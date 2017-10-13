@@ -1,4 +1,8 @@
-// Planets-wekazaji
+/*
+planets-wekazaji
+A basic ring physics tutorial to build off
+
+ */
 
 
 var game;
@@ -142,7 +146,7 @@ function addCrate(e){
 function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
 	var planet = game.add.sprite(posX, posY, asset);
 	planet.gravityRadius = gravityRadius;
-	planet.gravityForce = gravityForce
+	planet.gravityForce = gravityForce;
 	planetGroup.add(planet);
 	game.physics.box2d.enable(planet);
 	planet.body.static = true;

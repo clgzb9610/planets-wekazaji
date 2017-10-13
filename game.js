@@ -1,3 +1,6 @@
+// Planets-wekazaji
+
+
 var game;
 
 // groups containing crates and planets

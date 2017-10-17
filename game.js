@@ -8,11 +8,11 @@ A basic ring physics tutorial to build off
 var game;
 
 // groups containing crates and planets
-
 var crateGroup;
 var planetGroup;
 var cursors;
 
+//for the player & walk animations
 var player;
 var walkR;
 var walkL;
@@ -37,7 +37,7 @@ playGame.prototype = {
         game.load.image("planet", "assets/planet.png");
         game.load.image("bigplanet", "assets/bigplanet.png");
         game.load.image('dude', 'assets/dude.png');
-        game.load.spritesheet('player',"assets/nebsprites.png",40,50);
+        game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
     },
     create: function () {
 
@@ -68,6 +68,7 @@ playGame.prototype = {
         walkR = player.animations.add('walkR',[5,6,7,8], 15, true);
         walkL = player.animations.add('walkL', [0,1,2,3], 15, true);
         stand = player.animations.add('stand',[4],1);
+        fall = player.animations.add('fall',[9],1);
 
         // player = game.add.sprite(200, 200, 'dude');
         game.physics.box2d.enable(player);
@@ -117,7 +118,11 @@ playGame.prototype = {
         }
 
         if (cursors.left.justUp || cursors.right.justUp){
-            player.animations.play('stand');
+            if (player.body.velocity < 200) {           //TODO: can't figure out how to do stand animation when still
+                player.animations.play('stand');
+            } else {
+                player.animations.play('fall');
+            }
         }
 
 

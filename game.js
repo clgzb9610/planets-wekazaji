@@ -75,24 +75,6 @@ playGame.prototype = {
 
     update: function(){
 
-        // player.body.setZeroVelocity();
-        // if (cursors.left.isDown)
-        // {
-        //     player.body.moveLeft(400);
-        // }
-        // else if (cursors.right.isDown)
-        // {
-        //     player.body.moveRight(400);
-        // }
-        // if (cursors.up.isDown)
-        // {
-        //     player.body.moveUp(400);
-        // }
-        // else if (cursors.down.isDown)
-        // {
-        //     player.body.moveDown(400);
-        // }
-
         // looping through all crates
         for (var i = 0; i < crateGroup.total; i++) {
             var c = crateGroup.getChildAt(i);
@@ -111,22 +93,29 @@ playGame.prototype = {
                     var angle = Phaser.Math.angleBetween(c.x, c.y, p.x, p.y);
 
                     // add gravity force to the crate in the direction of planet center
-                    c.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer, p.gravityForce * Math.sin(angle) * forceReducer);
-                    if (cursors.left.isDown) {
-                        c.body.moveLeft(90);
-                    }
-                    else if (cursors.right.isDown) {
-                        c.body.moveRight(90);
-                    }
-                    if (cursors.up.isDown) {
-                        c.body.moveUp(90);
-                    }
-                    else if (cursors.down.isDown) {
-                        c.body.moveDown(90);
-                    }
+                    c.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer,
+                                      p.gravityForce * Math.sin(angle) * forceReducer);
+
                 }
             }
+
+            //Handle keyboard input for the crates
+            if (cursors.left.isDown) {
+                c.body.moveLeft(90);
+            }
+            else if (cursors.right.isDown) {
+                c.body.moveRight(90);
+            }
+            if (cursors.up.isDown) {
+                c.body.moveUp(90);
+            }
+            else if (cursors.down.isDown) {
+                c.body.moveDown(90);
+            }
         }
+
+
+
     }
 };
 

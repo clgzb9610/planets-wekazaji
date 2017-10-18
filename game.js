@@ -16,6 +16,8 @@ var cursors;
 var player;
 var walkR;
 var walkL;
+var stand;
+var fall;
 
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.01; //was .005
@@ -95,6 +97,10 @@ playGame.prototype = {
                 // add gravity force to the crate in the direction of planet center
                 player.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer,
                                   p.gravityForce * Math.sin(angle) * forceReducer);
+
+                // player.body.setZeroRotation();
+
+                player.body.angle = angle * 180 / Math.PI - 90;
 
             }
          }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="Animations use wes's new spritesheet">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.js" afterPath="$PROJECT_DIR$/game.js" />
     </list>
@@ -30,8 +30,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="75" column="42" lean-forward="true" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
+            <state relative-caret-position="374">
+              <caret line="81" column="6" lean-forward="true" selection-start-line="81" selection-start-column="6" selection-end-line="81" selection-end-column="6" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -158,7 +158,7 @@
       <workItem from="1507829640718" duration="151000" />
       <workItem from="1507833354532" duration="3471000" />
       <workItem from="1507916049355" duration="11634000" />
-      <workItem from="1508358604613" duration="2593000" />
+      <workItem from="1508358604613" duration="3519000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -202,11 +202,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508276844888</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Player's feet always face towards the ground.">
+      <created>1508364923735</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1508364923735</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21054000" />
+    <option name="totallyTimeSpent" value="21980000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="745" extended-state="0" />
@@ -214,8 +221,8 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19765624" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4398217" sideWeight="0.509375" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4398217" sideWeight="0.490625" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13521545" sideWeight="0.509375" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13521545" sideWeight="0.490625" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986626" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -244,7 +251,8 @@
     <MESSAGE value="Added Asset Directory&#10;Replaced crates with the player character.&#10;Implemented animations.&#10;I added in a camera follow feature to see what it does, but I haven't played with it yet." />
     <MESSAGE value="Pulled wes's spritesheet 2.5 &amp; moved it to assets directory" />
     <MESSAGE value="Animations use wes's new spritesheet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Animations use wes's new spritesheet" />
+    <MESSAGE value="Player's feet always face towards the ground." />
+    <option name="LAST_COMMIT_MESSAGE" value="Player's feet always face towards the ground." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -358,8 +366,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="75" column="42" lean-forward="true" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
+        <state relative-caret-position="374">
+          <caret line="81" column="6" lean-forward="true" selection-start-line="81" selection-start-column="6" selection-end-line="81" selection-end-column="6" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

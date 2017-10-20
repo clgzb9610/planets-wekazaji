@@ -27,7 +27,7 @@ var forceReducer = 0.01; //was .005
 var gravityGraphics;
 
 window.onload = function(){
-    game = new Phaser.Game(900, 800, Phaser.AUTO, "");
+    game = new Phaser.Game(400, 300, Phaser.AUTO, "");
     game.state.add("PlayGame",playGame);
     game.state.start("PlayGame");
 };
@@ -43,6 +43,8 @@ playGame.prototype = {
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
     },
     create: function () {
+
+        game.world.setBounds(0, 0, 800, 600);
 
         // adding groups
 
@@ -78,6 +80,8 @@ playGame.prototype = {
         // player.body.fixedRotation = true;
 
         cursors = game.input.keyboard.createCursorKeys();
+
+        game.camera.follow(player);
     },
 
     update: function(){

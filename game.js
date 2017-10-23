@@ -9,7 +9,7 @@ source: https://phaser.io/news/2015/07/simulate-planet-gravity-with-box2d-tutori
 var game;
 
 // groups containing crates and planets
-var crateGroup;
+// var crateGroup;
 var planetGroup;
 var cursors;
 
@@ -22,12 +22,13 @@ var fall;
 
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.01; //was .005
+var vel = 5;
 
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
 window.onload = function(){
-    game = new Phaser.Game(400, 300, Phaser.AUTO, "");
+    game = new Phaser.Game(800, 800, Phaser.AUTO, "");
     game.state.add("PlayGame",playGame);
     game.state.start("PlayGame");
 };
@@ -43,12 +44,11 @@ playGame.prototype = {
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
     },
     create: function () {
-
-        game.world.setBounds(0, 0, 800, 600);
+        // new boundaries are centered on 0,0 so the world can rotate
+        game.world.setBounds(-400, -300, 400, 300);
 
         // adding groups
-
-        crateGroup = game.add.group();
+        // crateGroup = game.add.group();
         planetGroup = game.add.group();
 
         // adding graphic objects
@@ -63,15 +63,17 @@ playGame.prototype = {
 
         /* adding a couple of planets. Arguments are:
          * x position, y position, gravity radius, gravity force, graphic asset */
-        addPlanet(180, 200, 250, 150, "planet");
-        addPlanet(600, 400, 400, 250, "bigplanet");
+        // addPlanet(180, 200, 250, 150, "planet");
+        // addPlanet(600, 400, 400, 250, "bigplanet");
+        addPlanet(-280, -100, 250, 150, "planet");
+        addPlanet(130, 150, 400, 250, "bigplanet");
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
-        player = game.add.sprite(650, 100, "player");
+        player = game.add.sprite(100, 120, "player");
         player.frame = 4;
-        walkR = player.animations.add('walkR',[5,6,7,8], 15, true);
-        walkL = player.animations.add('walkL', [0,1,2,3], 15, true);
+        walkR = player.animations.add('walkR',[5,6,7,8], 7, true);
+        walkL = player.animations.add('walkL', [0,1,2,3], 7, true);
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
@@ -86,56 +88,43 @@ playGame.prototype = {
 
     update: function(){
 
-        // looping through all planets
-        for (var j = 0; j < planetGroup.total; j++) {
-            var p = planetGroup.getChildAt(j);
+        var angle = gravityRadius(player);
+        if (angle > -361){ // angle == -361 if the player is not in any gravity field.
+            //orients players feet toward the ground. Uses var angle as degrees offset by -90
+            player.body.angle = angle * 180 / Math.PI - 90;
+        }
 
-            // calculating distance between the planet and the crate
-            var distance = Phaser.Math.distance(player.x, player.y, p.x, p.y);
-
-            // checking if the distance is less than gravity radius
-            if (distance < p.width / 2 + p.gravityRadius / 2) {
-
-                // calculating angle between the planet and the crate
-                var angle = Phaser.Math.angleBetween(player.x, player.y, p.x, p.y);
-
-                // add gravity force to the crate in the direction of planet center
-                player.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer,
-                                  p.gravityForce * Math.sin(angle) * forceReducer);
-
-                // player.body.setZeroRotation();
-
-                player.body.angle = angle * 180 / Math.PI - 90;
-
-            }
-         }
+        game.world.pivot.x = player.x;
+        game.world.pivot.y = player.y;
+        game.world.rotation = -angle + (Math.PI/2);
 
         //Handle keyboard input for the player
         if (cursors.left.isDown) {
-            player.body.moveLeft(90);
+            // player.body.moveLeft(90);
+            player.body.velocity.x += vel * Math.cos(angle + (Math.PI/2));
+            player.body.velocity.y += vel * Math.sin(angle + (Math.PI/2));
             player.animations.play('walkL');
         }
         else if (cursors.right.isDown) {
-            player.body.moveRight(90);
+            // player.body.moveRight(90);
+            player.body.velocity.x += vel * Math.cos(angle - (Math.PI / 2)) ;
+            player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
             player.animations.play('walkR');
         }
         if (cursors.up.isDown) {
-            player.body.moveUp(90);
-            player.animations.play('stand');
+            // player.body.moveUp(90);
+            player.body.velocity.x += -vel * Math.cos(angle);
+            player.body.velocity.y += -vel * Math.sin(angle);
+            player.animations.play('fall');
         }
         else if (cursors.down.isDown) {
-            player.body.moveDown(90);
+            // player.body.moveDown(90);
+            player.body.velocity.x += vel * Math.cos(angle);
+            player.body.velocity.y += vel * Math.sin(angle);
             player.animations.play('stand');
         }
 
-        if (cursors.left.justUp || cursors.right.justUp){
-            if (player.body.velocity < 200) {           //TODO: can't figure out how to do stand animation when still
-                player.animations.play('stand');
-            } else {
-                player.animations.play('fall');
-            }
-        }
-
+        constrainVelocity(player,100);
 
     },
 
@@ -153,6 +142,57 @@ playGame.prototype = {
 //     crateGroup.add(crateSprite);
 //     game.physics.box2d.enable(crateSprite);
 // }
+
+/*
+This is the code that calculates gravity fields for the player, if they are in the radius.
+I changed it so that this function returns -361, which is impossible in radian angles,
+if the player is not in any gravity radius.
+ */
+function gravityRadius(player){
+    var distance;
+    var angle = -361;
+    // looping through all planets
+    for (var j = 0; j < planetGroup.total; j++) {
+        var p = planetGroup.getChildAt(j);
+
+        // calculating distance between the planet and the crate
+        distance = Phaser.Math.distance(player.x, player.y, p.x, p.y);
+
+        // checking if the distance is less than gravity radius
+        if (distance < p.width / 2 + p.gravityRadius / 2) {
+
+            // calculating angle between the planet and the crate
+            angle = Phaser.Math.angleBetween(player.x, player.y, p.x, p.y);
+
+            // add gravity force to the crate in the direction of planet center
+            player.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer,
+                p.gravityForce * Math.sin(angle) * forceReducer);
+        }
+    }
+    return angle;
+}
+
+/*
+ This function implements a max velocity on a sprite, so it cannot accelerate too far and fly out of a
+ gravity field. Code from : http://www.html5gamedevs.com/topic/9835-is-there-a-proper-way-to-limit-the-speed-of-a-p2-body/
+ */
+function constrainVelocity(sprite, maxVelocity) {
+    var body = sprite.body;
+    var angle, currVelocitySqr, vx, vy;
+    vx = body.velocity.x;
+    vy = body.velocity.y;
+    currVelocitySqr = vx * vx + vy * vy;
+    if (currVelocitySqr > maxVelocity * maxVelocity) {
+        angle = Math.atan2(vy, vx);
+        vx = Math.cos(angle) * maxVelocity;
+        vy = Math.sin(angle) * maxVelocity;
+        body.velocity.x = vx;
+        body.velocity.y = vy;
+        // console.log('limited speed to: '+ maxVelocity);
+    }
+}
+
+
 
 // function to add a planet
 function addPlanet(posX, posY, gravityRadius, gravityForce, asset){

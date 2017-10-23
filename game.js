@@ -27,7 +27,7 @@ var forceReducer = 0.01; //was .005
 var gravityGraphics;
 
 window.onload = function(){
-    game = new Phaser.Game(900, 800, Phaser.AUTO, "");
+    game = new Phaser.Game(400, 300, Phaser.AUTO, "");
     game.state.add("PlayGame",playGame);
     game.state.start("PlayGame");
 };
@@ -43,6 +43,8 @@ playGame.prototype = {
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
     },
     create: function () {
+
+        game.world.setBounds(0, 0, 800, 600);
 
         // adding groups
 
@@ -78,7 +80,8 @@ playGame.prototype = {
         // player.body.fixedRotation = true;
 
         cursors = game.input.keyboard.createCursorKeys();
-        // cursor = game.input.mouse.capture = true;
+
+        game.camera.follow(player);
     },
 
     update: function(){
@@ -133,26 +136,6 @@ playGame.prototype = {
             }
         }
 
-        /* Mouse input - follow the pointer
-         * code source: https://phaser.io/examples/v2/input/follow-mouse
-         */
-
-        // //  only move when you click
-        // if (game.input.mousePointer.isDown)
-        // {
-        //     //  400 is the speed it will move towards the mouse
-        //     game.physics.box2d.moveToPointer(player, 400);
-        //
-        //     //  if it's overlapping the mouse, don't move any more
-        //     if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
-        //     {
-        //         player.body.velocity.setTo(0, 0);
-        //     }
-        // }
-        // else
-        // {
-        //     player.body.velocity = (0, 0);
-        // }
 
     },
 

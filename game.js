@@ -20,6 +20,9 @@ var walkL;
 var stand;
 var fall;
 
+var scoreCaption;
+var score = 0;
+
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.01; //was .005
 var vel = 5;
@@ -64,44 +67,44 @@ playGame.prototype = {
 
         /* adding a couple of planets. Arguments are:
          * x position, y position, gravity radius, gravity force, graphic asset */
-        // addPlanet(180, 200, 250, 150, "planet");
-        // addPlanet(600, 400, 400, 250, "bigplanet");
         addPlanet(-280, -100, 250, 150, "planet");
         addPlanet(130, 150, 400, 250, "bigplanet");
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
         player = game.add.sprite(100, 120, "player");
+        game.physics.box2d.enable(player);
         player.frame = 4;
         walkR = player.animations.add('walkR',[5,6,7,8], 7, true);
         walkL = player.animations.add('walkL', [0,1,2,3], 7, true);
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
-        game.physics.box2d.enable(player);
-
         //add enemy - crate
-        var enemy = game.add.sprite(400, 300, 'crate');
+        var enemy = game.add.sprite(100, 130, 'crate');
         game.physics.box2d.enable(enemy);
         enemy.body.setRectangle(10, 10);
-        enemy.body.static = true;
 
-        var coins = game.add.group();
-        coins.enableBody = true;
-        coins.physicsBodyType = Phaser.Physics.BOX2D;
-
-        for (var i = 0; i < 10; i++)
+        // add coinGroup
+        var coinGroup = game.add.group();
+        coinGroup.enableBody = true;
+        coinGroup.physicsBodyType = Phaser.Physics.BOX2D;
+        for (var i = 0; i < 5; i++) //add random 10 coins
         {
-            var coin = coins.create(game.world.randomX, game.world.randomY, 'coin');
+            var coin = game.add.sprite(game.world.randomX, game.world.randomY, 'coin');
+            coinGroup.add(coin);
             game.physics.box2d.enable(coin);
             coin.body.setCollisionCategory(2);
             coin.body.sensor = true;
+            coin.body.static = false;
         }
-
         player.body.setCategoryContactCallback(2, coinCallback, this);
+        scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
+        scoreCaption.fixedToCamera = true;
 
+        // get keyboard input
         cursors = game.input.keyboard.createCursorKeys();
-
+        //camera follows the player
         game.camera.follow(player);
     },
 
@@ -152,7 +155,6 @@ playGame.prototype = {
         game.debug.spriteCoords(player, 32, 500);
 
     }
-
 };
 
 // function to add a crate
@@ -225,6 +227,7 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
 }
 
+// kills the coin when touched
 function coinCallback(body1, body2, fixture1, fixture2, begin) {
     // body1 is the player because it's the body that owns the callback
     // body2 is the body it impacted with, in this case the coin
@@ -236,6 +239,7 @@ function coinCallback(body1, body2, fixture1, fixture2, begin) {
     {
         return;
     }
+    score += 100;
+    scoreCaption.text = 'Score: ' + score;
     body2.sprite.destroy();
-
 }

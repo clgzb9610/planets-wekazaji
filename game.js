@@ -42,6 +42,7 @@ playGame.prototype = {
         game.load.image("bigplanet", "assets/bigplanet.png");
         game.load.image('dude', 'assets/dude.png');
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
+        game.load.spritesheet('coin', 'assets/coin_spritesheet.png', 22, 22);
     },
     create: function () {
         // new boundaries are centered on 0,0 so the world can rotate
@@ -77,9 +78,27 @@ playGame.prototype = {
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
-        // player = game.add.sprite(200, 200, 'dude');
         game.physics.box2d.enable(player);
-        // player.body.fixedRotation = true;
+
+        //add enemy - crate
+        var enemy = game.add.sprite(400, 300, 'crate');
+        game.physics.box2d.enable(enemy);
+        enemy.body.setRectangle(10, 10);
+        enemy.body.static = true;
+
+        var coins = game.add.group();
+        coins.enableBody = true;
+        coins.physicsBodyType = Phaser.Physics.BOX2D;
+
+        for (var i = 0; i < 10; i++)
+        {
+            var coin = coins.create(game.world.randomX, game.world.randomY, 'coin');
+            game.physics.box2d.enable(coin);
+            coin.body.setCollisionCategory(2);
+            coin.body.sensor = true;
+        }
+
+        player.body.setCategoryContactCallback(2, coinCallback, this);
 
         cursors = game.input.keyboard.createCursorKeys();
 
@@ -192,8 +211,6 @@ function constrainVelocity(sprite, maxVelocity) {
     }
 }
 
-
-
 // function to add a planet
 function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     var planet = game.add.sprite(posX, posY, asset);
@@ -206,4 +223,19 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     // look how I create a circular body
     planet.body.setCircle(planet.width / 2);
     gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
+}
+
+function coinCallback(body1, body2, fixture1, fixture2, begin) {
+    // body1 is the player because it's the body that owns the callback
+    // body2 is the body it impacted with, in this case the coin
+    // fixture1 is the fixture of body1 that was touched
+    // fixture2 is the fixture of body2 that was touched
+
+    // This callback is also called for EndContact events, which we are not interested in.
+    if (!begin)
+    {
+        return;
+    }
+    body2.sprite.destroy();
+
 }

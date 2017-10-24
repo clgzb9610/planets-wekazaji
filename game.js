@@ -54,6 +54,7 @@ playGame.prototype = {
         // adding groups
         // crateGroup = game.add.group();
         planetGroup = game.add.group();
+        objectGroup = game.add.group();
 
         // adding graphic objects
         gravityGraphics = game.add.graphics(0, 0);
@@ -81,21 +82,24 @@ playGame.prototype = {
         fall = player.animations.add('fall',[9],1);
 
         //add enemy - crate
-        var enemy = game.add.sprite(100, 130, 'crate');
+        var enemy = game.add.sprite(110, 130, 'crate');
         game.physics.box2d.enable(enemy);
-        enemy.body.setRectangle(10, 10);
+        enemy.body.setRectangle(12, 12);
+        objectGroup.add(enemy);
 
         // add coinGroup
         var coinGroup = game.add.group();
         coinGroup.enableBody = true;
         coinGroup.physicsBodyType = Phaser.Physics.BOX2D;
+
         for (var i = 0; i < 5; i++) //add random 10 coins
         {
             var coin = game.add.sprite(game.world.randomX, game.world.randomY, 'coin');
             coinGroup.add(coin);
+            objectGroup.add(coin);
             game.physics.box2d.enable(coin);
             coin.body.setCollisionCategory(2);
-            coin.body.sensor = true;
+            // coin.body.sensor = true;
             coin.body.static = false;
         }
         player.body.setCategoryContactCallback(2, coinCallback, this);
@@ -115,6 +119,8 @@ playGame.prototype = {
             //orients players feet toward the ground. Uses var angle as degrees offset by -90
             player.body.angle = angle * 180 / Math.PI - 90;
         }
+
+        objGrav();
 
         game.world.pivot.x = player.x;
         game.world.pivot.y = player.y;
@@ -191,6 +197,14 @@ function gravityRadius(player){
         }
     }
     return angle;
+}
+
+function objGrav(){
+
+    for (var i = 0; i < objectGroup.total; i++){
+        var o = objectGroup.getChildAt(i);
+        gravityRadius(o);
+    }
 }
 
 /*

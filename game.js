@@ -20,6 +20,7 @@ var walkL;
 var stand;
 var fall;
 
+var coinGroup;
 var scoreCaption;
 var score = 0;
 
@@ -47,6 +48,7 @@ playGame.prototype = {
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('coin', 'assets/coin_spritesheet.png', 22, 22);
     },
+
     create: function () {
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-400, -300, 400, 300);
@@ -66,10 +68,17 @@ playGame.prototype = {
         // physics initialization
         game.physics.startSystem(Phaser.Physics.BOX2D);
 
+        // create coinGroup
+        coinGroup = game.add.group();
+        coinGroup.enableBody = true;
+        coinGroup.physicsBodyType = Phaser.Physics.BOX2D;
+
         /* adding a couple of planets. Arguments are:
          * x position, y position, gravity radius, gravity force, graphic asset */
         addPlanet(-280, -100, 250, 150, "planet");
+        addCoin(-280, -100, 250, 'coin');
         addPlanet(130, 150, 400, 250, "bigplanet");
+
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
@@ -87,21 +96,7 @@ playGame.prototype = {
         enemy.body.setRectangle(12, 12);
         objectGroup.add(enemy);
 
-        // add coinGroup
-        var coinGroup = game.add.group();
-        coinGroup.enableBody = true;
-        coinGroup.physicsBodyType = Phaser.Physics.BOX2D;
-
-        for (var i = 0; i < 5; i++) //add random 10 coins
-        {
-            var coin = game.add.sprite(game.world.randomX, game.world.randomY, 'coin');
-            coinGroup.add(coin);
-            objectGroup.add(coin);
-            game.physics.box2d.enable(coin);
-            coin.body.setCollisionCategory(2);
-            // coin.body.sensor = true;
-            coin.body.static = false;
-        }
+        //coin callback
         player.body.setCategoryContactCallback(2, coinCallback, this);
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
@@ -163,12 +158,14 @@ playGame.prototype = {
     }
 };
 
-// function to add a crate
-// function addCrate(e){
-//     var crateSprite = game.add.sprite(e.x, e.y, "crate");
-//     crateGroup.add(crateSprite);
-//     game.physics.box2d.enable(crateSprite);
-// }
+/*
+function to add a crate
+function addCrate(e){
+    var crateSprite = game.add.sprite(e.x, e.y, "crate");
+    crateGroup.add(crateSprite);
+    game.physics.box2d.enable(crateSprite);
+}
+*/
 
 /*
 This is the code that calculates gravity fields for the player, if they are in the radius.
@@ -200,7 +197,6 @@ function gravityRadius(player){
 }
 
 function objGrav(){
-
     for (var i = 0; i < objectGroup.total; i++){
         var o = objectGroup.getChildAt(i);
         gravityRadius(o);
@@ -239,14 +235,18 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     // look how I create a circular body
     planet.body.setCircle(planet.width / 2);
     gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
+
+
 }
 
 // kills the coin when touched
 function coinCallback(body1, body2, fixture1, fixture2, begin) {
-    // body1 is the player because it's the body that owns the callback
-    // body2 is the body it impacted with, in this case the coin
-    // fixture1 is the fixture of body1 that was touched
-    // fixture2 is the fixture of body2 that was touched
+    /*
+    body1 is the player because it's the body that owns the callback
+    body2 is the body it impacted with, in this case the coin
+    fixture1 is the fixture of body1 that was touched
+    fixture2 is the fixture of body2 that was touched
+    */
 
     // This callback is also called for EndContact events, which we are not interested in.
     if (!begin)
@@ -256,4 +256,17 @@ function coinCallback(body1, body2, fixture1, fixture2, begin) {
     score += 100;
     scoreCaption.text = 'Score: ' + score;
     body2.sprite.destroy();
+}
+
+function addCoin(planetx, planety, gravityRadius, asset) {
+    for (var i = 0; i < 5; i++) //add random 5 coins
+    { //Math.random() * (max - min) + min;
+        var coin = game.add.sprite(Math.random()*gravityRadius, planety+Math.random()*gravityRadius, asset); //fix coordinate later
+        coinGroup.add(coin);
+        objectGroup.add(coin);
+        game.physics.box2d.enable(coin);
+        coin.body.setCollisionCategory(2);
+        // coin.body.sensor = true;
+        coin.body.static = false;
+    }
 }

@@ -45,7 +45,7 @@ playGame.prototype = {
         game.load.image("bigplanet", "assets/bigplanet.png");
         game.load.image('dude', 'assets/dude.png');
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
-        game.load.spritesheet('coin', 'assets/coin_spritesheet.png', 22, 22);
+        game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
     },
     create: function () {
         // new boundaries are centered on 0,0 so the world can rotate
@@ -87,22 +87,23 @@ playGame.prototype = {
         enemy.body.setRectangle(12, 12);
         objectGroup.add(enemy);
 
-        // add coinGroup
-        var coinGroup = game.add.group();
-        coinGroup.enableBody = true;
-        coinGroup.physicsBodyType = Phaser.Physics.BOX2D;
+        // add gearGroup
+        var gearGroup = game.add.group();
+        gearGroup.enableBody = true;
+        gearGroup.physicsBodyType = Phaser.Physics.BOX2D;
 
-        for (var i = 0; i < 5; i++) //add random 10 coins
+        for (var i = 0; i < 5; i++) //add random 10 gears
         {
-            var coin = game.add.sprite(game.world.randomX, game.world.randomY, 'coin');
-            coinGroup.add(coin);
-            objectGroup.add(coin);
-            game.physics.box2d.enable(coin);
-            coin.body.setCollisionCategory(2);
-            // coin.body.sensor = true;
-            coin.body.static = false;
+            var gear = game.add.sprite(game.world.randomX, game.world.randomY, 'gear');
+            gearGroup.add(gear);
+            objectGroup.add(gear);
+            game.physics.box2d.enable(gear);
+            gear.body.setCollisionCategory(2);
+            // gear.body.sensor = true;
+            gear.body.static = false;
+            gear.animations.add(0,1,2,3);
         }
-        player.body.setCategoryContactCallback(2, coinCallback, this);
+        player.body.setCategoryContactCallback(2, gearCallback, this);
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
 
@@ -241,10 +242,10 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
 }
 
-// kills the coin when touched
-function coinCallback(body1, body2, fixture1, fixture2, begin) {
+// kills the gear when touched
+function gearCallback(body1, body2, fixture1, fixture2, begin) {
     // body1 is the player because it's the body that owns the callback
-    // body2 is the body it impacted with, in this case the coin
+    // body2 is the body it impacted with, in this case the gear
     // fixture1 is the fixture of body1 that was touched
     // fixture2 is the fixture of body2 that was touched
 

@@ -24,10 +24,11 @@ var scoreCaption;
 var score = 0;
 
 // a force reducer to let the simulation run smoothly
-var forceReducer = 0.01; //was .005
-var vel = 20;
+var forceReducer = 0.0175; //was .005
+var vel = 25;
 
 var fuelTimer = 0;
+var planetContact = false;
 
 // graphic object where to draw planet gravity area
 var gravityGraphics;
@@ -112,6 +113,8 @@ playGame.prototype = {
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
 
+        player.body.setCategoryContactCallback(1,planetContactCallback,this);
+
         // get keyboard input
         cursors = game.input.keyboard.createCursorKeys();
         //camera follows the player
@@ -119,6 +122,8 @@ playGame.prototype = {
     },
 
     update: function(){
+
+        // console.log('planet contact', planetContact);
 
         var angle = gravityRadius(player);
         if (angle > -361){ // angle == -361 if the player is not in any gravity field.
@@ -146,17 +151,18 @@ playGame.prototype = {
             player.animations.play('walkR');
         }
         if (cursors.up.isDown) {
-            if (fuelTimer === 0) { //start the jump
+            if (fuelTimer === 0 && planetContact === true) { //start the jump
                 player.body.velocity.x += -vel * Math.cos(angle);
                 player.body.velocity.y += -vel * Math.sin(angle);
                 player.animations.play('fall');
                 fuelTimer = 1;
-            } else if (fuelTimer > 0 && fuelTimer < 10 ){
+                planetContact = false;
+            }else if (fuelTimer > 0 && fuelTimer < 20){
                 fuelTimer++;        //jump for 10 cycles. holding jump increases upward velocity.
-                player.body.velocity.x += -(vel*fuelTimer) * Math.cos(angle);
-                player.body.velocity.y += -(vel*fuelTimer) * Math.sin(angle);
+                player.body.velocity.x += -vel * Math.cos(angle);
+                player.body.velocity.y += -vel * Math.sin(angle);
                 player.animations.play('fall');
-                console.log('up', fuelTimer);
+                console.log('up', fuelTimer, planetContact);
             }
         }
 
@@ -179,7 +185,7 @@ playGame.prototype = {
             fuelTimer = 0;
         }
 
-        constrainVelocity(player,120);
+        constrainVelocity(player,125);
 
     },
 
@@ -266,6 +272,8 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     // look how I create a circular body
     planet.body.setCircle(planet.width / 2);
     gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
+    planet.body.setCollisionCategory(1);
+
 }
 
 // kills the gear when touched
@@ -283,4 +291,12 @@ function gearCallback(body1, body2, fixture1, fixture2, begin) {
     score += 100;
     scoreCaption.text = 'Score: ' + score;
     body2.sprite.destroy();
+}
+
+function planetContactCallback(body1, body2, fixture1, fixture2, begin){
+    if (!begin){
+        return;
+    }
+
+    planetContact =  true;
 }

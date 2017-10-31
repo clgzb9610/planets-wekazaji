@@ -25,7 +25,9 @@ var score = 0;
 
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.01; //was .005
-var vel = 5;
+var vel = 20;
+
+var fuelTimer = 0;
 
 // graphic object where to draw planet gravity area
 var gravityGraphics;
@@ -50,6 +52,9 @@ playGame.prototype = {
     create: function () {
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-400, -300, 400, 300);
+
+        game.time.desiredFps = 20;
+        fuelTimer = game.time.now;
 
         // adding groups
         // crateGroup = game.add.group();
@@ -82,7 +87,7 @@ playGame.prototype = {
         fall = player.animations.add('fall',[9],1);
 
         //add enemy - crate
-        var enemy = game.add.sprite(110, 130, 'crate');
+        var enemy = game.add.sprite(120, 120, 'crate');
         game.physics.box2d.enable(enemy);
         enemy.body.setRectangle(12, 12);
         objectGroup.add(enemy);
@@ -140,19 +145,40 @@ playGame.prototype = {
             player.animations.play('walkR');
         }
         if (cursors.up.isDown) {
-            // player.body.moveUp(90);
-            player.body.velocity.x += -vel * Math.cos(angle);
-            player.body.velocity.y += -vel * Math.sin(angle);
-            player.animations.play('fall');
-        }
-        else if (cursors.down.isDown) {
-            // player.body.moveDown(90);
-            player.body.velocity.x += vel * Math.cos(angle);
-            player.body.velocity.y += vel * Math.sin(angle);
-            player.animations.play('stand');
+            if (fuelTimer === 0) { //start the jump
+                player.body.velocity.x += -vel * Math.cos(angle);
+                player.body.velocity.y += -vel * Math.sin(angle);
+                player.animations.play('fall');
+                fuelTimer = 1;
+            } else if (fuelTimer > 0 && fuelTimer < 10 ){
+                fuelTimer++;        //jump for 10 cycles. holding jump increases upward velocity.
+                player.body.velocity.x += -(vel*fuelTimer) * Math.cos(angle);
+                player.body.velocity.y += -(vel*fuelTimer) * Math.sin(angle);
+                player.animations.play('fall');
+                console.log('up', fuelTimer);
+            }
         }
 
-        constrainVelocity(player,100);
+        if (cursors.down.isDown) {
+            if (fuelTimer === 0) {
+                player.body.velocity.x += vel * Math.cos(angle);
+                player.body.velocity.y += vel * Math.sin(angle);
+                player.animations.play('stand');
+                fuelTimer = 1;
+            }else if (fuelTimer > 0 && fuelTimer < 10){
+                fuelTimer ++;
+                player.body.velocity.x += (vel*fuelTimer) * Math.cos(angle);
+                player.body.velocity.y += (vel*fuelTimer) * Math.sin(angle);
+                player.animations.play('stand');
+                console.log('down', fuelTimer);
+            }
+        }
+
+        if (cursors.up.justUp || cursors.down.justUp){ //resets fuel timer for up/down motion via jetpack
+            fuelTimer = 0;
+        }
+
+        constrainVelocity(player,120);
 
     },
 

@@ -33,12 +33,6 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
-// window.onload = function(){
-//     game = new Phaser.Game(800, 800, Phaser.AUTO, "");
-//     game.state.add("PlayGame",playGame);
-//     game.state.start("PlayGame");
-// };
-
 playGame.prototype = {
     preload: function () {
         game.load.image("crate", "assets/crate.png");
@@ -98,19 +92,9 @@ playGame.prototype = {
         gearGroup = game.add.group();
         gearGroup.enableBody = true;
         gearGroup.physicsBodyType = Phaser.Physics.BOX2D;
-
-        for (var i = 0; i < 5; i++) //add random 10 gears
-        {
-            var gear = game.add.sprite(game.world.randomX, game.world.randomY, 'gear');
-            gearGroup.add(gear);
-            objectGroup.add(gear);
-            game.physics.box2d.enable(gear);
-            gear.body.setCollisionCategory(2);
-            // gear.body.sensor = true;
-            gear.body.static = false;
-            gear.animations.add(0,1,2,3);
-        }
+        addRandomGears(5, gearGroup, 'gear');
         player.body.setCategoryContactCallback(2, gearCallback, this);
+
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
 
@@ -185,17 +169,19 @@ playGame.prototype = {
         if (cursors.up.justUp || cursors.down.justUp){ //resets fuel timer for up/down motion via jetpack
             fuelTimer = 0;
         }
-
         constrainVelocity(player,150);
 
     },
-
     render: function() {
         game.debug.cameraInfo(game.camera, 32, 32);
         game.debug.spriteCoords(player, 32, 500);
 
     }
 };
+
+/*=============================================================================
+    HELPER FUNCTIONS
+=============================================================================*/
 
 // function to add a crate
 // function addCrate(e){
@@ -234,7 +220,6 @@ function gravityRadius(player){
 }
 
 function objGrav(){
-
     for (var i = 0; i < objectGroup.total; i++){
         var o = objectGroup.getChildAt(i);
         gravityRadius(o);
@@ -299,6 +284,18 @@ function planetContactCallback(body1, body2, fixture1, fixture2, begin){
     if (!begin){
         return;
     }
-
     planetContact =  true;
+}
+
+function addRandomGears(numGears, gearGroup, spriteImage){
+    for (var i = 0; i < numGears; i++) {//add random 10 gears
+        var gear = game.add.sprite(game.world.randomX, game.world.randomY, spriteImage);
+        gearGroup.add(gear);
+        objectGroup.add(gear);
+        game.physics.box2d.enable(gear);
+        gear.body.setCollisionCategory(2);
+        // gear.body.sensor = true;
+        gear.body.static = false;
+        gear.animations.add(0,1,2,3);
+    }
 }

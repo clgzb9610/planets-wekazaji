@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="created a new ga">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainmenu.js" afterPath="$PROJECT_DIR$/src/mainmenu.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -52,8 +50,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="-2129">
+              <caret line="114" column="93" lean-forward="false" selection-start-line="114" selection-start-column="93" selection-end-line="114" selection-end-column="93" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -297,11 +295,18 @@
       <option name="project" value="LOCAL" />
       <updated>1509728958221</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="created a main menu screen">
+      <created>1509729302723</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1509729302723</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39745000" />
+    <option name="totallyTimeSpent" value="40100000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1439" height="873" extended-state="0" />
@@ -356,7 +361,8 @@
     <MESSAGE value="player can only jump during a collision. (added player collision to other objects besides gears)" />
     <MESSAGE value="created src folder" />
     <MESSAGE value="created empty main.js and mainmenu.js file" />
-    <option name="LAST_COMMIT_MESSAGE" value="created empty main.js and mainmenu.js file" />
+    <MESSAGE value="created a main menu screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="created a main menu screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -715,18 +721,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -741,8 +747,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state relative-caret-position="-2129">
+          <caret line="114" column="93" lean-forward="false" selection-start-line="114" selection-start-column="93" selection-end-line="114" selection-end-column="93" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

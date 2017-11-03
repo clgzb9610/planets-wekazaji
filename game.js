@@ -141,13 +141,13 @@ playGame.prototype = {
         game.world.rotation = -angle + (Math.PI/2);
 
         //Handle keyboard input for the player
-        if (cursors.left.isDown && planetContact === true) {
+        if (cursors.left.isDown ) {
             // player.body.moveLeft(90);
             player.body.velocity.x += vel * Math.cos(angle + (Math.PI/2));
             player.body.velocity.y += vel * Math.sin(angle + (Math.PI/2));
             player.animations.play('walkL');
         }
-        else if (cursors.right.isDown && planetContact === true) {
+        else if (cursors.right.isDown ) {
             // player.body.moveRight(90);
             player.body.velocity.x += vel * Math.cos(angle - (Math.PI / 2)) ;
             player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
@@ -188,7 +188,7 @@ playGame.prototype = {
             fuelTimer = 0;
         }
 
-        constrainVelocity(player,125);
+        constrainVelocity(player,150);
 
     },
 

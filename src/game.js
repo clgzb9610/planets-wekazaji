@@ -36,7 +36,7 @@ var gravityGraphics;
 playGame.prototype = {
     preload: function () {
         game.load.image("crate", "assets/crate.png");
-        game.load.image("planet", "assets/planet.png");
+        game.load.image("smallplanet", "assets/planet.png");
         game.load.image("bigplanet", "assets/bigplanet.png");
         game.load.image('dude', 'assets/dude.png');
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
@@ -69,7 +69,7 @@ playGame.prototype = {
 
         /* adding a couple of planets. Arguments are:
          * x position, y position, gravity radius, gravity force, graphic asset */
-        addPlanet(-280, -100, 250, 150, "planet");
+        addPlanet(-280, -100, 250, 150, "smallplanet");
         addPlanet(130, 150, 400, 250, "bigplanet");
 
         // waiting for player input
@@ -95,6 +95,7 @@ playGame.prototype = {
         addRandomGears(5, gearGroup, 'gear');
         player.body.setCategoryContactCallback(2, gearCallback, this);
 
+        //add score to the screen
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
 
@@ -107,7 +108,6 @@ playGame.prototype = {
     },
 
     update: function(){
-
         // console.log('planet contact', planetContact);
 
         var angle = gravityRadius(player);
@@ -150,7 +150,6 @@ playGame.prototype = {
                 console.log('up', fuelTimer, planetContact);
             }
         }
-
         if (cursors.down.isDown) {
             if (fuelTimer === 0) {
                 player.body.velocity.x += vel * Math.cos(angle);
@@ -175,14 +174,12 @@ playGame.prototype = {
     render: function() {
         game.debug.cameraInfo(game.camera, 32, 32);
         game.debug.spriteCoords(player, 32, 500);
-
     }
 };
 
 /*=============================================================================
     HELPER FUNCTIONS
 =============================================================================*/
-
 // function to add a crate
 // function addCrate(e){
 //     var crateSprite = game.add.sprite(e.x, e.y, "crate");
@@ -259,7 +256,6 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     planet.body.setCircle(planet.width / 2);
     gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
     planet.body.setCollisionCategory(1);
-
 }
 
 // kills the gear when touched
@@ -288,7 +284,7 @@ function planetContactCallback(body1, body2, fixture1, fixture2, begin){
 }
 
 function addRandomGears(numGears, gearGroup, spriteImage){
-    for (var i = 0; i < numGears; i++) {//add random 10 gears
+    for (var i = 0; i < numGears; i++) {
         var gear = game.add.sprite(game.world.randomX, game.world.randomY, spriteImage);
         gearGroup.add(gear);
         objectGroup.add(gear);

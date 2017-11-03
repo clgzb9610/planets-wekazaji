@@ -51,6 +51,9 @@ playGame.prototype = {
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
     },
     create: function () {
+        var enemy;
+        var gearGroup;
+
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-400, -300, 400, 300);
 
@@ -88,13 +91,13 @@ playGame.prototype = {
         fall = player.animations.add('fall',[9],1);
 
         //add enemy - crate
-        var enemy = game.add.sprite(120, 120, 'crate');
+        enemy = game.add.sprite(120, 120, 'crate');
         game.physics.box2d.enable(enemy);
         enemy.body.setRectangle(12, 12);
         objectGroup.add(enemy);
 
         // add gearGroup
-        var gearGroup = game.add.group();
+        gearGroup = game.add.group();
         gearGroup.enableBody = true;
         gearGroup.physicsBodyType = Phaser.Physics.BOX2D;
 
@@ -138,13 +141,13 @@ playGame.prototype = {
         game.world.rotation = -angle + (Math.PI/2);
 
         //Handle keyboard input for the player
-        if (cursors.left.isDown) {
+        if (cursors.left.isDown && planetContact === true) {
             // player.body.moveLeft(90);
             player.body.velocity.x += vel * Math.cos(angle + (Math.PI/2));
             player.body.velocity.y += vel * Math.sin(angle + (Math.PI/2));
             player.animations.play('walkL');
         }
-        else if (cursors.right.isDown) {
+        else if (cursors.right.isDown && planetContact === true) {
             // player.body.moveRight(90);
             player.body.velocity.x += vel * Math.cos(angle - (Math.PI / 2)) ;
             player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
@@ -156,8 +159,8 @@ playGame.prototype = {
                 player.body.velocity.y += -vel * Math.sin(angle);
                 player.animations.play('fall');
                 fuelTimer = 1;
-                planetContact = false;
             }else if (fuelTimer > 0 && fuelTimer < 20){
+                planetContact = false;
                 fuelTimer++;        //jump for 10 cycles. holding jump increases upward velocity.
                 player.body.velocity.x += -vel * Math.cos(angle);
                 player.body.velocity.y += -vel * Math.sin(angle);
@@ -172,7 +175,7 @@ playGame.prototype = {
                 player.body.velocity.y += vel * Math.sin(angle);
                 player.animations.play('stand');
                 fuelTimer = 1;
-            }else if (fuelTimer > 0 && fuelTimer < 10){
+            }else if (fuelTimer > 0 && fuelTimer < 25){
                 fuelTimer ++;
                 player.body.velocity.x += (vel*fuelTimer) * Math.cos(angle);
                 player.body.velocity.y += (vel*fuelTimer) * Math.sin(angle);
@@ -250,7 +253,7 @@ function constrainVelocity(sprite, maxVelocity) {
     vx = body.velocity.x;
     vy = body.velocity.y;
     currVelocitySqr = vx * vx + vy * vy;
-    if (currVelocitySqr > maxVelocity * maxVelocity) {
+    if (currVelocitySqr > (maxVelocity * maxVelocity)) {
         angle = Math.atan2(vy, vx);
         vx = Math.cos(angle) * maxVelocity;
         vy = Math.sin(angle) * maxVelocity;
@@ -277,7 +280,8 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
 }
 
 // kills the gear when touched
-function gearCallback(body1, body2, fixture1, fixture2, begin) {
+function gearCallback(body1,body2, fixture1, fixture2, begin) {
+    //body1, body2, fixture1, fixture2, begin
     // body1 is the player because it's the body that owns the callback
     // body2 is the body it impacted with, in this case the gear
     // fixture1 is the fixture of body1 that was touched

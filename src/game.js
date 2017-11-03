@@ -33,6 +33,24 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
+var level = [
+    [//level 1
+        {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
+        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
+        {objectType: 'gear', x: -100, y: -100, sprite: 'gear'}
+    ],
+    [//level2
+        {objectType:"enemy"},
+        {objectType:"spider"},
+        {objectType:"portal"}
+    ],
+    [//level3
+        {objectType:"level3"},
+        {objectType:"level3"},
+        {objectType:"level3"}
+    ]
+];
+
 playGame.prototype = {
     preload: function () {
         game.load.image("crate", "assets/crate.png");

@@ -50,8 +50,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="257" column="40" lean-forward="false" selection-start-line="257" selection-start-column="40" selection-end-line="257" selection-end-column="40" />
+            <state relative-caret-position="474">
+              <caret line="51" column="2" lean-forward="false" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -309,11 +309,18 @@
       <option name="project" value="LOCAL" />
       <updated>1509729692064</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="renamed sprite name 'planet' to 'smallplanet'">
+      <created>1509730131108</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1509730131108</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40560000" />
+    <option name="totallyTimeSpent" value="41270000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1439" height="873" extended-state="0" />
@@ -370,7 +377,8 @@
     <MESSAGE value="created empty main.js and mainmenu.js file" />
     <MESSAGE value="created a main menu screen" />
     <MESSAGE value="created separate function for adding gears" />
-    <option name="LAST_COMMIT_MESSAGE" value="created separate function for adding gears" />
+    <MESSAGE value="renamed sprite name 'planet' to 'smallplanet'" />
+    <option name="LAST_COMMIT_MESSAGE" value="renamed sprite name 'planet' to 'smallplanet'" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -755,8 +763,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="257" column="40" lean-forward="false" selection-start-line="257" selection-start-column="40" selection-end-line="257" selection-end-column="40" />
+        <state relative-caret-position="474">
+          <caret line="51" column="2" lean-forward="false" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

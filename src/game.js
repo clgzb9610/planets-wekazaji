@@ -33,11 +33,11 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
+var currentLevel = 0;
 var level = [
     [//level 1
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
-        {objectType: 'gear', x: -100, y: -100, sprite: 'gear'}
+        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"}
     ],
     [//level2
         {objectType:"enemy"},
@@ -56,7 +56,6 @@ playGame.prototype = {
         game.load.image("crate", "assets/crate.png");
         game.load.image("smallplanet", "assets/planet.png");
         game.load.image("bigplanet", "assets/bigplanet.png");
-        game.load.image('dude', 'assets/dude.png');
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
     },
@@ -87,8 +86,9 @@ playGame.prototype = {
 
         /* adding a couple of planets. Arguments are:
          * x position, y position, gravity radius, gravity force, graphic asset */
-        addPlanet(-280, -100, 250, 150, "smallplanet");
-        addPlanet(130, 150, 400, 250, "bigplanet");
+        // addPlanet(-280, -100, 250, 150, "smallplanet");
+        // addPlanet(130, 150, 400, 250, "bigplanet");
+        drawLevel();
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
@@ -124,7 +124,6 @@ playGame.prototype = {
         //camera follows the player
         game.camera.follow(player);
     },
-
     update: function(){
         // console.log('planet contact', planetContact);
 
@@ -204,6 +203,15 @@ playGame.prototype = {
 //     crateGroup.add(crateSprite);
 //     game.physics.box2d.enable(crateSprite);
 // }
+
+function drawLevel(){
+    for (var i = 0; i < level[currentLevel].length; i++) {
+        if (level[currentLevel][i].objectType == 'planet') {
+            addPlanet(level[currentLevel][i].x, level[currentLevel][i].y,
+                level[currentLevel][i].gravRadius, level[currentLevel][i].gravForce, level[currentLevel][i].sprite)
+        }
+    }
+}
 
 /*
 This is the code that calculates gravity fields for the player, if they are in the radius.

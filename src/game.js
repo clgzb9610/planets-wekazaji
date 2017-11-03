@@ -4,7 +4,7 @@ A basic ring physics tutorial to build off
 
 source: https://phaser.io/news/2015/07/simulate-planet-gravity-with-box2d-tutorial
  */
-
+var playGame = function(game){};
 
 var game;
 
@@ -33,13 +33,11 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
-window.onload = function(){
-    game = new Phaser.Game(800, 800, Phaser.AUTO, "");
-    game.state.add("PlayGame",playGame);
-    game.state.start("PlayGame");
-};
-
-var playGame = function(game){};
+// window.onload = function(){
+//     game = new Phaser.Game(800, 800, Phaser.AUTO, "");
+//     game.state.add("PlayGame",playGame);
+//     game.state.start("PlayGame");
+// };
 
 playGame.prototype = {
     preload: function () {

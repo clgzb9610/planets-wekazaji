@@ -24,7 +24,7 @@ var scoreCaption;
 var score = 0;
 
 // a force reducer to let the simulation run smoothly
-var forceReducer = 0.0175; //was .005
+var forceReducer = 0.0007; //was .00175
 var vel = 25;
 
 var fuelTimer = 0;
@@ -152,20 +152,19 @@ playGame.prototype = {
             player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
             player.animations.play('walkR');
         }
-        if (cursors.up.isDown) {
-            if (fuelTimer === 0 && planetContact === true) { //start the jump
-                player.body.velocity.x += -vel * Math.cos(angle);
-                player.body.velocity.y += -vel * Math.sin(angle);
-                player.animations.play('fall');
-                fuelTimer = 1;
-            }else if (fuelTimer > 0 && fuelTimer < 20){
-                planetContact = false;
-                fuelTimer++;        //jump for 10 cycles. holding jump increases upward velocity.
-                player.body.velocity.x += -vel * Math.cos(angle);
-                player.body.velocity.y += -vel * Math.sin(angle);
-                player.animations.play('fall');
-                console.log('up', fuelTimer, planetContact);
-            }
+        if (cursors.up.isDown /*&& planetContact === true*/) {
+            player.body.velocity.x += -vel * Math.cos(angle);
+            player.body.velocity.y += -vel * Math.sin(angle);
+            player.animations.play('fall');
+            fuelTimer = 1;
+            //else if (fuelTimer > 0 && fuelTimer < 20){
+            //     planetContact = false;
+            //     fuelTimer++;        //jump for 10 cycles. holding jump increases upward velocity.
+            //     player.body.velocity.x += -vel * Math.cos(angle);
+            //     player.body.velocity.y += -vel * Math.sin(angle);
+            //     player.animations.play('fall');
+            //     console.log('up', fuelTimer, planetContact);
+            // }
         }
         if (cursors.down.isDown) {
             if (fuelTimer === 0) {
@@ -206,7 +205,7 @@ playGame.prototype = {
 
 function drawLevel(){
     for (var i = 0; i < level[currentLevel].length; i++) {
-        if (level[currentLevel][i].objectType == 'planet') {
+        if (level[currentLevel][i].objectType === 'planet') {
             addPlanet(level[currentLevel][i].x, level[currentLevel][i].y,
                 level[currentLevel][i].gravRadius, level[currentLevel][i].gravForce, level[currentLevel][i].sprite)
         }
@@ -219,24 +218,28 @@ I changed it so that this function returns -361, which is impossible in radian a
 if the player is not in any gravity radius.
  */
 function gravityRadius(player){
+    var p;
     var distance;
+    var radius;
     var angle = -361;
     // looping through all planets
     for (var j = 0; j < planetGroup.total; j++) {
-        var p = planetGroup.getChildAt(j);
+        p = planetGroup.getChildAt(j);
+        radius = p.width / 2 + p.gravityRadius / 2;
 
         // calculating distance between the planet and the crate
         distance = Phaser.Math.distance(player.x, player.y, p.x, p.y);
 
         // checking if the distance is less than gravity radius
-        if (distance < p.width / 2 + p.gravityRadius / 2) {
+        if (distance < radius) {
 
             // calculating angle between the planet and the crate
             angle = Phaser.Math.angleBetween(player.x, player.y, p.x, p.y);
-
             // add gravity force to the crate in the direction of planet center
-            player.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer,
-                p.gravityForce * Math.sin(angle) * forceReducer);
+
+            console.log(distance-p.width/2, radius-p.width);
+            player.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distance-p.width/2),
+                p.gravityForce * Math.sin(angle) * forceReducer* (distance-p.width/2));
         }
     }
     return angle;

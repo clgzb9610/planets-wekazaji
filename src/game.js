@@ -62,7 +62,7 @@ playGame.prototype = {
         game.load.image("bigplanet", "assets/bigplanet.png");
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
-        game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 40, 47);
+        game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
     },
     create: function () {
         var enemy;

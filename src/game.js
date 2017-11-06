@@ -344,5 +344,5 @@ function teleporterCallback(body1, body2, fixture1, fixture2, begin){
         return;
     }
     currentLevel++;
-    game.state.start("PlayGame", true, false, this.currentLevel);
+    // game.state.start("PlayGame", true, false, this.currentLevel);
 }

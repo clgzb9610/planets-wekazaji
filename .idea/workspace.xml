@@ -42,7 +42,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
               <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-              <folding />
+              <folding>
+                <marker date="1509948893000" expanded="true" signature="608:674" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,12 +52,10 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1558">
-              <caret line="246" column="0" lean-forward="true" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+            <state relative-caret-position="306">
+              <caret line="346" column="39" lean-forward="false" selection-start-line="346" selection-start-column="39" selection-end-line="346" selection-end-column="39" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#910#1016#0" expanded="false" />
-                <element signature="e#1022#1129#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -212,7 +212,7 @@
       <workItem from="1507833354532" duration="3471000" />
       <workItem from="1507916049355" duration="11634000" />
       <workItem from="1508358604613" duration="17072000" />
-      <workItem from="1509942747939" duration="1713000" />
+      <workItem from="1509942747939" duration="2048000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -333,11 +333,18 @@
       <option name="project" value="LOCAL" />
       <updated>1509732152483</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="gravity on the player increases as it gets farther from the surface of the planet. You dont have to be in contact with the planet to jump.">
+      <created>1509948887205</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1509948887205</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44681000" />
+    <option name="totallyTimeSpent" value="45016000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="23" width="1280" height="773" extended-state="6" />
@@ -345,8 +352,8 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19765624" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34664765" sideWeight="0.509375" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.055634808" sideWeight="0.4875" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34664765" sideWeight="0.515625" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34664765" sideWeight="0.484375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16833095" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -388,7 +395,8 @@
     <MESSAGE value="renamed sprite name 'planet' to 'smallplanet'" />
     <MESSAGE value="created level variable" />
     <MESSAGE value="created basic structure for level design" />
-    <option name="LAST_COMMIT_MESSAGE" value="created basic structure for level design" />
+    <MESSAGE value="gravity on the player increases as it gets farther from the surface of the planet. You dont have to be in contact with the planet to jump." />
+    <option name="LAST_COMMIT_MESSAGE" value="gravity on the player increases as it gets farther from the surface of the planet. You dont have to be in contact with the planet to jump." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -411,8 +419,6 @@
           <caret line="100" column="33" lean-forward="false" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -431,8 +437,6 @@
           <caret line="102" column="74" lean-forward="true" selection-start-line="102" selection-start-column="74" selection-end-line="102" selection-end-column="74" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -451,8 +455,6 @@
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -506,8 +508,6 @@
           <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -534,8 +534,6 @@
           <caret line="100" column="33" lean-forward="false" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -554,8 +552,6 @@
           <caret line="102" column="74" lean-forward="true" selection-start-line="102" selection-start-column="74" selection-end-line="102" selection-end-column="74" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -574,8 +570,6 @@
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -637,8 +631,6 @@
           <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -657,8 +649,6 @@
           <caret line="100" column="33" lean-forward="false" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -677,8 +667,6 @@
           <caret line="102" column="74" lean-forward="true" selection-start-line="102" selection-start-column="74" selection-end-line="102" selection-end-column="74" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -697,8 +685,6 @@
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -755,6 +741,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -782,7 +769,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-          <folding />
+          <folding>
+            <marker date="1509948893000" expanded="true" signature="608:674" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -796,12 +785,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1558">
-          <caret line="246" column="0" lean-forward="true" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+        <state relative-caret-position="306">
+          <caret line="346" column="39" lean-forward="false" selection-start-line="346" selection-start-column="39" selection-end-line="346" selection-end-column="39" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#910#1016#0" expanded="false" />
-            <element signature="e#1022#1129#0" expanded="false" />
           </folding>
         </state>
       </provider>

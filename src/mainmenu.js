@@ -15,7 +15,7 @@ mainMenu.prototype = {
         playButton.anchor.setTo(0.5,0.5);
     },
     playTheGame:function () {
-        this.game.state.start("PlayGame");
+        this.game.state.start("PlayGame", true, false, 0);
     },
     render:function(){
 

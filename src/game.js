@@ -34,15 +34,16 @@ var planetContact = false;
 var gravityGraphics;
 
 var currentLevel = 0;
+var teleporterContact = false;
 var level = [
     [//level 1
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"}
     ],
     [//level2
-        {objectType:"enemy"},
-        {objectType:"spider"},
-        {objectType:"portal"}
+        {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
+        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "smallplanet"},
+        {objectType: 'planet', x: -130, y: -150, gravRadius: 400, gravForce: 250, sprite: "smallplanet"}
     ],
     [//level3
         {objectType:"level3"},
@@ -52,12 +53,16 @@ var level = [
 ];
 
 playGame.prototype = {
+    init:function(){
+      this.currentLevel = currentLevel;
+    },
     preload: function () {
         game.load.image("crate", "assets/crate.png");
         game.load.image("smallplanet", "assets/planet.png");
         game.load.image("bigplanet", "assets/bigplanet.png");
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
+        game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 40, 47);
     },
     create: function () {
         var enemy;
@@ -116,6 +121,13 @@ playGame.prototype = {
         //add score to the screen
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
+
+        //add teleporter
+        teleporter = game.add.sprite(130, 0, "teleporter");
+        game.physics.box2d.enable(teleporter);
+        teleporter.body.setRectangle(40, 47);
+        teleporter.body.static = true;
+        player.body.setBodyContactCallback(teleporter, teleporterCallback, this);
 
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
@@ -206,7 +218,7 @@ playGame.prototype = {
 
 function drawLevel(){
     for (var i = 0; i < level[currentLevel].length; i++) {
-        if (level[currentLevel][i].objectType == 'planet') {
+        if (level[currentLevel][i].objectType === 'planet') {
             addPlanet(level[currentLevel][i].x, level[currentLevel][i].y,
                 level[currentLevel][i].gravRadius, level[currentLevel][i].gravForce, level[currentLevel][i].sprite)
         }
@@ -320,4 +332,14 @@ function addRandomGears(numGears, gearGroup, spriteImage){
         gear.body.static = false;
         gear.animations.add(0,1,2,3);
     }
+}
+
+function teleporterCallback(body1, body2, fixture1, fixture2, begin){
+    console.log('contact with teleporter');
+    if (!begin)
+    {
+        return;
+    }
+    currentLevel++;
+    game.state.start("PlayGame", true, false, this.currentLevel);
 }

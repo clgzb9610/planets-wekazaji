@@ -123,10 +123,13 @@ playGame.prototype = {
         scoreCaption.fixedToCamera = true;
 
         //add teleporter
-        teleporter = game.add.sprite(130, 0, "teleporter");
+        teleporter = game.add.sprite(130, 0, "teleporter", 6);
         game.physics.box2d.enable(teleporter);
+        teleporter.animations.add('swirl', [0,1,2,3,4,5], 15, true);
         teleporter.body.setRectangle(40, 47);
         teleporter.body.static = true;
+        do teleporter.animations.play('swirl');
+        while (score>400);
         player.body.setBodyContactCallback(teleporter, teleporterCallback, this);
 
         player.body.setCategoryContactCallback(1,planetContactCallback,this);

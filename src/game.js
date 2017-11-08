@@ -95,6 +95,16 @@ playGame.prototype = {
         // addPlanet(130, 150, 400, 250, "bigplanet");
         drawLevel();
 
+        //add teleporter
+        teleporter = game.add.sprite(130, -3, "teleporter", 6);
+        game.physics.box2d.enable(teleporter);
+        teleporter.animations.add('swirl', [0,1,2,3,4,5], 15, true);
+        teleporter.body.setRectangle(40, 47);
+        teleporter.body.static = true;
+        teleporter.body.setCollisionCategory(1);
+        teleporter.body.setCollisionMask(0);
+
+
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
         player = game.add.sprite(100, 120, "player");
@@ -122,16 +132,7 @@ playGame.prototype = {
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
 
-        //add teleporter
-        teleporter = game.add.sprite(130, 0, "teleporter", 6);
-        game.physics.box2d.enable(teleporter);
-        teleporter.animations.add('swirl', [0,1,2,3,4,5], 15, true);
-        teleporter.body.setRectangle(40, 47);
-        teleporter.body.static = true;
-        do teleporter.animations.play('swirl');
-        while (score>400);
-        player.body.setBodyContactCallback(teleporter, teleporterCallback, this);
-
+        player.body.setCategoryContactCallback(1,teleporterCallback,this);
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
         // get keyboard input
@@ -192,7 +193,7 @@ playGame.prototype = {
                 player.body.velocity.x += (vel*fuelTimer) * Math.cos(angle);
                 player.body.velocity.y += (vel*fuelTimer) * Math.sin(angle);
                 player.animations.play('stand');
-                console.log('down', fuelTimer);
+                // console.log('down', fuelTimer);
             }
         }
 
@@ -252,7 +253,7 @@ function gravityRadius(player){
             angle = Phaser.Math.angleBetween(player.x, player.y, p.x, p.y);
             // add gravity force to the crate in the direction of planet center
 
-            console.log(distance-p.width/2, radius-p.width);
+            // console.log(distance-p.width/2, radius-p.width);
             player.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distance-p.width/2),
                 p.gravityForce * Math.sin(angle) * forceReducer* (distance-p.width/2));
         }
@@ -317,10 +318,14 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
     }
     score += 100;
     scoreCaption.text = 'Score: ' + score;
+    if (score>400){
+        teleporter.animations.play('swirl');
+    }
     body2.sprite.destroy();
 }
 
 function planetContactCallback(body1, body2, fixture1, fixture2, begin){
+    console.log("planet touch");
     if (!begin){
         return;
     }

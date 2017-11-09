@@ -132,7 +132,6 @@ playGame.prototype = {
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
 
-        player.body.setCategoryContactCallback(1,teleporterCallback,this);
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
         // get keyboard input
@@ -150,6 +149,7 @@ playGame.prototype = {
         }
 
         objGrav();
+        checkTeleporterOverlap(player,teleporter);
 
         game.world.pivot.x = player.x;
         game.world.pivot.y = player.y;
@@ -318,7 +318,7 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
     }
     score += 100;
     scoreCaption.text = 'Score: ' + score;
-    if (score>400){
+    if (score>100){
         teleporter.animations.play('swirl');
     }
     body2.sprite.destroy();
@@ -345,12 +345,13 @@ function addRandomGears(numGears, gearGroup, spriteImage){
     }
 }
 
-function teleporterCallback(body1, body2, fixture1, fixture2, begin){
-    console.log('contact with teleporter');
-    if (!begin)
-    {
-        return;
+function checkTeleporterOverlap(player,teleporter){
+    var playerBounds = player.getBounds();
+    var teleporterBounds = teleporter.getBounds();
+
+    if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds)){
+        console.log('contact with teleporter');
+        currentLevel++;
+        // game.state.start("PlayGame", true, false, this.currentLevel);
     }
-    currentLevel++;
-    // game.state.start("PlayGame", true, false, this.currentLevel);
 }

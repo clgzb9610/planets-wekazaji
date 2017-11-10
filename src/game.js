@@ -368,8 +368,19 @@ function checkTeleporterOverlap(teleporter){
     var teleporterBounds = teleporter.getBounds();
 
     if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds)){
+        teleporter.destroy();
         console.log('contact with teleporter');
-        // currentLevel++;
+        currentLevel++;
+        console.log('currentLevel: ', currentLevel);
+        planetGroup.destroy();
+        planetGroup = game.add.group();
+
+        gravityGraphics.destroy();
+        gravityGraphics = game.add.graphics(0, 0);
+        gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+
+        console.log('destroy!');
+        drawLevel()
         // game.state.start("PlayGame", true, false, this.currentLevel);
     }
 }

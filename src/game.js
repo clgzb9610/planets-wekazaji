@@ -46,7 +46,7 @@ var level = [
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 100, gravForce: 100, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 50, sprite: "smallplanet"},
-        {objectType: 'teleporter', x:130, y: 31}
+        {objectType: 'teleporter', x:130, y: 100/*31*/}
     ],
     [//level3
         {objectType:"level3"},
@@ -341,8 +341,19 @@ function checkTeleporterOverlap(teleporter){
     var teleporterBounds = teleporter.getBounds();
 
     if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds)){
+        teleporter.destroy();
         console.log('contact with teleporter');
-        // currentLevel++;
+        currentLevel++;
+        console.log('currentLevel: ', currentLevel);
+        planetGroup.destroy();
+        planetGroup = game.add.group();
+
+        gravityGraphics.destroy();
+        gravityGraphics = game.add.graphics(0, 0);
+        gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+
+        console.log('destroy!');
+        drawLevel()
         // game.state.start("PlayGame", true, false, this.currentLevel);
     }
 }

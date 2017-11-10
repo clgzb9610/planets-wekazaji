@@ -20,6 +20,8 @@ var walkL;
 var stand;
 var fall;
 
+var teleporter;
+
 var scoreCaption;
 var score = 0;
 
@@ -27,23 +29,24 @@ var score = 0;
 var forceReducer = 0.0007; //was .00175
 var vel = 25;
 
-var fuelTimer = 0;
 var planetContact = false;
 
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
 var currentLevel = 0;
-var teleporterContact = false;
+/* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [//level 1
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"}
+        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
+        {objectType: 'teleporter', x: 130, y: -3}
     ],
     [//level2
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "smallplanet"},
-        {objectType: 'planet', x: -130, y: -150, gravRadius: 400, gravForce: 250, sprite: "smallplanet"}
+        {objectType: 'planet', x: 130, y: 150, gravRadius: 100, gravForce: 100, sprite: "smallplanet"},
+        {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 50, sprite: "smallplanet"},
+        {objectType: 'teleporter', x:130, y: 31}
     ],
     [//level3
         {objectType:"level3"},
@@ -72,7 +75,6 @@ playGame.prototype = {
         game.world.setBounds(-400, -300, 400, 300);
 
         game.time.desiredFps = 20;
-        fuelTimer = game.time.now;
 
         // adding groups
         // crateGroup = game.add.group();
@@ -94,16 +96,6 @@ playGame.prototype = {
         // addPlanet(-280, -100, 250, 150, "smallplanet");
         // addPlanet(130, 150, 400, 250, "bigplanet");
         drawLevel();
-
-        //add teleporter
-        teleporter = game.add.sprite(130, -3, "teleporter", 6);
-        game.physics.box2d.enable(teleporter);
-        teleporter.animations.add('swirl', [0,1,2,3,4,5], 15, true);
-        teleporter.body.setRectangle(40, 47);
-        teleporter.body.static = true;
-        teleporter.body.setCollisionCategory(1);
-        teleporter.body.setCollisionMask(0);
-
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
@@ -149,7 +141,7 @@ playGame.prototype = {
         }
 
         objGrav();
-        checkTeleporterOverlap(player,teleporter);
+        checkTeleporterOverlap(teleporter);
 
         game.world.pivot.x = player.x;
         game.world.pivot.y = player.y;
@@ -168,37 +160,21 @@ playGame.prototype = {
             player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
             player.animations.play('walkR');
         }
-        if (cursors.up.isDown /*&& planetContact === true*/) {
+        if (cursors.up.isDown) {
             player.body.velocity.x += -vel * Math.cos(angle);
             player.body.velocity.y += -vel * Math.sin(angle);
             player.animations.play('fall');
-            fuelTimer = 1;
-            //else if (fuelTimer > 0 && fuelTimer < 20){
-            //     planetContact = false;
-            //     fuelTimer++;        //jump for 10 cycles. holding jump increases upward velocity.
-            //     player.body.velocity.x += -vel * Math.cos(angle);
-            //     player.body.velocity.y += -vel * Math.sin(angle);
-            //     player.animations.play('fall');
-            //     console.log('up', fuelTimer, planetContact);
-            // }
+
         }
         if (cursors.down.isDown) {
-            if (fuelTimer === 0) {
-                player.body.velocity.x += vel * Math.cos(angle);
-                player.body.velocity.y += vel * Math.sin(angle);
-                player.animations.play('stand');
-                fuelTimer = 1;
-            }else if (fuelTimer > 0 && fuelTimer < 25){
-                fuelTimer ++;
-                player.body.velocity.x += (vel*fuelTimer) * Math.cos(angle);
-                player.body.velocity.y += (vel*fuelTimer) * Math.sin(angle);
-                player.animations.play('stand');
-                // console.log('down', fuelTimer);
-            }
+            player.body.velocity.x += vel * Math.cos(angle);
+            player.body.velocity.y += vel * Math.sin(angle);
+            player.animations.play('stand');
+
         }
 
-        if (cursors.up.justUp || cursors.down.justUp){ //resets fuel timer for up/down motion via jetpack
-            fuelTimer = 0;
+        if (cursors.left.justUp || cursors.right.justUp){
+            player.animations.play('stand');
         }
         constrainVelocity(player,150);
 
@@ -221,10 +197,15 @@ playGame.prototype = {
 
 function drawLevel(){
     for (var i = 0; i < level[currentLevel].length; i++) {
-        if (level[currentLevel][i].objectType === 'planet') {
-            addPlanet(level[currentLevel][i].x, level[currentLevel][i].y,
-                level[currentLevel][i].gravRadius, level[currentLevel][i].gravForce, level[currentLevel][i].sprite)
+        var addition = level[currentLevel][i];
+        if (addition.objectType === 'planet') {
+            addPlanet(addition.x, addition.y,
+                addition.gravRadius, addition.gravForce, addition.sprite);
         }
+        if(addition.objectType === 'teleporter') {
+            addTeleporter(addition.x,addition.y);
+        }
+
     }
 }
 
@@ -303,6 +284,16 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     planet.body.setCollisionCategory(1);
 }
 
+function addTeleporter(x, y) {
+    teleporter = game.add.sprite(x, y, "teleporter", 6);
+    game.physics.box2d.enable(teleporter);
+    teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 15, true);
+    teleporter.body.setRectangle(40, 47);
+    teleporter.body.static = true;
+    // teleporter.body.setCollisionCategory(1);
+    teleporter.body.setCollisionMask(0);
+}
+
 // kills the gear when touched
 function gearCallback(body1,body2, fixture1, fixture2, begin) {
     //body1, body2, fixture1, fixture2, begin
@@ -345,13 +336,13 @@ function addRandomGears(numGears, gearGroup, spriteImage){
     }
 }
 
-function checkTeleporterOverlap(player,teleporter){
+function checkTeleporterOverlap(teleporter){
     var playerBounds = player.getBounds();
     var teleporterBounds = teleporter.getBounds();
 
     if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds)){
         console.log('contact with teleporter');
-        currentLevel++;
+        // currentLevel++;
         // game.state.start("PlayGame", true, false, this.currentLevel);
     }
 }

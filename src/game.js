@@ -37,7 +37,7 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
-var currentLevel = 1;
+var currentLevel = 0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [//level 1
@@ -53,7 +53,7 @@ var level = [
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 120, gravForce: 100, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 500, sprite: "smallplanet"},
-        {objectType: 'teleporter', x:130, y: 31},
+        {objectType: 'teleporter', x:130, y: 100},//temporary change in coordinate, was y=31
         {objectType: 'gear', x: -300, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"}
     ],

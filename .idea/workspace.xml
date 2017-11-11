@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -494,11 +493,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510428731091</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Gear animations working!">
+      <created>1510431037848</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1510431037848</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67041000" />
+    <option name="totallyTimeSpent" value="67059000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1099" height="709" extended-state="0" />
@@ -540,7 +546,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added Asset Directory&#10;Replaced crates with the player character.&#10;Implemented animations.&#10;I added in a camera follow feature to see what it does, but I haven't played with it yet." />
     <MESSAGE value="Pulled wes's spritesheet 2.5 &amp; moved it to assets directory" />
     <MESSAGE value="Animations use wes's new spritesheet" />
     <MESSAGE value="Player's feet always face towards the ground." />
@@ -565,7 +570,8 @@
     <MESSAGE value="level works!" />
     <MESSAGE value="need to collect a gear before the teleporter works" />
     <MESSAGE value="Added the tiled background." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the tiled background." />
+    <MESSAGE value="Gear animations working!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gear animations working!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

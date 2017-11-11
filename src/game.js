@@ -37,10 +37,10 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
-var currentLevel = 0;
+var currentLevel = 1;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
-    [//level 1
+    [//level 0
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
         {objectType: 'teleporter', x: 130, y: -3, goal: 3},
@@ -49,15 +49,15 @@ var level = [
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
 
     ],
-    [//level2
+    [//level 1
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 120, gravForce: 100, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 500, sprite: "smallplanet"},
-        {objectType: 'teleporter', x:130, y: 100},//temporary change in coordinate, was y=31
+        {objectType: 'teleporter', x:130, y: 30},//temporary change in coordinate, was y=31
         {objectType: 'gear', x: -300, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"}
     ],
-    [//level3
+    [//level 2
         {objectType:"level3"},
         {objectType:"level3"},
         {objectType:"level3"}
@@ -117,10 +117,10 @@ playGame.prototype = {
         fall = player.animations.add('fall',[9],1);
 
         //add enemy - crate
-        enemy = game.add.sprite(0, 80, 'crate');
-        game.physics.box2d.enable(enemy);
-        enemy.body.setRectangle(12, 12);
-        objectGroup.add(enemy);
+        // enemy = game.add.sprite(0, 80, 'crate');
+        // game.physics.box2d.enable(enemy);
+        // enemy.body.setRectangle(12, 12);
+        // objectGroup.add(enemy);
 
         // add gearGroup
         // gearGroup.enableBody = true;
@@ -150,8 +150,6 @@ playGame.prototype = {
         } else{
             angle = lastAngle;
         }
-
-        console.log(angle);
 
         objGrav();
         checkTeleporterOverlap(teleporter);
@@ -350,24 +348,24 @@ function addGear(x, y, sprite){
     gear.animations.add(0,1,2,3);
 }
 
-function addRandomGears(numGears, gearGroup, spriteImage){
-    for (var i = 0; i < numGears; i++) {
-        var gear = game.add.sprite(game.world.randomX, game.world.randomY, spriteImage);
-        gearGroup.add(gear);
-        objectGroup.add(gear);
-        game.physics.box2d.enable(gear);
-        gear.body.setCollisionCategory(2);
-        // gear.body.sensor = true;
-        gear.body.static = false;
-        gear.animations.add(0,1,2,3);
-    }
-}
+// function addRandomGears(numGears, gearGroup, spriteImage){
+//     for (var i = 0; i < numGears; i++) {
+//         var gear = game.add.sprite(game.world.randomX, game.world.randomY, spriteImage);
+//         gearGroup.add(gear);
+//         objectGroup.add(gear);
+//         game.physics.box2d.enable(gear);
+//         gear.body.setCollisionCategory(2);
+//         // gear.body.sensor = true;
+//         gear.body.static = false;
+//         gear.animations.add(0,1,2,3);
+//     }
+// }
 
 function checkTeleporterOverlap(teleporter){
     var playerBounds = player.getBounds();
     var teleporterBounds = teleporter.getBounds();
 
-    if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds)){
+    if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds) && score >= 1){
         teleporter.destroy();
         console.log('contact with teleporter');
         currentLevel++;

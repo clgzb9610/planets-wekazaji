@@ -20,8 +20,13 @@ var walkL;
 var stand;
 var fall;
 
+
 var scoreCaption;
 var score = 0;
+
+var health = 100;
+var maxHealth = 100;
+var percent = (health/maxHealth) * 100;
 
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.0007; //was .00175
@@ -106,7 +111,7 @@ playGame.prototype = {
         fall = player.animations.add('fall',[9],1);
 
         //add enemy - crate
-        enemy = game.add.sprite(120, 120, 'crate');
+        enemy = game.add.sprite(-120, 120, 'crate');
         game.physics.box2d.enable(enemy);
         enemy.body.setRectangle(12, 12);
         objectGroup.add(enemy);
@@ -117,6 +122,37 @@ playGame.prototype = {
         gearGroup.physicsBodyType = Phaser.Physics.BOX2D;
         addRandomGears(5, gearGroup, 'gear');
         player.body.setCategoryContactCallback(2, gearCallback, this);
+
+        // add healthbar
+        // bar = game.add.sprite.rect(350,250,50,10);
+        // { fill: '#ffaaaa', font: '14pt Arial'})
+        // bad.body.setRectangle(50,10);
+        // bar.body.static = true;
+
+        var maxHealthBar;
+        var healthBar;
+        var maxWidth = 20 // example;
+        var maxHeight = 5 // example;
+        var width = 50 // example;
+        var height = 10 // example;
+        var bmd = game.add.bitmapData(width, height);
+        var bmd2 = game.add.bitmapData(width, height);
+
+        bmd.ctx.beginPath();
+        bmd.ctx.rect(0, 0, maxWidth, maxHeight);
+        bmd.ctx.fillStyle = '#ffff00';
+        bmd.ctx.fill();
+        maxHealthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd);
+        maxHealthBar.anchor.setTo(0.5, 0.5);
+
+
+        bmd2.ctx.beginPath();
+        bmd2.ctx.rect(0, 0, width, height);
+        bmd2.ctx.fillStyle = '#ffffff';
+        bmd2.ctx.fill();
+        healthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd2);
+        healthBar.anchor.setTo(0.5, 0.5);
+
 
         //add score to the screen
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
@@ -226,6 +262,18 @@ function drawLevel(){
         }
     }
 }
+
+// function drawHealthBar(x,y) {
+//     var bmd = this.game.add.bitmapData(250, 40);
+//     bmd.ctx.fillStyle = '#FEFF03';
+//     bmd.ctx.beginPath();
+//     bmd.ctx.rect(x, y, 250, 40);
+//     bmd.ctx.fill();
+//     // bmd.update();
+//
+//     // this.barSprite = this.game.add.sprite(this.x - this.bgSprite.width/2, this.y, bmd);
+//     // this.barSprite.anchor.y = 0.5;
+// }
 
 /*
 This is the code that calculates gravity fields for the player, if they are in the radius.

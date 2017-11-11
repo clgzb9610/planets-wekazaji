@@ -37,7 +37,7 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
-var currentLevel = 1;
+var currentLevel = 0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [//level 0
@@ -51,11 +51,12 @@ var level = [
     ],
     [//level 1
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 120, gravForce: 100, sprite: "smallplanet"},
+        {objectType: 'planet', x: 130, y: 150, gravRadius: 120, gravForce: 130, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 500, sprite: "smallplanet"},
         {objectType: 'teleporter', x:130, y: 30},//temporary change in coordinate, was y=31
         {objectType: 'gear', x: -300, y: -50, sprite: "gear"},
-        {objectType: 'gear', x: -200, y: -150, sprite: "gear"}
+        {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
+        {objectType: 'player', x: 25, y: 205}
     ],
     [//level 2
         {objectType:"level3"},
@@ -220,6 +221,9 @@ function drawLevel(){
         if(addition.objectType === 'gear'){
             addGear(addition.x, addition.y, addition.sprite);
         }
+        if(addition.objectType === 'player'){
+            movePlayer(addition.x,addition.y);
+        }
 
     }
 }
@@ -348,6 +352,13 @@ function addGear(x, y, sprite){
     gear.animations.add(0,1,2,3);
 }
 
+function movePlayer(x, y){
+    player.body.velocity.x = 0;
+    player.body.velocity.y = 0;
+    player.body.x = x;
+    player.body.y = y;
+}
+
 // function addRandomGears(numGears, gearGroup, spriteImage){
 //     for (var i = 0; i < numGears; i++) {
 //         var gear = game.add.sprite(game.world.randomX, game.world.randomY, spriteImage);
@@ -378,6 +389,7 @@ function checkTeleporterOverlap(teleporter){
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         console.log('destroy!');
+        score = 0;
         drawLevel()
         // game.state.start("PlayGame", true, false, this.currentLevel);
     }

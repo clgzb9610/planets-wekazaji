@@ -361,7 +361,8 @@ function addGear(x, y, sprite){
     game.physics.box2d.enable(gear);
     gear.body.setCollisionCategory(2);
     gear.body.static = false;
-    gear.animations.add(0,1,2,3);
+    spin=gear.animations.add('spin', [0,1,2,3]);
+    gear.animations.play('spin', 10, true);
 }
 
 function movePlayer(x, y){

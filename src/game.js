@@ -141,16 +141,17 @@ playGame.prototype = {
 
         player.body.setCategoryContactCallback(2, gearCallback, this);
 
-        //add score to the screen
-        scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
-        scoreCaption.fixedToCamera = true;
-
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
         // get keyboard input
         cursors = game.input.keyboard.createCursorKeys();
         //camera follows the player
         game.camera.follow(player);
+
+        //add score to the screen
+        scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
+        scoreCaption.fixedToCamera = true;
+        scoreCaption.cameraOffset.setTo(300, 300);
     },
     update: function(){
         // console.log('planet contact', planetContact);

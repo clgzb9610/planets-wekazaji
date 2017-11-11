@@ -21,7 +21,6 @@ var stand;
 var fall;
 
 var teleporter;
-var gearGroup;
 var levelGoal;
 var lastAngle;
 
@@ -89,7 +88,6 @@ playGame.prototype = {
         // crateGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
-        gearGroup = game.add.group();
 
         // adding graphic objects
         gravityGraphics = game.add.graphics(0, 0);
@@ -123,10 +121,6 @@ playGame.prototype = {
         // enemy.body.setRectangle(12, 12);
         // objectGroup.add(enemy);
 
-        // add gearGroup
-        // gearGroup.enableBody = true;
-        // gearGroup.physicsBodyType = Phaser.Physics.BOX2D;
-        // addRandomGears(5, gearGroup, 'gear');
         player.body.setCategoryContactCallback(2, gearCallback, this);
 
         //add score to the screen
@@ -344,7 +338,6 @@ function planetContactCallback(body1, body2, fixture1, fixture2, begin){
 
 function addGear(x, y, sprite){
     var gear = game.add.sprite(x, y, sprite);
-    gearGroup.add(gear);
     objectGroup.add(gear);
     game.physics.box2d.enable(gear);
     gear.body.setCollisionCategory(2);
@@ -359,10 +352,9 @@ function movePlayer(x, y){
     player.body.y = y;
 }
 
-// function addRandomGears(numGears, gearGroup, spriteImage){
+// function addRandomGears(numGears, spriteImage){
 //     for (var i = 0; i < numGears; i++) {
 //         var gear = game.add.sprite(game.world.randomX, game.world.randomY, spriteImage);
-//         gearGroup.add(gear);
 //         objectGroup.add(gear);
 //         game.physics.box2d.enable(gear);
 //         gear.body.setCollisionCategory(2);

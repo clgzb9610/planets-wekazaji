@@ -115,6 +115,16 @@ playGame.prototype = {
         // addPlanet(130, 150, 400, 250, "bigplanet");
         drawLevel();
 
+        // //add teleporter
+        // teleporter = game.add.sprite(130, -3, "teleporter", 6);
+        // game.physics.box2d.enable(teleporter);
+        // teleporter.animations.add('swirl', [0,1,2,3,4,5], 15, true);
+        // teleporter.body.setRectangle(40, 47);
+        // teleporter.body.static = true;
+        // teleporter.body.setCollisionCategory(1);
+        // teleporter.body.setCollisionMask(0);
+
+
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
         player = game.add.sprite(100, 120, "player");

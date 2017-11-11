@@ -60,7 +60,7 @@ playGame.prototype = {
         game.load.image("crate", "assets/crate.png");
         game.load.image("smallplanet", "assets/planet.png");
         game.load.image("bigplanet", "assets/bigplanet.png");
-        game.load.image("space", "assets/seamlessspace.png");
+        game.load.image("space", "assets/seamlessspacebright.png");
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
@@ -75,12 +75,10 @@ playGame.prototype = {
         game.time.desiredFps = 20;
         fuelTimer = game.time.now;
 
-        background=game.add.tileSprite(-1000, -1000, 800, 800, 'space');
-        game.add.tileSprite(-200, -200, 800, 800, 'space');
-        game.add.tileSprite(-1000, -200, 800, 800, 'space');
-        game.add.tileSprite(-200, -1000, 800, 800, 'space');
-        game.add.tileSprite(-200, 600, 800, 800, 'space');
-        game.add.tileSprite(600, -200, 800, 800, 'space');
+        background=game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
+        game.add.tileSprite(24, 24, 1024, 1024, 'space');
+        game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
+        game.add.tileSprite(24, -1000, 1024, 1024, 'space');
 
 
         // adding groups

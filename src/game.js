@@ -39,7 +39,7 @@ var gravityGraphics;
 var currentLevel = 0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
-    [//level 0
+    [//level 0 - tutorial, jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
         {objectType: 'teleporter', x: 130, y: -3, goal: 3},
@@ -48,7 +48,7 @@ var level = [
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
 
     ],
-    [//level 1
+    [//level 1 - start in void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 120, gravForce: 130, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 500, sprite: "smallplanet"},
@@ -57,11 +57,11 @@ var level = [
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'player', x: 25, y: 205}
     ],
-    [//level 2
+    [//level 2 - jumping to planets through void
         {objectType:"level3"},
         {objectType:"level3"},
         {objectType:"level3"}
-    ]
+    ] //level 3-static obstacles, level4-trampoline, level5-trampoline in the void, other ideas: planetoid chain, overlapping planets
 ];
 
 playGame.prototype = {
@@ -143,15 +143,15 @@ playGame.prototype = {
 
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
-        // get keyboard input
-        cursors = game.input.keyboard.createCursorKeys();
-        //camera follows the player
-        game.camera.follow(player);
-
         //add score to the screen
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
         scoreCaption.cameraOffset.setTo(300, 300);
+
+        // get keyboard input
+        cursors = game.input.keyboard.createCursorKeys();
+        //camera follows the player
+        game.camera.follow(player);
     },
     update: function(){
         // console.log('planet contact', planetContact);

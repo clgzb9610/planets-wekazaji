@@ -30,8 +30,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="117" column="7" lean-forward="false" selection-start-line="117" selection-start-column="7" selection-end-line="124" selection-end-column="47" />
+            <state relative-caret-position="176">
+              <caret line="88" column="2" lean-forward="false" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="2" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -206,7 +206,7 @@
       <workItem from="1509942747939" duration="2048000" />
       <workItem from="1510100336054" duration="374000" />
       <workItem from="1510279828015" duration="6480000" />
-      <workItem from="1510429297573" duration="320000" />
+      <workItem from="1510429297573" duration="1843000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -383,11 +383,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510428731091</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="merge conflict">
+      <created>1510429629218</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1510429629218</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66719000" />
+    <option name="totallyTimeSpent" value="68242000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="20" y="23" width="1280" height="773" extended-state="0" />
@@ -419,7 +426,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added Asset Directory&#10;Replaced crates with the player character.&#10;Implemented animations.&#10;I added in a camera follow feature to see what it does, but I haven't played with it yet." />
     <MESSAGE value="Pulled wes's spritesheet 2.5 &amp; moved it to assets directory" />
     <MESSAGE value="Animations use wes's new spritesheet" />
     <MESSAGE value="Player's feet always face towards the ground." />
@@ -444,7 +450,8 @@
     <MESSAGE value="level works!" />
     <MESSAGE value="need to collect a gear before the teleporter works" />
     <MESSAGE value="Added the tiled background." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the tiled background." />
+    <MESSAGE value="merge conflict" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge conflict" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -827,8 +834,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="117" column="7" lean-forward="false" selection-start-line="117" selection-start-column="7" selection-end-line="124" selection-end-column="47" />
+        <state relative-caret-position="176">
+          <caret line="88" column="2" lean-forward="false" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="2" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

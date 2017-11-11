@@ -42,7 +42,7 @@ var level = [
     [//level 0
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
-        {objectType: 'teleporter', x: 130, y: -3, goal: 3},
+        {objectType: 'teleporter', x: 130, y: -3, goal: 1},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
@@ -52,7 +52,7 @@ var level = [
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 120, gravForce: 130, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 500, sprite: "smallplanet"},
-        {objectType: 'teleporter', x:130, y: 30},//temporary change in coordinate, was y=31
+        {objectType: 'teleporter', x:130, y: 30, goal: 1},//temporary change in coordinate, was y=31
         {objectType: 'gear', x: -300, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'player', x: 25, y: 205}
@@ -83,10 +83,10 @@ playGame.prototype = {
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-400, -300, 400, 300);
 
-        game.time.desiredFps = 20;
+        game.time.desiredFps = 25;
         fuelTimer = game.time.now;
 
-        background=game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
+          background=game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
         game.add.tileSprite(24, 24, 1024, 1024, 'space');
         game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
         game.add.tileSprite(24, -1000, 1024, 1024, 'space');
@@ -228,7 +228,7 @@ function drawLevel(){
                 addition.gravRadius, addition.gravForce, addition.sprite);
         }
         if(addition.objectType === 'teleporter') {
-            addTeleporter(addition.x,addition.y);
+            addTeleporter(addition.x,addition.y, addition.goal);
         }
         if(addition.objectType === 'gear'){
             addGear(addition.x, addition.y, addition.sprite);
@@ -323,6 +323,7 @@ function addTeleporter(x, y, goal) {
     teleporter.body.static = true;
     teleporter.body.setCollisionMask(0);
     levelGoal = goal;
+    console.log('set goal', goal, levelGoal);
 }
 
 // kills the gear when touched
@@ -340,7 +341,8 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
     }
     score += 1;
     scoreCaption.text = 'Score: ' + score;
-    if (score>=1){
+    console.log('score', score, 'goal', levelGoal);
+    if (score>=levelGoal){
         teleporter.animations.play('swirl');
     }
     body2.sprite.destroy();
@@ -386,7 +388,7 @@ function checkTeleporterOverlap(teleporter){
     var playerBounds = player.getBounds();
     var teleporterBounds = teleporter.getBounds();
 
-    if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds) && score >= 1){
+    if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds) && score >= levelGoal){
         teleporter.destroy();
         console.log('contact with teleporter');
         currentLevel++;

@@ -36,26 +36,26 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
-var currentLevel = 0;
+var currentLevel = 1;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [//level 0 - tutorial, jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
-        {objectType: 'teleporter', x: 130, y: -3, goal: 1},
+        {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 1},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
 
     ],
     [//level 1 - start in void
-        {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 120, gravForce: 130, sprite: "smallplanet"},
-        {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 500, sprite: "smallplanet"},
-        {objectType: 'teleporter', x:130, y: 30, goal: 1},//temporary change in coordinate, was y=31
-        {objectType: 'gear', x: -300, y: -50, sprite: "gear"},
+        {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
+        {objectType: 'planet', x: 130, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
+        {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
+        {objectType: 'teleporter', x:248, y: 140, radians: 1.48, goal: 1}, //temporary change in coordinate, was y=31
+        {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 25, y: 205}
+        // {objectType: 'player', x: 25, y: 205}
     ],
     [//level 2 - jumping to planets through void
         {objectType:"level3"},
@@ -106,16 +106,13 @@ playGame.prototype = {
         // physics initialization
         game.physics.startSystem(Phaser.Physics.BOX2D);
 
-        /* adding a couple of planets. Arguments are:
-         * x position, y position, gravity radius, gravity force, graphic asset */
-        // addPlanet(-280, -100, 250, 150, "smallplanet");
-        // addPlanet(130, 150, 400, 250, "bigplanet");
+
         drawLevel();
-        
+
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
-        player = game.add.sprite(100, 120, "player");
+        player = game.add.sprite(-330, -50, "player");
         game.physics.box2d.enable(player);
         player.frame = 4;
         walkR = player.animations.add('walkR',[5,6,7,8], 7, true);
@@ -192,7 +189,7 @@ function drawLevel(){
                 addition.gravRadius, addition.gravForce, addition.sprite);
         }
         if(addition.objectType === 'teleporter') {
-            addTeleporter(addition.x,addition.y, addition.goal);
+            addTeleporter(addition.x,addition.y, addition.radians, addition.goal);
         }
         if(addition.objectType === 'gear'){
             addGear(addition.x, addition.y, addition.sprite);
@@ -279,15 +276,15 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     planet.body.setCollisionCategory(1);
 }
 
-function addTeleporter(x, y, goal) {
+function addTeleporter(x, y, radians, goal) {
     teleporter = game.add.sprite(x, y, "teleporter", 6);
     game.physics.box2d.enable(teleporter);
     teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 15, true);
     teleporter.body.setRectangle(40, 47);
+    teleporter.body.rotation += radians;
     teleporter.body.static = true;
     teleporter.body.setCollisionMask(0);
     levelGoal = goal;
-    console.log('set goal', goal, levelGoal);
 }
 
 // kills the gear when touched

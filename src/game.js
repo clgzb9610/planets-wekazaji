@@ -84,9 +84,8 @@ playGame.prototype = {
         game.world.setBounds(-400, -300, 400, 300);
 
         game.time.desiredFps = 25;
-        fuelTimer = game.time.now;
 
-          background=game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
+        background=game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
         game.add.tileSprite(24, 24, 1024, 1024, 'space');
         game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
         game.add.tileSprite(24, -1000, 1024, 1024, 'space');
@@ -112,16 +111,7 @@ playGame.prototype = {
         // addPlanet(-280, -100, 250, 150, "smallplanet");
         // addPlanet(130, 150, 400, 250, "bigplanet");
         drawLevel();
-
-        // //add teleporter
-        // teleporter = game.add.sprite(130, -3, "teleporter", 6);
-        // game.physics.box2d.enable(teleporter);
-        // teleporter.animations.add('swirl', [0,1,2,3,4,5], 15, true);
-        // teleporter.body.setRectangle(40, 47);
-        // teleporter.body.static = true;
-        // teleporter.body.setCollisionCategory(1);
-        // teleporter.body.setCollisionMask(0);
-
+        
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
@@ -172,36 +162,9 @@ playGame.prototype = {
         game.world.pivot.y = player.y;
         game.world.rotation = -angle + (Math.PI/2);     //rotates the world so the controls aren't global
 
-
         //Handle keyboard input for the player
-        if (cursors.left.isDown ) {
-            // player.body.moveLeft(90);
-            player.body.velocity.x += vel * Math.cos(angle + (Math.PI/2));
-            player.body.velocity.y += vel * Math.sin(angle + (Math.PI/2));
-            player.animations.play('walkL');
-        }
-        else if (cursors.right.isDown ) {
-            // player.body.moveRight(90);
-            player.body.velocity.x += vel * Math.cos(angle - (Math.PI / 2)) ;
-            player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
-            player.animations.play('walkR');
-        }
-        if (cursors.up.isDown) {
-            player.body.velocity.x += -vel * Math.cos(angle);
-            player.body.velocity.y += -vel * Math.sin(angle);
-            player.animations.play('fall');
+        keyboardInput(angle);
 
-        }
-        if (cursors.down.isDown) {
-            player.body.velocity.x += vel * Math.cos(angle);
-            player.body.velocity.y += vel * Math.sin(angle);
-            player.animations.play('stand');
-
-        }
-
-        if (cursors.left.justUp || cursors.right.justUp){
-            player.animations.play('stand');
-        }
         constrainVelocity(player,150);
 
     },
@@ -391,20 +354,55 @@ function checkTeleporterOverlap(teleporter){
     var teleporterBounds = teleporter.getBounds();
 
     if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds) && score >= levelGoal){
-        teleporter.destroy();
-        console.log('contact with teleporter');
-        currentLevel++;
-        console.log('currentLevel: ', currentLevel);
-        planetGroup.destroy();
-        planetGroup = game.add.group();
+        changeLevel();
+    }
+}
 
-        gravityGraphics.destroy();
-        gravityGraphics = game.add.graphics(0, 0);
-        gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+function changeLevel(){
+    teleporter.destroy();
+    console.log('contact with teleporter');
+    currentLevel++;
+    console.log('currentLevel: ', currentLevel);
+    planetGroup.destroy();
+    planetGroup = game.add.group();
 
-        console.log('destroy!');
-        score = 0;
-        drawLevel()
-        // game.state.start("PlayGame", true, false, this.currentLevel);
+    gravityGraphics.destroy();
+    gravityGraphics = game.add.graphics(0, 0);
+    gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+
+    console.log('destroy!');
+    score = 0;
+    drawLevel()
+    // game.state.start("PlayGame", true, false, this.currentLevel);
+}
+
+function keyboardInput(angle){
+    if (cursors.left.isDown ) {
+        // player.body.moveLeft(90);
+        player.body.velocity.x += vel * Math.cos(angle + (Math.PI/2));
+        player.body.velocity.y += vel * Math.sin(angle + (Math.PI/2));
+        player.animations.play('walkL');
+    }
+    else if (cursors.right.isDown ) {
+        // player.body.moveRight(90);
+        player.body.velocity.x += vel * Math.cos(angle - (Math.PI / 2)) ;
+        player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
+        player.animations.play('walkR');
+    }
+    if (cursors.up.isDown) {
+        player.body.velocity.x += -vel * Math.cos(angle);
+        player.body.velocity.y += -vel * Math.sin(angle);
+        player.animations.play('fall');
+
+    }
+    if (cursors.down.isDown) {
+        player.body.velocity.x += vel * Math.cos(angle);
+        player.body.velocity.y += vel * Math.sin(angle);
+        player.animations.play('stand');
+
+    }
+
+    if (cursors.left.justUp || cursors.right.justUp){
+        player.animations.play('stand');
     }
 }

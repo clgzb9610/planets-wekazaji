@@ -50,11 +50,11 @@ var level = [
     ],
     [//level 1 - start in void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
+        {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
-        {objectType: 'teleporter', x:248, y: 140, radians: 1.48, goal: 1}, //temporary change in coordinate, was y=31
+        {objectType: 'teleporter', x:278, y: 140, radians: 1.48, goal: 1}, //temporary change in coordinate, was y=31
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
-        {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
+        {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 25, y: 205}
     ],
     [//level 2 - jumping to planets through void
@@ -240,52 +240,51 @@ function normalizedRadians(rawAngle){
 
 /*
 This is the code that calculates gravity fields for the player, if they are in the radius.
-I changed it so that this function returns -361, which is impossible in radian angles,
+function returns -361, which is impossible in radian angles,
 if the player is not in any gravity radius.
  */
 function gravityToPlanets(gravObject){
     var angle = -361;
-    var closestPlanetDistance = Infinity;
     // looping through all planets
+    var p = findClosestPlanet(gravObject);
+
+    if(p !== undefined) {
+        var distanceFromPlanet = Phaser.Math.distance(gravObject.x, gravObject.y, p.x, p.y);
+
+        // calculating angle between the planet and the crate
+        angle = Phaser.Math.angleBetween(gravObject.x, gravObject.y, p.x, p.y);
+
+        // add gravity force to the gravObject in the direction of planet center
+        gravObject.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet - p.width / 2),
+            p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet - p.width / 2));
+    }
+    return angle;
+}
+
+/* finds which planet the gravityObject is closest to, if it is within a gravity field.
+ * returns undefined if the object is outside all gravity fields.
+ */
+function findClosestPlanet(gravObject){
+    var closestPlanetDistance = Infinity;
+    var closestPlanet;
+
     for(var j = 0; j < planetGroup.total; j++){
         var p = planetGroup.getChildAt(j);
         var planetGravityRadius = p.width / 2 + p.gravityRadius / 2;
         var distanceFromPlanet = Phaser.Math.distance(gravObject.x, gravObject.y, p.x, p.y);
 
         if (distanceFromPlanet < planetGravityRadius){
-            // calculating angle between the planet and the crate
-            angle = Phaser.Math.angleBetween(gravObject.x, gravObject.y, p.x, p.y);
-            // add gravity force to the crate in the direction of planet center
-
-            // console.log(distance-p.width/2, radius-p.width);
-            gravObject.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet-p.width/2),
-                p.gravityForce * Math.sin(angle) * forceReducer* (distanceFromPlanet-p.width/2));
+            if (closestPlanet === undefined){
+                closestPlanet = p;
+                closestPlanetDistance = distanceFromPlanet;
+            } else if( distanceFromPlanet < closestPlanetDistance){
+                closestPlanet = p;
+                closestPlanetDistance = distanceFromPlanet;
+            }
         }
     }
-    return angle;
+    return closestPlanet
 }
-
-// function findClosestPlanet(gravObject){
-//     var closestPlanetDistance = Infinity;
-//     var closestPlanet;
-//
-//     for(var j = 0; j < planetGroup.total; j++){
-//         var p = planetGroup.getChildAt(j);
-//         var planetGravityRadius = p.width / 2 + p.gravityRadius / 2;
-//         var distanceFromPlanet = Phaser.Math.distance(gravObject.x, gravObject.y, p.x, p.y);
-//
-//         if (distanceFromPlanet < planetGravityRadius){
-//             if (closestPlanet === undefined){
-//                 closestPlanet = p;
-//                 closestPlanetDistance = distanceFromPlanet;
-//             } else if( distanceFromPlanet < closestPlanetDistance){
-//                 closestPlanet = p;
-//                 closestPlanetDistance = distanceFromPlanet;
-//             }
-//         }
-//     }
-//     return [closestPlanet,distanceFromPlanet];
-// }
 
 function applyGravityToObjects(){
     for (var i = 0; i < objectGroup.total; i++){

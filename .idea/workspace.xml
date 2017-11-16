@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="decomposed gravity function to have a findClosestPlanet helper. moved some stuff around on level 1. Also i just realized that the gears aren't being deleted between levels if you don't collect them all.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/message_back.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
     </list>
@@ -16,12 +17,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="52" column="61" lean-forward="true" selection-start-line="52" selection-start-column="61" selection-end-line="52" selection-end-column="61" />
+            <state relative-caret-position="334">
+              <caret line="337" column="26" lean-forward="true" selection-start-line="337" selection-start-column="26" selection-end-line="337" selection-end-column="26" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -90,7 +91,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="6" />
+    <option name="x" value="-4" />
     <option name="y" value="23" />
     <option name="width" value="1267" />
     <option name="height" value="773" />
@@ -110,7 +111,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -133,6 +133,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -145,8 +146,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/assets" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -204,7 +205,8 @@
       <workItem from="1510279828015" duration="6480000" />
       <workItem from="1510429297573" duration="320000" />
       <workItem from="1510431961614" duration="5132000" />
-      <workItem from="1510596349979" duration="10163000" />
+      <workItem from="1510596349979" duration="12694000" />
+      <workItem from="1510866001627" duration="1123000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -409,17 +411,24 @@
       <option name="project" value="LOCAL" />
       <updated>1510763027357</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="decomposed gravity function to have a findClosestPlanet helper. moved some stuff around on level 1. Also i just realized that the gears aren't being deleted between levels if you don't collect them all.">
+      <created>1510764209029</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1510764209029</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83097000" />
+    <option name="totallyTimeSpent" value="86751000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="23" width="1267" height="773" extended-state="0" />
+    <frame x="-4" y="23" width="1267" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20145044" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20144463" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12028542" sideWeight="0.5055784" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3452211" sideWeight="0.47109374" order="7" side_tool="false" content_ui="tabs" />
@@ -464,7 +473,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="started adding things for mouse control. they're commented out bc they dont work yet ha." />
     <MESSAGE value="Player relative arrow controls &amp; world rotation!&#10;&#10;Also I decomposed the gravity field stuff from update, added a max velocity function i found online, and messed with some boundaries and layouts. The new world is centered at (0,0) so there's negative coordinates now." />
     <MESSAGE value="Applying gravity to coins &amp; other objects" />
     <MESSAGE value="Added in gear sprites in place of coin sprites." />
@@ -489,7 +497,8 @@
     <MESSAGE value="separate functions for changing levels &amp; handling keyboard input. Deleting some stuff that accidentally got put back in during a weird merge." />
     <MESSAGE value="Moving things. player in level 0, gears and teleporter in level 1. Added a rotation option to the teleporter creation." />
     <MESSAGE value="World rotates gradually when you change gravity fields. Some renaming / refactoring." />
-    <option name="LAST_COMMIT_MESSAGE" value="World rotates gradually when you change gravity fields. Some renaming / refactoring." />
+    <MESSAGE value="decomposed gravity function to have a findClosestPlanet helper. moved some stuff around on level 1. Also i just realized that the gears aren't being deleted between levels if you don't collect them all." />
+    <option name="LAST_COMMIT_MESSAGE" value="decomposed gravity function to have a findClosestPlanet helper. moved some stuff around on level 1. Also i just realized that the gears aren't being deleted between levels if you don't collect them all." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -872,8 +881,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="52" column="61" lean-forward="true" selection-start-line="52" selection-start-column="61" selection-end-line="52" selection-end-column="61" />
+        <state relative-caret-position="334">
+          <caret line="337" column="26" lean-forward="true" selection-start-line="337" selection-start-column="26" selection-end-line="337" selection-end-column="26" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

@@ -24,7 +24,7 @@ var teleporter;
 var levelGoal;
 var lastAngle;
 
-var scoreCaption;
+var messageCaption;
 var score = 0;
 
 // a force reducer to let the simulation run smoothly
@@ -76,6 +76,7 @@ playGame.prototype = {
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
+        game.load.image("message_back", "assets/message_back.png");
     },
     create: function () {
         var enemy;
@@ -127,13 +128,9 @@ playGame.prototype = {
         // objectGroup.add(enemy);
 
         player.body.setCategoryContactCallback(2, gearCallback, this);
-
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
-        //add score to the screen
-        scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
-        scoreCaption.fixedToCamera = true;
-        scoreCaption.cameraOffset.setTo(300, 300);
+        addMessage("text here");
 
         // get keyboard input
         cursors = game.input.keyboard.createCursorKeys();
@@ -145,6 +142,8 @@ playGame.prototype = {
 
         applyGravityToObjects();
         checkTeleporterOverlap(teleporter);
+
+        messageLocation(playerAngle);
 
         //Handle keyboard input for the player
         handleKeyboardInput(playerAngle);
@@ -313,6 +312,33 @@ function constrainVelocity(sprite, maxVelocity) {
     }
 }
 
+function addMessage(text){
+    //add score to the screen
+    messageBack = game.add.sprite(200,400,"message_back");
+    messageBack.scale.setTo(0.45,0.45);
+    messageBack.anchor.set(0.5);
+    messageCaption = game.add.text(300, 300, text, {fill: '#ffffff', font: '14pt Arial'});
+    messageCaption.anchor.set(0.5);
+}
+
+function updateMessage(text){
+    messageCaption.text = text;
+}
+
+function messageLocation(angle){
+    messageBack.x = player.x - 200 * Math.cos(angle);
+    messageBack.y = player.y - 200 * Math.sin(angle);
+    messageCaption.x = Math.floor(messageBack.x);
+    messageCaption.y = Math.floor(messageBack.y);
+    messageBack.angle = angle * 180 / Math.PI - 90;
+    messageCaption.angle = angle * 180 / Math.PI - 90;
+}
+
+function destroyMessage(){
+    messageBack.destroy();
+    messageCaption.destroy();
+}
+
 // function to add a planet
 function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     var planet = game.add.sprite(posX, posY, asset);
@@ -353,7 +379,7 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
         return;
     }
     score += 1;
-    scoreCaption.text = 'Score: ' + score;
+    updateMessage("score: " + score);
     console.log('score', score, 'goal', levelGoal);
     if (score>=levelGoal){
         teleporter.animations.play('swirl');

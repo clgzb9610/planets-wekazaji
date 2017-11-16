@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="decomposed gravity function to have a findClosestPlanet helper. moved some stuff around on level 1. Also i just realized that the gears aren't being deleted between levels if you don't collect them all.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/message_back.png" />
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
     </list>
@@ -21,8 +20,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="337" column="26" lean-forward="true" selection-start-line="337" selection-start-column="26" selection-end-line="337" selection-end-column="26" />
+            <state relative-caret-position="330">
+              <caret line="132" column="66" lean-forward="false" selection-start-line="132" selection-start-column="66" selection-end-line="132" selection-end-column="66" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -206,7 +205,7 @@
       <workItem from="1510429297573" duration="320000" />
       <workItem from="1510431961614" duration="5132000" />
       <workItem from="1510596349979" duration="12694000" />
-      <workItem from="1510866001627" duration="1123000" />
+      <workItem from="1510866001627" duration="1290000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -418,11 +417,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510764209029</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Added message panel to display above the player's head and follow them. We should come up with a system for what to display here and when to hide / destroy the message.">
+      <created>1510867364113</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1510867364113</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86751000" />
+    <option name="totallyTimeSpent" value="86918000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="23" width="1267" height="773" extended-state="0" />
@@ -473,7 +479,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Player relative arrow controls &amp; world rotation!&#10;&#10;Also I decomposed the gravity field stuff from update, added a max velocity function i found online, and messed with some boundaries and layouts. The new world is centered at (0,0) so there's negative coordinates now." />
     <MESSAGE value="Applying gravity to coins &amp; other objects" />
     <MESSAGE value="Added in gear sprites in place of coin sprites." />
     <MESSAGE value="player can only jump during a collision. (added player collision to other objects besides gears)" />
@@ -498,7 +503,8 @@
     <MESSAGE value="Moving things. player in level 0, gears and teleporter in level 1. Added a rotation option to the teleporter creation." />
     <MESSAGE value="World rotates gradually when you change gravity fields. Some renaming / refactoring." />
     <MESSAGE value="decomposed gravity function to have a findClosestPlanet helper. moved some stuff around on level 1. Also i just realized that the gears aren't being deleted between levels if you don't collect them all." />
-    <option name="LAST_COMMIT_MESSAGE" value="decomposed gravity function to have a findClosestPlanet helper. moved some stuff around on level 1. Also i just realized that the gears aren't being deleted between levels if you don't collect them all." />
+    <MESSAGE value="Added message panel to display above the player's head and follow them. We should come up with a system for what to display here and when to hide / destroy the message." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added message panel to display above the player's head and follow them. We should come up with a system for what to display here and when to hide / destroy the message." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -881,8 +887,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="337" column="26" lean-forward="true" selection-start-line="337" selection-start-column="26" selection-end-line="337" selection-end-column="26" />
+        <state relative-caret-position="330">
+          <caret line="132" column="66" lean-forward="false" selection-start-line="132" selection-start-column="66" selection-end-line="132" selection-end-column="66" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

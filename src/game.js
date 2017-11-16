@@ -130,7 +130,7 @@ playGame.prototype = {
         player.body.setCategoryContactCallback(2, gearCallback, this);
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
-        addMessage("text here");
+        addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter");
 
         // get keyboard input
         cursors = game.input.keyboard.createCursorKeys();

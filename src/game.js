@@ -77,6 +77,7 @@ playGame.prototype = {
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
         game.load.image("message_back", "assets/message_back.png");
+        game.load.image("speechBubble", "assets/speechBubble.png")
     },
     create: function () {
         var enemy;
@@ -91,20 +92,16 @@ playGame.prototype = {
         game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
         game.add.tileSprite(24, -1000, 1024, 1024, 'space');
 
-
-        // adding groups
         // crateGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
 
-        // adding graphic objects
+        // adding gravitiy line
         gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
-        // stage setup
         game.stage.backgroundColor = "#222222";
 
-        // physics initialization
         game.physics.startSystem(Phaser.Physics.BOX2D);
 
 
@@ -130,11 +127,11 @@ playGame.prototype = {
         player.body.setCategoryContactCallback(2, gearCallback, this);
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
-        addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter");
+        // text, seconds until it fades
+        addMessage("Hi! There!", 1);
+        // addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter", 3);
 
-        // get keyboard input
         cursors = game.input.keyboard.createCursorKeys();
-        //camera follows the player
         game.camera.follow(player);
     },
     update: function(){
@@ -312,26 +309,32 @@ function constrainVelocity(sprite, maxVelocity) {
     }
 }
 
-function addMessage(text){
+//=======adds text================================================================================================
+function addMessage(text, sec){
     //add score to the screen
-    messageBack = game.add.sprite(200,400,"message_back");
-    messageBack.scale.setTo(0.45,0.45);
+    messageBack = game.add.sprite(100,100,"speechBubble");
+    messageBack.scale.setTo(0.6,0.6);
     messageBack.anchor.set(0.5);
-    messageCaption = game.add.text(300, 300, text, {fill: '#ffffff', font: '14pt Arial'});
+    messageCaption = game.add.text(100, 100, text, {fill: '#000000', font: '9pt Arial'});
     messageCaption.anchor.set(0.5);
+    if(sec > 0){
+        messageTimer(sec); //fades message
+    }
+}
+
+function messageTimer(sec){
+    game.time.events.add(Phaser.Timer.SECOND * sec, fadeMessage, this);
+}
+
+function fadeMessage(){
+    var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+    var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+    bubbleTween.onComplete.add(destroyMessage, this);
+    textTween.onComplete.add(destroyMessage, this);
 }
 
 function updateMessage(text){
     messageCaption.text = text;
-}
-
-function messageLocation(angle){
-    messageBack.x = player.x - 200 * Math.cos(angle);
-    messageBack.y = player.y - 200 * Math.sin(angle);
-    messageCaption.x = Math.floor(messageBack.x);
-    messageCaption.y = Math.floor(messageBack.y);
-    messageBack.angle = angle * 180 / Math.PI - 90;
-    messageCaption.angle = angle * 180 / Math.PI - 90;
 }
 
 function destroyMessage(){
@@ -339,7 +342,16 @@ function destroyMessage(){
     messageCaption.destroy();
 }
 
-// function to add a planet
+function messageLocation(angle){
+    messageBack.x = player.x - 100 * Math.cos(angle);
+    messageBack.y = player.y - 100 * Math.sin(angle);
+    messageCaption.x = Math.floor(messageBack.x);
+    messageCaption.y = Math.floor(messageBack.y);
+    messageBack.angle = angle * 180 / Math.PI - 90;
+    messageCaption.angle = angle * 180 / Math.PI - 90;
+}
+//=======================================================================================================
+
 function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     var planet = game.add.sprite(posX, posY, asset);
     planet.gravityRadius = gravityRadius;
@@ -348,7 +360,6 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     game.physics.box2d.enable(planet);
     planet.body.static = true;
 
-    // look how I create a circular body
     planet.body.setCircle(planet.width / 2);
     gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
     planet.body.setCollisionCategory(1);
@@ -365,7 +376,6 @@ function addTeleporter(x, y, radians, goal) {
     levelGoal = goal;
 }
 
-// kills the gear when touched
 function gearCallback(body1,body2, fixture1, fixture2, begin) {
     //body1, body2, fixture1, fixture2, begin
     // body1 is the player because it's the body that owns the callback

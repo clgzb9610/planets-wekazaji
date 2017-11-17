@@ -389,7 +389,8 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
         return;
     }
     score += 1;
-    updateMessage("score: " + score);
+    var gearText = score + " / " + levelGoal;
+    addMessage(gearText,1);
     console.log('score', score, 'goal', levelGoal);
     if (score>=levelGoal){
         teleporter.animations.play('swirl');

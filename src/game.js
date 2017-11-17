@@ -20,6 +20,8 @@ var walkL;
 var stand;
 var fall;
 
+var enemy;
+
 var teleporter;
 var levelGoal;
 var lastAngle;
@@ -29,7 +31,11 @@ var score = 0;
 
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.0007; //was .00175
-var vel = 25;
+
+var playerVel = 25;
+var enemyVel = 45;
+
+var enemyCounterClockwise = -1;
 
 var planetContact = false;
 
@@ -69,7 +75,7 @@ playGame.prototype = {
       this.currentLevel = currentLevel;
     },
     preload: function () {
-        game.load.image("crate", "assets/crate.png");
+        game.load.image("enemy", "assets/redcrate.png");
         game.load.image("smallplanet", "assets/planet.png");
         game.load.image("bigplanet", "assets/bigplanet.png");
         game.load.image("space", "assets/seamlessspacebright.png");
@@ -78,7 +84,6 @@ playGame.prototype = {
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
     },
     create: function () {
-        var enemy;
 
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-400, -300, 400, 300);
@@ -93,7 +98,7 @@ playGame.prototype = {
 
 
         // adding groups
-        // crateGroup = game.add.group();
+        // enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
 
@@ -134,10 +139,15 @@ playGame.prototype = {
         fall = player.animations.add('fall',[9],1);
 
         //add enemy - crate
-        // enemy = game.add.sprite(0, 80, 'crate');
-        // game.physics.box2d.enable(enemy);
-        // enemy.body.setRectangle(12, 12);
-        // objectGroup.add(enemy);
+        enemy = game.add.sprite(100, 120, 'enemy');
+        game.physics.box2d.enable(enemy);
+        enemy.body.static = false;
+        // enemy.body.setCollisionCategory(3);
+        enemy.body.setRectangle(12, 50);
+        objectGroup.add(enemy);
+
+        // player.body.setCategoryContactCallback(3, enemyContactCallback, this);
+        player.body.setBodyContactCallback(enemy, enemyContactCallback, this);
 
         player.body.setCategoryContactCallback(2, gearCallback, this);
 
@@ -147,6 +157,35 @@ playGame.prototype = {
         cursors = game.input.keyboard.createCursorKeys();
         //camera follows the player
         game.camera.follow(player);
+                                            //
+                                            // // add healthbar
+                                            // // bar = game.add.sprite.rect(350,250,50,10);
+                                            // // { fill: '#ffaaaa', font: '14pt Arial'})
+                                            // // bad.body.setRectangle(50,10);
+                                            // // bar.body.static = true;
+                                            //
+                                            // var maxHealthBar;
+                                            // var healthBar;
+                                            // var maxWidth = 50 // example;
+                                            // var maxHeight = 10 // example;
+                                            // var width = 25 // example;
+                                            // var height = 5 // example;
+                                            // var bmd = game.add.bitmapData(width, height);
+                                            // var bmd2 = game.add.bitmapData(width, height);
+                                            //
+                                            // bmd.ctx.beginPath();
+                                            // bmd.ctx.rect(0, 0, maxWidth, maxHeight);
+                                            // bmd.ctx.fillStyle = '#ffff00';
+                                            // bmd.ctx.fill();
+                                            // maxHealthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd);
+                                            // maxHealthBar.anchor.setTo(0.5, 0.5);
+                                            //
+                                            // bmd2.ctx.beginPath();
+                                            // bmd2.ctx.rect(0, 0, width, height);
+                                            // bmd2.ctx.fillStyle = '#ffffff';
+                                            // bmd2.ctx.fill();
+                                            // healthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd2);
+                                            // healthBar.anchor.setTo(0.5, 0.5);
 
         //add score to the screen
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
@@ -156,14 +195,8 @@ playGame.prototype = {
     update: function(){
         // console.log('planet contact', planetContact);
 
-        var angle = gravityToPlanets(player);
-        if (angle > -361){ // angle == -361 if the player is not in any gravity field.
-            //orients players feet toward the ground. Uses var angle as degrees offset by -90
-            player.body.angle = angle * 180 / Math.PI - 90;
-            lastAngle = angle;
-        } else{
-            angle = lastAngle;
-        }
+        angle = planetGrounder(player);
+        angle2 = planetGrounder(enemy);
 
         objGrav();
         checkTeleporterOverlap(teleporter);
@@ -173,28 +206,41 @@ playGame.prototype = {
         game.world.rotation = -angle + (Math.PI/2);     //rotates the world so the controls aren't global
 
 
+        // Keep the enemy moving
+
+        if (enemyCounterClockwise == -1) {
+            enemy.body.velocity.x += enemyVel * Math.cos(angle2 - (Math.PI / 2)) ;
+            enemy.body.velocity.y += enemyVel * Math.sin(angle2 - (Math.PI / 2)) ;
+            // player.x += 20;
+
+        } else {
+            enemy.body.velocity.x += enemyVel * Math.cos(angle2 + (Math.PI / 2)) ;
+            enemy.body.velocity.y += enemyVel * Math.sin(angle2 + (Math.PI / 2)) ;
+
+        }
+
         //Handle keyboard input for the player
         if (cursors.left.isDown ) {
             // player.body.moveLeft(90);
-            player.body.velocity.x += vel * Math.cos(angle + (Math.PI/2));
-            player.body.velocity.y += vel * Math.sin(angle + (Math.PI/2));
+            player.body.velocity.x += playerVel * Math.cos(angle + (Math.PI/2));
+            player.body.velocity.y += playerVel * Math.sin(angle + (Math.PI/2));
             player.animations.play('walkL');
         }
         else if (cursors.right.isDown ) {
             // player.body.moveRight(90);
-            player.body.velocity.x += vel * Math.cos(angle - (Math.PI / 2)) ;
-            player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
+            player.body.velocity.x += playerVel * Math.cos(angle - (Math.PI / 2)) ;
+            player.body.velocity.y += playerVel * Math.sin(angle - (Math.PI / 2)) ;
             player.animations.play('walkR');
         }
         if (cursors.up.isDown) {
-            player.body.velocity.x += -vel * Math.cos(angle);
-            player.body.velocity.y += -vel * Math.sin(angle);
+            player.body.velocity.x += -playerVel * Math.cos(angle);
+            player.body.velocity.y += -playerVel * Math.sin(angle);
             player.animations.play('fall');
 
         }
         if (cursors.down.isDown) {
-            player.body.velocity.x += vel * Math.cos(angle);
-            player.body.velocity.y += vel * Math.sin(angle);
+            player.body.velocity.x += playerVel * Math.cos(angle);
+            player.body.velocity.y += playerVel * Math.sin(angle);
             player.animations.play('stand');
 
         }
@@ -203,6 +249,7 @@ playGame.prototype = {
             player.animations.play('stand');
         }
         constrainVelocity(player,150);
+        constrainVelocity(enemy,300);
 
     },
     render: function() {
@@ -241,6 +288,18 @@ function drawLevel(){
     }
 }
 
+// function drawHealthBar(x,y) {
+//     var bmd = this.game.add.bitmapData(250, 40);
+//     bmd.ctx.fillStyle = '#FEFF03';
+//     bmd.ctx.beginPath();
+//     bmd.ctx.rect(x, y, 250, 40);
+//     bmd.ctx.fill();
+//     // bmd.update();
+//
+//     // this.barSprite = this.game.add.sprite(this.x - this.bgSprite.width/2, this.y, bmd);
+//     // this.barSprite.anchor.y = 0.5;
+// }
+
 /*
 This is the code that calculates gravity fields for the player, if they are in the radius.
 I changed it so that this function returns -361, which is impossible in radian angles,
@@ -250,7 +309,7 @@ function gravityToPlanets(gravObject){
     var p;
     var distance;
     var radius;
-   var angle = -361;
+    var angle = -361;
     // looping through all planets
     for (var j = 0; j < planetGroup.total; j++) {
         p = planetGroup.getChildAt(j);
@@ -270,6 +329,18 @@ function gravityToPlanets(gravObject){
             gravObject.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distance-p.width/2),
                 p.gravityForce * Math.sin(angle) * forceReducer* (distance-p.width/2));
         }
+    }
+    return angle;
+}
+
+function planetGrounder(sprite) {
+    var angle = gravityToPlanets(sprite);
+    if (angle > -361) { // angle == -361 if the player is not in any gravity field.
+        //orients players feet toward the ground. Uses var angle as degrees offset by -90
+        sprite.body.angle = angle * 180 / Math.PI - 90;
+        lastAngle = angle;
+    } else {
+        angle = lastAngle;
     }
     return angle;
 }
@@ -324,6 +395,27 @@ function addTeleporter(x, y, goal) {
     teleporter.body.static = true;
     teleporter.body.setCollisionMask(0);
     levelGoal = goal;
+}
+
+//rebounds the player sprite back after enemy collision
+function enemyContactCallback(body1, body2, fixture1, fixture2, begin){
+    if (!begin){
+        return;
+    }
+
+    if (enemyCounterClockwise == -1) {
+        enemyCounterClockwise = 0;
+        // body2.posx = body2.posx - 10;
+    } else {
+        enemyCounterClockwise = -1;
+        // body2.posx = body2.posx - 10;
+    }
+    body2.velocity.x = 0;
+    body2.velocity.y = 0;
+    enemyVel += 5;
+
+    score += 1;
+    //just to test when I can get the function to actually call itself!
 }
 
 // kills the gear when touched
@@ -405,3 +497,8 @@ function checkTeleporterOverlap(teleporter){
         // game.state.start("PlayGame", true, false, this.currentLevel);
     }
 }
+
+// Consistently checks if the players health goes to zero, and if so resets the level.
+// function resetLevel(health) {
+    // TBD
+// }

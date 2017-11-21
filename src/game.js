@@ -173,9 +173,9 @@ playGame.prototype = {
         // healthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd2);
         // healthBar.anchor.setTo(0.5, 0.5);
   //add score to the screen
-        scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
-        scoreCaption.fixedToCamera = true;
-        scoreCaption.cameraOffset.setTo(300, 300);
+  //       scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
+  //       scoreCaption.fixedToCamera = true;
+  //       scoreCaption.cameraOffset.setTo(300, 300);
     },
 
     update: function(){
@@ -188,7 +188,7 @@ playGame.prototype = {
         messageLocation(playerAngle);
 
         // Keep the enemy moving
-        if (enemyCounterClockwise == -1) {
+        if (enemyCounterClockwise === -1) {
         enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle - (Math.PI / 2)) ;
         enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle - (Math.PI / 2)) ;
 
@@ -283,8 +283,6 @@ function handlePlayerRotation(player){
     } else{
         playerAngle = playerLastAngle;
     }
-
-    console.log("before:" + playerAngle);
 
     game.world.pivot.x = player.x;          //these two rotate the world around the player
     game.world.pivot.y = player.y;
@@ -459,7 +457,6 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     game.physics.box2d.enable(planet);
     planet.body.static = true;
 
-    // look how I create a circular body
     planet.body.setCircle(planet.width / 2);
     gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
     planet.body.setCollisionCategory(1);
@@ -482,7 +479,7 @@ function enemyContactCallback(body1, body2, fixture1, fixture2, begin){
         return;
     }
 
-    if (enemyCounterClockwise == -1) {
+    if (enemyCounterClockwise === -1) {
         enemyCounterClockwise = 0;
     } else {
         enemyCounterClockwise = -1;
@@ -506,8 +503,7 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
         return;
     }
     score += 1;
-    updateMessage("score: " + score);
-    console.log('score', score, 'goal', levelGoal);
+    addMessage(score + " / " + levelGoal, 1);
     if (score>=levelGoal){
         teleporter.animations.play('swirl');
     }
@@ -562,9 +558,9 @@ function checkTeleporterOverlap(teleporter){
 
 function changeLevel(){
     teleporter.destroy();
-    console.log('contact with teleporter');
+    // console.log('contact with teleporter');
     currentLevel++;
-    console.log('currentLevel: ', currentLevel);
+    // console.log('currentLevel: ', currentLevel);
     planetGroup.destroy();
     planetGroup = game.add.group();
 
@@ -572,7 +568,7 @@ function changeLevel(){
     gravityGraphics = game.add.graphics(0, 0);
     gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
-    console.log('destroy!');
+    // console.log('destroy!');
     score = 0;
     createLevel()
     // game.state.start("PlayGame", true, false, this.currentLevel);

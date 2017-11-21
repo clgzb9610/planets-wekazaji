@@ -26,7 +26,7 @@ var teleporter;
 var levelGoal;
 var lastAngle;
 
-var scoreCaption;
+var messageCaption;
 var score = 0;
 
 // a force reducer to let the simulation run smoothly
@@ -45,29 +45,29 @@ var gravityGraphics;
 var currentLevel = 0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
-    [//level 0
+    [//level 0 - tutorial, jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
-        {objectType: 'teleporter', x: 130, y: -3, goal: 3},
+        {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 1},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
 
     ],
-    [//level 1
-        {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "bigplanet"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 120, gravForce: 130, sprite: "smallplanet"},
-        {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 500, sprite: "smallplanet"},
-        {objectType: 'teleporter', x:130, y: 30},//temporary change in coordinate, was y=31
-        {objectType: 'gear', x: -300, y: -50, sprite: "gear"},
-        {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
+    [//level 1 - start in void
+        {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
+        {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
+        {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
+        {objectType: 'teleporter', x:278, y: 140, radians: 1.48, goal: 1}, //temporary change in coordinate, was y=31
+        {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
+        {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 25, y: 205}
     ],
-    [//level 2
+    [//level 2 - jumping to planets through void
         {objectType:"level3"},
         {objectType:"level3"},
         {objectType:"level3"}
-    ]
+    ] //level 3-static obstacles, level4-trampoline, level5-trampoline in the void, other ideas: planetoid chain, overlapping planets
 ];
 
 playGame.prototype = {
@@ -82,55 +82,41 @@ playGame.prototype = {
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
+        game.load.image("message_back", "assets/message_back.png");
+        game.load.image("speechBubble", "assets/speechBubble.png")
     },
     create: function () {
+        var enemy;
 
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-400, -300, 400, 300);
 
-        game.time.desiredFps = 20;
-        fuelTimer = game.time.now;
+        game.time.desiredFps = 25;
 
         background=game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
         game.add.tileSprite(24, 24, 1024, 1024, 'space');
         game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
         game.add.tileSprite(24, -1000, 1024, 1024, 'space');
 
-
-        // adding groups
         // enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
 
-        // adding graphic objects
+        // adding gravitiy line
         gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
-        // stage setup
         game.stage.backgroundColor = "#222222";
 
-        // physics initialization
         game.physics.startSystem(Phaser.Physics.BOX2D);
 
-        /* adding a couple of planets. Arguments are:
-         * x position, y position, gravity radius, gravity force, graphic asset */
-        // addPlanet(-280, -100, 250, 150, "smallplanet");
-        // addPlanet(130, 150, 400, 250, "bigplanet");
-        drawLevel();
 
-        // //add teleporter
-        // teleporter = game.add.sprite(130, -3, "teleporter", 6);
-        // game.physics.box2d.enable(teleporter);
-        // teleporter.animations.add('swirl', [0,1,2,3,4,5], 15, true);
-        // teleporter.body.setRectangle(40, 47);
-        // teleporter.body.static = true;
-        // teleporter.body.setCollisionCategory(1);
-        // teleporter.body.setCollisionMask(0);
+        createLevel();
 
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
-        player = game.add.sprite(100, 120, "player");
+        player = game.add.sprite(-330, -50, "player");
         game.physics.box2d.enable(player);
         player.frame = 4;
         walkR = player.animations.add('walkR',[5,6,7,8], 7, true);
@@ -148,14 +134,14 @@ playGame.prototype = {
 
         // player.body.setCategoryContactCallback(3, enemyContactCallback, this);
         player.body.setBodyContactCallback(enemy, enemyContactCallback, this);
-
         player.body.setCategoryContactCallback(2, gearCallback, this);
-
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
-        // get keyboard input
+        // text, seconds until it fades
+        addMessage("Hi! There!", 1);
+        // addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter", 3);
+
         cursors = game.input.keyboard.createCursorKeys();
-        //camera follows the player
         game.camera.follow(player);
                                             //
                                             // // add healthbar
@@ -195,62 +181,30 @@ playGame.prototype = {
     update: function(){
         // console.log('planet contact', planetContact);
 
-        angle = planetGrounder(player);
-        angle2 = planetGrounder(enemy);
+        var playerAngle = handleRotation(player);
+        var enemyAngle = handleRotation(enemy);
 
-        objGrav();
+        applyGravityToObjects();
         checkTeleporterOverlap(teleporter);
 
-        game.world.pivot.x = player.x;          //these two rotate the world around the player
-        game.world.pivot.y = player.y;
-        game.world.rotation = -angle + (Math.PI/2);     //rotates the world so the controls aren't global
-
+        messageLocation(playerAngle);
 
         // Keep the enemy moving
-
         if (enemyCounterClockwise == -1) {
-            enemy.body.velocity.x += enemyVel * Math.cos(angle2 - (Math.PI / 2)) ;
-            enemy.body.velocity.y += enemyVel * Math.sin(angle2 - (Math.PI / 2)) ;
+            enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle - (Math.PI / 2)) ;
+            enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle - (Math.PI / 2)) ;
             // player.x += 20;
 
         } else {
-            enemy.body.velocity.x += enemyVel * Math.cos(angle2 + (Math.PI / 2)) ;
-            enemy.body.velocity.y += enemyVel * Math.sin(angle2 + (Math.PI / 2)) ;
+            enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle + (Math.PI / 2)) ;
+            enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle + (Math.PI / 2)) ;
 
         }
 
         //Handle keyboard input for the player
-        if (cursors.left.isDown ) {
-            // player.body.moveLeft(90);
-            player.body.velocity.x += playerVel * Math.cos(angle + (Math.PI/2));
-            player.body.velocity.y += playerVel * Math.sin(angle + (Math.PI/2));
-            player.animations.play('walkL');
-        }
-        else if (cursors.right.isDown ) {
-            // player.body.moveRight(90);
-            player.body.velocity.x += playerVel * Math.cos(angle - (Math.PI / 2)) ;
-            player.body.velocity.y += playerVel * Math.sin(angle - (Math.PI / 2)) ;
-            player.animations.play('walkR');
-        }
-        if (cursors.up.isDown) {
-            player.body.velocity.x += -playerVel * Math.cos(angle);
-            player.body.velocity.y += -playerVel * Math.sin(angle);
-            player.animations.play('fall');
+        handleKeyboardInput(playerAngle);
 
-        }
-        if (cursors.down.isDown) {
-            player.body.velocity.x += playerVel * Math.cos(angle);
-            player.body.velocity.y += playerVel * Math.sin(angle);
-            player.animations.play('stand');
-
-        }
-
-        if (cursors.left.justUp || cursors.right.justUp){
-            player.animations.play('stand');
-        }
         constrainVelocity(player,150);
-        constrainVelocity(enemy,300);
-
     },
     render: function() {
         game.debug.cameraInfo(game.camera, 32, 32);
@@ -268,7 +222,7 @@ playGame.prototype = {
 //     game.physics.box2d.enable(crateSprite);
 // }
 
-function drawLevel(){
+function createLevel(){
     for (var i = 0; i < level[currentLevel].length; i++) {
         var addition = level[currentLevel][i];
         if (addition.objectType === 'planet') {
@@ -276,7 +230,7 @@ function drawLevel(){
                 addition.gravRadius, addition.gravForce, addition.sprite);
         }
         if(addition.objectType === 'teleporter') {
-            addTeleporter(addition.x,addition.y);
+            addTeleporter(addition.x,addition.y, addition.radians, addition.goal);
         }
         if(addition.objectType === 'gear'){
             addGear(addition.x, addition.y, addition.sprite);
@@ -286,6 +240,57 @@ function drawLevel(){
         }
 
     }
+}
+/* calculates angle between the player and the planet it is gravitationally attracted to.
+ * Orients the player's feet to the ground & handles all the world rotation.
+ */
+function handleRotation(player){
+    var angleToPlanet = gravityToPlanets(player);
+    var playerAngle;
+
+    if (lastAngle === undefined){
+        playerAngle = angleToPlanet;
+        lastAngle = playerAngle;
+    }
+    if (angleToPlanet > -361){ // angle == -361 if the player is not in any gravity field.
+        //orients players feet toward the ground. Uses var angle as degrees offset by -90
+        var playerRotationToGravity = radiansDelta(lastAngle, angleToPlanet);
+        var maxPlayerRotationSpeed = 0.15;
+
+        if (Math.abs(playerRotationToGravity) <= maxPlayerRotationSpeed){
+            playerAngle = angleToPlanet;
+        } else if ( playerRotationToGravity > Math.PI){
+            playerAngle = lastAngle + maxPlayerRotationSpeed;
+        } else {
+            playerAngle = lastAngle - maxPlayerRotationSpeed;
+        }
+
+        player.body.angle = angleToPlanet * 180 / Math.PI - 90;
+        lastAngle = playerAngle;
+    } else{
+        playerAngle = lastAngle;
+    }
+
+    game.world.pivot.x = player.x;          //these two rotate the world around the player
+    game.world.pivot.y = player.y;
+    game.world.rotation = -playerAngle + (Math.PI/2);     //rotates the world so the controls aren't global
+
+    return playerAngle;
+}
+
+/* Shortest distance between two angles in range -pi to pi.
+ *
+ */
+function radiansDelta(fromAngle, toAngle){
+    return normalizedRadians(fromAngle - toAngle + Math.PI) - Math.PI;
+}
+
+/* normalizes a angle to the range 0 to 2 pi.
+ *
+ */
+function normalizedRadians(rawAngle){
+    var TAU = Math.PI * 2;
+    return ((rawAngle % TAU) + TAU) % TAU;
 }
 
 // function drawHealthBar(x,y) {
@@ -302,50 +307,53 @@ function drawLevel(){
 
 /*
 This is the code that calculates gravity fields for the player, if they are in the radius.
-I changed it so that this function returns -361, which is impossible in radian angles,
+function returns -361, which is impossible in radian angles,
 if the player is not in any gravity radius.
  */
 function gravityToPlanets(gravObject){
-    var p;
-    var distance;
-    var radius;
     var angle = -361;
     // looping through all planets
-    for (var j = 0; j < planetGroup.total; j++) {
-        p = planetGroup.getChildAt(j);
-        radius = p.width / 2 + p.gravityRadius / 2;
+    var p = findClosestPlanet(gravObject);
 
-        // calculating distance between the planet and the crate
-        distance = Phaser.Math.distance(gravObject.x, gravObject.y, p.x, p.y);
+    if(p !== undefined) {
+        var distanceFromPlanet = Phaser.Math.distance(gravObject.x, gravObject.y, p.x, p.y);
 
-        // checking if the distance is less than gravity radius
-        if (distance < radius) {
+        // calculating angle between the planet and the crate
+        angle = Phaser.Math.angleBetween(gravObject.x, gravObject.y, p.x, p.y);
 
-            // calculating angle between the planet and the crate
-            angle = Phaser.Math.angleBetween(gravObject.x, gravObject.y, p.x, p.y);
-            // add gravity force to the crate in the direction of planet center
+        // add gravity force to the gravObject in the direction of planet center
+        gravObject.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet - p.width / 2),
+            p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet - p.width / 2));
+    }
+    return angle;
+}
 
-            // console.log(distance-p.width/2, radius-p.width);
-            gravObject.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distance-p.width/2),
-                p.gravityForce * Math.sin(angle) * forceReducer* (distance-p.width/2));
+/* finds which planet the gravityObject is closest to, if it is within a gravity field.
+ * returns undefined if the object is outside all gravity fields.
+ */
+function findClosestPlanet(gravObject){
+    var closestPlanetDistance = Infinity;
+    var closestPlanet;
+
+    for(var j = 0; j < planetGroup.total; j++){
+        var p = planetGroup.getChildAt(j);
+        var planetGravityRadius = p.width / 2 + p.gravityRadius / 2;
+        var distanceFromPlanet = Phaser.Math.distance(gravObject.x, gravObject.y, p.x, p.y);
+
+        if (distanceFromPlanet < planetGravityRadius){
+            if (closestPlanet === undefined){
+                closestPlanet = p;
+                closestPlanetDistance = distanceFromPlanet;
+            } else if( distanceFromPlanet < closestPlanetDistance){
+                closestPlanet = p;
+                closestPlanetDistance = distanceFromPlanet;
+            }
         }
     }
-    return angle;
+    return closestPlanet
 }
 
-function planetGrounder(sprite) {
-    var angle = gravityToPlanets(sprite);
-    if (angle > -361) { // angle == -361 if the player is not in any gravity field.
-        //orients players feet toward the ground. Uses var angle as degrees offset by -90
-        sprite.body.angle = angle * 180 / Math.PI - 90;
-        lastAngle = angle;
-    } else {
-        angle = lastAngle;
-    }
-    return angle;
-}
-
-function objGrav(){
+function applyGravityToObjects(){
     for (var i = 0; i < objectGroup.total; i++){
         var o = objectGroup.getChildAt(i);
         gravityToPlanets(o);
@@ -372,7 +380,49 @@ function constrainVelocity(sprite, maxVelocity) {
     }
 }
 
-// function to add a planet
+//=======adds text================================================================================================
+function addMessage(text, sec){
+    //add score to the screen
+    messageBack = game.add.sprite(100,100,"speechBubble");
+    messageBack.scale.setTo(0.6,0.6);
+    messageBack.anchor.set(0.5);
+    messageCaption = game.add.text(100, 100, text, {fill: '#000000', font: '9pt Arial'});
+    messageCaption.anchor.set(0.5);
+    if(sec > 0){
+        messageTimer(sec); //fades message
+    }
+}
+
+function messageTimer(sec){
+    game.time.events.add(Phaser.Timer.SECOND * sec, fadeMessage, this);
+}
+
+function fadeMessage(){
+    var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+    var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+    bubbleTween.onComplete.add(destroyMessage, this);
+    textTween.onComplete.add(destroyMessage, this);
+}
+
+function updateMessage(text){
+    messageCaption.text = text;
+}
+
+function destroyMessage(){
+    messageBack.destroy();
+    messageCaption.destroy();
+}
+
+function messageLocation(angle){
+    messageBack.x = player.x - 100 * Math.cos(angle);
+    messageBack.y = player.y - 100 * Math.sin(angle);
+    messageCaption.x = Math.floor(messageBack.x);
+    messageCaption.y = Math.floor(messageBack.y);
+    messageBack.angle = angle * 180 / Math.PI - 90;
+    messageCaption.angle = angle * 180 / Math.PI - 90;
+}
+//=======================================================================================================
+
 function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     var planet = game.add.sprite(posX, posY, asset);
     planet.gravityRadius = gravityRadius;
@@ -387,11 +437,12 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     planet.body.setCollisionCategory(1);
 }
 
-function addTeleporter(x, y, goal) {
+function addTeleporter(x, y, radians, goal) {
     teleporter = game.add.sprite(x, y, "teleporter", 6);
     game.physics.box2d.enable(teleporter);
     teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 15, true);
     teleporter.body.setRectangle(40, 47);
+    teleporter.body.rotation += radians;
     teleporter.body.static = true;
     teleporter.body.setCollisionMask(0);
     levelGoal = goal;
@@ -432,8 +483,9 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
         return;
     }
     score += 1;
-    scoreCaption.text = 'Score: ' + score;
-    if (score>=1){
+    updateMessage("score: " + score);
+    console.log('score', score, 'goal', levelGoal);
+    if (score>=levelGoal){
         teleporter.animations.play('swirl');
     }
     body2.sprite.destroy();
@@ -453,7 +505,8 @@ function addGear(x, y, sprite){
     game.physics.box2d.enable(gear);
     gear.body.setCollisionCategory(2);
     gear.body.static = false;
-    gear.animations.add(0,1,2,3);
+    spin=gear.animations.add('spin', [0,1,2,3]);
+    gear.animations.play('spin', 10, true);
 }
 
 function movePlayer(x, y){
@@ -479,22 +532,57 @@ function checkTeleporterOverlap(teleporter){
     var playerBounds = player.getBounds();
     var teleporterBounds = teleporter.getBounds();
 
-    if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds) && score >= 1){
-        teleporter.destroy();
-        console.log('contact with teleporter');
-        currentLevel++;
-        console.log('currentLevel: ', currentLevel);
-        planetGroup.destroy();
-        planetGroup = game.add.group();
+    if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds) && score >= levelGoal){
+        changeLevel();
+    }
+}
 
-        gravityGraphics.destroy();
-        gravityGraphics = game.add.graphics(0, 0);
-        gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+function changeLevel(){
+    teleporter.destroy();
+    console.log('contact with teleporter');
+    currentLevel++;
+    console.log('currentLevel: ', currentLevel);
+    planetGroup.destroy();
+    planetGroup = game.add.group();
 
-        console.log('destroy!');
-        score = 0;
-        drawLevel()
-        // game.state.start("PlayGame", true, false, this.currentLevel);
+    gravityGraphics.destroy();
+    gravityGraphics = game.add.graphics(0, 0);
+    gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+
+    console.log('destroy!');
+    score = 0;
+    createLevel()
+    // game.state.start("PlayGame", true, false, this.currentLevel);
+}
+
+function handleKeyboardInput(angle){
+    if (cursors.left.isDown ) {
+        // player.body.moveLeft(90);
+        player.body.velocity.x += vel * Math.cos(angle + (Math.PI/2));
+        player.body.velocity.y += vel * Math.sin(angle + (Math.PI/2));
+        player.animations.play('walkL');
+    }
+    else if (cursors.right.isDown ) {
+        // player.body.moveRight(90);
+        player.body.velocity.x += vel * Math.cos(angle - (Math.PI / 2)) ;
+        player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
+        player.animations.play('walkR');
+    }
+    if (cursors.up.isDown) {
+        player.body.velocity.x += -vel * Math.cos(angle);
+        player.body.velocity.y += -vel * Math.sin(angle);
+        player.animations.play('fall');
+
+    }
+    if (cursors.down.isDown) {
+        player.body.velocity.x += vel * Math.cos(angle);
+        player.body.velocity.y += vel * Math.sin(angle);
+        player.animations.play('stand');
+
+    }
+
+    if (cursors.left.justUp || cursors.right.justUp){
+        player.animations.play('stand');
     }
 }
 

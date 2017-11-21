@@ -3,7 +3,7 @@ planets-wekazaji
 A basic ring physics tutorial to build off
 
 source: https://phaser.io/news/2015/07/simulate-planet-gravity-with-box2d-tutorial
- */
+*/
 var playGame = function(game){};
 
 var game;
@@ -24,7 +24,8 @@ var enemy;
 
 var teleporter;
 var levelGoal;
-var lastAngle;
+var playerLastAngle;
+var enemyLastAngle;
 
 var messageCaption;
 var score = 0;
@@ -33,7 +34,8 @@ var score = 0;
 var forceReducer = 0.0007; //was .00175
 
 var playerVel = 25;
-var enemyVel = 45;
+var enemyVel = 25;
+var maxEnemyVel = 200;
 
 var enemyCounterClockwise = -1;
 
@@ -86,7 +88,6 @@ playGame.prototype = {
         game.load.image("speechBubble", "assets/speechBubble.png")
     },
     create: function () {
-        var enemy;
 
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-400, -300, 400, 300);
@@ -98,7 +99,7 @@ playGame.prototype = {
         game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
         game.add.tileSprite(24, -1000, 1024, 1024, 'space');
 
-        // enemyGroup = game.add.group();
+        enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
 
@@ -124,15 +125,14 @@ playGame.prototype = {
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
+
         //add enemy - crate
-        enemy = game.add.sprite(100, 120, 'enemy');
+        enemy = game.add.sprite(-350, 50, "enemy");
         game.physics.box2d.enable(enemy);
         enemy.body.static = false;
-        // enemy.body.setCollisionCategory(3);
         enemy.body.setRectangle(12, 50);
-        objectGroup.add(enemy);
+        enemyGroup.add(enemy);
 
-        // player.body.setCategoryContactCallback(3, enemyContactCallback, this);
         player.body.setBodyContactCallback(enemy, enemyContactCallback, this);
         player.body.setCategoryContactCallback(2, gearCallback, this);
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
@@ -143,46 +143,44 @@ playGame.prototype = {
 
         cursors = game.input.keyboard.createCursorKeys();
         game.camera.follow(player);
-                                            //
-                                            // // add healthbar
-                                            // // bar = game.add.sprite.rect(350,250,50,10);
-                                            // // { fill: '#ffaaaa', font: '14pt Arial'})
-                                            // // bad.body.setRectangle(50,10);
-                                            // // bar.body.static = true;
-                                            //
-                                            // var maxHealthBar;
-                                            // var healthBar;
-                                            // var maxWidth = 50 // example;
-                                            // var maxHeight = 10 // example;
-                                            // var width = 25 // example;
-                                            // var height = 5 // example;
-                                            // var bmd = game.add.bitmapData(width, height);
-                                            // var bmd2 = game.add.bitmapData(width, height);
-                                            //
-                                            // bmd.ctx.beginPath();
-                                            // bmd.ctx.rect(0, 0, maxWidth, maxHeight);
-                                            // bmd.ctx.fillStyle = '#ffff00';
-                                            // bmd.ctx.fill();
-                                            // maxHealthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd);
-                                            // maxHealthBar.anchor.setTo(0.5, 0.5);
-                                            //
-                                            // bmd2.ctx.beginPath();
-                                            // bmd2.ctx.rect(0, 0, width, height);
-                                            // bmd2.ctx.fillStyle = '#ffffff';
-                                            // bmd2.ctx.fill();
-                                            // healthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd2);
-                                            // healthBar.anchor.setTo(0.5, 0.5);
 
-        //add score to the screen
+        // // add healthbar
+        // // bar = game.add.sprite.rect(350,250,50,10);
+        // // { fill: '#ffaaaa', font: '14pt Arial'})
+        // // bad.body.setRectangle(50,10);
+        // // bar.body.static = true;
+        //
+        // var maxHealthBar;
+        // var healthBar;
+        // var maxWidth = 50 // example;
+        // var maxHeight = 10 // example;
+        // var width = 25 // example;
+        // var height = 5 // example;
+        // var bmd = game.add.bitmapData(width, height);
+        // var bmd2 = game.add.bitmapData(width, height);
+        //
+        // bmd.ctx.beginPath();
+        // bmd.ctx.rect(0, 0, maxWidth, maxHeight);
+        // bmd.ctx.fillStyle = '#ffff00';
+        // bmd.ctx.fill();
+        // maxHealthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd);
+        // maxHealthBar.anchor.setTo(0.5, 0.5);
+        //
+        // bmd2.ctx.beginPath();
+        // bmd2.ctx.rect(0, 0, width, height);
+        // bmd2.ctx.fillStyle = '#ffffff';
+        // bmd2.ctx.fill();
+        // healthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd2);
+        // healthBar.anchor.setTo(0.5, 0.5);
+  //add score to the screen
         scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
         scoreCaption.fixedToCamera = true;
         scoreCaption.cameraOffset.setTo(300, 300);
     },
-    update: function(){
-        // console.log('planet contact', planetContact);
 
-        var playerAngle = handleRotation(player);
-        var enemyAngle = handleRotation(enemy);
+    update: function(){
+        var enemyAngle = handleEnemyRotation(enemy);
+        var playerAngle = handlePlayerRotation(player);
 
         applyGravityToObjects();
         checkTeleporterOverlap(teleporter);
@@ -191,20 +189,21 @@ playGame.prototype = {
 
         // Keep the enemy moving
         if (enemyCounterClockwise == -1) {
-            enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle - (Math.PI / 2)) ;
-            enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle - (Math.PI / 2)) ;
-            // player.x += 20;
+        enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle - (Math.PI / 2)) ;
+        enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle - (Math.PI / 2)) ;
 
         } else {
             enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle + (Math.PI / 2)) ;
             enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle + (Math.PI / 2)) ;
-
         }
 
         //Handle keyboard input for the player
         handleKeyboardInput(playerAngle);
 
         constrainVelocity(player,150);
+        constrainVelocity(enemy,maxEnemyVel);
+
+        // camera.focusOnXY(player.x,player.y);
     },
     render: function() {
         game.debug.cameraInfo(game.camera, 32, 32);
@@ -213,7 +212,7 @@ playGame.prototype = {
 };
 
 /*=============================================================================
-    HELPER FUNCTIONS
+   HELPER FUNCTIONS
 =============================================================================*/
 // function to add a crate
 // function addCrate(e){
@@ -241,35 +240,51 @@ function createLevel(){
 
     }
 }
+
+function handleEnemyRotation(sprite) {
+    var angle = enemyGravityToPlanets(sprite);
+    if (angle > -361) { // angle == -361 if the player is not in any gravity field.
+        // orients players feet toward the ground. Uses var angle as degrees offset by -90
+        sprite.body.angle = angle * 180 / Math.PI - 90;
+        enemyLastAngle = angle;
+    } else {
+        angle = enemyLastAngle;
+    }
+    return angle;
+}
+
 /* calculates angle between the player and the planet it is gravitationally attracted to.
- * Orients the player's feet to the ground & handles all the world rotation.
- */
-function handleRotation(player){
+* Orients the player's feet to the ground & handles all the world rotation.
+*/
+function handlePlayerRotation(player){
+
     var angleToPlanet = gravityToPlanets(player);
     var playerAngle;
 
-    if (lastAngle === undefined){
+    if (playerLastAngle === undefined){
         playerAngle = angleToPlanet;
-        lastAngle = playerAngle;
+        playerLastAngle = playerAngle;
     }
     if (angleToPlanet > -361){ // angle == -361 if the player is not in any gravity field.
         //orients players feet toward the ground. Uses var angle as degrees offset by -90
-        var playerRotationToGravity = radiansDelta(lastAngle, angleToPlanet);
+        var playerRotationToGravity = radiansDelta(playerLastAngle, angleToPlanet);
         var maxPlayerRotationSpeed = 0.15;
 
         if (Math.abs(playerRotationToGravity) <= maxPlayerRotationSpeed){
             playerAngle = angleToPlanet;
         } else if ( playerRotationToGravity > Math.PI){
-            playerAngle = lastAngle + maxPlayerRotationSpeed;
+            playerAngle = playerLastAngle + maxPlayerRotationSpeed;
         } else {
-            playerAngle = lastAngle - maxPlayerRotationSpeed;
+            playerAngle = playerLastAngle - maxPlayerRotationSpeed;
         }
 
         player.body.angle = angleToPlanet * 180 / Math.PI - 90;
-        lastAngle = playerAngle;
+        playerLastAngle = playerAngle;
     } else{
-        playerAngle = lastAngle;
+        playerAngle = playerLastAngle;
     }
+
+    console.log("before:" + playerAngle);
 
     game.world.pivot.x = player.x;          //these two rotate the world around the player
     game.world.pivot.y = player.y;
@@ -279,15 +294,15 @@ function handleRotation(player){
 }
 
 /* Shortest distance between two angles in range -pi to pi.
- *
- */
+*
+*/
 function radiansDelta(fromAngle, toAngle){
     return normalizedRadians(fromAngle - toAngle + Math.PI) - Math.PI;
 }
 
 /* normalizes a angle to the range 0 to 2 pi.
- *
- */
+*
+*/
 function normalizedRadians(rawAngle){
     var TAU = Math.PI * 2;
     return ((rawAngle % TAU) + TAU) % TAU;
@@ -305,11 +320,24 @@ function normalizedRadians(rawAngle){
 //     // this.barSprite.anchor.y = 0.5;
 // }
 
+
+function enemyGravityToPlanets(gravObject) {
+    var p = findClosestPlanet(gravObject);
+    var distanceFromPlanet = Phaser.Math.distance(gravObject.x,gravObject.y,p.x,p.y)
+    var angle = Phaser.Math.angleBetween(gravObject.x,gravObject.y,p.x,p.y);
+
+    enemy.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet - p.width / 2), p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet - p.width / 2));
+    enemy.body.angle = angle;
+
+    return angle;
+
+}
+
 /*
 This is the code that calculates gravity fields for the player, if they are in the radius.
 function returns -361, which is impossible in radian angles,
 if the player is not in any gravity radius.
- */
+*/
 function gravityToPlanets(gravObject){
     var angle = -361;
     // looping through all planets
@@ -329,8 +357,8 @@ function gravityToPlanets(gravObject){
 }
 
 /* finds which planet the gravityObject is closest to, if it is within a gravity field.
- * returns undefined if the object is outside all gravity fields.
- */
+* returns undefined if the object is outside all gravity fields.
+*/
 function findClosestPlanet(gravObject){
     var closestPlanetDistance = Infinity;
     var closestPlanet;
@@ -350,7 +378,7 @@ function findClosestPlanet(gravObject){
             }
         }
     }
-    return closestPlanet
+    return closestPlanet;
 }
 
 function applyGravityToObjects(){
@@ -361,9 +389,9 @@ function applyGravityToObjects(){
 }
 
 /*
- This function implements a max velocity on a sprite, so it cannot accelerate too far and fly out of a
- gravity field. Code from : http://www.html5gamedevs.com/topic/9835-is-there-a-proper-way-to-limit-the-speed-of-a-p2-body/
- */
+This function implements a max velocity on a sprite, so it cannot accelerate too far and fly out of a
+gravity field. Code from : http://www.html5gamedevs.com/topic/9835-is-there-a-proper-way-to-limit-the-speed-of-a-p2-body/
+*/
 function constrainVelocity(sprite, maxVelocity) {
     var body = sprite.body;
     var angle, currVelocitySqr, vx, vy;
@@ -456,17 +484,12 @@ function enemyContactCallback(body1, body2, fixture1, fixture2, begin){
 
     if (enemyCounterClockwise == -1) {
         enemyCounterClockwise = 0;
-        // body2.posx = body2.posx - 10;
     } else {
         enemyCounterClockwise = -1;
-        // body2.posx = body2.posx - 10;
     }
-    body2.velocity.x = 0;
-    body2.velocity.y = 0;
-    enemyVel += 5;
+    enemyVel += 30;
 
-    score += 1;
-    //just to test when I can get the function to actually call itself!
+
 }
 
 // kills the gear when touched
@@ -483,8 +506,7 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
         return;
     }
     score += 1;
-    var gearText = score + " / " + levelGoal;
-    addMessage(gearText,1);
+    updateMessage("score: " + score);
     console.log('score', score, 'goal', levelGoal);
     if (score>=levelGoal){
         teleporter.animations.play('swirl');
@@ -559,25 +581,25 @@ function changeLevel(){
 function handleKeyboardInput(angle){
     if (cursors.left.isDown ) {
         // player.body.moveLeft(90);
-        player.body.velocity.x += vel * Math.cos(angle + (Math.PI/2));
-        player.body.velocity.y += vel * Math.sin(angle + (Math.PI/2));
+        player.body.velocity.x += playerVel * Math.cos(angle + (Math.PI/2));
+        player.body.velocity.y += playerVel * Math.sin(angle + (Math.PI/2));
         player.animations.play('walkL');
     }
     else if (cursors.right.isDown ) {
         // player.body.moveRight(90);
-        player.body.velocity.x += vel * Math.cos(angle - (Math.PI / 2)) ;
-        player.body.velocity.y += vel * Math.sin(angle - (Math.PI / 2)) ;
+        player.body.velocity.x += playerVel * Math.cos(angle - (Math.PI / 2)) ;
+        player.body.velocity.y += playerVel * Math.sin(angle - (Math.PI / 2)) ;
         player.animations.play('walkR');
     }
     if (cursors.up.isDown) {
-        player.body.velocity.x += -vel * Math.cos(angle);
-        player.body.velocity.y += -vel * Math.sin(angle);
+        player.body.velocity.x += -playerVel * Math.cos(angle);
+        player.body.velocity.y += -playerVel * Math.sin(angle);
         player.animations.play('fall');
 
     }
     if (cursors.down.isDown) {
-        player.body.velocity.x += vel * Math.cos(angle);
-        player.body.velocity.y += vel * Math.sin(angle);
+        player.body.velocity.x += playerVel * Math.cos(angle);
+        player.body.velocity.y += playerVel * Math.sin(angle);
         player.animations.play('stand');
 
     }
@@ -589,5 +611,6 @@ function handleKeyboardInput(angle){
 
 // Consistently checks if the players health goes to zero, and if so resets the level.
 // function resetLevel(health) {
-    // TBD
+// TBD
 // }
+

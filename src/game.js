@@ -44,7 +44,7 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
-var currentLevel = 0;
+var currentLevel = 1;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [//level 0 - tutorial, jumping between planets
@@ -58,6 +58,16 @@ var level = [
 
     ],
     [//level 1 - start in void
+        {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
+        {objectType: 'planet', x: 370, y: 350, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
+        {objectType: 'teleporter', x: 400, y: 200, radians: 0.2, goal: 1},
+        {objectType: 'startPad', x: 25, y: -30 , radians: 1.5},
+        {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
+        {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
+        {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
+        {objectType: 'player', x: 23, y: -30}
+    ],
+    [//level 2 - jumping to planets through void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
         {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
@@ -65,13 +75,13 @@ var level = [
         {objectType: 'startPad', x: 50, y: 180, radians: 1.4 },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 25, y: 190}
+        {objectType: 'player', x: 30, y: 185}
     ],
-    [//level 2 - jumping to planets through void
+    [ //level 3-static obstacles
         {objectType:"level3"},
         {objectType:"level3"},
         {objectType:"level3"}
-    ] //level 3-static obstacles, level4-trampoline, level5-trampoline in the void, other ideas: planetoid chain, overlapping planets
+    ] //other ideas: planetoid chain, overlapping planets
 ];
 
 playGame.prototype = {
@@ -329,7 +339,7 @@ function normalizedRadians(rawAngle){
 
 function enemyGravityToPlanets(gravObject) {
     var p = findClosestPlanet(gravObject);
-    var distanceFromPlanet = Phaser.Math.distance(gravObject.x,gravObject.y,p.x,p.y)
+    var distanceFromPlanet = Phaser.Math.distance(gravObject.x,gravObject.y,p.x,p.y);
     var angle = Phaser.Math.angleBetween(gravObject.x,gravObject.y,p.x,p.y);
 
     enemy.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet - p.width / 2), p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet - p.width / 2));
@@ -592,8 +602,11 @@ function changeLevel(){
     gravityGraphics = game.add.graphics(0, 0);
     gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
-    // console.log('destroy!');
+    //SHOULD WE PAUSE THE GAME FOR A MOMENT BETWEEN LEVELS??
+
     score = 0;
+    player.body.velocity.x = 0;
+    player.body.velocity.y = 0;
     createLevel()
     // game.state.start("PlayGame", true, false, this.currentLevel);
 }

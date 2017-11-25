@@ -51,6 +51,7 @@ var level = [
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
         {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 1},
+        {objectType: 'startPad', x: -425, y: -50 , radians:1.15},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
@@ -60,10 +61,11 @@ var level = [
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
         {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
-        {objectType: 'teleporter', x:278, y: 140, radians: 1.48, goal: 1}, //temporary change in coordinate, was y=31
+        {objectType: 'teleporter', x: 278, y: 140, radians: 1.48, goal: 1},
+        {objectType: 'startPad', x: 50, y: 180, radians: 1.4 },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 25, y: 205}
+        {objectType: 'player', x: 25, y: 190}
     ],
     [//level 2 - jumping to planets through void
         {objectType:"level3"},
@@ -85,7 +87,8 @@ playGame.prototype = {
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
         game.load.image("message_back", "assets/message_back.png");
-        game.load.image("speechBubble", "assets/speechBubble.png")
+        game.load.image("speechBubble", "assets/speechBubble.png");
+        game.load.image("startPad","assets/pad.png");
     },
     create: function () {
 
@@ -112,12 +115,12 @@ playGame.prototype = {
         game.physics.startSystem(Phaser.Physics.BOX2D);
 
 
-        createLevel();
+
 
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
-        player = game.add.sprite(-330, -50, "player");
+        player = game.add.sprite(-430, -55, "player");
         game.physics.box2d.enable(player);
         player.frame = 4;
         walkR = player.animations.add('walkR',[5,6,7,8], 7, true);
@@ -125,12 +128,14 @@ playGame.prototype = {
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
+        createLevel();
 
         //add enemy - crate
         enemy = game.add.sprite(-350, 50, "enemy");
         game.physics.box2d.enable(enemy);
         enemy.body.static = false;
         enemy.body.setRectangle(12, 50);
+        enemy.body.setCollisionMask(1);
         enemyGroup.add(enemy);
 
         player.body.setBodyContactCallback(enemy, enemyContactCallback, this);
@@ -230,6 +235,9 @@ function createLevel(){
         }
         if(addition.objectType === 'teleporter') {
             addTeleporter(addition.x,addition.y, addition.radians, addition.goal);
+        }
+        if(addition.objectType === 'startPad') {
+            addStartPad(addition.x, addition.y, addition.radians);
         }
         if(addition.objectType === 'gear'){
             addGear(addition.x, addition.y, addition.sprite);
@@ -473,6 +481,16 @@ function addTeleporter(x, y, radians, goal) {
     levelGoal = goal;
 }
 
+function addStartPad(x, y, radians) {
+    startPad = game.add.sprite(x, y, "startPad", 6);
+    objectGroup.add(startPad);
+    game.physics.box2d.enable(startPad);
+    startPad.body.setRectangle(40,10);
+    startPad.body.rotation += radians;
+    startPad.body.static = true;
+    startPad.body.setCollisionCategory(1);
+}
+
 //rebounds the player sprite back after enemy collision
 function enemyContactCallback(body1, body2, fixture1, fixture2, begin){
     if (!begin){
@@ -563,6 +581,12 @@ function changeLevel(){
     // console.log('currentLevel: ', currentLevel);
     planetGroup.destroy();
     planetGroup = game.add.group();
+
+    objectGroup.destroy();
+    objectGroup = game.add.group();
+
+    enemyGroup.destroy();
+    enemyGroup = game.add.group();
 
     gravityGraphics.destroy();
     gravityGraphics = game.add.graphics(0, 0);

@@ -29,6 +29,14 @@ var enemyLastAngle;
 
 var messageCaption;
 var score = 0;
+var messageContent = [
+    "If you click me,\nI'll tell you what\nhappens next.",
+    "Whoa, you clicked me!",
+    "I'm lost here \nin this galaxey",
+    "I need to fix \nmy spaceship to \ngo back to my home.",
+    "Can you help me \ncollect the gears \nto fix my spaceship?"
+];
+var messageLength = 0;
 
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.0007; //was .00175
@@ -99,6 +107,7 @@ playGame.prototype = {
         game.load.image("message_back", "assets/message_back.png");
         game.load.image("speechBubble", "assets/speechBubble.png");
         game.load.image("startPad","assets/pad.png");
+        game.load.image('boarder', "assets/boarder.png");
     },
     create: function () {
 
@@ -154,6 +163,7 @@ playGame.prototype = {
 
         // text, seconds until it fades
         addMessage("Hi! There!", 1);
+        game.input.onDown.add(updateMessage, this);
         // addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter", 3);
 
         cursors = game.input.keyboard.createCursorKeys();
@@ -427,47 +437,51 @@ function constrainVelocity(sprite, maxVelocity) {
 //=======adds text================================================================================================
 function addMessage(text, sec){
     //add score to the screen
-    messageBack = game.add.sprite(100,100,"speechBubble");
-    messageBack.scale.setTo(0.6,0.6);
+    messageBack = game.add.sprite(100,100,"boarder");
+    // messageBack.scale.setTo(0.6,0.6);
     messageBack.anchor.set(0.5);
-    messageCaption = game.add.text(100, 100, text, {fill: '#000000', font: '9pt Arial'});
+    messageCaption = game.add.text(100, 100, text, {fill: '#6CC417', font: '13pt Arial'});
     messageCaption.anchor.set(0.5);
-    if(sec > 0){
-        messageTimer(sec); //fades message
+    // if(sec > 0){
+    //     messageTimer(sec); //fades message
+    // }
+}
+
+// function messageTimer(sec){
+//     game.time.events.add(Phaser.Timer.SECOND * sec, fadeMessage, this);
+// }
+//
+// function fadeMessage(){
+//     var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+//     var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+//     bubbleTween.onComplete.add(destroyMessage, this);
+//     textTween.onComplete.add(destroyMessage, this);
+// }
+
+function updateMessage() {
+    if (messageLength <= messageContent.length) {
+        messageCaption.text = messageContent[messageLength];
+        messageLength++;
     }
 }
 
-function messageTimer(sec){
-    game.time.events.add(Phaser.Timer.SECOND * sec, fadeMessage, this);
-}
+// function destroyMessage(){
+//     messageBack.destroy();
+//     messageCaption.destroy();
+// }
 
-function fadeMessage(){
-    var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
-    var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
-    bubbleTween.onComplete.add(destroyMessage, this);
-    textTween.onComplete.add(destroyMessage, this);
-}
-
-function updateMessage(text){
-    messageCaption.text = text;
-}
-
-function destroyMessage(){
-    messageBack.destroy();
-    messageCaption.destroy();
-}
-
-function messageLocation(angle){
-    messageBack.x = player.x - 100 * Math.cos(angle);
-    messageBack.y = player.y - 100 * Math.sin(angle);
-    messageCaption.x = Math.floor(messageBack.x);
-    messageCaption.y = Math.floor(messageBack.y);
+function messageLocation(angle) {
+    messageBack.x = player.x + 100 * Math.cos(angle);
+    messageBack.y = player.y + 100 * Math.sin(angle);
+    messageCaption.x = player.x + 250 * Math.cos(angle - (Math.PI / 2));
+    messageCaption.y = player.y + 250 * Math.sin(angle - (Math.PI / 2));
     messageBack.angle = angle * 180 / Math.PI - 90;
     messageCaption.angle = angle * 180 / Math.PI - 90;
 }
+
 //=======================================================================================================
 
-function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
+function addPlanet(posX, posY, gravityRadius, gravityForce, asset) {
     var planet = game.add.sprite(posX, posY, asset);
     planet.gravityRadius = gravityRadius;
     planet.gravityForce = gravityForce;
@@ -476,7 +490,7 @@ function addPlanet(posX, posY, gravityRadius, gravityForce, asset){
     planet.body.static = true;
 
     planet.body.setCircle(planet.width / 2);
-    gravityGraphics.drawCircle(planet.x, planet.y, planet.width+planet.gravityRadius);
+    gravityGraphics.drawCircle(planet.x, planet.y, planet.width + planet.gravityRadius);
     planet.body.setCollisionCategory(1);
 }
 
@@ -495,15 +509,15 @@ function addStartPad(x, y, radians) {
     startPad = game.add.sprite(x, y, "startPad", 6);
     objectGroup.add(startPad);
     game.physics.box2d.enable(startPad);
-    startPad.body.setRectangle(40,10);
+    startPad.body.setRectangle(40, 10);
     startPad.body.rotation += radians;
     startPad.body.static = true;
     startPad.body.setCollisionCategory(1);
 }
 
 //rebounds the player sprite back after enemy collision
-function enemyContactCallback(body1, body2, fixture1, fixture2, begin){
-    if (!begin){
+function enemyContactCallback(body1, body2, fixture1, fixture2, begin) {
+    if (!begin) {
         return;
     }
 
@@ -518,7 +532,7 @@ function enemyContactCallback(body1, body2, fixture1, fixture2, begin){
 }
 
 // kills the gear when touched
-function gearCallback(body1,body2, fixture1, fixture2, begin) {
+function gearCallback(body1, body2, fixture1, fixture2, begin) {
     //body1, body2, fixture1, fixture2, begin
     // body1 is the player because it's the body that owns the callback
     // body2 is the body it impacted with, in this case the gear
@@ -526,37 +540,36 @@ function gearCallback(body1,body2, fixture1, fixture2, begin) {
     // fixture2 is the fixture of body2 that was touched
 
     // This callback is also called for EndContact events, which we are not interested in.
-    if (!begin)
-    {
+    if (!begin) {
         return;
     }
     score += 1;
     addMessage(score + " / " + levelGoal, 1);
-    if (score>=levelGoal){
+    if (score >= levelGoal) {
         teleporter.animations.play('swirl');
     }
     body2.sprite.destroy();
 }
 
-function planetContactCallback(body1, body2, fixture1, fixture2, begin){
+function planetContactCallback(body1, body2, fixture1, fixture2, begin) {
     // console.log("planet touch");
-    if (!begin){
+    if (!begin) {
         return;
     }
-    planetContact =  true;
+    planetContact = true;
 }
 
-function addGear(x, y, sprite){
+function addGear(x, y, sprite) {
     var gear = game.add.sprite(x, y, sprite);
     objectGroup.add(gear);
     game.physics.box2d.enable(gear);
     gear.body.setCollisionCategory(2);
     gear.body.static = false;
-    spin=gear.animations.add('spin', [0,1,2,3]);
+    spin = gear.animations.add('spin', [0, 1, 2, 3]);
     gear.animations.play('spin', 10, true);
 }
 
-function movePlayer(x, y){
+function movePlayer(x, y) {
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
     player.body.x = x;
@@ -575,16 +588,16 @@ function movePlayer(x, y){
 //     }
 // }
 
-function checkTeleporterOverlap(teleporter){
+function checkTeleporterOverlap(teleporter) {
     var playerBounds = player.getBounds();
     var teleporterBounds = teleporter.getBounds();
 
-    if (Phaser.Rectangle.intersects(playerBounds,teleporterBounds) && score >= levelGoal){
+    if (Phaser.Rectangle.intersects(playerBounds, teleporterBounds) && score >= levelGoal) {
         changeLevel();
     }
 }
 
-function changeLevel(){
+function changeLevel() {
     teleporter.destroy();
     // console.log('contact with teleporter');
     currentLevel++;
@@ -611,17 +624,17 @@ function changeLevel(){
     // game.state.start("PlayGame", true, false, this.currentLevel);
 }
 
-function handleKeyboardInput(angle){
-    if (cursors.left.isDown ) {
+function handleKeyboardInput(angle) {
+    if (cursors.left.isDown) {
         // player.body.moveLeft(90);
-        player.body.velocity.x += playerVel * Math.cos(angle + (Math.PI/2));
-        player.body.velocity.y += playerVel * Math.sin(angle + (Math.PI/2));
+        player.body.velocity.x += playerVel * Math.cos(angle + (Math.PI / 2));
+        player.body.velocity.y += playerVel * Math.sin(angle + (Math.PI / 2));
         player.animations.play('walkL');
     }
-    else if (cursors.right.isDown ) {
+    else if (cursors.right.isDown) {
         // player.body.moveRight(90);
-        player.body.velocity.x += playerVel * Math.cos(angle - (Math.PI / 2)) ;
-        player.body.velocity.y += playerVel * Math.sin(angle - (Math.PI / 2)) ;
+        player.body.velocity.x += playerVel * Math.cos(angle - (Math.PI / 2));
+        player.body.velocity.y += playerVel * Math.sin(angle - (Math.PI / 2));
         player.animations.play('walkR');
     }
     if (cursors.up.isDown) {
@@ -637,13 +650,13 @@ function handleKeyboardInput(angle){
 
     }
 
-    if (cursors.left.justUp || cursors.right.justUp){
+    if (cursors.left.justUp || cursors.right.justUp) {
         player.animations.play('stand');
     }
 }
+
 
 // Consistently checks if the players health goes to zero, and if so resets the level.
 // function resetLevel(health) {
 // TBD
 // }
-

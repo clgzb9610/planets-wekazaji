@@ -48,7 +48,7 @@ var currentLevel = 0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [//level 0 - tutorial, jumping between planets
-        {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
+        {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
         {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 1},
         {objectType: 'startPad', x: -425, y: -50 , radians:1.15},
@@ -58,10 +58,10 @@ var level = [
 
     ],
     [//level 1 - start in void
-        {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 150, sprite: "smallplanet"},
+        {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 150, sprite: "mediumplanet"},
         {objectType: 'planet', x: 370, y: 350, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
         {objectType: 'teleporter', x: 400, y: 200, radians: 0.2, goal: 1},
-        {objectType: 'startPad', x: 25, y: -30 , radians: 1.5},
+        {objectType: 'startPad', x: 20, y: -15 , radians: 0},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
@@ -91,12 +91,13 @@ playGame.prototype = {
     preload: function () {
         game.load.image("enemy", "assets/redcrate.png");
         game.load.image("smallplanet", "assets/planet.png");
+        game.load.image("mediumplanet", "assets/med_planet.png");
         game.load.image("bigplanet", "assets/bigplanet.png");
         game.load.image("space", "assets/seamlessspacebright.png");
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
-        game.load.image("message_back", "assets/message_back.png");
+        // game.load.image("message_back", "assets/message_back.png");
         game.load.image("speechBubble", "assets/speechBubble.png");
         game.load.image("startPad","assets/pad.png");
     },

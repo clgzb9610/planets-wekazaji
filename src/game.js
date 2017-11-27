@@ -44,7 +44,7 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
-var currentLevel = 1;
+var currentLevel = 0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [//level 0 - tutorial, jumping between planets
@@ -71,7 +71,7 @@ var level = [
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
         {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
-        {objectType: 'teleporter', x: 278, y: 140, radians: 1.48, goal: 1},
+        {objectType: 'teleporter', x: 278, y: 140, radians: 1.48, goal: 2},
         {objectType: 'startPad', x: 50, y: 180, radians: 1.4 },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},

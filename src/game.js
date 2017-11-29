@@ -437,26 +437,26 @@ function constrainVelocity(sprite, maxVelocity) {
 //=======adds text================================================================================================
 function addMessage(text, sec){
     //add score to the screen
-    messageBack = game.add.sprite(100,100,"boarder");
-    // messageBack.scale.setTo(0.6,0.6);
+    messageBack = game.add.sprite(100,100,"speechbubble");
+    messageBack.scale.setTo(0.6,0.6);
     messageBack.anchor.set(0.5);
     messageCaption = game.add.text(100, 100, text, {fill: '#6CC417', font: '13pt Arial'});
     messageCaption.anchor.set(0.5);
-    // if(sec > 0){
-    //     messageTimer(sec); //fades message
-    // }
+    if(sec > 0){
+        messageTimer(sec); //fades message
+    }
 }
 
-// function messageTimer(sec){
-//     game.time.events.add(Phaser.Timer.SECOND * sec, fadeMessage, this);
-// }
-//
-// function fadeMessage(){
-//     var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
-//     var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
-//     bubbleTween.onComplete.add(destroyMessage, this);
-//     textTween.onComplete.add(destroyMessage, this);
-// }
+function messageTimer(sec){
+    game.time.events.add(Phaser.Timer.SECOND * sec, fadeMessage, this);
+}
+
+function fadeMessage(){
+    var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+    var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+    bubbleTween.onComplete.add(destroyMessage, this);
+    textTween.onComplete.add(destroyMessage, this);
+}
 
 function updateMessage() {
     if (messageLength <= messageContent.length) {
@@ -465,16 +465,16 @@ function updateMessage() {
     }
 }
 
-// function destroyMessage(){
-//     messageBack.destroy();
-//     messageCaption.destroy();
-// }
+function destroyMessage(){
+    messageBack.destroy();
+    messageCaption.destroy();
+}
 
 function messageLocation(angle) {
     messageBack.x = player.x + 100 * Math.cos(angle);
     messageBack.y = player.y + 100 * Math.sin(angle);
-    messageCaption.x = player.x + 250 * Math.cos(angle - (Math.PI / 2));
-    messageCaption.y = player.y + 250 * Math.sin(angle - (Math.PI / 2));
+    messageCaption.x = player.x + 100 * Math.cos(angle - (Math.PI / 2));
+    messageCaption.y = player.y + 100 * Math.sin(angle - (Math.PI / 2));
     messageBack.angle = angle * 180 / Math.PI - 90;
     messageCaption.angle = angle * 180 / Math.PI - 90;
 }

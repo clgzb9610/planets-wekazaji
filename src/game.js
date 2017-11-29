@@ -99,6 +99,7 @@ playGame.prototype = {
         game.load.image("message_back", "assets/message_back.png");
         game.load.image("speechBubble", "assets/speechBubble.png");
         game.load.image("startPad","assets/pad.png");
+        game.load.image("log", "assets/shipslog.png");
     },
     create: function () {
 
@@ -153,7 +154,7 @@ playGame.prototype = {
         player.body.setCategoryContactCallback(1,planetContactCallback,this);
 
         // text, seconds until it fades
-        addMessage("Hi! There!", 1);
+        addMessage("Captain's Log:", 1);
         // addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter", 3);
 
         cursors = game.input.keyboard.createCursorKeys();
@@ -427,10 +428,10 @@ function constrainVelocity(sprite, maxVelocity) {
 //=======adds text================================================================================================
 function addMessage(text, sec){
     //add score to the screen
-    messageBack = game.add.sprite(100,100,"speechBubble");
+    messageBack = game.add.sprite(100,100,"log");
     messageBack.scale.setTo(0.6,0.6);
     messageBack.anchor.set(0.5);
-    messageCaption = game.add.text(100, 100, text, {fill: '#000000', font: '9pt Arial'});
+    messageCaption = game.add.text(100, 100, text, {fill: '#72fa80', font: '9pt Courier'});
     messageCaption.anchor.set(0.5);
     if(sec > 0){
         messageTimer(sec); //fades message
@@ -458,8 +459,8 @@ function destroyMessage(){
 }
 
 function messageLocation(angle){
-    messageBack.x = player.x - 100 * Math.cos(angle);
-    messageBack.y = player.y - 100 * Math.sin(angle);
+    messageBack.x = player.x + 200 * Math.cos(angle);
+    messageBack.y = player.y + 100 * Math.sin(angle);
     messageCaption.x = Math.floor(messageBack.x);
     messageCaption.y = Math.floor(messageBack.y);
     messageBack.angle = angle * 180 / Math.PI - 90;

@@ -474,8 +474,8 @@ function destroyMessage(){
 function messageLocation(angle) {
     messageBack.x = player.x + 100 * Math.cos(angle);
     messageBack.y = player.y + 100 * Math.sin(angle);
-    messageCaption.x = player.x + 100 * Math.cos(angle - (Math.PI / 2));
-    messageCaption.y = player.y + 100 * Math.sin(angle - (Math.PI / 2));
+    messageCaption.x = player.x + 200 * Math.cos(angle - (Math.PI / 2));
+    messageCaption.y = player.y - 60 * Math.sin(angle - (Math.PI / 2));
     messageBack.angle = angle * 180 / Math.PI - 90;
     messageCaption.angle = angle * 180 / Math.PI - 90;
 }

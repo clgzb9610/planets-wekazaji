@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="I added a new level.&#10;Moved the current level 1 down to a level 2 slot &amp; added an easier level as the current level 1.">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -220,7 +219,7 @@
       <workItem from="1510429297573" duration="320000" />
       <workItem from="1511572501704" duration="3349000" />
       <workItem from="1511804093779" duration="583000" />
-      <workItem from="1511980499551" duration="52000" />
+      <workItem from="1511980499551" duration="89000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -411,11 +410,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511624456099</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Changed the speech bubble to the log, with different font.">
+      <created>1511980586515</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1511980586515</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79633000" />
+    <option name="totallyTimeSpent" value="79670000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1267" height="714" extended-state="0" />
@@ -502,7 +508,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Player's feet always face towards the ground." />
     <MESSAGE value="started adding things for mouse control. they're commented out bc they dont work yet ha." />
     <MESSAGE value="Player relative arrow controls &amp; world rotation!&#10;&#10;Also I decomposed the gravity field stuff from update, added a max velocity function i found online, and messed with some boundaries and layouts. The new world is centered at (0,0) so there's negative coordinates now." />
     <MESSAGE value="Applying gravity to coins &amp; other objects" />
@@ -527,7 +532,8 @@
     <MESSAGE value="some score message stuff i changed that jin is about to change again. hiding some old console.logs" />
     <MESSAGE value="Added a starting platform.&#10;&#10;Made the enemy stop colliding with the gears.&#10;&#10;Made gears &amp; the enemy disappear when you change levels. #1" />
     <MESSAGE value="I added a new level.&#10;Moved the current level 1 down to a level 2 slot &amp; added an easier level as the current level 1." />
-    <option name="LAST_COMMIT_MESSAGE" value="I added a new level.&#10;Moved the current level 1 down to a level 2 slot &amp; added an easier level as the current level 1." />
+    <MESSAGE value="Changed the speech bubble to the log, with different font." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed the speech bubble to the log, with different font." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -572,6 +578,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -675,6 +684,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -778,6 +790,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -841,6 +856,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="2" lean-forward="false" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -848,6 +864,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

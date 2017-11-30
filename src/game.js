@@ -52,6 +52,8 @@ var planetContact = false;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
+var bgm;
+
 var currentLevel = 1;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
@@ -112,6 +114,9 @@ playGame.prototype = {
         game.load.image("startPad","assets/pad.png");
         game.load.image("log", "assets/shipslog.png");
         game.load.image('boarder', "assets/boarder.png");
+
+        game.load.audio('bgm', "assets/Visager_-_01_-_The_Great_Tree_Loop.mp3");
+        game.load.audio('ting', "assets/Ting-Popup_Pixels-349896185.mp3");
     },
     create: function () {
 
@@ -137,9 +142,9 @@ playGame.prototype = {
 
         game.physics.startSystem(Phaser.Physics.BOX2D);
 
-
-
-
+        bgm = game.add.audio('bgm');
+        bgm.loop = true;
+        bgm.play();
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
@@ -201,10 +206,10 @@ playGame.prototype = {
         // bmd2.ctx.fill();
         // healthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd2);
         // healthBar.anchor.setTo(0.5, 0.5);
-  //add score to the screen
-  //       scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
-  //       scoreCaption.fixedToCamera = true;
-  //       scoreCaption.cameraOffset.setTo(300, 300);
+        //add score to the screen
+        //scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
+        //scoreCaption.fixedToCamera = true;
+        //scoreCaption.cameraOffset.setTo(300, 300);
     },
 
     update: function(){
@@ -553,6 +558,8 @@ function gearCallback(body1, body2, fixture1, fixture2, begin) {
     if (!begin) {
         return;
     }
+    var ting = game.add.audio('ting');
+    ting.play();
     score += 1;
     addMessage(score + " / " + levelGoal, 1);
     if (score >= levelGoal) {

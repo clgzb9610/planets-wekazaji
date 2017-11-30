@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/Ting-Popup_Pixels-349896185.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/Visager_-_01_-_The_Great_Tree_Loop.mp3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
     </list>
@@ -23,8 +25,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="491" column="77" lean-forward="true" selection-start-line="491" selection-start-column="77" selection-end-line="491" selection-end-column="77" />
+            <state relative-caret-position="208">
+              <caret line="688" column="34" lean-forward="false" selection-start-line="688" selection-start-column="34" selection-end-line="688" selection-end-column="34" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -417,11 +419,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511804433385</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="corrected message box coordinates">
+      <created>1512022279366</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1512022279366</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83088000" />
+    <option name="totallyTimeSpent" value="84389000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -517,7 +526,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="started adding things for mouse control. they're commented out bc they dont work yet ha." />
     <MESSAGE value="Player relative arrow controls &amp; world rotation!&#10;&#10;Also I decomposed the gravity field stuff from update, added a max velocity function i found online, and messed with some boundaries and layouts. The new world is centered at (0,0) so there's negative coordinates now." />
     <MESSAGE value="Applying gravity to coins &amp; other objects" />
     <MESSAGE value="Added in gear sprites in place of coin sprites." />
@@ -542,7 +550,8 @@
     <MESSAGE value="Added a starting platform.&#10;&#10;Made the enemy stop colliding with the gears.&#10;&#10;Made gears &amp; the enemy disappear when you change levels. #1" />
     <MESSAGE value="I added a new level.&#10;Moved the current level 1 down to a level 2 slot &amp; added an easier level as the current level 1." />
     <MESSAGE value="added message box prototype. Took out message box." />
-    <option name="LAST_COMMIT_MESSAGE" value="added message box prototype. Took out message box." />
+    <MESSAGE value="corrected message box coordinates" />
+    <option name="LAST_COMMIT_MESSAGE" value="corrected message box coordinates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -905,8 +914,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="491" column="77" lean-forward="true" selection-start-line="491" selection-start-column="77" selection-end-line="491" selection-end-column="77" />
+        <state relative-caret-position="208">
+          <caret line="688" column="34" lean-forward="false" selection-start-line="688" selection-start-column="34" selection-end-line="688" selection-end-column="34" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

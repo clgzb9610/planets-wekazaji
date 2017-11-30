@@ -62,7 +62,8 @@ var level = [
         {objectType: 'startPad', x: -425, y: -50 , radians:1.15},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
-        {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
+        {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
+        {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
 
     ],
     [//level 1 - start in void
@@ -73,7 +74,8 @@ var level = [
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: 23, y: -30}
+        {objectType: 'player', x: 23, y: -30},
+        {objectType: 'enemy', x: -350, y: 50, sprite: "enemy"}
     ],
     [//level 2 - jumping to planets through void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
@@ -83,7 +85,8 @@ var level = [
         {objectType: 'startPad', x: 50, y: 180, radians: 1.4 },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 30, y: 185}
+        {objectType: 'player', x: 30, y: 185},
+        {objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
     ],
     [ //level 3-static obstacles
         {objectType:"level3"},
@@ -148,8 +151,6 @@ playGame.prototype = {
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
-        createLevel();
-
         //add enemy - crate
         enemy = game.add.sprite(-350, 50, "enemy");
         game.physics.box2d.enable(enemy);
@@ -157,6 +158,8 @@ playGame.prototype = {
         enemy.body.setRectangle(12, 50);
         enemy.body.setCollisionMask(1);
         enemyGroup.add(enemy);
+
+        createLevel();
 
         player.body.setBodyContactCallback(enemy, enemyContactCallback, this);
         player.body.setCategoryContactCallback(2, gearCallback, this);
@@ -223,6 +226,8 @@ playGame.prototype = {
             enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle + (Math.PI / 2)) ;
         }
 
+        console.log("enemy x: " + enemy.body.x);
+        console.log("enemy y: " + enemy.body.y);
         //Handle keyboard input for the player
         handleKeyboardInput(playerAngle);
 
@@ -262,6 +267,9 @@ function createLevel(){
         }
         if(addition.objectType === 'gear'){
             addGear(addition.x, addition.y, addition.sprite);
+        }
+        if(addition.objectType === 'enemy'){
+            moveEnemy(addition.x, addition.y);
         }
         if(addition.objectType === 'player'){
             movePlayer(addition.x,addition.y);
@@ -570,6 +578,23 @@ function addGear(x, y, sprite) {
     gear.animations.play('spin', 10, true);
 }
 
+// function addEnemy(x, y, sprite) {
+//     var enemy = game.add.sprite(x, y, sprite);
+//     enemyGroup.add(enemy);
+//     game.physics.box2d.enable(enemy);
+//     enemy.body.static = false;
+//     enemy.body.setRectangle(12, 50);
+//     enemy.body.setCollisionCategory(3);
+//     enemy.body.setCollisionMask(1);
+// }
+
+function moveEnemy(x, y) {
+    enemy.body.velocity.x = 0;
+    enemy.body.velocity.y = 0;
+    enemy.body.x = x;
+    enemy.body.y = y;
+}
+
 function movePlayer(x, y) {
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
@@ -609,8 +634,8 @@ function changeLevel() {
     objectGroup.destroy();
     objectGroup = game.add.group();
 
-    enemyGroup.destroy();
-    enemyGroup = game.add.group();
+    // enemyGroup.destroy();
+    // enemyGroup = game.add.group();
 
     gravityGraphics.destroy();
     gravityGraphics = game.add.graphics(0, 0);
@@ -621,6 +646,8 @@ function changeLevel() {
     score = 0;
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
+    enemy.body.velocity.x = 0;
+    enemy.body.velocity.y = 0;
     createLevel()
     // game.state.start("PlayGame", true, false, this.currentLevel);
 }

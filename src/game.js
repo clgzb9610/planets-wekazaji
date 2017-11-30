@@ -21,7 +21,9 @@ var stand;
 var fall;
 
 var enemy;
+var enemyPresent = false;
 
+var onStartPad;
 var teleporter;
 var levelGoal;
 var playerLastAngle;
@@ -47,7 +49,7 @@ var maxEnemyVel = 200;
 
 var enemyCounterClockwise = -1;
 
-var planetContact = false;
+//var planetContact = false;
 
 // graphic object where to draw planet gravity area
 var gravityGraphics;
@@ -64,8 +66,8 @@ var level = [
         {objectType: 'startPad', x: -425, y: -50 , radians:1.15},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
-        {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
+        {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
+        //{objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
 
     ],
     [//level 1 - start in void
@@ -77,7 +79,7 @@ var level = [
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
         {objectType: 'player', x: 23, y: -30},
-        {objectType: 'enemy', x: -350, y: 50, sprite: "enemy"}
+        {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
     ],
     [//level 2 - jumping to planets through void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
@@ -87,8 +89,8 @@ var level = [
         {objectType: 'startPad', x: 50, y: 180, radians: 1.4 },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 30, y: 185},
-        {objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
+        {objectType: 'player', x: 30, y: 185}
+        //{objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
     ],
     [ //level 3-static obstacles
         {objectType:"level3"},
@@ -157,19 +159,23 @@ playGame.prototype = {
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
-        //add enemy - crate
-        enemy = game.add.sprite(-350, 50, "enemy");
-        game.physics.box2d.enable(enemy);
-        enemy.body.static = false;
-        enemy.body.setRectangle(12, 50);
-        enemy.body.setCollisionMask(1);
-        enemyGroup.add(enemy);
+        // //add enemy - crate
+        // enemy = game.add.sprite(-350, 50, "enemy");
+        // game.physics.box2d.enable(enemy);
+        // enemy.body.static = false;
+        // enemy.body.setRectangle(12, 50);
+        // enemy.body.setCollisionMask(1);
+        // enemyGroup.add(enemy);
 
         createLevel();
 
-        player.body.setBodyContactCallback(enemy, enemyContactCallback, this);
+        if(enemyPresent) {
+            player.body.setBodyContactCallback(enemy, enemyContactCallback, this);
+        }
+
         player.body.setCategoryContactCallback(2, gearCallback, this);
-        player.body.setCategoryContactCallback(1,planetContactCallback,this);
+        // player.body.setCategoryContactCallback(1,planetContactCallback,this);
+        player.body.setBodyContactCallback(startPad,startPadContactCallback,this);
 
         // text, seconds until it fades
         addMessage("Hi! There!", 1);
@@ -214,7 +220,26 @@ playGame.prototype = {
     },
 
     update: function(){
-        var enemyAngle = handleEnemyRotation(enemy);
+
+        if (enemyPresent) {
+            var enemyAngle = handleEnemyRotation(enemy);
+
+            // Keep the enemy moving
+            if (enemyCounterClockwise === -1) {
+                enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle - (Math.PI / 2)) ;
+                enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle - (Math.PI / 2)) ;
+
+            } else {
+                enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle + (Math.PI / 2)) ;
+                enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle + (Math.PI / 2)) ;
+            }
+
+//    console.log("enemy x: " + enemy.body.x);
+//    console.log("enemy y: " + enemy.body.y);
+
+            constrainVelocity(enemy,maxEnemyVel);
+        }
+
         var playerAngle = handlePlayerRotation(player);
 
         applyGravityToObjects();
@@ -222,25 +247,12 @@ playGame.prototype = {
 
         messageLocation(playerAngle);
 
-        // Keep the enemy moving
-        if (enemyCounterClockwise === -1) {
-        enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle - (Math.PI / 2)) ;
-        enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle - (Math.PI / 2)) ;
 
-        } else {
-            enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle + (Math.PI / 2)) ;
-            enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle + (Math.PI / 2)) ;
-        }
 
-        console.log("enemy x: " + enemy.body.x);
-        console.log("enemy y: " + enemy.body.y);
         //Handle keyboard input for the player
         handleKeyboardInput(playerAngle);
 
         constrainVelocity(player,150);
-        constrainVelocity(enemy,maxEnemyVel);
-
-        // camera.focusOnXY(player.x,player.y);
     },
     render: function() {
         game.debug.cameraInfo(game.camera, 32, 32);
@@ -275,7 +287,7 @@ function createLevel(){
             addGear(addition.x, addition.y, addition.sprite);
         }
         if(addition.objectType === 'enemy'){
-            moveEnemy(addition.x, addition.y);
+            addEnemy(addition.x, addition.y,"enemy");
         }
         if(addition.objectType === 'player'){
             movePlayer(addition.x,addition.y);
@@ -453,7 +465,7 @@ function constrainVelocity(sprite, maxVelocity) {
 //=======adds text================================================================================================
 function addMessage(text, sec){
     //add score to the screen
-    messageBack = game.add.sprite(100,100,"log");
+    messageBack = game.add.sprite(1000,1000,"log");
     messageBack.scale.setTo(0.6,0.6);
     messageBack.anchor.set(0.5);
     messageCaption = game.add.text(100, 100, text, {fill: '#72fa80', font: '9pt Courier'});
@@ -487,10 +499,10 @@ function destroyMessage(){
 }
 
 function messageLocation(angle) {
-    messageBack.x = player.x + 180 * Math.cos(angle);
-    messageBack.y = player.y +  180 * Math.sin(angle);
-    messageCaption.x = player.x + 180 * Math.cos(angle);
-    messageCaption.y = player.y + 180 * Math.sin(angle);
+    messageBack.x = player.x - 300 * Math.cos(angle);
+    messageBack.y = player.y -  300 * Math.sin(angle);
+    messageCaption.x = player.x - 250 * Math.cos(angle);
+    messageCaption.y = player.y - 250 * Math.sin(angle);
     messageBack.angle = angle * 180 / Math.PI - 90;
     messageCaption.angle = angle * 180 / Math.PI - 90;
 }
@@ -529,6 +541,7 @@ function addStartPad(x, y, radians) {
     startPad.body.rotation += radians;
     startPad.body.static = true;
     startPad.body.setCollisionCategory(1);
+    startPad.body.setCategoryContactCallback()
 }
 
 //rebounds the player sprite back after enemy collision
@@ -543,8 +556,42 @@ function enemyContactCallback(body1, body2, fixture1, fixture2, begin) {
         enemyCounterClockwise = -1;
     }
     enemyVel += 30;
+}
 
+function addGear(x, y, sprite) {
+    var gear = game.add.sprite(x, y, sprite);
+    objectGroup.add(gear);
+    game.physics.box2d.enable(gear);
+    gear.body.setCollisionCategory(2);
+    gear.body.static = false;
+    spin = gear.animations.add('spin', [0, 1, 2, 3]);
+    gear.animations.play('spin', 10, true);
+}
 
+function addEnemy(x, y, sprite) {
+    addMessage("adding enemy",1);
+    enemy = game.add.sprite(x, y, sprite);
+    enemyPresent = true;
+    enemyGroup.add(enemy);
+    game.physics.box2d.enable(enemy);
+    enemy.body.static = false;
+    enemy.body.setRectangle(12, 50);
+    enemy.body.setCollisionCategory(3);
+    enemy.body.setCollisionMask(1);
+}
+
+function moveEnemy(x, y) {
+    enemy.body.velocity.x = 0;
+    enemy.body.velocity.y = 0;
+    enemy.body.x = x;
+    enemy.body.y = y;
+}
+
+function movePlayer(x, y) {
+    player.body.velocity.x = 0;
+    player.body.velocity.y = 0;
+    player.body.x = x;
+    player.body.y = y;
 }
 
 // kills the gear when touched
@@ -569,46 +616,29 @@ function gearCallback(body1, body2, fixture1, fixture2, begin) {
     body2.sprite.destroy();
 }
 
-function planetContactCallback(body1, body2, fixture1, fixture2, begin) {
-    // console.log("planet touch");
-    if (!begin) {
-        return;
-    }
-    planetContact = true;
-}
-
-function addGear(x, y, sprite) {
-    var gear = game.add.sprite(x, y, sprite);
-    objectGroup.add(gear);
-    game.physics.box2d.enable(gear);
-    gear.body.setCollisionCategory(2);
-    gear.body.static = false;
-    spin = gear.animations.add('spin', [0, 1, 2, 3]);
-    gear.animations.play('spin', 10, true);
-}
-
-// function addEnemy(x, y, sprite) {
-//     var enemy = game.add.sprite(x, y, sprite);
-//     enemyGroup.add(enemy);
-//     game.physics.box2d.enable(enemy);
-//     enemy.body.static = false;
-//     enemy.body.setRectangle(12, 50);
-//     enemy.body.setCollisionCategory(3);
-//     enemy.body.setCollisionMask(1);
+// function planetContactCallback(body1, body2, fixture1, fixture2, begin) {
+//     // console.log("planet touch");
+//     if (!begin) {
+//         return;
+//     }
+//     //planetContact = true;
 // }
 
-function moveEnemy(x, y) {
-    enemy.body.velocity.x = 0;
-    enemy.body.velocity.y = 0;
-    enemy.body.x = x;
-    enemy.body.y = y;
+function startPadContactCallback(body1,body2,fixture1,fixture2,begin){
+    if (!begin){
+        return;
+    }
+    console.log("platform");
+    game.time.events.add(Phaser.Timer.SECOND * 5, fadeStartPad, this);
 }
 
-function movePlayer(x, y) {
-    player.body.velocity.x = 0;
-    player.body.velocity.y = 0;
-    player.body.x = x;
-    player.body.y = y;
+function fadeStartPad(){
+    var platformTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+    platformTween.onComplete.add(destroyStartPad, this);
+}
+
+function destroyStartPad(){
+    startPad.destroy();
 }
 
 // function addRandomGears(numGears, spriteImage){
@@ -655,8 +685,11 @@ function changeLevel() {
     score = 0;
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
-    enemy.body.velocity.x = 0;
-    enemy.body.velocity.y = 0;
+
+    enemyPresent = false;
+    // enemy.body.velocity.x = 0;
+    // enemy.body.velocity.y = 0;
+
     createLevel()
     // game.state.start("PlayGame", true, false, this.currentLevel);
 }

@@ -361,7 +361,8 @@ function enemyGravityToPlanets(gravObject) {
     var distanceFromPlanet = Phaser.Math.distance(gravObject.x,gravObject.y,p.x,p.y);
     var angle = Phaser.Math.angleBetween(gravObject.x,gravObject.y,p.x,p.y);
 
-    enemy.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet - p.width / 2), p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet - p.width / 2));
+    enemy.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet - p.width / 2),
+        p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet - p.width / 2));
     enemy.body.angle = angle;
 
     return angle;
@@ -480,10 +481,10 @@ function destroyMessage(){
 }
 
 function messageLocation(angle) {
-    messageBack.x = player.x + 100 * Math.cos(angle);
-    messageBack.y = player.y + 100 * Math.sin(angle);
-    messageCaption.x = player.x + 200 * Math.cos(angle - (Math.PI / 2));
-    messageCaption.y = player.y - 60 * Math.sin(angle - (Math.PI / 2));
+    messageBack.x = player.x + 180 * Math.cos(angle);
+    messageBack.y = player.y +  180 * Math.sin(angle);
+    messageCaption.x = player.x + 180 * Math.cos(angle);
+    messageCaption.y = player.y + 180 * Math.sin(angle);
     messageBack.angle = angle * 180 / Math.PI - 90;
     messageCaption.angle = angle * 180 / Math.PI - 90;
 }

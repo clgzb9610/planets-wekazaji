@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="enemyPresent boolean variable that let's you execute certain parts of code only when there's an enemy in that level.&#10;(additionally, removed the enemy from levels 0 and 2.)&#10;fixed the bug where the enemy created in the add function was assigned to a variable local only to that function, so it wasn't being passed to the handleEnemyRotation function.&#10;Moved the message to the top of the screen above the player.&#10;Rearranged some of the add/contact functions bc they were mixed together.&#10;&#10;Also  there's some merge stuff in this commit bc i forgot to commit after merge. :/">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
     </list>
@@ -23,8 +23,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="154" column="42" lean-forward="true" selection-start-line="154" selection-start-column="42" selection-end-line="154" selection-end-column="42" />
+            <state relative-caret-position="421">
+              <caret line="621" column="5" lean-forward="true" selection-start-line="621" selection-start-column="5" selection-end-line="621" selection-end-column="5" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -448,11 +448,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512084637566</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="decreased background music volume">
+      <created>1512096411979</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1512096411979</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91211000" />
+    <option name="totallyTimeSpent" value="91751000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -461,7 +468,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17970401" sideWeight="0.4923664" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3414322" sideWeight="0.5419309" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3414322" sideWeight="0.45806906" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3414322" sideWeight="0.45806906" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16833095" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -548,7 +555,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added in gear sprites in place of coin sprites." />
     <MESSAGE value="player can only jump during a collision. (added player collision to other objects besides gears)" />
     <MESSAGE value="created src folder" />
     <MESSAGE value="created empty main.js and mainmenu.js file" />
@@ -573,7 +579,8 @@
     <MESSAGE value="corrected message box coordinates" />
     <MESSAGE value="enemyPresent boolean variable that let's you execute certain parts of code only when there's an enemy in that level.&#10;(additionally, removed the enemy from levels 0 and 2.)&#10;fixed the bug where the enemy created in the add function was assigned to a variable local only to that function, so it wasn't being passed to the handleEnemyRotation function.&#10;Moved the message to the top of the screen above the player.&#10;Rearranged some of the add/contact functions bc they were mixed together.&#10;&#10;Also  there's some merge stuff in this commit bc i forgot to commit after merge. :/" />
     <MESSAGE value="startplatform disappears after you jump off it in the first level but contact doesnt register for later levels. any ideas why???" />
-    <option name="LAST_COMMIT_MESSAGE" value="startplatform disappears after you jump off it in the first level but contact doesnt register for later levels. any ideas why???" />
+    <MESSAGE value="decreased background music volume" />
+    <option name="LAST_COMMIT_MESSAGE" value="decreased background music volume" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -936,8 +943,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="154" column="42" lean-forward="true" selection-start-line="154" selection-start-column="42" selection-end-line="154" selection-end-column="42" />
+        <state relative-caret-position="421">
+          <caret line="621" column="5" lean-forward="true" selection-start-line="621" selection-start-column="5" selection-end-line="621" selection-end-column="5" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

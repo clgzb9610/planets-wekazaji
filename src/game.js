@@ -146,6 +146,7 @@ playGame.prototype = {
 
         bgm = game.add.audio('bgm');
         bgm.loop = true;
+        bgm.volume = 0.6;
         bgm.play();
 
         // waiting for player input

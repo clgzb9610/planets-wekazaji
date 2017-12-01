@@ -23,7 +23,6 @@ var fall;
 var enemy;
 var enemyPresent = false;
 
-var onStartPad;
 var teleporter;
 var levelGoal;
 var playerLastAngle;
@@ -73,7 +72,7 @@ var level = [
     [//level 1 - start in void
         {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 150, sprite: "mediumplanet"},
         {objectType: 'planet', x: 370, y: 350, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
-        {objectType: 'teleporter', x: 400, y: 200, radians: 0.2, goal: 1},
+        {objectType: 'teleporter', x: 395, y: 202, radians: 0.2, goal: 1},
         {objectType: 'startPad', x: 20, y: -15 , radians: 0},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
@@ -116,7 +115,7 @@ playGame.prototype = {
         // game.load.image("speechBubble", "assets/speechBubble.png");
         game.load.image("startPad","assets/pad.png");
         game.load.image("log", "assets/shipslog.png");
-        game.load.image('boarder', "assets/boarder.png");
+        game.load.image('border', "assets/boarder.png");
 
         game.load.audio('bgm', "assets/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/Ting-Popup_Pixels-349896185.mp3");
@@ -174,8 +173,7 @@ playGame.prototype = {
         }
 
         player.body.setCategoryContactCallback(2, gearCallback, this);
-        // player.body.setCategoryContactCallback(1,planetContactCallback,this);
-        player.body.setBodyContactCallback(startPad,startPadContactCallback,this);
+        player.body.setCategoryContactCallback(3,startPadContactCallback,this);
 
         // text, seconds until it fades
         addMessage("Hi! There!", 1);
@@ -255,8 +253,8 @@ playGame.prototype = {
         constrainVelocity(player,150);
     },
     render: function() {
-        game.debug.cameraInfo(game.camera, 32, 32);
-        game.debug.spriteCoords(player, 32, 500);
+        // game.debug.cameraInfo(game.camera, 32, 32);
+        // game.debug.spriteCoords(player, 32, 500);
     }
 };
 
@@ -468,7 +466,7 @@ function addMessage(text, sec){
     messageBack = game.add.sprite(1000,1000,"log");
     messageBack.scale.setTo(0.6,0.6);
     messageBack.anchor.set(0.5);
-    messageCaption = game.add.text(100, 100, text, {fill: '#72fa80', font: '9pt Courier'});
+    messageCaption = game.add.text(1000, 1000, text, {fill: '#72fa80', font: '9pt Courier'});
     messageCaption.anchor.set(0.5);
     if(sec > 0){
         messageTimer(sec); //fades message
@@ -499,12 +497,14 @@ function destroyMessage(){
 }
 
 function messageLocation(angle) {
-    messageBack.x = player.x - 300 * Math.cos(angle);
-    messageBack.y = player.y -  300 * Math.sin(angle);
-    messageCaption.x = player.x - 250 * Math.cos(angle);
-    messageCaption.y = player.y - 250 * Math.sin(angle);
-    messageBack.angle = angle * 180 / Math.PI - 90;
-    messageCaption.angle = angle * 180 / Math.PI - 90;
+    if(messageBack !== null) {
+        messageBack.x = player.x - 300 * Math.cos(angle);
+        messageBack.y = player.y - 300 * Math.sin(angle);
+        messageCaption.x = player.x - 250 * Math.cos(angle);
+        messageCaption.y = player.y - 250 * Math.sin(angle);
+        messageBack.angle = angle * 180 / Math.PI - 90;
+        messageCaption.angle = angle * 180 / Math.PI - 90;
+    }
 }
 
 //=======================================================================================================
@@ -534,13 +534,14 @@ function addTeleporter(x, y, radians, goal) {
 }
 
 function addStartPad(x, y, radians) {
+console.log("adding startPad");
     startPad = game.add.sprite(x, y, "startPad", 6);
     objectGroup.add(startPad);
     game.physics.box2d.enable(startPad);
     startPad.body.setRectangle(40, 10);
     startPad.body.rotation += radians;
     startPad.body.static = true;
-    startPad.body.setCollisionCategory(1);
+    startPad.body.setCollisionCategory(3);
     startPad.body.setCategoryContactCallback()
 }
 
@@ -569,20 +570,22 @@ function addGear(x, y, sprite) {
 }
 
 function addEnemy(x, y, sprite) {
-    addMessage("adding enemy",1);
+    console.log("adding enemy");
     enemy = game.add.sprite(x, y, sprite);
     enemyPresent = true;
     enemyGroup.add(enemy);
     game.physics.box2d.enable(enemy);
     enemy.body.static = false;
     enemy.body.setRectangle(12, 50);
-    enemy.body.setCollisionCategory(3);
+    enemy.body.setCollisionCategory(1);
     enemy.body.setCollisionMask(1);
+    player.body.setBodyContactCallback(enemy, enemyContactCallback, this);
+
 }
 
 function moveEnemy(x, y) {
-    enemy.body.velocity.x = 0;
-    enemy.body.velocity.y = 0;
+    // enemy.body.velocity.x = 0;
+    // enemy.body.velocity.y = 0;
     enemy.body.x = x;
     enemy.body.y = y;
 }
@@ -629,7 +632,7 @@ function startPadContactCallback(body1,body2,fixture1,fixture2,begin){
         return;
     }
     console.log("platform");
-    game.time.events.add(Phaser.Timer.SECOND * 5, fadeStartPad, this);
+    game.time.events.add(Phaser.Timer.SECOND * 6, fadeStartPad, this);
 }
 
 function fadeStartPad(){
@@ -686,7 +689,6 @@ function changeLevel() {
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
 
-    enemyPresent = false;
     // enemy.body.velocity.x = 0;
     // enemy.body.velocity.y = 0;
 

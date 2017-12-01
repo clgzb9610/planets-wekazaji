@@ -119,6 +119,7 @@ playGame.prototype = {
 
         game.load.audio('bgm', "assets/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/Ting-Popup_Pixels-349896185.mp3");
+        game.load.audio('teleporterSound', "assets/zapsplat_magical_portal_open_001_12505.mp3");
     },
     create: function () {
 
@@ -146,6 +147,7 @@ playGame.prototype = {
 
         bgm = game.add.audio('bgm');
         bgm.loop = true;
+        bgm.volume = 0.6;
         bgm.play();
 
         // waiting for player input
@@ -615,6 +617,8 @@ function gearCallback(body1, body2, fixture1, fixture2, begin) {
     addMessage(score + " / " + levelGoal, 1);
     if (score >= levelGoal) {
         teleporter.animations.play('swirl');
+        var teleporterSound = game.add.audio("teleporterSound");
+        teleporterSound.play();
     }
     body2.sprite.destroy();
 }

@@ -92,10 +92,7 @@ var level = [
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185}
         //{objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
-    ],
-    [ //level 3-static obstacles
-        {objectType:"Ending"}
-    ] //other ideas: planetoid chain, overlapping planets
+    ]
 ];
 
 playGame.prototype = {
@@ -271,6 +268,15 @@ playGame.prototype = {
 // }
 
 function createLevel(){
+    if(!level[currentLevel]) {
+        bgm.pause();
+        console.log("bgm paused");
+        game.physics.clear();
+        console.log("destroyed the physics");
+        game.state.start("Ending", true, false, 0);
+        return;
+    }
+
     for (var i = 0; i < level[currentLevel].length; i++) {
         var addition = level[currentLevel][i];
         if (addition.objectType === 'planet') {
@@ -292,11 +298,6 @@ function createLevel(){
         if(addition.objectType === 'player'){
             movePlayer(addition.x,addition.y);
         }
-        if(addition.objectType === "Ending"){
-            bgm.pause();
-            game.state.start("Ending", true, false, 0);
-        }
-
     }
 }
 

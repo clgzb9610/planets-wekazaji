@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/Visager_-_14_-_Home_Departure_Loop.mp3" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/boarder.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/dude.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/message_back.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/pad.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/speechBubble.png" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/credits.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenuLogo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/wekazaji.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/wekazajiPage.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/x.png" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/coin_spritesheet.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/play.png" afterPath="$PROJECT_DIR$/assets/play.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainmenu.js" afterPath="$PROJECT_DIR$/src/mainmenu.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -28,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="115" column="64" lean-forward="true" selection-start-line="115" selection-start-column="64" selection-end-line="115" selection-end-column="64" />
+            <state relative-caret-position="143">
+              <caret line="655" column="4" lean-forward="true" selection-start-line="655" selection-start-column="4" selection-end-line="655" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -40,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainmenu.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mainmenu.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mainmenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="465">
+              <caret line="31" column="33" lean-forward="true" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -61,7 +61,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rotation</find>
       <find>constri</find>
       <find>d</find>
       <find>enemyp</find>
@@ -91,6 +90,7 @@
       <find>addEnem</find>
       <find>addenem</find>
       <find>background</find>
+      <find>ting</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -108,8 +108,8 @@
         <option value="$PROJECT_DIR$/game.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/main.js" />
-        <option value="$PROJECT_DIR$/src/mainmenu.js" />
         <option value="$PROJECT_DIR$/src/game.js" />
+        <option value="$PROJECT_DIR$/src/mainmenu.js" />
       </list>
     </option>
   </component>
@@ -479,11 +479,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512356708769</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="added music to main menu">
+      <created>1512381092053</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1512381092053</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101905000" />
+    <option name="totallyTimeSpent" value="105089000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -498,7 +505,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27683616" sideWeight="0.50763357" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39942938" sideWeight="0.496875" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39897698" sideWeight="0.496875" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3430769" sideWeight="0.46629214" order="7" side_tool="false" content_ui="tabs" />
@@ -579,7 +586,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created empty main.js and mainmenu.js file" />
     <MESSAGE value="created a main menu screen" />
     <MESSAGE value="created separate function for adding gears" />
     <MESSAGE value="renamed sprite name 'planet' to 'smallplanet'" />
@@ -604,7 +610,8 @@
     <MESSAGE value="decreased background music volume" />
     <MESSAGE value="added teleporter swirl sound" />
     <MESSAGE value="added startPad art &amp; an animation when the player teleports in onto it." />
-    <option name="LAST_COMMIT_MESSAGE" value="added startPad art &amp; an animation when the player teleports in onto it." />
+    <MESSAGE value="added music to main menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="added music to main menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -613,11 +620,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/bigplanet.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/nebspritesv2.5.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -946,21 +948,26 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainmenu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/assets/wekazaji.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="115" column="64" lean-forward="true" selection-start-line="115" selection-start-column="64" selection-end-line="115" selection-end-column="64" />
+        <state relative-caret-position="143">
+          <caret line="655" column="4" lean-forward="true" selection-start-line="655" selection-start-column="4" selection-end-line="655" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mainmenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="33" lean-forward="true" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>

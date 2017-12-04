@@ -635,6 +635,7 @@ function gearCallback(body1, body2, fixture1, fixture2, begin) {
         return;
     }
     var ting = game.add.audio('ting');
+    ting.volume = 0.6;
     ting.play();
     score += 1;
     addMessage(score + " / " + levelGoal, 1);

@@ -4,8 +4,6 @@ var text;
 var menuBack;
 var menuBGM;
 var wakazajiPOP;
-var tween = null;
-var closeButton;
 
 mainMenu.prototype = {
     preload:function(){

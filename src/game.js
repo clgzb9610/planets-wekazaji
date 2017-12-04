@@ -94,9 +94,7 @@ var level = [
         //{objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
     ],
     [ //level 3-static obstacles
-        {objectType:"level3"},
-        {objectType:"level3"},
-        {objectType:"level3"}
+        {objectType:"Ending"}
     ] //other ideas: planetoid chain, overlapping planets
 ];
 
@@ -116,7 +114,6 @@ playGame.prototype = {
         game.load.image('startPad','assets/startPad.png',50,12);
         game.load.spritesheet('startPadAnimations','assets/startPadAnimationSpriteSheet.png',50,17);
         game.load.image("log", "assets/shipslog.png");
-        game.load.image('border', "assets/boarder.png");
 
         game.load.audio('bgm', "assets/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/Ting-Popup_Pixels-349896185.mp3");
@@ -294,6 +291,10 @@ function createLevel(){
         }
         if(addition.objectType === 'player'){
             movePlayer(addition.x,addition.y);
+        }
+        if(addition.objectType === "Ending"){
+            bgm.pause();
+            game.state.start("Ending", true, false, 0);
         }
 
     }

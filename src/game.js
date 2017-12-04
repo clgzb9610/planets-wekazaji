@@ -115,9 +115,6 @@ playGame.prototype = {
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
         game.load.image('startPad','assets/startPad.png',50,12);
         game.load.spritesheet('startPadAnimations','assets/startPadAnimationSpriteSheet.png',50,17);
-        // game.load.image("message_back", "assets/message_back.png");
-        // game.load.image("speechBubble", "assets/speechBubble.png");
-        // game.load.image("startPad","assets/pad.png");
         game.load.image("log", "assets/shipslog.png");
         game.load.image('border', "assets/boarder.png");
 

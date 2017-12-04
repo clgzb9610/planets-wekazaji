@@ -23,6 +23,8 @@ var fall;
 var enemy;
 var enemyPresent = false;
 
+var startPadActive;
+
 var teleporter;
 var levelGoal;
 var playerLastAngle;
@@ -61,8 +63,8 @@ var level = [
     [//level 0 - tutorial, jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
-        {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 1},
-        {objectType: 'startPad', x: -425, y: -50 , radians:1.15},
+        {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 3},
+        {objectType: 'startPad', x: -425, y: -50 , radians:1.15 + Math.PI},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
@@ -72,7 +74,7 @@ var level = [
     [//level 1 - start in void
         {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 150, sprite: "mediumplanet"},
         {objectType: 'planet', x: 370, y: 350, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
-        {objectType: 'teleporter', x: 395, y: 202, radians: 0.2, goal: 1},
+        {objectType: 'teleporter', x: 395, y: 202, radians: 0.2, goal: 3},
         {objectType: 'startPad', x: 20, y: -15 , radians: 0},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
@@ -85,7 +87,7 @@ var level = [
         {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
         {objectType: 'teleporter', x: 278, y: 140, radians: 1.48, goal: 2},
-        {objectType: 'startPad', x: 50, y: 180, radians: 1.4 },
+        {objectType: 'startPad', x: 50, y: 180, radians: 1.4 + Math.PI },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185}
@@ -111,9 +113,11 @@ playGame.prototype = {
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
+        game.load.image('startPad','assets/startPad.png',50,12);
+        game.load.spritesheet('startPadAnimations','assets/startPadAnimationSpriteSheet.png',50,17);
         // game.load.image("message_back", "assets/message_back.png");
         // game.load.image("speechBubble", "assets/speechBubble.png");
-        game.load.image("startPad","assets/pad.png");
+        // game.load.image("startPad","assets/pad.png");
         game.load.image("log", "assets/shipslog.png");
         game.load.image('border', "assets/boarder.png");
 
@@ -159,6 +163,7 @@ playGame.prototype = {
         walkL = player.animations.add('walkL', [0,1,2,3], 7, true);
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
+
 
         // //add enemy - crate
         // enemy = game.add.sprite(-350, 50, "enemy");
@@ -540,11 +545,22 @@ console.log("adding startPad");
     startPad = game.add.sprite(x, y, "startPad", 6);
     objectGroup.add(startPad);
     game.physics.box2d.enable(startPad);
-    startPad.body.setRectangle(40, 10);
+    startPad.body.setRectangle(48, 2);
     startPad.body.rotation += radians;
     startPad.body.static = true;
     startPad.body.setCollisionCategory(3);
-    startPad.body.setCategoryContactCallback()
+    // startPad.body.setCategoryContactCallback();
+
+    startPadAnimations = game.add.sprite(x,y,"startPadAnimations");
+    game.physics.box2d.enable(startPadAnimations);
+    startPadAnimations.body.setRectangle(50,17);
+    startPadAnimations.body.static = true;
+    startPadAnimations.body.rotation += radians;
+    startPadAnimations.body.setCollisionMask(0);
+
+    startPadActive = startPadAnimations.animations.add('active',[1,2,3,4,0],7);
+    startPadAnimations.animations.play('active');
+    startPadAnimations.animations.play('active');
 }
 
 //rebounds the player sprite back after enemy collision

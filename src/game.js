@@ -123,7 +123,8 @@ playGame.prototype = {
 
         game.load.audio('bgm', "assets/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/Ting-Popup_Pixels-349896185.mp3");
-        game.load.audio('teleporterSound', "assets/zapsplat_magical_portal_open_001_12505.mp3");
+        game.load.audio('teleporterOpen', "assets/zapsplat_magical_portal_open_001_12505.mp3");
+        game.load.audio('teleportToPad',"assets/zapsplat_magical_telekinesis_blast_002_12511.mp3");
     },
     create: function () {
 
@@ -558,9 +559,18 @@ console.log("adding startPad");
     startPadAnimations.body.rotation += radians;
     startPadAnimations.body.setCollisionMask(0);
 
-    startPadActive = startPadAnimations.animations.add('active',[1,2,3,4,0],7);
+    var teleportToPad = game.add.audio("teleportToPad");
+    teleportToPad.play();
+
+    startPadActive = startPadAnimations.animations.add('active',[1,2,3,4,0],12,true);
     startPadAnimations.animations.play('active');
-    startPadAnimations.animations.play('active');
+    startPadActive.onLoop.add(startPadAnimationLooped,this);
+}
+
+function startPadAnimationLooped(){
+    if(startPadActive.loopCount > 1){
+        startPadActive.loop = false;
+    }
 }
 
 //rebounds the player sprite back after enemy collision
@@ -633,8 +643,8 @@ function gearCallback(body1, body2, fixture1, fixture2, begin) {
     addMessage(score + " / " + levelGoal, 1);
     if (score >= levelGoal) {
         teleporter.animations.play('swirl');
-        var teleporterSound = game.add.audio("teleporterSound");
-        teleporterSound.play();
+        var teleporterOpenSound = game.add.audio("teleporterOpen");
+        teleporterOpenSound.play();
     }
     body2.sprite.destroy();
 }

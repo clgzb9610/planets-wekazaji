@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/startPad.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/startPadAnimationSpriteSheet.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/zapsplat_magical_telekinesis_blast_002_12511.mp3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
     </list>
@@ -25,8 +24,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="59" column="20" lean-forward="false" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+            <state relative-caret-position="476">
+              <caret line="570" column="35" lean-forward="false" selection-start-line="570" selection-start-column="35" selection-end-line="570" selection-end-column="35" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -240,7 +239,7 @@
       <workItem from="1511803072588" duration="2070000" />
       <workItem from="1511974116568" duration="1244000" />
       <workItem from="1511980897549" duration="389000" />
-      <workItem from="1512286607247" duration="3841000" />
+      <workItem from="1512286607247" duration="5361000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -473,11 +472,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512097093199</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="added startPad art &amp; an animation when the player teleports in onto it.">
+      <created>1512356708769</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1512356708769</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96802000" />
+    <option name="totallyTimeSpent" value="98322000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="5" y="23" width="1185" height="773" extended-state="0" />
@@ -564,7 +570,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created src folder" />
     <MESSAGE value="created empty main.js and mainmenu.js file" />
     <MESSAGE value="created a main menu screen" />
     <MESSAGE value="created separate function for adding gears" />
@@ -589,7 +594,8 @@
     <MESSAGE value="startplatform disappears after you jump off it in the first level but contact doesnt register for later levels. any ideas why???" />
     <MESSAGE value="decreased background music volume" />
     <MESSAGE value="added teleporter swirl sound" />
-    <option name="LAST_COMMIT_MESSAGE" value="added teleporter swirl sound" />
+    <MESSAGE value="added startPad art &amp; an animation when the player teleports in onto it." />
+    <option name="LAST_COMMIT_MESSAGE" value="added startPad art &amp; an animation when the player teleports in onto it." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -598,11 +604,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/dude.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/nebsprites.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -940,10 +941,18 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/zapsplat_magical_portal_open_001_12505.mp3">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="59" column="20" lean-forward="false" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+        <state relative-caret-position="476">
+          <caret line="570" column="35" lean-forward="false" selection-start-line="570" selection-start-column="35" selection-end-line="570" selection-end-column="35" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

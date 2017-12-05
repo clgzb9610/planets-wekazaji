@@ -99,12 +99,7 @@ var level = [
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185}
         //{objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
-    ],
-    [ //level 3-static obstacles
-        {objectType:"level3"},
-        {objectType:"level3"},
-        {objectType:"level3"}
-    ] //other ideas: planetoid chain, overlapping planets
+    ]
 ];
 
 playGame.prototype = {
@@ -122,11 +117,7 @@ playGame.prototype = {
         game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
         game.load.image('startPad','assets/startPad.png',50,12);
         game.load.spritesheet('startPadAnimations','assets/startPadAnimationSpriteSheet.png',50,17);
-        // game.load.image("message_back", "assets/message_back.png");
-        // game.load.image("speechBubble", "assets/speechBubble.png");
-        // game.load.image("startPad","assets/pad.png");
         game.load.image("log", "assets/shipslog.png");
-        game.load.image('border', "assets/boarder.png");
 
         game.load.audio('bgm', "assets/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/Ting-Popup_Pixels-349896185.mp3");
@@ -284,6 +275,15 @@ playGame.prototype = {
 // }
 
 function createLevel(){
+    if(!level[currentLevel]) {
+        bgm.pause();
+        console.log("bgm paused");
+        game.physics.clear();
+        console.log("destroyed the physics");
+        game.state.start("Ending", true, false, 0);
+        return;
+    }
+
     for (var i = 0; i < level[currentLevel].length; i++) {
         var addition = level[currentLevel][i];
         if (addition.objectType === 'planet') {
@@ -305,7 +305,6 @@ function createLevel(){
         if(addition.objectType === 'player'){
             movePlayer(addition.x,addition.y);
         }
-
     }
 }
 
@@ -645,6 +644,7 @@ function gearCallback(body1, body2, fixture1, fixture2, begin) {
         return;
     }
     var ting = game.add.audio('ting');
+    ting.volume = 0.6;
     ting.play();
     score += 1;
     addMessage(score + " / " + levelGoal, 1);

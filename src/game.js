@@ -32,14 +32,7 @@ var enemyLastAngle;
 
 var messageCaption;
 var score = 0;
-var messageContent = [
-    "If you click me,\nI'll tell you what\nhappens next.",
-    "Whoa, you clicked me!",
-    "I'm lost here \nin this galaxey",
-    "I need to fix \nmy spaceship to \ngo back to my home.",
-    "Can you help me \ncollect the gears \nto fix my spaceship?"
-];
-var messageLength = 0;
+var lastCaption = "";
 
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.0007; //was .00175
@@ -60,13 +53,13 @@ var bgm;
 var currentLevel = 0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
-    [
+    [ //level 0 - collect gears to activate portal
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "bigplanet"},
         {objectType:'teleporter', x:0, y: -155, radians: 0, goal:1},
         {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
         {objectType: 'gear', x: -50, y: 200, sprite:"gear"}
     ],
-    [//level 0 - tutorial, jumping between planets
+    [//level 1 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
         {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 3},
@@ -78,7 +71,7 @@ var level = [
         //{objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
 
     ],
-    [//level 1 - start in void
+    [//level 2 - start in void
         {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 150, sprite: "mediumplanet"},
         {objectType: 'planet', x: 370, y: 350, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
         {objectType: 'teleporter', x: 395, y: 202, radians: 0.2, goal: 3},
@@ -89,7 +82,7 @@ var level = [
         {objectType: 'player', x: 23, y: -30},
         {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
     ],
-    [//level 2 - jumping to planets through void
+    [//level 3 - jumping to planets through void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
         {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
@@ -183,7 +176,7 @@ playGame.prototype = {
 
         // text, seconds until it fades
         addMessage("Hi! There!", 1);
-        game.input.onDown.add(updateMessage, this);
+        //game.input.onDown.add(updateMessage, this);
         // addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter", 3);
 
         cursors = game.input.keyboard.createCursorKeys();
@@ -276,6 +269,8 @@ playGame.prototype = {
 
 function createLevel(){
     if(!level[currentLevel]) {
+        // jin - it might be better to check for this in the destroy method before calling createLevel.
+        // i think trying to access level[x] out of bounds could be what's crashing it?
         bgm.pause();
         console.log("bgm paused");
         game.physics.clear();
@@ -477,13 +472,16 @@ function constrainVelocity(sprite, maxVelocity) {
 //=======adds text================================================================================================
 function addMessage(text, sec){
     //add score to the screen
-    messageBack = game.add.sprite(1000,1000,"log");
-    messageBack.scale.setTo(0.6,0.6);
-    messageBack.anchor.set(0.5);
-    messageCaption = game.add.text(1000, 1000, text, {fill: '#72fa80', font: '9pt Courier'});
-    messageCaption.anchor.set(0.5);
-    if(sec > 0){
-        messageTimer(sec); //fades message
+    if(lastCaption !== text) {
+        messageBack = game.add.sprite(1000, 1000, "log");
+        messageBack.scale.setTo(0.6, 0.6);
+        messageBack.anchor.set(0.5);
+        messageCaption = game.add.text(1000, 1000, text, {fill: '#72fa80', font: '9pt Courier'});
+        messageCaption.anchor.set(0.5);
+        lastCaption = text;
+        if (sec > 0) {
+            messageTimer(sec); //fades message
+        }
     }
 }
 
@@ -498,12 +496,12 @@ function fadeMessage(){
     textTween.onComplete.add(destroyMessage, this);
 }
 
-function updateMessage() {
-    if (messageLength <= messageContent.length) {
-        messageCaption.text = messageContent[messageLength];
-        messageLength++;
-    }
-}
+// function updateMessage() {
+//     if (messageLength <= messageContent.length) {
+//         messageCaption.text = messageContent[messageLength];
+//         messageLength++;
+//     }
+// }
 
 function destroyMessage(){
     messageBack.destroy();
@@ -548,7 +546,7 @@ function addTeleporter(x, y, radians, goal) {
 }
 
 function addStartPad(x, y, radians) {
-console.log("adding startPad");
+    //console.log("adding startPad");
     startPad = game.add.sprite(x, y, "startPad", 6);
     objectGroup.add(startPad);
     game.physics.box2d.enable(startPad);
@@ -604,7 +602,7 @@ function addGear(x, y, sprite) {
 }
 
 function addEnemy(x, y, sprite) {
-    console.log("adding enemy");
+    //console.log("adding enemy");
     enemy = game.add.sprite(x, y, sprite);
     enemyPresent = true;
     enemyGroup.add(enemy);
@@ -668,7 +666,7 @@ function startPadContactCallback(body1,body2,fixture1,fixture2,begin){
     if (!begin){
         return;
     }
-    console.log("platform");
+    //console.log("platform");
     game.time.events.add(Phaser.Timer.SECOND * 6, fadeStartPad, this);
 }
 
@@ -694,10 +692,14 @@ function destroyStartPad(){
 // }
 
 function checkTeleporterOverlap(teleporter) {
-    var playerBounds = player.getBounds();
-    var teleporterBounds = teleporter.getBounds();
+    // var playerBounds = player.getBounds();
+    // var teleporterBounds = teleporter.getBounds();
+    if (Phaser.Rectangle.containsRect(player, teleporter) && score < levelGoal){
+        console.log('teleporter');
+        addMessage("This portal is broken.\nCollect gears to repair.",3);
+    }
 
-    if (Phaser.Rectangle.intersects(playerBounds, teleporterBounds) && score >= levelGoal) {
+    if (Phaser.Rectangle.containsRect(player, teleporter) && score >= levelGoal) {
         changeLevel();
     }
 }
@@ -713,8 +715,8 @@ function changeLevel() {
     objectGroup.destroy();
     objectGroup = game.add.group();
 
-    // enemyGroup.destroy();
-    // enemyGroup = game.add.group();
+    enemyGroup.destroy();
+    enemyGroup = game.add.group();
 
     gravityGraphics.destroy();
     gravityGraphics = game.add.graphics(0, 0);

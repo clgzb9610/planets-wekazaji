@@ -60,6 +60,12 @@ var bgm;
 var currentLevel = 0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
+    [
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "bigplanet"},
+        {objectType:'teleporter', x:0, y: -155, radians: 0, goal:1},
+        {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
+        {objectType: 'gear', x: -50, y: 200, sprite:"gear"}
+    ],
     [//level 0 - tutorial, jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallplanet"},
         {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
@@ -67,7 +73,8 @@ var level = [
         {objectType: 'startPad', x: -425, y: -50 , radians:1.15 + Math.PI},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
-        {objectType: 'gear', x: -220, y: 10, sprite: "gear"}
+        {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
+        {objectType: 'player', x: -430, y: -50}
         //{objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
 
     ],
@@ -157,7 +164,7 @@ playGame.prototype = {
 
         // waiting for player input
         // game.input.onDown.add(addCrate, this);
-        player = game.add.sprite(-430, -55, "player");
+        player = game.add.sprite(-155, -45, "player");
         game.physics.box2d.enable(player);
         player.frame = 4;
         walkR = player.animations.add('walkR',[5,6,7,8], 7, true);

@@ -112,6 +112,13 @@ playGame.prototype = {
         game.load.spritesheet('startPadAnimations','assets/startPadAnimationSpriteSheet.png',50,17);
         game.load.image("log", "assets/shipslog.png");
 
+        game.load.image("dashboard","assets/dashboard.png",300,52);
+        game.load.image("mute","assets/mute.png",52,52);
+        game.load.image("pause","assets/pause.png",52,52);
+        game.load.image("playArrow","assets/playArrow.png",52,52);
+        game.load.image("restart","assets/restart.png",52,52);
+        game.load.image("unmute","assets/unMute.png",52,52);
+
         game.load.audio('bgm', "assets/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/Ting-Popup_Pixels-349896185.mp3");
         game.load.audio('teleporterOpen', "assets/zapsplat_magical_portal_open_001_12505.mp3");
@@ -120,7 +127,7 @@ playGame.prototype = {
     create: function () {
 
         // new boundaries are centered on 0,0 so the world can rotate
-        game.world.setBounds(-400, -300, 400, 300);
+        game.world.setBounds(-320, -300, 320, 300);
 
         game.time.desiredFps = 25;
 
@@ -132,6 +139,7 @@ playGame.prototype = {
         enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
+        dashboardGroup = game.add.group();
 
         // adding gravitiy line
         gravityGraphics = game.add.graphics(0, 0);
@@ -181,6 +189,26 @@ playGame.prototype = {
 
         cursors = game.input.keyboard.createCursorKeys();
         game.camera.follow(player);
+
+        dashboard = game.add.sprite(-100,-600,"dashboard");
+        dashboard.anchor.set(0.5);
+        dashboardGroup.add(dashboard);
+        mute = game.add.sprite(-100,-600,"mute");
+        mute.anchor.set(-0.9,0.5);
+        dashboardGroup.add(mute);
+        pause = game.add.sprite(-100,-600,"pause");
+        pause.anchor.set(0.5, 0.55);
+        dashboardGroup.add(pause);
+        restart= game.add.sprite(-100,-600,"restart");
+        restart.anchor.set(1.9,0.55);
+        dashboardGroup.add(restart);
+
+
+        pause.inputEnabled = true;
+        pause.events.onInputUp.add(pauseGame, self);
+
+        game.input.onDown.add(unpauseGame, self);
+
 
         // // add healthbar
         // // bar = game.add.sprite.rect(350,250,50,10);
@@ -243,6 +271,8 @@ playGame.prototype = {
         checkTeleporterOverlap(teleporter);
 
         messageLocation(playerAngle);
+        moveDashboard(playerAngle);
+
 
 
 
@@ -474,9 +504,9 @@ function addMessage(text, sec){
     //add score to the screen
     if(lastCaption !== text) {
         messageBack = game.add.sprite(1000, 1000, "log");
-        messageBack.scale.setTo(0.6, 0.6);
+        messageBack.scale.setTo(0.5, 0.5);
         messageBack.anchor.set(0.5);
-        messageCaption = game.add.text(1000, 1000, text, {fill: '#72fa80', font: '9pt Courier'});
+        messageCaption = game.add.text(1000, 1000, text, {fill: '#72fa80', font: '10pt Courier'});
         messageCaption.anchor.set(0.5);
         lastCaption = text;
         if (sec > 0) {
@@ -510,12 +540,21 @@ function destroyMessage(){
 
 function messageLocation(angle) {
     if(messageBack !== null) {
-        messageBack.x = player.x - 300 * Math.cos(angle);
-        messageBack.y = player.y - 300 * Math.sin(angle);
-        messageCaption.x = player.x - 250 * Math.cos(angle);
-        messageCaption.y = player.y - 250 * Math.sin(angle);
+        messageBack.x = player.x - 190 * Math.cos(angle);
+        messageBack.y = player.y - 190 * Math.sin(angle);
+        messageCaption.x = player.x - 190 * Math.cos(angle);
+        messageCaption.y = player.y - 190 * Math.sin(angle);
         messageBack.angle = angle * 180 / Math.PI - 90;
         messageCaption.angle = angle * 180 / Math.PI - 90;
+    }
+}
+
+function moveDashboard(angle){
+    for(var i = 0; i < dashboardGroup.total; i ++) {
+        var d = dashboardGroup.getChildAt(i);
+        d.x = player.x + 480 * Math.cos(angle);
+        d.y = player.y + 480 * Math.sin(angle);
+        d.angle = angle * 180 / Math.PI - 90;
     }
 }
 
@@ -765,6 +804,21 @@ function handleKeyboardInput(angle) {
         player.animations.play('stand');
     }
 }
+
+function pauseGame(){
+    // play = game.add.sprite(pause.x,pause.y,"playArrow");
+    // play.angle = pause.angle;
+    // play.anchor.set(0.5,0.55);
+    // dashboardGroup.add(play);
+    // pause.destroy();
+
+    game.paused = true;
+}
+
+function unpauseGame(){
+    game.paused = false;
+}
+
 
 
 // Consistently checks if the players health goes to zero, and if so resets the level.

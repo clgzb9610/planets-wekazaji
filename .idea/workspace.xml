@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/helper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/mute.png" afterPath="$PROJECT_DIR$/assets/mute.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/pause.png" afterPath="$PROJECT_DIR$/assets/pause.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -55,19 +50,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="210" column="51" lean-forward="false" selection-start-line="210" selection-start-column="51" selection-end-line="210" selection-end-column="51" />
+            <state relative-caret-position="173">
+              <caret line="82" column="64" lean-forward="true" selection-start-line="82" selection-start-column="64" selection-end-line="82" selection-end-column="64" />
               <folding>
-                <element signature="e#8108#8127#0" expanded="false" />
+                <element signature="e#8304#8323#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="helper.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/helper.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
@@ -147,8 +142,8 @@
         <option value="$PROJECT_DIR$/src/mainmenu.js" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/game.js" />
         <option value="$PROJECT_DIR$/src/helper.js" />
+        <option value="$PROJECT_DIR$/src/game.js" />
       </list>
     </option>
   </component>
@@ -285,7 +280,7 @@
       <workItem from="1512410304992" duration="1187000" />
       <workItem from="1512548610508" duration="2552000" />
       <workItem from="1512597577291" duration="159000" />
-      <workItem from="1512597760318" duration="4338000" />
+      <workItem from="1512597760318" duration="5360000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -560,11 +555,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512548723267</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="moved all the functions to a file helper.js&#10;got the pause button to change by making it a spritesheet with the pause &amp; play buttons. Mute/unmute is also a spritesheet now.&#10;The functions in helper that are called from the game are declared this.name, while the functions only called by other functions are not.">
+      <created>1512624000878</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1512624000878</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119398000" />
+    <option name="totallyTimeSpent" value="120420000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
@@ -651,7 +653,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created basic structure for level design" />
     <MESSAGE value="gravity on the player increases as it gets farther from the surface of the planet. You dont have to be in contact with the planet to jump." />
     <MESSAGE value="Fixed the division of the teleporter sprites. Going to work on the animation." />
     <MESSAGE value="reorganized render (moved teleporter up a few lines) and moved check for teleporter-on animation in to gear contact callback" />
@@ -676,7 +677,8 @@
     <MESSAGE value="ending structure is set up, but it's not working :(" />
     <MESSAGE value="pushing ending music file" />
     <MESSAGE value="Merge branch etc." />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch etc." />
+    <MESSAGE value="moved all the functions to a file helper.js&#10;got the pause button to change by making it a spritesheet with the pause &amp; play buttons. Mute/unmute is also a spritesheet now.&#10;The functions in helper that are called from the game are declared this.name, while the functions only called by other functions are not." />
+    <option name="LAST_COMMIT_MESSAGE" value="moved all the functions to a file helper.js&#10;got the pause button to change by making it a spritesheet with the pause &amp; play buttons. Mute/unmute is also a spritesheet now.&#10;The functions in helper that are called from the game are declared this.name, while the functions only called by other functions are not." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -690,7 +692,7 @@
         <state relative-caret-position="1530">
           <caret line="102" column="74" lean-forward="true" selection-start-line="102" selection-start-column="74" selection-end-line="102" selection-end-column="74" />
           <folding>
-            <element signature="e#8108#8127#0" expanded="false" />
+            <element signature="e#8304#8323#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -708,7 +710,7 @@
         <state relative-caret-position="1305">
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
-            <element signature="e#8108#8127#0" expanded="false" />
+            <element signature="e#8304#8323#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -762,7 +764,7 @@
         <state relative-caret-position="255">
           <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
           <folding>
-            <element signature="e#8108#8127#0" expanded="false" />
+            <element signature="e#8304#8323#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -780,7 +782,7 @@
         <state relative-caret-position="1500">
           <caret line="100" column="33" lean-forward="false" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
           <folding>
-            <element signature="e#8108#8127#0" expanded="false" />
+            <element signature="e#8304#8323#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -798,7 +800,7 @@
         <state relative-caret-position="1530">
           <caret line="102" column="74" lean-forward="true" selection-start-line="102" selection-start-column="74" selection-end-line="102" selection-end-column="74" />
           <folding>
-            <element signature="e#8108#8127#0" expanded="false" />
+            <element signature="e#8304#8323#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -816,7 +818,7 @@
         <state relative-caret-position="1305">
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
-            <element signature="e#8108#8127#0" expanded="false" />
+            <element signature="e#8304#8323#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -940,21 +942,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/bigplanet2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/bigplanet3.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/bigplanet4.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -979,21 +966,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="210" column="51" lean-forward="false" selection-start-line="210" selection-start-column="51" selection-end-line="210" selection-end-column="51" />
-          <folding>
-            <element signature="e#8108#8127#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/helper.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/bigplanet4.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/bigplanet3.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/bigplanet2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="82" column="64" lean-forward="true" selection-start-line="82" selection-start-column="64" selection-end-line="82" selection-end-column="64" />
+          <folding>
+            <element signature="e#8304#8323#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

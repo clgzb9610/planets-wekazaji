@@ -61,7 +61,7 @@ var level = [
     ],
     [//level 1 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallplanet"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
+        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "starplanet"},
         {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 3},
         {objectType: 'startPad', x: -425, y: -50 , radians:1.15 + Math.PI},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
@@ -73,7 +73,7 @@ var level = [
     ],
     [//level 2 - start in void
         {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 150, sprite: "mediumplanet"},
-        {objectType: 'planet', x: 370, y: 350, gravRadius: 400, gravForce: 250, sprite: "bigplanet"},
+        {objectType: 'planet', x: 370, y: 350, gravRadius: 400, gravForce: 250, sprite: "fishplanet"},
         {objectType: 'teleporter', x: 395, y: 202, radians: 0.2, goal: 3},
         {objectType: 'startPad', x: 20, y: -15 , radians: 0},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
@@ -83,7 +83,7 @@ var level = [
         {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
     ],
     [//level 3 - jumping to planets through void
-        {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "bigplanet"},
+        {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "tennisplanet"},
         {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
         {objectType: 'teleporter', x: 278, y: 140, radians: 1.48, goal: 2},
@@ -104,6 +104,9 @@ playGame.prototype = {
         game.load.image("smallplanet", "assets/planet.png");
         game.load.image("mediumplanet", "assets/med_planet.png");
         game.load.image("bigplanet", "assets/bigplanet.png");
+        game.load.image("starplanet","assets/bigplanet2.png");
+        game.load.image("fishplanet","assets/bigplanet3.png");
+        game.load.image("tennisplanet","assets/bigplanet4.png");
         game.load.image("space", "assets/seamlessspacebright.png");
         game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);

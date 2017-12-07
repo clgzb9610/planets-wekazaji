@@ -23,6 +23,7 @@ var fall;
 
 var enemy;
 var enemyPresent = false;
+var enemyCollision;
 
 var startPadActive;
 
@@ -97,7 +98,7 @@ var level = [
 
 playGame.prototype = {
     init:function(){
-      this.currentLevel = currentLevel;
+        this.currentLevel = currentLevel;
     },
     preload: function () {
         game.load.image("enemy", "assets/redcrate.png");
@@ -265,10 +266,14 @@ playGame.prototype = {
                 enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle + (Math.PI / 2)) ;
             }
 
-//    console.log("enemy x: " + enemy.body.x);
-//    console.log("enemy y: " + enemy.body.y);
+            //    console.log("enemy x: " + enemy.body.x);
+            //    console.log("enemy y: " + enemy.body.y);
 
             helper.constrainVelocity(enemy,maxEnemyVel);
+
+            if (enemyCollision) {
+                resetLevel();
+            }
         }
 
         var playerAngle = helper.handlePlayerRotation(player);

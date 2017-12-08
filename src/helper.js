@@ -2,7 +2,7 @@ var Helper = function(game){
 
     var messageBack;
     var messageCaption;
-    
+
 
     /*=============================================================================
        HELPER FUNCTIONS
@@ -338,13 +338,14 @@ var Helper = function(game){
         if (!begin) {
             return;
         }
-
+       // console.log("callback");
         if (enemyCounterClockwise === -1) {
             enemyCounterClockwise = 0;
         } else {
             enemyCounterClockwise = -1;
         }
         enemyVel += 30;
+        enemyCollision = true;
     };
 
     function addGear(x, y, sprite) {
@@ -367,16 +368,16 @@ var Helper = function(game){
         enemy.body.setRectangle(12, 50);
         enemy.body.setCollisionCategory(1);
         enemy.body.setCollisionMask(1);
-        player.body.setBodyContactCallback(enemy, this.enemyContactCallback, this);
+        player.body.setBodyContactCallback(enemy, helper.enemyContactCallback, this);
 
     }
 
-    function moveEnemy(x, y) {
-        // enemy.body.velocity.x = 0;
-        // enemy.body.velocity.y = 0;
-        enemy.body.x = x;
-        enemy.body.y = y;
-    }
+    // function moveEnemy(x, y) {
+    //     // enemy.body.velocity.x = 0;
+    //     // enemy.body.velocity.y = 0;
+    //     enemy.body.x = x;
+    //     enemy.body.y = y;
+    // }
 
     function movePlayer(x, y) {
         player.body.velocity.x = 0;
@@ -423,7 +424,7 @@ var Helper = function(game){
             return;
         }
         //console.log("platform");
-        game.time.events.add(Phaser.Timer.SECOND * 6, fadeStartPad, this);
+        game.time.events.add(Phaser.Timer.SECOND * 4, fadeStartPad, this);
     };
 
     function fadeStartPad(){
@@ -528,9 +529,19 @@ var Helper = function(game){
         game.paused = true;
     };
 
-    this.unpauseGame = function(){
-        game.paused = false;
-        pause.frame = 0;
+    this.unpauseGame = function(event){
+        var pauseButton = pause.getBounds();
+        if(Phaser.Rectangle.contains(pauseButton,event.x,event.y)) {
+            game.paused = false;
+            pause.frame = 0;
+        }
     };
+
+    // Consistently checks if the players health goes to zero, and if so resets the level.
+    this.resetLevel = function() {
+        currentLevel -= 1;
+        enemyCollision = false;
+        changeLevel();
+    }
 
 };

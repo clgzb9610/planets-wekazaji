@@ -80,8 +80,8 @@ var level = [
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: 23, y: -30},
-        {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
+        {objectType: 'player', x: 23, y: -30}
+        //{objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
     ],
     [//level 3 - jumping to planets through void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "tennisplanet"},
@@ -93,7 +93,23 @@ var level = [
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185}
         //{objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
-    ]
+    ],
+    [ //level 4 - enemy introduction
+        {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallplanet"},
+        {objectType: 'planet', x: 150, y: -160, gravRadius: 200, gravForce: 370, sprite: "smallplanet"},
+        {objectType: 'planet', x: -170, y: -400, gravRadius: 180, gravForce: 400, sprite: "mediumplanet"},
+        //{objectType: 'planet', x: -130, y: -80, gravRadius: 160, gravForce: 450, sprite: "mediumplanet"},
+        {objectType: 'teleporter', x: 318, y: 90, radians: 1.48, goal: 2},
+        {objectType: 'startPad', x: -270, y: -490, radians: -0.8 },
+        {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
+        {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
+        {objectType: 'player', x: -275, y: -495},
+        {objectType: 'enemy' , x:-110, y: -240, sprite: "enemy"}
+    ]//,
+    // [ //level 5
+    //
+    //
+    // ]
 ];
 
 playGame.prototype = {
@@ -180,16 +196,12 @@ playGame.prototype = {
         helper = new Helper(game);
         helper.createLevel();
 
-        if(enemyPresent) {
-            player.body.setBodyContactCallback(enemy, helper.enemyContactCallback, this);
-        }
-
         player.body.setCategoryContactCallback(2, helper.gearCallback, this);
         player.body.setCategoryContactCallback(3,helper.startPadContactCallback,this);
 
         // text, seconds until it fades
         helper.addMessage("Hi! There!", 1);
-        //game.input.onDown.add(updateMessage, this);
+        // game.input.onDown.add(updateMessage, this);
         // addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter", 3);
 
         cursors = game.input.keyboard.createCursorKeys();
@@ -213,8 +225,10 @@ playGame.prototype = {
 
         pause.inputEnabled = true;
         pause.events.onInputUp.add(helper.pauseGame, self);
-
+        restart.inputEnabled = true;
+        restart.events.onInputUp.add(helper.resetLevel,self);
         game.input.onDown.add(helper.unpauseGame, self);
+
 
 
         // // add healthbar
@@ -272,7 +286,8 @@ playGame.prototype = {
             helper.constrainVelocity(enemy,maxEnemyVel);
 
             if (enemyCollision) {
-                resetLevel();
+               // console.log("collide!");
+                helper.resetLevel();
             }
         }
 
@@ -283,8 +298,6 @@ playGame.prototype = {
 
         helper.messageLocation(playerAngle);
         helper.moveDashboard(playerAngle);
-
-
 
 
         //Handle keyboard input for the player

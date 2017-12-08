@@ -71,6 +71,11 @@ mainMenu.prototype = {
 };
 
 function playTheGame(){
+    game.camera.fade('#000000',1500);
+    game.camera.onFadeComplete.add(fadeComplete,this);
+}
+
+function fadeComplete(){
     menuBGM.pause();
     game.state.start("PlayGame", true, false, 0);
 }

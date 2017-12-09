@@ -23,7 +23,6 @@ var fall;
 
 var enemy;
 var enemyPresent = false;
-var enemyCollision;
 
 var startPadActive;
 
@@ -69,7 +68,7 @@ var level = [
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
         {objectType: 'player', x: -430, y: -50}
-        //{objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
+        // {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
 
     ],
     [//level 2 - start in void
@@ -81,7 +80,7 @@ var level = [
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
         {objectType: 'player', x: 23, y: -30}
-        //{objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
+        // {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
     ],
     [//level 3 - jumping to planets through void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "tennisplanet"},
@@ -92,7 +91,7 @@ var level = [
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185}
-        //{objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
+        // {objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
     ],
     [ //level 4 - enemy introduction
         {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallplanet"},
@@ -282,11 +281,6 @@ playGame.prototype = {
             //    console.log("enemy y: " + enemy.body.y);
 
             helper.constrainVelocity(enemy,maxEnemyVel);
-
-            if (enemyCollision) {
-               console.log("Enemy collide!");
-                helper.resetLevel();
-            }
         }
 
         var playerAngle = helper.handlePlayerRotation(player);

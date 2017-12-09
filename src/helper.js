@@ -345,6 +345,8 @@ var Helper = function(game){
         }
         enemyVel += 30;
         enemyCollision = true;
+
+        helper.resetLevel();
     };
 
     function addGear(x, y, sprite) {

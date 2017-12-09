@@ -4,7 +4,7 @@ var endingBGM;
 
 ending.prototype = {
     preload:function(){
-        game.load.audio('endingBGM', "assets/Visager_-_05_-_Roots_Loop.mp3");
+        game.load.audio('endingBGM', "assets/music/Visager_-_05_-_Roots_Loop.mp3");
     },
     create:function () {
         endingBGM = game.add.audio('menuBGM');

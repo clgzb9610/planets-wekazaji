@@ -117,30 +117,30 @@ playGame.prototype = {
         this.currentLevel = currentLevel;
     },
     preload: function () {
-        game.load.image("enemy", "assets/redcrate.png");
-        game.load.image("smallplanet", "assets/planet.png");
-        game.load.image("mediumplanet", "assets/med_planet.png");
-        game.load.image("bigplanet", "assets/bigplanet.png");
-        game.load.image("starplanet","assets/bigplanet2.png");
-        game.load.image("fishplanet","assets/bigplanet3.png");
-        game.load.image("tennisplanet","assets/bigplanet4.png");
-        game.load.image("space", "assets/seamlessspacebright.png");
-        game.load.spritesheet('player',"assets/nebspritesv2.5.png",40,47);
-        game.load.spritesheet('gear', 'assets/gearspritessmall.png',38,34);
-        game.load.spritesheet('teleporter', 'assets/teleporterspritesheet.png', 48, 61);
-        game.load.image('startPad','assets/startPad.png',50,12);
-        game.load.spritesheet('startPadAnimations','assets/startPadAnimationSpriteSheet.png',50,17);
-        game.load.image("log", "assets/shipslog.png");
+        game.load.image("enemy", "assets/game/redcrate.png");
+        game.load.image("smallplanet", "assets/planets/planet.png");
+        game.load.image("mediumplanet", "assets/planets/med_planet.png");
+        game.load.image("bigplanet", "assets/planets/bigplanet.png");
+        game.load.image("starplanet","assets/planets/bigplanet2.png");
+        game.load.image("fishplanet","assets/planets/bigplanet3.png");
+        game.load.image("tennisplanet","assets/planets/bigplanet4.png");
+        game.load.image("space", "assets/game/seamlessspacebright.png");
+        game.load.spritesheet('player',"assets/game/nebspritesv2.5.png",40,47);
+        game.load.spritesheet('gear', 'assets/game/gearspritessmall.png',38,34);
+        game.load.spritesheet('teleporter', 'assets/game/teleporterspritesheet.png', 48, 61);
+        game.load.image('startPad','assets/game/startPad.png',50,12);
+        game.load.spritesheet('startPadAnimations','assets/game/startPadAnimationSpriteSheet.png',50,17);
+        game.load.image("log", "assets/game/shipslog.png");
 
-        game.load.image("dashboard","assets/dashboard.png",300,52);
-        game.load.spritesheet("mute","assets/mute.png",52,52);
-        game.load.spritesheet("pause","assets/pause.png",52,52);
-        game.load.image("restart","assets/restart.png",52,52);
+        game.load.image("dashboard","assets/game/dashboard.png",300,52);
+        game.load.spritesheet("mute","assets/buttons/mute.png",52,52);
+        game.load.spritesheet("pause","assets/buttons/pause.png",52,52);
+        game.load.image("restart","assets/buttons/restart.png",52,52);
 
-        game.load.audio('bgm', "assets/Visager_-_01_-_The_Great_Tree_Loop.mp3");
-        game.load.audio('ting', "assets/Ting-Popup_Pixels-349896185.mp3");
-        game.load.audio('teleporterOpen', "assets/zapsplat_magical_portal_open_001_12505.mp3");
-        game.load.audio('teleportToPad',"assets/zapsplat_magical_telekinesis_blast_002_12511.mp3");
+        game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
+        game.load.audio('ting', "assets/music/Ting-Popup_Pixels-349896185.mp3");
+        game.load.audio('teleporterOpen', "assets/music/zapsplat_magical_portal_open_001_12505.mp3");
+        game.load.audio('teleportToPad',"assets/music/zapsplat_magical_telekinesis_blast_002_12511.mp3");
 
 
     },

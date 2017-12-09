@@ -462,6 +462,12 @@ var Helper = function(game){
     };
 
     function changeLevel() {
+        game.camera.fade('#000000',900);
+        game.camera.onFadeComplete.add(helper.destroyGroups,this);
+        // game.state.start("PlayGame", true, false, this.currentLevel);
+    }
+
+    this.destroyGroups = function(){
         teleporter.destroy();
         // console.log('contact with teleporter');
         currentLevel++;
@@ -489,8 +495,7 @@ var Helper = function(game){
         // enemy.body.velocity.y = 0;
 
         helper.createLevel()
-        // game.state.start("PlayGame", true, false, this.currentLevel);
-    }
+    };
 
     this.handleKeyboardInput = function(angle) {
         if (cursors.left.isDown) {

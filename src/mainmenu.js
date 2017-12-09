@@ -71,7 +71,7 @@ mainMenu.prototype = {
 };
 
 function playTheGame(){
-    game.camera.fade('#000000',1500);
+    game.camera.fade('#000000',1000);
     game.camera.onFadeComplete.add(fadeComplete,this);
 }
 

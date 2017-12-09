@@ -51,7 +51,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel = 0;
+var currentLevel = 4;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -284,7 +284,7 @@ playGame.prototype = {
             helper.constrainVelocity(enemy,maxEnemyVel);
 
             if (enemyCollision) {
-               // console.log("collide!");
+               console.log("Enemy collide!");
                 helper.resetLevel();
             }
         }

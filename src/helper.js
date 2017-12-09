@@ -25,7 +25,6 @@ var Helper = function(game){
         //     game.state.start("Ending", true, false, 0);
         //     return;
         // }
-        console.log("createLevel is called! currentLevel = ", currentLevel);
         for (var i = 0; i < level[currentLevel].length; i++) {
             var addition = level[currentLevel][i];
             if (addition.objectType === 'planet') {
@@ -48,7 +47,6 @@ var Helper = function(game){
                 movePlayer(addition.x,addition.y);
             }
         }
-        console.log("end of createLevel");
     };
 
     this.handleEnemyRotation = function(sprite) {
@@ -381,7 +379,6 @@ var Helper = function(game){
     // }
 
     function movePlayer(x, y) {
-        console.log("moveplayer is called, currentLevel = ", currentLevel);
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
         player.body.x = x;
@@ -459,6 +456,7 @@ var Helper = function(game){
         }
 
         if (Phaser.Rectangle.containsRect(player, teleporter) && score >= levelGoal) {
+            console.log('teleporter');
             changeLevel();
         }
     };
@@ -498,7 +496,6 @@ var Helper = function(game){
         game.camera.resetFX();
         game.input.enabled = true;
         helper.createLevel();
-        console.log("end of changeLevel function, currentLevel = ", currentLevel);
     };
 
     this.handleKeyboardInput = function(angle) {
@@ -526,14 +523,12 @@ var Helper = function(game){
             player.animations.play('stand');
 
         }
-
         if (cursors.left.justUp || cursors.right.justUp) {
             player.animations.play('stand');
         }
     };
 
     this.pauseGame = function(){
-
         pause.frame = 1;
         game.paused = true;
     };
@@ -551,6 +546,17 @@ var Helper = function(game){
         currentLevel -= 1;
         enemyCollision = false;
         changeLevel();
-    }
+    };
 
+    this.deadByEnemy = function(){
+        console.log("deadbyEnemy is called");
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+        game.input.enabled = false;
+
+        var drop = game.add.tween(player);
+        drop.to({ y: game.world.height-player.height }, 500, Phaser.Easing.Bounce.In);
+        drop.onComplete.add(helper.resetLevel, this);
+        drop.start();
+    }
 };

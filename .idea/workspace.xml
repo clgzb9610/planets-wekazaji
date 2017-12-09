@@ -1,50 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="divided assets folder to subfolders">
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/buttons/mute.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/buttons/pause.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/buttons/playArrow.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/buttons/restart.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/buttons/unMute.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/crate.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/dashboard.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/gearspritessmall.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/nebsprites.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/nebspritesv2.5.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/redcrate.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/seamlessspace.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/seamlessspacebright.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/shipslog.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/space.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/startPad.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/startPadAnimationSpriteSheet.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/game/teleporterspritesheet.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/credits.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/credits_hover.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/mainMenuLogo.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/play.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/play_hover.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/wekazaji.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/wekazajiPage.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/wekazaji_hover.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/mainMenu/x.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/music/Ting-Popup_Pixels-349896185.mp3" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/music/Visager_-_05_-_Roots_Loop.mp3" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/music/zapsplat_magical_portal_open_001_12505.mp3" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/music/zapsplat_magical_telekinesis_blast_002_12511.mp3" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/planets/bigplanet.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/planets/bigplanet2.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/planets/bigplanet3.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/planets/bigplanet4.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/planets/med_planet.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/planets/planet.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/planets/smallplanet2.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/planets/smallplanet3.png" />
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
       <change beforePath="$PROJECT_DIR$/src/helper.js" afterPath="$PROJECT_DIR$/src/helper.js" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
       <change beforePath="$PROJECT_DIR$/src/mainmenu.js" afterPath="$PROJECT_DIR$/src/mainmenu.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -72,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+            <state relative-caret-position="135">
+              <caret line="9" column="29" lean-forward="true" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -85,8 +46,8 @@
       <file leaf-file-name="mainmenu.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mainmenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="88" column="31" lean-forward="true" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+            <state relative-caret-position="650">
+              <caret line="98" column="26" lean-forward="true" selection-start-line="98" selection-start-column="26" selection-end-line="98" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -95,21 +56,21 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4215">
-              <caret line="312" column="0" lean-forward="true" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
+            <state relative-caret-position="174">
+              <caret line="194" column="29" lean-forward="true" selection-start-line="194" selection-start-column="29" selection-end-line="194" selection-end-column="29" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#9336#9355#0" expanded="false" />
+                <element signature="e#9334#9353#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="helper.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="485" column="52" lean-forward="true" selection-start-line="485" selection-start-column="52" selection-end-line="485" selection-end-column="52" />
+            <state relative-caret-position="87">
+              <caret line="386" column="26" lean-forward="true" selection-start-line="386" selection-start-column="26" selection-end-line="386" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -118,8 +79,8 @@
       <file leaf-file-name="ending.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ending.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+            <state relative-caret-position="300">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -136,11 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>planetContact</find>
-      <find>messageLocation</find>
-      <find>addm</find>
-      <find>addenemy</find>
-      <find>start</find>
       <find>addEnem</find>
       <find>addenem</find>
       <find>background</find>
@@ -166,6 +122,11 @@
       <find>fadeSt</find>
       <find>console.log(&quot;c</find>
       <find>playArrow</find>
+      <find>pausegame</find>
+      <find>startpad</find>
+      <find>changelevel</find>
+      <find>createLevel</find>
+      <find>pause</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -181,12 +142,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/game.js" />
-        <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/game.js" />
         <option value="$PROJECT_DIR$/src/ending.js" />
         <option value="$PROJECT_DIR$/src/mainmenu.js" />
+        <option value="$PROJECT_DIR$/src/game.js" />
         <option value="$PROJECT_DIR$/src/helper.js" />
+        <option value="$PROJECT_DIR$/src/main.js" />
       </list>
     </option>
   </component>
@@ -632,11 +593,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512784391154</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="pushing assets folder again">
+      <created>1512784870720</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1512784870720</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129172000" />
+    <option name="totallyTimeSpent" value="131325000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -733,7 +701,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="drawLevel includes teleporter" />
     <MESSAGE value="gears added to drawLevel method. Renamed gravity function. Made the world rotation remember the last orientation when player leaves a gravity radius." />
     <MESSAGE value="level works!" />
     <MESSAGE value="need to collect a gear before the teleporter works" />
@@ -758,19 +725,32 @@
     <MESSAGE value="Merged w zain's new enemy stuff &amp; fixed a bug where enemy collision only worked when the enemy was in the first level. (collision set up in the create part of the playGame.prototype was still in the last push though i thought i deleted it? who knows. &amp; the collision setup in addEnemy was called wrong for being the new file. my b).&#10;&#10;I think I got all zain's changes from the helper functions but the merge was really weird so you might want to double check." />
     <MESSAGE value="implement restart level button&#10;added 4th level" />
     <MESSAGE value="divided assets folder to subfolders" />
-    <option name="LAST_COMMIT_MESSAGE" value="divided assets folder to subfolders" />
+    <MESSAGE value="pushing assets folder again" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushing assets folder again" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/helper.js</url>
-          <line>463</line>
+          <line>465</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/helper.js</url>
+          <line>16</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/helper.js</url>
+          <line>499</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="7" />
+      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -789,7 +769,7 @@
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#9336#9355#0" expanded="false" />
+            <element signature="e#9334#9353#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -844,7 +824,7 @@
           <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#9336#9355#0" expanded="false" />
+            <element signature="e#9334#9353#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -863,7 +843,7 @@
           <caret line="100" column="33" lean-forward="false" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#9336#9355#0" expanded="false" />
+            <element signature="e#9334#9353#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -882,7 +862,7 @@
           <caret line="102" column="74" lean-forward="true" selection-start-line="102" selection-start-column="74" selection-end-line="102" selection-end-column="74" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#9336#9355#0" expanded="false" />
+            <element signature="e#9334#9353#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -901,7 +881,7 @@
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#9336#9355#0" expanded="false" />
+            <element signature="e#9334#9353#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1039,8 +1019,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ending.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        <state relative-caret-position="300">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="194" column="29" lean-forward="true" selection-start-line="194" selection-start-column="29" selection-end-line="194" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#9334#9353#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="386" column="26" lean-forward="true" selection-start-line="386" selection-start-column="26" selection-end-line="386" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1053,37 +1052,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mainmenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="88" column="31" lean-forward="true" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+        <state relative-caret-position="650">
+          <caret line="98" column="26" lean-forward="true" selection-start-line="98" selection-start-column="26" selection-end-line="98" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.js">
+    <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4215">
-          <caret line="312" column="0" lean-forward="true" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#9336#9355#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="485" column="52" lean-forward="true" selection-start-line="485" selection-start-column="52" selection-end-line="485" selection-end-column="52" />
+        <state relative-caret-position="135">
+          <caret line="9" column="29" lean-forward="true" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
           <folding />
         </state>
       </provider>

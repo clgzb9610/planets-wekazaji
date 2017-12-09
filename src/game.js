@@ -141,8 +141,6 @@ playGame.prototype = {
         game.load.audio('ting', "assets/music/Ting-Popup_Pixels-349896185.mp3");
         game.load.audio('teleporterOpen', "assets/music/zapsplat_magical_portal_open_001_12505.mp3");
         game.load.audio('teleportToPad',"assets/music/zapsplat_magical_telekinesis_blast_002_12511.mp3");
-
-
     },
     create: function () {
 

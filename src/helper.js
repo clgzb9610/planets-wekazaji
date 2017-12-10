@@ -15,17 +15,16 @@ var Helper = function(game){
 // }
 
     this.createLevel= function(){
-        if(!level[currentLevel]) {
-            // jin - it might be better to check for this in the destroy method before calling createLevel.
-            // i think trying to access level[x] out of bounds could be what's crashing it?
-            bgm.pause();
-            console.log("bgm paused");
-            game.physics.clear();
-            console.log("destroyed the physics");
-            game.state.start("Ending", true, false, 0);
-            return;
-        }
-
+        // if(!level[currentLevel]) {
+        //     // jin - it might be better to check for this in the destroy method before calling createLevel.
+        //     // i think trying to access level[x] out of bounds could be what's crashing it?
+        //     bgm.pause();
+        //     console.log("bgm paused");
+        //     game.physics.clear();
+        //     console.log("destroyed the physics");
+        //     game.state.start("Ending", true, false, 0);
+        //     return;
+        // }
         for (var i = 0; i < level[currentLevel].length; i++) {
             var addition = level[currentLevel][i];
             if (addition.objectType === 'planet') {
@@ -346,6 +345,8 @@ var Helper = function(game){
         }
         enemyVel += 30;
         enemyCollision = true;
+
+        helper.resetLevel();
     };
 
     function addGear(x, y, sprite) {
@@ -424,11 +425,11 @@ var Helper = function(game){
             return;
         }
         //console.log("platform");
-        game.time.events.add(Phaser.Timer.SECOND * 4, fadeStartPad, this);
+        game.time.events.add(Phaser.Timer.SECOND, fadeStartPad, this);
     };
 
     function fadeStartPad(){
-        var platformTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+        var platformTween = game.add.tween(messageBack).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
         platformTween.onComplete.add(destroyStartPad, this);
     }
 
@@ -463,6 +464,14 @@ var Helper = function(game){
     };
 
     function changeLevel() {
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+        game.input.enabled = false;
+        game.camera.fade('#000000',500);
+        game.camera.onFadeComplete.add(helper.destroyGroups);
+    }
+
+    this.destroyGroups = function(){
         teleporter.destroy();
         // console.log('contact with teleporter');
         currentLevel++;
@@ -488,10 +497,10 @@ var Helper = function(game){
 
         // enemy.body.velocity.x = 0;
         // enemy.body.velocity.y = 0;
-
-        helper.createLevel()
-        // game.state.start("PlayGame", true, false, this.currentLevel);
-    }
+        game.camera.resetFX();
+        game.input.enabled = true;
+        helper.createLevel();
+    };
 
     this.handleKeyboardInput = function(angle) {
         if (cursors.left.isDown) {
@@ -518,14 +527,12 @@ var Helper = function(game){
             player.animations.play('stand');
 
         }
-
         if (cursors.left.justUp || cursors.right.justUp) {
             player.animations.play('stand');
         }
     };
 
     this.pauseGame = function(){
-
         pause.frame = 1;
         game.paused = true;
     };
@@ -543,6 +550,17 @@ var Helper = function(game){
         currentLevel -= 1;
         enemyCollision = false;
         changeLevel();
-    }
+    };
 
+    this.deadByEnemy = function(){
+        console.log("deadbyEnemy is called");
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+        game.input.enabled = false;
+
+        var drop = game.add.tween(player);
+        drop.to({ y: game.world.height-player.height }, 500, Phaser.Easing.Bounce.In);
+        drop.onComplete.add(helper.resetLevel, this);
+        drop.start();
+    }
 };

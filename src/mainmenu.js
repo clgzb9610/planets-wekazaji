@@ -11,18 +11,18 @@ var credits;
 
 mainMenu.prototype = {
     preload:function(){
-        game.load.image("space", "assets/seamlessspacebright.png");
-        game.load.image("title", "assets/mainMenuLogo.png");
-        game.load.image("play", "assets/play.png");
-        game.load.image("play_hover", "assets/play_hover.png");
-        game.load.image("wakazaji", "assets/wekazaji.png");
-        game.load.image("wakazaji_hover", "assets/wekazaji_hover.png");
-        game.load.image("credits", "assets/credits.png");
-        game.load.image("credits_hover", "assets/credits_hover.png");
-        game.load.image("wakazaji_page", "assets/wekazajiPage.png");
-        game.load.image("close", "assets/x.png");
+        game.load.image("space", "assets/game/seamlessspacebright.png");
+        game.load.image("title", "assets/mainMenu/mainMenuLogo.png");
+        game.load.image("play", "assets/mainMenu/play.png");
+        game.load.image("play_hover", "assets/mainMenu/play_hover.png");
+        game.load.image("wakazaji", "assets/mainMenu/wekazaji.png");
+        game.load.image("wakazaji_hover", "assets/mainMenu/wekazaji_hover.png");
+        game.load.image("credits", "assets/mainMenu/credits.png");
+        game.load.image("credits_hover", "assets/mainMenu/credits_hover.png");
+        game.load.image("wakazaji_page", "assets/mainMenu/wekazajiPage.png");
+        game.load.image("close", "assets/mainMenu/x.png");
 
-        game.load.audio('menuBGM', "assets/Visager_-_14_-_Home_Departure_Loop.mp3");
+        game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
         // from http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/Home_Departure_Loop
     },
     create:function () {
@@ -71,7 +71,7 @@ mainMenu.prototype = {
 };
 
 function playTheGame(){
-    game.camera.fade('#000000',1500);
+    game.camera.fade('#000000',500);
     game.camera.onFadeComplete.add(fadeComplete,this);
 }
 

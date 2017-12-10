@@ -51,7 +51,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel = 0;
+var currentLevel =0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -99,17 +99,16 @@ var level = [
         {objectType: 'planet', x: 150, y: -160, gravRadius: 200, gravForce: 370, sprite: "smallplanet"},
         {objectType: 'planet', x: -170, y: -400, gravRadius: 180, gravForce: 400, sprite: "mediumplanet"},
         //{objectType: 'planet', x: -130, y: -80, gravRadius: 160, gravForce: 450, sprite: "mediumplanet"},
-        {objectType: 'teleporter', x: 318, y: 90, radians: 1.48, goal: 2},
+        {objectType: 'teleporter', x: 317, y: 90, radians: 1.48, goal: 2},
         {objectType: 'startPad', x: -270, y: -490, radians: -0.8 },
         {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -275, y: -495},
         {objectType: 'enemy' , x:-110, y: -240, sprite: "enemy"}
-    ]//,
-    // [ //level 5
-    //
-    //
-    // ]
+    ],
+    [ //level 5
+        {objectType: 'planet', x: 200,y: 100, gravRadius: 130, gravForce: 240, sprite: "smallplanet"}
+    ]
 ];
 
 playGame.prototype = {

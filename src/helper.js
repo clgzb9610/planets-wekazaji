@@ -452,11 +452,12 @@ var Helper = function(game){
         // var playerBounds = player.getBounds();
         // var teleporterBounds = teleporter.getBounds();
         if (Phaser.Rectangle.containsRect(player, teleporter) && score < levelGoal){
-            console.log('teleporter');
+            console.log('teleporter CONTACT');
             this.addMessage("This portal is broken.\nCollect gears to repair.",3);
         }
 
         if (Phaser.Rectangle.containsRect(player, teleporter) && score >= levelGoal) {
+            console.log("teleporter CONTACT");
             changeLevel();
         }
     };

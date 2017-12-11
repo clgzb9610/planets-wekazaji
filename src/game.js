@@ -58,6 +58,7 @@ var level = [
         {objectType:'teleporter', x:0, y: -155, radians: 0, goal:1},
         {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
         {objectType: 'gear', x: -50, y: 200, sprite:"gear"},
+        {objectType: 'player', x: -155, y: -45},
         {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move."}
     ],
     [//level 1 - jumping between planets
@@ -98,7 +99,6 @@ var level = [
         {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallplanet"},
         {objectType: 'planet', x: 150, y: -160, gravRadius: 200, gravForce: 370, sprite: "smallplanet"},
         {objectType: 'planet', x: -170, y: -400, gravRadius: 180, gravForce: 400, sprite: "mediumplanet"},
-        //{objectType: 'planet', x: -130, y: -80, gravRadius: 160, gravForce: 450, sprite: "mediumplanet"},
         {objectType: 'teleporter', x: 318, y: 90, radians: 1.5, goal: 2}, //317, 90
         {objectType: 'startPad', x: -270, y: -490, radians: -0.8 },
         {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
@@ -107,8 +107,19 @@ var level = [
         {objectType: 'enemy' , x:-110, y: -240, sprite: "enemy"},
         {objectType: 'hint', text: "Whoa! There's an enemy\nguarding this planet!"}
     ],
-    [ //level 5
-        {objectType: 'planet', x: 200,y: 100, gravRadius: 130, gravForce: 240, sprite: "smallplanet"}
+    [ //level 5 - fun with overlapping gravity fields
+        {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 390, sprite: "bigplanet"},
+        {objectType: 'planet', x: 140, y: 360, gravRadius: 120, gravForce: 300, sprite: "smallplanet"},
+        {objectType: 'planet', x: 370, y: -250, gravRadius: 150, gravForce: 270, sprite: "mediumplanet"},
+        {objectType: 'planet', x: 590, y: -380, gravRadius: 160, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'teleporter', x: 349, y: 140, radians: 1.82, goal: 3},
+        {objectType: 'startPad', x: 30, y: 17, radians: -1.1},
+        {objectType: 'gear', x: 5, y: 400, sprite: "gear"},
+        {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
+        {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
+        {objectType: 'player', x: 0, y: 10},
+        {objectType: 'enemy', x: 400, y: -20, sprite: "enemy"},
+        {objectType: 'hint', text: "Where are those gears?"}
     ]
 ];
 

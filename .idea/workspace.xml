@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="shortened startPad duration.changed addMessage function so you can redisplay the same message if long enough has passed.">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="added a 5th level">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helper.js" afterPath="$PROJECT_DIR$/src/helper.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,21 +30,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="52" column="19" lean-forward="true" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
+            <state relative-caret-position="287">
+              <caret line="52" column="18" lean-forward="false" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="helper.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+            <state relative-caret-position="159">
+              <caret line="170" column="20" lean-forward="false" selection-start-line="170" selection-start-column="13" selection-end-line="170" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -82,8 +81,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>messageCont</find>
-      <find>messageLength</find>
       <find>message</find>
       <find>radiansDel</find>
       <find>this.</find>
@@ -112,6 +109,8 @@
       <find>teleporterBou</find>
       <find>addTele</find>
       <find>&quot;hi</find>
+      <find>bgm</find>
+      <find>findClo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -131,8 +130,8 @@
         <option value="$PROJECT_DIR$/src/ending.js" />
         <option value="$PROJECT_DIR$/src/mainmenu.js" />
         <option value="$PROJECT_DIR$/src/main.js" />
-        <option value="$PROJECT_DIR$/src/game.js" />
         <option value="$PROJECT_DIR$/src/helper.js" />
+        <option value="$PROJECT_DIR$/src/game.js" />
       </list>
     </option>
   </component>
@@ -150,9 +149,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
+    <option name="x" value="34" />
     <option name="y" value="23" />
-    <option name="width" value="1440" />
+    <option name="width" value="1203" />
     <option name="height" value="773" />
   </component>
   <component name="ProjectView">
@@ -177,6 +176,11 @@
             <path>
               <item name="planets-wekazaji" type="b2602c69:ProjectViewProjectNode" />
               <item name="planets-wekazaji" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="planets-wekazaji" type="b2602c69:ProjectViewProjectNode" />
+              <item name="planets-wekazaji" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -266,7 +270,7 @@
       <workItem from="1512548610508" duration="2552000" />
       <workItem from="1512597577291" duration="159000" />
       <workItem from="1512597760318" duration="12807000" />
-      <workItem from="1512868381221" duration="9376000" />
+      <workItem from="1512868381221" duration="12761000" />
     </task>
     <task id="LOCAL-00001" summary="description - a test push">
       <created>1507916413013</created>
@@ -597,17 +601,24 @@
       <option name="project" value="LOCAL" />
       <updated>1512967933797</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="shortened startPad duration.changed addMessage function so you can redisplay the same message if long enough has passed.">
+      <created>1512969588797</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1512969588797</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="145874000" />
+    <option name="totallyTimeSpent" value="149259000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1440" height="773" extended-state="0" />
+    <frame x="34" y="23" width="1203" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20014094" sideWeight="0.4923664" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24027073" sideWeight="0.4923664" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.033923306" sideWeight="0.46629214" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39897698" sideWeight="0.50565773" order="14" side_tool="true" content_ui="tabs" />
@@ -669,7 +680,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added the tiled background." />
     <MESSAGE value="some score message stuff i changed that jin is about to change again. hiding some old console.logs" />
     <MESSAGE value="Added a starting platform.&#10;&#10;Made the enemy stop colliding with the gears.&#10;&#10;Made gears &amp; the enemy disappear when you change levels. #1" />
     <MESSAGE value="I added a new level.&#10;Moved the current level 1 down to a level 2 slot &amp; added an easier level as the current level 1." />
@@ -694,7 +704,8 @@
     <MESSAGE value="fading between each level works, but it doesn't work with main menu enabled :( :(" />
     <MESSAGE value="merge &amp; debugging teleporter collision on level 4" />
     <MESSAGE value="changed checkTeleporterOverlap. Added hint object to level creation. Moved player velocity = 0 to after the camera fades." />
-    <option name="LAST_COMMIT_MESSAGE" value="changed checkTeleporterOverlap. Added hint object to level creation. Moved player velocity = 0 to after the camera fades." />
+    <MESSAGE value="shortened startPad duration.changed addMessage function so you can redisplay the same message if long enough has passed." />
+    <option name="LAST_COMMIT_MESSAGE" value="shortened startPad duration.changed addMessage function so you can redisplay the same message if long enough has passed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -893,18 +904,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.js">
+    <entry file="file://$PROJECT_DIR$/src/helper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="52" column="19" lean-forward="true" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="19" />
+        <state relative-caret-position="159">
+          <caret line="170" column="20" lean-forward="false" selection-start-line="170" selection-start-column="13" selection-end-line="170" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper.js">
+    <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+        <state relative-caret-position="287">
+          <caret line="52" column="18" lean-forward="false" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
           <folding />
         </state>
       </provider>

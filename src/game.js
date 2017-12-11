@@ -92,7 +92,7 @@ var level = [
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185},
-        {objectType: 'hint', text: "The gravity on the mid\nplanet is too strong.\nIs there another way around?"}
+        {objectType: 'hint', text: "The gravity on the\nmidplanet is too strong to\nescape without an\noverlapping gravity field."}
     ],
     [ //level 4 - enemy introduction
         {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallplanet"},

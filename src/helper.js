@@ -220,7 +220,7 @@ var Helper = function(game){
 //=======adds text================================================================================================
     this.addMessage = function(text, sec){
         //add score to the screen
-        if(lastCaption !== text) {
+        if(lastCaption !== text || game.time.events.duration === 0) {
             messageBack = game.add.sprite(1000, 1000, "log");
             messageBack.scale.setTo(0.5, 0.5);
             messageBack.anchor.set(0.5);
@@ -243,13 +243,6 @@ var Helper = function(game){
         bubbleTween.onComplete.add(destroyMessage, this);
         textTween.onComplete.add(destroyMessage, this);
     }
-
-// function updateMessage() {
-//     if (messageLength <= messageContent.length) {
-//         messageCaption.text = messageContent[messageLength];
-//         messageLength++;
-//     }
-// }
 
     function destroyMessage(){
         messageBack.destroy();
@@ -427,11 +420,11 @@ var Helper = function(game){
             return;
         }
         //console.log("platform");
-        game.time.events.add(Phaser.Timer.SECOND, fadeStartPad, this);
+        game.time.events.add(Phaser.Timer.SECOND* 0.6, fadeStartPad, this);
     };
 
     function fadeStartPad(){
-        var platformTween = game.add.tween(messageBack).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+        var platformTween = game.add.tween(messageBack).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
         platformTween.onComplete.add(destroyStartPad, this);
     }
 

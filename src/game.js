@@ -50,14 +50,15 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel =0;
+var currentLevel=0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "bigplanet"},
         {objectType:'teleporter', x:0, y: -155, radians: 0, goal:1},
         {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
-        {objectType: 'gear', x: -50, y: 200, sprite:"gear"}
+        {objectType: 'gear', x: -50, y: 200, sprite:"gear"},
+        {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move."}
     ],
     [//level 1 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallplanet"},
@@ -67,8 +68,8 @@ var level = [
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: -430, y: -50}
-        // {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
+        {objectType: 'player', x: -430, y: -50},
+        {objectType: 'hint', text: "The portal's so far!\nMaybe you can jump?"}
 
     ],
     [//level 2 - start in void
@@ -79,31 +80,32 @@ var level = [
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: 23, y: -30}
-        // {objectType: 'enemy', x: -250, y: -150, sprite: "enemy"}
+        {objectType: 'player', x: 23, y: -30},
+        {objectType: 'hint', text: "Whoa!\nYou're not on a planet!"}
     ],
     [//level 3 - jumping to planets through void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "tennisplanet"},
         {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "smallplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "smallplanet"},
-        {objectType: 'teleporter', x: 278, y: 140, radians: 1.48, goal: 2},
+        {objectType: 'teleporter', x: 278, y: 140, radians: 1.485, goal: 2},
         {objectType: 'startPad', x: 50, y: 180, radians: 1.4 + Math.PI },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 30, y: 185}
-        // {objectType: 'enemy', x: 100, y: -240, sprite: "enemy"}
+        {objectType: 'player', x: 30, y: 185},
+        {objectType: 'hint', text: "The gravity on the mid\nplanet is too strong.\nIs there another way around?"}
     ],
     [ //level 4 - enemy introduction
         {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallplanet"},
         {objectType: 'planet', x: 150, y: -160, gravRadius: 200, gravForce: 370, sprite: "smallplanet"},
         {objectType: 'planet', x: -170, y: -400, gravRadius: 180, gravForce: 400, sprite: "mediumplanet"},
         //{objectType: 'planet', x: -130, y: -80, gravRadius: 160, gravForce: 450, sprite: "mediumplanet"},
-        {objectType: 'teleporter', x: 317, y: 90, radians: 1.48, goal: 2},
+        {objectType: 'teleporter', x: 318, y: 90, radians: 1.5, goal: 2}, //317, 90
         {objectType: 'startPad', x: -270, y: -490, radians: -0.8 },
         {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -275, y: -495},
-        {objectType: 'enemy' , x:-110, y: -240, sprite: "enemy"}
+        {objectType: 'enemy' , x:-110, y: -240, sprite: "enemy"},
+        {objectType: 'hint', text: "Whoa! There's an enemy\nguarding this planet!"}
     ],
     [ //level 5
         {objectType: 'planet', x: 200,y: 100, gravRadius: 130, gravForce: 240, sprite: "smallplanet"}
@@ -196,7 +198,7 @@ playGame.prototype = {
         player.body.setCategoryContactCallback(3,helper.startPadContactCallback,this);
 
         // text, seconds until it fades
-        helper.addMessage("Hi! There!", 1);
+        // helper.addMessage("Hi! There!", 1);
         // game.input.onDown.add(updateMessage, this);
         // addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter", 3);
 
@@ -297,6 +299,8 @@ playGame.prototype = {
         helper.constrainVelocity(player,150);
     },
     render: function() {
+    //     game.debug.body(player);
+    //     game.debug.body(teleporter);
         // game.debug.cameraInfo(game.camera, 32, 32);
         // game.debug.spriteCoords(player, 32, 500);
     }

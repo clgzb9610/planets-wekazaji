@@ -3,7 +3,6 @@ var Helper = function(game){
     var messageBack;
     var messageCaption;
 
-
     /*=============================================================================
        HELPER FUNCTIONS
     =============================================================================*/
@@ -45,6 +44,9 @@ var Helper = function(game){
             }
             if(addition.objectType === 'player'){
                 movePlayer(addition.x,addition.y);
+            }
+            if(addition.objectType === 'hint'){
+                helper.addMessage(addition.text,3);
             }
         }
     };
@@ -293,7 +295,7 @@ var Helper = function(game){
         teleporter = game.add.sprite(x, y, "teleporter", 6);
         game.physics.box2d.enable(teleporter);
         teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 15, true);
-        teleporter.body.setRectangle(40, 47);
+        teleporter.body.setRectangle(48, 61);
         teleporter.body.rotation += radians;
         teleporter.body.static = true;
         teleporter.body.setCollisionMask(0);
@@ -344,7 +346,7 @@ var Helper = function(game){
             enemyCounterClockwise = -1;
         }
         enemyVel += 30;
-        enemyCollision = true;
+        // enemyCollision = true;
 
         helper.resetLevel();
     };
@@ -429,7 +431,7 @@ var Helper = function(game){
     };
 
     function fadeStartPad(){
-        var platformTween = game.add.tween(messageBack).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+        var platformTween = game.add.tween(messageBack).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
         platformTween.onComplete.add(destroyStartPad, this);
     }
 
@@ -450,28 +452,35 @@ var Helper = function(game){
 // }
 
     this.checkTeleporterOverlap = function(teleporter) {
-        // var playerBounds = player.getBounds();
-        // var teleporterBounds = teleporter.getBounds();
-        if (Phaser.Rectangle.containsRect(player, teleporter) && score < levelGoal){
+        console.log("overlap called");
+        var teleporterBounds = teleporter.getBounds();
+        var playerBounds = player.getBounds();
+        if (Phaser.Rectangle.contains(teleporterBounds,playerBounds.centerX, playerBounds.centerY)){
             console.log('teleporter CONTACT');
-            this.addMessage("This portal is broken.\nCollect gears to repair.",3);
-        }
-
-        if (Phaser.Rectangle.containsRect(player, teleporter) && score >= levelGoal) {
-            console.log("teleporter CONTACT");
-            changeLevel();
+            if(score < levelGoal) {
+                this.addMessage("This portal is broken.\nCollect gears to repair.", 3);
+            } else {
+                changeLevel();
+            }
         }
     };
 
     function changeLevel() {
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
         game.input.enabled = false;
+
+        //will be in deadByEnemy
+        cursors.left.reset(true);
+        cursors.right.reset(true);
+        cursors.up.reset(true);
+        cursors.down.reset(true);
+        player.animations.play('stand');
         game.camera.fade('#000000',500);
         game.camera.onFadeComplete.add(helper.destroyGroups);
     }
 
     this.destroyGroups = function(){
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
         teleporter.destroy();
         // console.log('contact with teleporter');
         currentLevel++;
@@ -483,17 +492,16 @@ var Helper = function(game){
         objectGroup = game.add.group();
 
         enemyGroup.destroy();
+        enemyPresent = false;
         enemyGroup = game.add.group();
 
         gravityGraphics.destroy();
         gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
-        //SHOULD WE PAUSE THE GAME FOR A MOMENT BETWEEN LEVELS??
-
         score = 0;
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
+        // player.body.velocity.x = 0;
+        // player.body.velocity.y = 0;
 
         // enemy.body.velocity.x = 0;
         // enemy.body.velocity.y = 0;
@@ -548,7 +556,7 @@ var Helper = function(game){
     // Consistently checks if the players health goes to zero, and if so resets the level.
     this.resetLevel = function() {
         currentLevel -= 1;
-        enemyCollision = false;
+        // enemyCollision = false;
         changeLevel();
     };
 

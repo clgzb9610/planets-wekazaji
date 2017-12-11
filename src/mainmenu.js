@@ -3,10 +3,10 @@ var mainMenu = function (game) {};
 var text;
 var menuBack;
 var menuBGM;
-var wakazajiPOP;
+var wekazajiPOP;
 
 var playButton;
-var wakazaji;
+var wekazaji;
 var credits;
 
 mainMenu.prototype = {
@@ -15,11 +15,11 @@ mainMenu.prototype = {
         game.load.image("title", "assets/mainMenu/mainMenuLogo.png");
         game.load.image("play", "assets/mainMenu/play.png");
         game.load.image("play_hover", "assets/mainMenu/play_hover.png");
-        game.load.image("wakazaji", "assets/mainMenu/wekazaji.png");
-        game.load.image("wakazaji_hover", "assets/mainMenu/wekazaji_hover.png");
+        game.load.image("wekazaji", "assets/mainMenu/wekazaji.png");
+        game.load.image("wekazaji_hover", "assets/mainMenu/wekazaji_hover.png");
         game.load.image("credits", "assets/mainMenu/credits.png");
         game.load.image("credits_hover", "assets/mainMenu/credits_hover.png");
-        game.load.image("wakazaji_page", "assets/mainMenu/wekazajiPage.png");
+        game.load.image("wekazaji_page", "assets/mainMenu/wekazajiPage.png");
         game.load.image("close", "assets/mainMenu/x.png");
 
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
@@ -42,10 +42,10 @@ mainMenu.prototype = {
         playButton.scale.y = 0.4;
         playButton.inputEnabled = true;
 
-        wakazaji = game.add.button(250,450,"wakazaji",openWekazaj, this);
-        wakazaji.scale.x = 0.4;
-        wakazaji.scale.y = 0.4;
-        wakazaji.inputEnabled = true;
+        wekazaji = game.add.button(250,450,"wekazaji",openWekazaj, this);
+        wekazaji.scale.x = 0.4;
+        wekazaji.scale.y = 0.4;
+        wekazaji.inputEnabled = true;
 
         credits = game.add.button(250,550,"credits",null, this);
         credits.scale.x = 0.4;
@@ -59,8 +59,8 @@ mainMenu.prototype = {
         if (playButton.input.pointerOver()) {playButton.loadTexture('play_hover', 0);}
         else {playButton.loadTexture('play', 0);}
 
-        if (wakazaji.input.pointerOver()) {wakazaji.loadTexture('wakazaji_hover', 0);}
-        else {wakazaji.loadTexture('wakazaji', 0);}
+        if (wekazaji.input.pointerOver()) {wekazaji.loadTexture('wekazaji_hover', 0);}
+        else {wekazaji.loadTexture('wekazaji', 0);}
 
         if (credits.input.pointerOver()) {credits.loadTexture('credits_hover', 0);}
         else {credits.loadTexture('credits', 0);}
@@ -81,20 +81,20 @@ function fadeComplete(){
 }
 
 function openWekazaj(){
-    wakazajiPOP = game.add.sprite(game.world.centerX, game.world.centerY, 'wakazaji_page');
-    wakazajiPOP.anchor.set(0.5);
-    wakazajiPOP.inputEnabled = true;
+    wekazajiPOP = game.add.sprite(game.world.centerX, game.world.centerY, 'wekazaji_page');
+    wekazajiPOP.anchor.set(0.5);
+    wekazajiPOP.inputEnabled = true;
 
     var closeButton = game.make.sprite(330, -380, 'close');
     closeButton.scale.set(0.3);
     closeButton.inputEnabled = true;
     closeButton.input.priorityID = 1;
     closeButton.input.useHandCursor = true;
-    closeButton.events.onInputDown.add(closeWakazaji, this);
+    closeButton.events.onInputDown.add(closeWekazaji, this);
 
-    wakazajiPOP.addChild(closeButton);
+    wekazajiPOP.addChild(closeButton);
 }
 
-function closeWakazaji(){
-    wakazajiPOP.destroy();
+function closeWekazaji(){
+    wekazajiPOP.destroy();
 }

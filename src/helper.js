@@ -2,6 +2,7 @@ var Helper = function(game){
 
     var messageBack;
     var messageCaption;
+    var blackScreen;
 
     /*=============================================================================
        HELPER FUNCTIONS
@@ -469,14 +470,19 @@ var Helper = function(game){
         cursors.up.reset(true);
         cursors.down.reset(true);
         player.animations.play('stand');
+
+        // blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
+        // blackScreen.anchor.set(0.5, 0.5);
+        // blackScreen.alpha = 0;
+        // var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
+        // fade.onComplete.add(helper.destroyGroups);
+
         helper.destroyGroups();
     }
 
     this.destroyGroups = function(){
         teleporter.destroy();
-        // console.log('contact with teleporter');
         currentLevel++;
-        // console.log('currentLevel: ', currentLevel);
         planetGroup.destroy();
         planetGroup = game.add.group();
 
@@ -494,6 +500,7 @@ var Helper = function(game){
         score = 0;
 
         game.input.enabled = true;
+        // blackScreen.destroy();
         helper.createLevel();
     };
 
@@ -548,14 +555,16 @@ var Helper = function(game){
     };
 
     this.deadByEnemy = function(){
-        console.log("deadbyEnemy is called");
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
-        game.input.enabled = false;
-
-        var drop = game.add.tween(player);
-        drop.to({ y: game.world.height-player.height }, 500, Phaser.Easing.Bounce.In);
-        drop.onComplete.add(helper.resetLevel, this);
-        drop.start();
+        // console.log("deadbyEnemy is called");
+        // player.body.velocity.x = 0;
+        // player.body.velocity.y = 0;
+        // game.input.enabled = false;
+        //
+        // var drop = game.add.tween(player);
+        // drop.to({ y: game.world.height-player.height }, 500, Phaser.Easing.Bounce.In);
+        // drop.onComplete.add(helper.resetLevel, this);
+        // drop.start();
+        bgm.pause();
+        game.state.start("DeadState", true, false, 0);
     }
 };

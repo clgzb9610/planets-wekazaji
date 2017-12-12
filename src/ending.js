@@ -11,6 +11,11 @@ ending.prototype = {
         endingBGM.loop = true;
         endingBGM.volume = 0.6;
         endingBGM.play();
+
+        replayButton = game.add.button(250,350,"play",replayTheGame,this);
+        replayButton.scale.x = 0.4;
+        replayButton.scale.y = 0.4;
+        replayButton.inputEnabled = true;
     },
     update:function() {
     },
@@ -18,3 +23,14 @@ ending.prototype = {
 
     }
 };
+
+function replayTheGame(){
+    game.camera.fade('#000000',500);
+    game.camera.onFadeComplete.add(refadeComplete,this);
+}
+
+function refadeComplete(){
+    endingBGM.pause();
+    replayButton.destroy();
+    game.state.start("PlayGame", true, false, 0, currentLevel = 0);
+}

@@ -50,7 +50,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=0;
+var currentLevel=5;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -124,7 +124,7 @@ var level = [
 ];
 
 playGame.prototype = {
-    init:function(){
+    init:function(currentLevel){
         this.currentLevel = currentLevel;
     },
     preload: function () {
@@ -149,6 +149,7 @@ playGame.prototype = {
         game.load.image('startPad','assets/game/startPad.png',50,12);
         game.load.spritesheet('startPadAnimations','assets/game/startPadAnimationSpriteSheet.png',50,17);
         game.load.image("log", "assets/game/shipslog.png");
+        game.load.image('blackScreen', "assets/game/blackScreen.png");
 
         game.load.image("dashboard","assets/game/dashboard.png",300,52);
         game.load.spritesheet("mute","assets/buttons/mute.png",52,52);

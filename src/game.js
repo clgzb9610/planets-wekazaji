@@ -50,7 +50,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=4;
+var currentLevel=0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal

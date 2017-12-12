@@ -7,4 +7,4 @@ game.state.add("PlayGame", playGame);
 // console.log("------------> in main.js, ending = ", ending);
 game.state.add("Ending", ending);
 
-game.state.start("PlayGame");
+game.state.start("MainMenu");

@@ -14,16 +14,16 @@ var Helper = function(game){
 // }
 
     this.createLevel= function(){
-        // if(!level[currentLevel]) {
-        //     // jin - it might be better to check for this in the destroy method before calling createLevel.
-        //     // i think trying to access level[x] out of bounds could be what's crashing it?
-        //     bgm.pause();
-        //     console.log("bgm paused");
-        //     game.physics.clear();
-        //     console.log("destroyed the physics");
-        //     game.state.start("Ending", true, false, 0);
-        //     return;
-        // }
+        if(!level[currentLevel]) {
+            // jin - it might be better to check for this in the destroy method before calling createLevel.
+            // i think trying to access level[x] out of bounds could be what's crashing it?
+            bgm.pause();
+            console.log("bgm paused");
+            game.physics.clear();
+            console.log("destroyed the physics");
+            game.state.start("Ending", true, false, 0);
+            return;
+        }
         for (var i = 0; i < level[currentLevel].length; i++) {
             var addition = level[currentLevel][i];
             if (addition.objectType === 'planet') {
@@ -448,7 +448,7 @@ var Helper = function(game){
         console.log("overlap called");
         var teleporterBounds = teleporter.getBounds();
         var playerBounds = player.getBounds();
-        if (Phaser.Rectangle.contains(teleporterBounds,playerBounds.centerX, playerBounds.centerY)){
+        if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
             console.log('teleporter CONTACT');
             if(score < levelGoal) {
                 this.addMessage("This portal is broken.\nCollect gears to repair.", 3);
@@ -459,6 +459,8 @@ var Helper = function(game){
     };
 
     function changeLevel() {
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
         game.input.enabled = false;
 
         //will be in deadByEnemy
@@ -467,13 +469,10 @@ var Helper = function(game){
         cursors.up.reset(true);
         cursors.down.reset(true);
         player.animations.play('stand');
-        game.camera.fade('#000000',500);
-        game.camera.onFadeComplete.add(helper.destroyGroups);
+        helper.destroyGroups();
     }
 
     this.destroyGroups = function(){
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
         teleporter.destroy();
         // console.log('contact with teleporter');
         currentLevel++;
@@ -493,12 +492,7 @@ var Helper = function(game){
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         score = 0;
-        // player.body.velocity.x = 0;
-        // player.body.velocity.y = 0;
 
-        // enemy.body.velocity.x = 0;
-        // enemy.body.velocity.y = 0;
-        game.camera.resetFX();
         game.input.enabled = true;
         helper.createLevel();
     };

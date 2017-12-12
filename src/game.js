@@ -177,6 +177,7 @@ playGame.prototype = {
         planetGroup = game.add.group();
         objectGroup = game.add.group();
         dashboardGroup = game.add.group();
+        messageGroup = game.add.group();
 
         // adding gravitiy line
         gravityGraphics = game.add.graphics(0, 0);

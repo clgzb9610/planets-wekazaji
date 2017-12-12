@@ -228,6 +228,8 @@ var Helper = function(game){
             messageBack.anchor.set(0.5);
             messageCaption = game.add.text(1000, 1000, text, {fill: '#72fa80', font: '10pt Courier'});
             messageCaption.anchor.set(0.5);
+            messageGroup.add(messageBack);
+            messageGroup.add(messageCaption);
             lastCaption = text;
             if (sec > 0) {
                 messageTimer(sec); //fades message
@@ -247,6 +249,8 @@ var Helper = function(game){
     }
 
     function destroyMessage(){
+        messageGroup.remove(messageBack);
+        messageGroup.remove(messageCaption);
         messageBack.destroy();
         messageCaption.destroy();
     }
@@ -309,6 +313,7 @@ var Helper = function(game){
         // startPad.body.setCategoryContactCallback();
 
         startPadAnimations = game.add.sprite(x,y,"startPadAnimations");
+        objectGroup.add(startPadAnimations);
         game.physics.box2d.enable(startPadAnimations);
         startPadAnimations.body.setRectangle(50,17);
         startPadAnimations.body.static = true;
@@ -456,6 +461,8 @@ var Helper = function(game){
     }
 
     function destroyStartPad(){
+        objectGroup.remove(startPad);
+        objectGroup.remove(startPadAnimations);
         startPad.destroy();
     }
 
@@ -517,6 +524,9 @@ var Helper = function(game){
 
         dashboardGroup.destroy();
         dashboardGroup = game.add.group();
+
+        messageGroup.destroy();
+        messageGroup = game.add.group();
 
         enemyGroup.destroy();
         enemyPresent = false;

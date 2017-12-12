@@ -9,8 +9,9 @@ deadState.prototype = {
         game.load.image("play", "assets/mainMenu/play.png");
     },
     create:function () {
-        deadBack = game.add.tileSprite(0, 0, 1024, 1024, 'space');
-        deadplayButton = game.add.button(250,350,"play",deadplayTheGame,this);
+        deadBack = game.add.tileSprite(-320, -300, 1024, 1024, 'space');
+        deadplayButton = game.add.button(-70,50,"play",deadplayTheGame,this);
+        deadplayButton.scale.setTo(0.4, 0.4);
         console.log("this is dead state")
     },
     update:function() {

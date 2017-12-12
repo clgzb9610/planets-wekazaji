@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="fading b">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/deadState.js" afterPath="$PROJECT_DIR$/src/deadState.js" />
       <change beforePath="$PROJECT_DIR$/src/helper.js" afterPath="$PROJECT_DIR$/src/helper.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -43,18 +44,18 @@
       <file leaf-file-name="mainmenu.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mainmenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
+            <state relative-caret-position="634">
               <caret line="64" column="38" lean-forward="true" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="436">
+              <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -62,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="helper.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="609" column="20" lean-forward="true" selection-start-line="609" selection-start-column="20" selection-end-line="609" selection-end-column="20" />
+            <state relative-caret-position="437">
+              <caret line="594" column="26" lean-forward="true" selection-start-line="594" selection-start-column="26" selection-end-line="594" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -75,8 +76,8 @@
       <file leaf-file-name="deadState.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/deadState.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+            <state relative-caret-position="195">
+              <caret line="13" column="45" lean-forward="false" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -103,7 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>console</find>
       <find>checktele</find>
       <find>currentlevel</find>
       <find>current</find>
@@ -120,7 +120,6 @@
       <find>findClo</find>
       <find>overlap called</find>
       <find>destroy</find>
-      <find>anchor</find>
       <find>world</find>
       <find>menuback</find>
       <find>callback</find>
@@ -133,6 +132,8 @@
       <find>game.world.set</find>
       <find>message</find>
       <find>addMessage</find>
+      <find>rotation</find>
+      <find>anchor</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,8 +154,8 @@
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/ending.js" />
         <option value="$PROJECT_DIR$/src/deadState.js" />
-        <option value="$PROJECT_DIR$/src/game.js" />
         <option value="$PROJECT_DIR$/src/helper.js" />
+        <option value="$PROJECT_DIR$/src/game.js" />
       </list>
     </option>
   </component>
@@ -300,13 +301,6 @@
       <workItem from="1512597760318" duration="12807000" />
       <workItem from="1512868381221" duration="12761000" />
       <workItem from="1513109208633" duration="514000" />
-    </task>
-    <task id="LOCAL-00003" summary="Moved keyboard input so it doesn't repeat for every planet">
-      <created>1508268746173</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1508268746173</updated>
     </task>
     <task id="LOCAL-00004" summary="Added Asset Directory&#10;Replaced crates with the player character.&#10;Implemented animations.&#10;I added in a camera follow feature to see what it does, but I haven't played with it yet.">
       <created>1508275680288</created>
@@ -644,11 +638,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513109224131</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="fading between level now works!">
+      <created>1513111871906</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1513111871906</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159046000" />
+    <option name="totallyTimeSpent" value="159535000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -747,7 +748,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added message box prototype. Took out message box." />
     <MESSAGE value="corrected message box coordinates" />
     <MESSAGE value="enemyPresent boolean variable that let's you execute certain parts of code only when there's an enemy in that level.&#10;(additionally, removed the enemy from levels 0 and 2.)&#10;fixed the bug where the enemy created in the add function was assigned to a variable local only to that function, so it wasn't being passed to the handleEnemyRotation function.&#10;Moved the message to the top of the screen above the player.&#10;Rearranged some of the add/contact functions bc they were mixed together.&#10;&#10;Also  there's some merge stuff in this commit bc i forgot to commit after merge. :/" />
     <MESSAGE value="startplatform disappears after you jump off it in the first level but contact doesnt register for later levels. any ideas why???" />
@@ -772,7 +772,8 @@
     <MESSAGE value="updated box2d plugin, now the level change works with main menu." />
     <MESSAGE value="Ending state structure is complete" />
     <MESSAGE value="Merge branch 'master' of https://github.com/clgzb9610/planets-wekazaji&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/game.js&#10;#&#9;src/helper.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/clgzb9610/planets-wekazaji&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/game.js&#10;#&#9;src/helper.js" />
+    <MESSAGE value="fading between level now works!" />
+    <option name="LAST_COMMIT_MESSAGE" value="fading between level now works!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -935,22 +936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/deadState.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ending.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -967,29 +952,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ending.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/mainmenu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
+        <state relative-caret-position="634">
           <caret line="64" column="38" lean-forward="true" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/deadState.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="45" lean-forward="false" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="594" column="26" lean-forward="true" selection-start-line="594" selection-start-column="26" selection-end-line="594" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="436">
+          <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="609" column="20" lean-forward="true" selection-start-line="609" selection-start-column="20" selection-end-line="609" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>

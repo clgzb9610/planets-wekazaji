@@ -610,7 +610,8 @@ var Helper = function(game){
         bgm.pause();
         game.world.pivot.x = 0;
         game.world.pivot.y = 0;
+        game.world.rotation = 0;
         game.camera.reset();
         game.state.start("DeadState", true, false, 0);
-    }
+    };
 };

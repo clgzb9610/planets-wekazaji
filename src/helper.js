@@ -21,9 +21,10 @@ var Helper = function(game){
             // jin - it might be better to check for this in the destroy method before calling createLevel.
             // i think trying to access level[x] out of bounds could be what's crashing it?
             bgm.pause();
-            console.log("bgm paused");
-            game.physics.clear();
-            console.log("destroyed the physics");
+            game.world.pivot.x = 0;
+            game.world.pivot.y = 0;
+            game.world.rotation = 0;
+            game.camera.reset();
             game.state.start("Ending", true, false, 0);
             return;
         }

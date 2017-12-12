@@ -16,12 +16,10 @@ var Helper = function(game){
 
     this.createLevel= function(){
         if(!level[currentLevel]) {
-            // jin - it might be better to check for this in the destroy method before calling createLevel.
-            // i think trying to access level[x] out of bounds could be what's crashing it?
             bgm.pause();
-            console.log("bgm paused");
+            // console.log("bgm paused");
             game.physics.clear();
-            console.log("destroyed the physics");
+            // console.log("destroyed the physics");
             game.state.start("Ending", true, false, 0);
             return;
         }
@@ -220,7 +218,7 @@ var Helper = function(game){
     };
 
 //=======adds text================================================================================================
-    this.addMessage = function(text, sec){
+    this.addMessage = function(text, delay){
         //add score to the screen
         if(lastCaption !== text || game.time.events.duration === 0) {
             messageBack = game.add.sprite(1000, 1000, "log");
@@ -231,17 +229,19 @@ var Helper = function(game){
             messageGroup.add(messageBack);
             messageGroup.add(messageCaption);
             lastCaption = text;
-            if (sec > 0) {
-                messageTimer(sec); //fades message
+            console.log("add message with delay:,", delay);
+            if (delay > 0) {
+                messageTimer(delay); //fades message
             }
         }
     };
 
-    function messageTimer(sec){
-        game.time.events.add(Phaser.Timer.SECOND * sec, fadeMessage, this);
+    function messageTimer(delay){
+        game.time.events.add(Phaser.Timer.SECOND * delay, fadeMessage, this);
     }
 
     function fadeMessage(){
+        console.log("start FADE MESSAGE");
         var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
         var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
         bubbleTween.onComplete.add(destroyMessage, this);
@@ -252,7 +252,9 @@ var Helper = function(game){
         messageGroup.remove(messageBack);
         messageGroup.remove(messageCaption);
         messageBack.destroy();
+        console.log("destroyed messageBack");
         messageCaption.destroy();
+        console.log("destroyed caption");
     }
 
     this.messageLocation = function(angle) {
@@ -412,6 +414,7 @@ var Helper = function(game){
         player.body.velocity.y = 0;
         player.body.x = x;
         player.body.y = y;
+        game.world.swap(player,teleporter);
     }
 
 // kills the gear when touched
@@ -456,7 +459,7 @@ var Helper = function(game){
     };
 
     function fadeStartPad(){
-        var platformTween = game.add.tween(messageBack).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+        var platformTween = game.add.tween(startPad).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
         platformTween.onComplete.add(destroyStartPad, this);
     }
 
@@ -479,11 +482,9 @@ var Helper = function(game){
 // }
 
     this.checkTeleporterOverlap = function(teleporter) {
-        console.log("overlap called");
         var teleporterBounds = teleporter.getBounds();
         var playerBounds = player.getBounds();
         if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
-            console.log('teleporter CONTACT');
             if(score < levelGoal) {
                 this.addMessage("This portal is broken.\nCollect gears to repair.", 3);
             } else {

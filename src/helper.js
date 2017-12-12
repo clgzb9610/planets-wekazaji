@@ -3,6 +3,7 @@ var Helper = function(game){
     var messageBack;
     var messageCaption;
     var blackScreen;
+    var levelComplete = false;
 
     /*=============================================================================
        HELPER FUNCTIONS
@@ -15,11 +16,16 @@ var Helper = function(game){
 // }
 
     this.createLevel= function(){
+        levelComplete = false;
         if(!level[currentLevel]) {
             bgm.pause();
             // console.log("bgm paused");
             game.physics.clear();
             // console.log("destroyed the physics");
+            game.world.pivot.x = 0;
+            game.world.pivot.y = 0;
+            game.world.rotation = 0;
+            game.camera.reset();
             game.state.start("Ending", true, false, 0);
             return;
         }
@@ -482,22 +488,23 @@ var Helper = function(game){
 // }
 
     this.checkTeleporterOverlap = function(teleporter) {
-        var teleporterBounds = teleporter.getBounds();
-        var playerBounds = player.getBounds();
-        if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
-            if(score < levelGoal) {
-                this.addMessage("This portal is broken.\nCollect gears to repair.", 3);
-            } else {
-                changeLevel();
+        if (levelComplete === false){
+            console.log("overlap called");
+            var teleporterBounds = teleporter.getBounds();
+            var playerBounds = player.getBounds();
+            if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
+                console.log('teleporter CONTACT');
+                if(score < levelGoal) {
+                    this.addMessage("This portal is broken.\nCollect gears to repair.", 3);
+                } else {
+                    levelComplete = true;
+                    changeLevel();
+                }
             }
         }
     };
 
     function changeLevel() {
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
-        game.input.enabled = false;
-
         //will be in deadByEnemy
         cursors.left.reset(true);
         cursors.right.reset(true);
@@ -505,13 +512,16 @@ var Helper = function(game){
         cursors.down.reset(true);
         player.animations.play('stand');
 
-        // blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
-        // blackScreen.anchor.set(0.5, 0.5);
-        // blackScreen.alpha = 0;
-        // var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
-        // fade.onComplete.add(helper.destroyGroups);
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+        game.input.enabled = false;
 
-        helper.destroyGroups();
+        blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
+        blackScreen.scale.setTo(2, 2);
+        blackScreen.anchor.set(0.5, 0.5);
+        blackScreen.alpha = 0;
+        var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
+        fade.onComplete.add(helper.destroyGroups);
     }
 
     this.destroyGroups = function(){
@@ -540,7 +550,7 @@ var Helper = function(game){
         score = 0;
 
         game.input.enabled = true;
-        // blackScreen.destroy();
+        blackScreen.destroy();
         helper.createLevel();
     };
 
@@ -607,7 +617,8 @@ var Helper = function(game){
         bgm.pause();
         game.world.pivot.x = 0;
         game.world.pivot.y = 0;
+        game.world.rotation = 0;
         game.camera.reset();
         game.state.start("DeadState", true, false, 0);
-    }
+    };
 };

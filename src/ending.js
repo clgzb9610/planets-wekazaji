@@ -12,7 +12,7 @@ ending.prototype = {
         endingBGM.volume = 0.6;
         endingBGM.play();
 
-        replayButton = game.add.button(250,350,"play",replayTheGame,this);
+        replayButton = game.add.button(-70,50,"play",replayTheGame,this);
         replayButton.scale.x = 0.4;
         replayButton.scale.y = 0.4;
         replayButton.inputEnabled = true;

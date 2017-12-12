@@ -50,6 +50,7 @@ var Helper = function(game){
                 helper.addMessage(addition.text,3);
             }
         }
+        addDashboard();
     };
 
     this.handleEnemyRotation = function(sprite) {
@@ -328,6 +329,30 @@ var Helper = function(game){
         }
     }
 
+    function addDashboard(){
+        dashboard = game.add.sprite(-100,-600,"dashboard");
+        dashboard.anchor.set(0.5);
+        dashboardGroup.add(dashboard);
+        mute = game.add.sprite(-100,-600,"mute");
+        mute.frame = 0;
+        mute.anchor.set(-0.9,0.5);
+        dashboardGroup.add(mute);
+        pause = game.add.sprite(-100,-600,"pause");
+        pause.frame = 0;
+        pause.anchor.set(0.5, 0.55);
+        dashboardGroup.add(pause);
+        restart= game.add.sprite(-100,-600,"restart");
+        restart.anchor.set(1.9,0.55);
+        dashboardGroup.add(restart);
+
+
+        pause.inputEnabled = true;
+        pause.events.onInputUp.add(helper.pauseGame, self);
+        restart.inputEnabled = true;
+        restart.events.onInputUp.add(helper.resetLevel,self);
+        game.input.onDown.add(helper.unpauseGame, self);
+    }
+
 //rebounds the player sprite back after enemy collision
     this.enemyContactCallback = function(body1, body2, fixture1, fixture2, begin) {
         if (!begin) {
@@ -489,6 +514,9 @@ var Helper = function(game){
         objectGroup.destroy();
         objectGroup = game.add.group();
 
+        dashboardGroup.destroy();
+        dashboardGroup = game.add.group();
+
         enemyGroup.destroy();
         enemyPresent = false;
         enemyGroup = game.add.group();
@@ -547,7 +575,7 @@ var Helper = function(game){
         }
     };
 
-    // Consistently checks if the players health goes to zero, and if so resets the level.
+
     this.resetLevel = function() {
         currentLevel -= 1;
         // enemyCollision = false;

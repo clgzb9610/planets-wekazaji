@@ -50,7 +50,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=5;
+var currentLevel=4;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -223,28 +223,6 @@ playGame.prototype = {
 
         cursors = game.input.keyboard.createCursorKeys();
         game.camera.follow(player);
-
-        dashboard = game.add.sprite(-100,-600,"dashboard");
-        dashboard.anchor.set(0.5);
-        dashboardGroup.add(dashboard);
-        mute = game.add.sprite(-100,-600,"mute");
-        mute.frame = 0;
-        mute.anchor.set(-0.9,0.5);
-        dashboardGroup.add(mute);
-        pause = game.add.sprite(-100,-600,"pause");
-        pause.frame = 0;
-        pause.anchor.set(0.5, 0.55);
-        dashboardGroup.add(pause);
-        restart= game.add.sprite(-100,-600,"restart");
-        restart.anchor.set(1.9,0.55);
-        dashboardGroup.add(restart);
-
-
-        pause.inputEnabled = true;
-        pause.events.onInputUp.add(helper.pauseGame, self);
-        restart.inputEnabled = true;
-        restart.events.onInputUp.add(helper.resetLevel,self);
-        game.input.onDown.add(helper.unpauseGame, self);
 
 
 

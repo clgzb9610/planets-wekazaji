@@ -1,6 +1,7 @@
 var deadState = function (game) {};
 
-var menuBack;
+var deadBack;
+var deadplayButton;
 
 deadState.prototype = {
     preload:function(){
@@ -8,18 +9,21 @@ deadState.prototype = {
         game.load.image("play", "assets/mainMenu/play.png");
     },
     create:function () {
-        menuBack = game.add.tileSprite(0, 0, 1024, 1024, 'space');
-        playButton = game.add.button(250,350,"play",playTheGame,this);
+        deadBack = game.add.tileSprite(0, 0, 1024, 1024, 'space');
+        deadplayButton = game.add.button(250,350,"play",deadplayTheGame,this);
         console.log("this is dead state")
     },
     update:function() {
-        menuBack.tilePosition.x -= 1;
+        deadBack.tilePosition.x -= 1;
     },
     render:function(){
     }
 };
 
-function playTheGame(){
+function deadplayTheGame(){
     game.camera.fade('#000000',500);
-    game.camera.onFadeComplete.add(fadeComplete,this);
+    game.camera.onFadeComplete.add(deadFadeComplete,this);
+}
+function deadFadeComplete(){
+    game.state.start("PlayGame", true, false, currentLevel);
 }

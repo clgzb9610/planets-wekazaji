@@ -328,7 +328,7 @@ var Helper = function(game){
         }
     }
 
-//rebounds the player sprite back after enemy collision
+    //rebounds the player sprite back after enemy collision
     this.enemyContactCallback = function(body1, body2, fixture1, fixture2, begin) {
         if (!begin) {
             return;
@@ -342,7 +342,7 @@ var Helper = function(game){
         enemyVel += 30;
         // enemyCollision = true;
 
-        helper.resetLevel();
+        helper.deadByEnemy();
     };
 
     function addGear(x, y, sprite) {
@@ -565,6 +565,9 @@ var Helper = function(game){
         // drop.onComplete.add(helper.resetLevel, this);
         // drop.start();
         bgm.pause();
+        game.world.pivot.x = 0;
+        game.world.pivot.y = 0;
+        game.camera.reset();
         game.state.start("DeadState", true, false, 0);
     }
 };

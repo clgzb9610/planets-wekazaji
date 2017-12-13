@@ -413,14 +413,13 @@ var Helper = function(game){
     //     // enemy.body.velocity.y = 0;
     //     enemy.body.x = x;
     //     enemy.body.y = y;
-    // }
-
+    //
     function movePlayer(x, y) {
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
         player.body.x = x;
         player.body.y = y;
-        game.world.swap(player,teleporter);
+        game.world.swap(player,teleporter); //makes the player younger than the teleporter in every level, so it passes in front
     }
 
 // kills the gear when touched

@@ -59,7 +59,7 @@ var level = [
         {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
         {objectType: 'gear', x: -50, y: 200, sprite:"gear"},
         {objectType: 'player', x: -155, y: -45},
-        {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move.", delay: 1}
+        {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move.", delay: 2}
     ],
     [//level 1 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallstar"},
@@ -105,7 +105,7 @@ var level = [
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -275, y: -495},
         {objectType: 'enemy' , x:-110, y: -240, sprite: "enemy"},
-        {objectType: 'hint', text: "Whoa! There's an enemy\nguarding this planet!", delay: 1}
+        {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
     ],
     [ //level 5 - fun with overlapping gravity fields
         {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 390, sprite: "bigplanet"},

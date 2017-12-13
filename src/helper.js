@@ -295,6 +295,7 @@ var Helper = function(game){
 
         planet.body.setCircle(planet.width / 2);
         gravityGraphics.drawCircle(planet.x, planet.y, planet.width + planet.gravityRadius);
+      //  game.world.sendToBack(gravityGraphics);               THIS LINE IS WRONG BUT TEST W/OUT GRAVITY LINES
         planet.body.setCollisionCategory(1);
     }
 

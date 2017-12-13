@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/deadState.js" afterPath="$PROJECT_DIR$/src/deadState.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helper.js" afterPath="$PROJECT_DIR$/src/helper.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -66,8 +65,8 @@
       <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
+            <state relative-caret-position="158">
+              <caret line="297" column="106" lean-forward="false" selection-start-line="297" selection-start-column="106" selection-end-line="297" selection-end-column="106" />
               <folding />
             </state>
           </provider>
@@ -104,7 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>call</find>
       <find>enemycoll</find>
       <find>enemyColl</find>
       <find>enemy</find>
@@ -134,6 +132,7 @@
       <find>movePla</find>
       <find>addMess</find>
       <find>startPad</find>
+      <find>gravityGraphics</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -302,14 +301,7 @@
       <workItem from="1512868381221" duration="12761000" />
       <workItem from="1513109208633" duration="514000" />
       <workItem from="1513113536587" duration="1782000" />
-      <workItem from="1513130751662" duration="953000" />
-    </task>
-    <task id="LOCAL-00009" summary="Player relative arrow controls &amp; world rotation!&#10;&#10;Also I decomposed the gravity field stuff from update, added a max velocity function i found online, and messed with some boundaries and layouts. The new world is centered at (0,0) so there's negative coordinates now.">
-      <created>1508730319306</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1508730319306</updated>
+      <workItem from="1513130751662" duration="1434000" />
     </task>
     <task id="LOCAL-00010" summary="Added in gear sprites in place of coin sprites.">
       <created>1508950188926</created>
@@ -647,19 +639,27 @@
       <option name="project" value="LOCAL" />
       <updated>1513132102138</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="merge &amp; added a commencted out comment on the dead state that didnt work">
+      <created>1513132134702</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1513132134702</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="162414000" />
+    <option name="totallyTimeSpent" value="162895000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="23" width="1195" height="714" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24020442" sideWeight="0.4923664" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39897698" sideWeight="0.50565773" order="14" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3489499" sideWeight="0.45544556" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16478191" sideWeight="0.45544556" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16833095" sideWeight="0.496875" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
@@ -979,8 +979,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/helper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
+        <state relative-caret-position="158">
+          <caret line="297" column="106" lean-forward="false" selection-start-line="297" selection-start-column="106" selection-end-line="297" selection-end-column="106" />
           <folding />
         </state>
       </provider>

@@ -164,7 +164,7 @@ playGame.prototype = {
     create: function () {
 
         // new boundaries are centered on 0,0 so the world can rotate
-        game.world.setBounds(-320, -300, 320, 300);
+        game.world.setBounds(-300, -320, 300, 320);
 
         game.time.desiredFps = 25;
 

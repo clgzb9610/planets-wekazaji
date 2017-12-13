@@ -51,7 +51,7 @@ var Helper = function(game){
                 movePlayer(addition.x,addition.y);
             }
             if(addition.objectType === 'hint'){
-                helper.addMessage(addition.text,3);
+                helper.addMessage(addition.text,addition.delay);
             }
         }
         addDashboard();
@@ -439,7 +439,7 @@ var Helper = function(game){
         ting.volume = 0.6;
         ting.play();
         score += 1;
-        helper.addMessage(score + " / " + levelGoal, 1);
+        helper.addMessage(score + " / " + levelGoal, 0.7);
         if (score >= levelGoal) {
             teleporter.animations.play('swirl');
             var teleporterOpenSound = game.add.audio("teleporterOpen");

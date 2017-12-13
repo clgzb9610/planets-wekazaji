@@ -50,7 +50,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=5;
+var currentLevel=0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -59,7 +59,7 @@ var level = [
         {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
         {objectType: 'gear', x: -50, y: 200, sprite:"gear"},
         {objectType: 'player', x: -155, y: -45},
-        {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move."}
+        {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move.", delay: 1}
     ],
     [//level 1 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallstar"},
@@ -70,7 +70,7 @@ var level = [
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
         {objectType: 'player', x: -430, y: -50},
-        {objectType: 'hint', text: "The portal's so far!\nMaybe you can jump?"}
+        {objectType: 'hint', text: "The portal's so far!\nMaybe you can jump?", delay: 2}
 
     ],
     [//level 2 - start in void
@@ -82,7 +82,7 @@ var level = [
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
         {objectType: 'player', x: 23, y: -30},
-        {objectType: 'hint', text: "Whoa!\nYou're not on a planet!"}
+        {objectType: 'hint', text: "Whoa!\nYou're not on a planet!", delay:1}
     ],
     [//level 3 - jumping to planets through void
         {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "soccerplanet"},
@@ -93,7 +93,7 @@ var level = [
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185},
-        {objectType: 'hint', text: "The gravity on the\nmidplanet is too strong to\nescape without an\noverlapping gravity field."}
+        {objectType: 'hint', text: "The gravity on the\nmidplanet is too strong to\nescape without an\noverlapping gravity field.", delay: 4}
     ],
     [ //level 4 - enemy introduction
         {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallrainbow"},
@@ -105,7 +105,7 @@ var level = [
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -275, y: -495},
         {objectType: 'enemy' , x:-110, y: -240, sprite: "enemy"},
-        {objectType: 'hint', text: "Whoa! There's an enemy\nguarding this planet!"}
+        {objectType: 'hint', text: "Whoa! There's an enemy\nguarding this planet!", delay: 1}
     ],
     [ //level 5 - fun with overlapping gravity fields
         {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 390, sprite: "bigplanet"},
@@ -119,7 +119,7 @@ var level = [
         {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
         {objectType: 'player', x: 0, y: 10},
         {objectType: 'enemy', x: 400, y: -20, sprite: "enemy"},
-        {objectType: 'hint', text: "Where are those gears?"}
+        {objectType: 'hint', text: "Where are those gears?", delay: 1}
     ]
 ];
 

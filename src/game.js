@@ -21,15 +21,18 @@ var walkL;
 var stand;
 var fall;
 
-var enemy;
-var enemyPresent = false;
+var enemy1;
+var enemy2;
+
+var enemy1Present = false;
+var enemy2Present = false;
+var enemyCollision = false;
 
 var startPadActive;
 
 var teleporter;
 var levelGoal;
 var playerLastAngle;
-var enemyLastAngle;
 
 var score = 0;
 var lastCaption = "";
@@ -38,8 +41,6 @@ var lastCaption = "";
 var forceReducer = 0.0007; //was .00175
 
 var playerVel = 25;
-var enemyVel = 25;
-var maxEnemyVel = 200;
 
 var enemyCounterClockwise = -1;
 
@@ -50,7 +51,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=0;
+var currentLevel=5;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -104,7 +105,7 @@ var level = [
         {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -275, y: -495},
-        {objectType: 'enemy' , x:-110, y: -240, sprite: "enemy"},
+        {objectType: 'enemy1' , x:-110, y: -240, sprite: "enemy"},
         {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
     ],
     [ //level 5 - fun with overlapping gravity fields
@@ -118,7 +119,8 @@ var level = [
         {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
         {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
         {objectType: 'player', x: 0, y: 10},
-        {objectType: 'enemy', x: 400, y: -20, sprite: "enemy"},
+        {objectType: 'enemy1', x: 400, y: -20, sprite: "enemy"},
+        {objectType: 'enemy2', x: 650, y: -240, sprite: "enemy"},
         {objectType: 'hint', text: "Where are those gears?", delay: 1}
     ]
 ];
@@ -202,15 +204,6 @@ playGame.prototype = {
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
-
-        // //add enemy - crate
-        // enemy = game.add.sprite(-350, 50, "enemy");
-        // game.physics.box2d.enable(enemy);
-        // enemy.body.static = false;
-        // enemy.body.setRectangle(12, 50);
-        // enemy.body.setCollisionMask(1);
-        // enemyGroup.add(enemy);
-
         helper = new Helper(game);
         helper.createLevel();
 
@@ -262,24 +255,11 @@ playGame.prototype = {
     },
 
     update: function(){
-
-        if (enemyPresent) {
-            var enemyAngle = helper.handleEnemyRotation(enemy);
-
-            // Keep the enemy moving
-            if (enemyCounterClockwise === -1) {
-                enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle - (Math.PI / 2)) ;
-                enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle - (Math.PI / 2)) ;
-
-            } else {
-                enemy.body.velocity.x += enemyVel * Math.cos(enemyAngle + (Math.PI / 2)) ;
-                enemy.body.velocity.y += enemyVel * Math.sin(enemyAngle + (Math.PI / 2)) ;
-            }
-
-            //    console.log("enemy x: " + enemy.body.x);
-            //    console.log("enemy y: " + enemy.body.y);
-
-            helper.constrainVelocity(enemy,maxEnemyVel);
+        if (enemy1Present) {
+            enemy1.update();
+        }
+        if (enemy1Present && enemy2Present) {
+            enemy2.update();
         }
 
         var playerAngle = helper.handlePlayerRotation(player);

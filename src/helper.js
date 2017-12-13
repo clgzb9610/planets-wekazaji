@@ -44,29 +44,22 @@ var Helper = function(game){
             if(addition.objectType === 'gear'){
                 addGear(addition.x, addition.y, addition.sprite);
             }
-            if(addition.objectType === 'enemy'){
-                addEnemy(addition.x, addition.y,"enemy");
+            if(addition.objectType === 'enemy1'){
+                enemy1Present = true;
+                enemy1 = new Enemy(game, addition.x, addition.y);
+            }
+            if(addition.objectType === 'enemy2'){
+                enemy2Present = true;
+                enemy2 = new Enemy(game, addition.x, addition.y);
             }
             if(addition.objectType === 'player'){
                 movePlayer(addition.x,addition.y);
             }
             if(addition.objectType === 'hint'){
-                helper.addMessage(addition.text,addition.delay);
+                helper.addMessage(addition.text,3);
             }
         }
         addDashboard();
-    };
-
-    this.handleEnemyRotation = function(sprite) {
-        var angle = enemyGravityToPlanets(sprite);
-        if (angle > -361) { // angle == -361 if the player is not in any gravity field.
-            // orients players feet toward the ground. Uses var angle as degrees offset by -90
-            sprite.body.angle = angle * 180 / Math.PI - 90;
-            enemyLastAngle = angle;
-        } else {
-            angle = enemyLastAngle;
-        }
-        return angle;
     };
 
     /* calculates angle between the player and the planet it is gravitationally attracted to.
@@ -134,20 +127,6 @@ var Helper = function(game){
 //     // this.barSprite.anchor.y = 0.5;
 // }
 
-
-    function enemyGravityToPlanets(gravObject) {
-        var p = findClosestPlanet(gravObject);
-        var distanceFromPlanet = Phaser.Math.distance(gravObject.x,gravObject.y,p.x,p.y);
-        var angle = Phaser.Math.angleBetween(gravObject.x,gravObject.y,p.x,p.y);
-
-        enemy.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet - p.width / 2),
-            p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet - p.width / 2));
-        enemy.body.angle = angle;
-
-        return angle;
-
-    }
-
     /*
     This is the code that calculates gravity fields for the player, if they are in the radius.
     function returns -361, which is impossible in radian angles,
@@ -156,7 +135,7 @@ var Helper = function(game){
     function gravityToPlanets(gravObject){
         var angle = -361;
         // looping through all planets
-        var p = findClosestPlanet(gravObject);
+        var p = helper.findClosestPlanet(gravObject);
 
         if(p !== undefined) {
             var distanceFromPlanet = Phaser.Math.distance(gravObject.x, gravObject.y, p.x, p.y);
@@ -174,7 +153,7 @@ var Helper = function(game){
     /* finds which planet the gravityObject is closest to, if it is within a gravity field.
     * returns undefined if the object is outside all gravity fields.
     */
-    function findClosestPlanet(gravObject){
+    this.findClosestPlanet = function(gravObject){
         var closestPlanetDistance = Infinity;
         var closestPlanet;
 
@@ -379,9 +358,9 @@ var Helper = function(game){
         } else {
             enemyCounterClockwise = -1;
         }
-        enemyVel += 30;
-        // enemyCollision = true;
+        enemyCollision = true;
 
+        // helper.resetLevel();
         helper.deadByEnemy();
     };
 
@@ -395,26 +374,6 @@ var Helper = function(game){
         gear.animations.play('spin', 10, true);
     }
 
-    function addEnemy(x, y, sprite) {
-        //console.log("adding enemy");
-        enemy = game.add.sprite(x, y, sprite);
-        enemyPresent = true;
-        enemyGroup.add(enemy);
-        game.physics.box2d.enable(enemy);
-        enemy.body.static = false;
-        enemy.body.setRectangle(12, 50);
-        enemy.body.setCollisionCategory(1);
-        enemy.body.setCollisionMask(1);
-        player.body.setBodyContactCallback(enemy, helper.enemyContactCallback, this);
-
-    }
-
-    // function moveEnemy(x, y) {
-    //     // enemy.body.velocity.x = 0;
-    //     // enemy.body.velocity.y = 0;
-    //     enemy.body.x = x;
-    //     enemy.body.y = y;
-    //
     function movePlayer(x, y) {
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
@@ -540,7 +499,12 @@ var Helper = function(game){
         messageGroup = game.add.group();
 
         enemyGroup.destroy();
-        enemyPresent = false;
+        if (enemy1Present) {
+            enemy1.destroySprite();
+        }
+        if (enemy2Present) {
+            enemy2.destroySprite();
+        }
         enemyGroup = game.add.group();
 
         gravityGraphics.destroy();

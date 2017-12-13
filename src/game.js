@@ -51,7 +51,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=5;
+var currentLevel=4;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -194,7 +194,6 @@ playGame.prototype = {
         bgm.volume = 0.6;
         bgm.play();
 
-        // waiting for player input
         // game.input.onDown.add(addCrate, this);
         player = game.add.sprite(-155, -45, "player");
         game.physics.box2d.enable(player);
@@ -209,11 +208,6 @@ playGame.prototype = {
 
         player.body.setCategoryContactCallback(2, helper.gearCallback, this);
         player.body.setCategoryContactCallback(3,helper.startPadContactCallback,this);
-
-        // text, seconds until it fades
-        // helper.addMessage("Hi! There!", 1);
-        // game.input.onDown.add(updateMessage, this);
-        // addMessage("Arrow keys to move \n Collect gears to fix \n your teleporter", 3);
 
         cursors = game.input.keyboard.createCursorKeys();
         game.camera.follow(player);

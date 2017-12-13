@@ -19,35 +19,35 @@ mainMenu.prototype = {
         game.load.image("wekazaji_hover", "assets/mainMenu/wekazaji_hover.png");
         game.load.image("credits", "assets/mainMenu/credits.png");
         game.load.image("credits_hover", "assets/mainMenu/credits_hover.png");
-        game.load.image("wekazaji_page", "assets/mainMenu/wekazajiPage.png");
+        game.load.image("wekazaji_page", "assets/mainMenu/wakazajiPage.png");
         game.load.image("close", "assets/mainMenu/x.png");
 
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
         // from http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/Home_Departure_Loop
     },
     create:function () {
-        menuBack = game.add.tileSprite(0, 0, 1024, 1024, 'space');
+        menuBack = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
 
         menuBGM = game.add.audio('menuBGM');
         menuBGM.loop = true;
         menuBGM.volume = 0.6;
         menuBGM.play();
 
-        var title = game.add.sprite(170, 70, "title");
+        var title = game.add.sprite(120, 50, "title");
         title.scale.x = 0.7;
         title.scale.y = 0.7;
 
-        playButton = game.add.button(250,350,"play",playTheGame,this);
+        playButton = game.add.button(200,330,"play",playTheGame,this);
         playButton.scale.x = 0.4;
         playButton.scale.y = 0.4;
         playButton.inputEnabled = true;
 
-        wekazaji = game.add.button(250,450,"wekazaji",openWekazaj, this);
+        wekazaji = game.add.button(200,430,"wekazaji",openWekazaj, this);
         wekazaji.scale.x = 0.4;
         wekazaji.scale.y = 0.4;
         wekazaji.inputEnabled = true;
 
-        credits = game.add.button(250,550,"credits",null, this);
+        credits = game.add.button(200,530,"credits",null, this);
         credits.scale.x = 0.4;
         credits.scale.y = 0.4;
         credits.inputEnabled = true;
@@ -82,10 +82,10 @@ function fadeComplete(){
 
 function openWekazaj(){
     wekazajiPOP = game.add.sprite(game.world.centerX, game.world.centerY, 'wekazaji_page');
-    wekazajiPOP.anchor.set(0.5);
+    wekazajiPOP.anchor.set(0.5, 0.5);
     wekazajiPOP.inputEnabled = true;
 
-    var closeButton = game.make.sprite(330, -380, 'close');
+    var closeButton = game.make.sprite(280, -330, 'close');
     closeButton.scale.set(0.3);
     closeButton.inputEnabled = true;
     closeButton.input.priorityID = 1;

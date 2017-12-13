@@ -505,16 +505,16 @@ var Helper = function(game){
     };
 
     function changeLevel() {
+        player.body.velocity.x -= 100;
+        // player.body.velocity.y -= 100;
+        game.input.enabled = false;
+
         //will be in deadByEnemy
         cursors.left.reset(true);
         cursors.right.reset(true);
         cursors.up.reset(true);
         cursors.down.reset(true);
         player.animations.play('stand');
-
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
-        game.input.enabled = false;
 
         blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
         blackScreen.scale.setTo(2, 2);

@@ -7,6 +7,7 @@ source: https://phaser.io/news/2015/07/simulate-planet-gravity-with-box2d-tutori
 var playGame = function(game){};
 
 var game;
+var gamePhysics;
 var helper;
 
 // groups containing crates and planets
@@ -51,7 +52,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=4;
+var currentLevel=0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -192,7 +193,7 @@ playGame.prototype = {
         bgm = game.add.audio('bgm');
         bgm.loop = true;
         bgm.volume = 0.6;
-        bgm.play();
+        //bgm.play();
 
         // game.input.onDown.add(addCrate, this);
         player = game.add.sprite(-155, -45, "player");
@@ -203,6 +204,7 @@ playGame.prototype = {
         stand = player.animations.add('stand',[4],1);
         fall = player.animations.add('fall',[9],1);
 
+        gamePhysics = new Physics(game);
         helper = new Helper(game);
         helper.createLevel();
 
@@ -256,9 +258,9 @@ playGame.prototype = {
             enemy2.update();
         }
 
-        var playerAngle = helper.handlePlayerRotation(player);
+        var playerAngle = gamePhysics.handlePlayerRotation(player);
 
-        helper.applyGravityToObjects();
+        gamePhysics.applyGravityToObjects();
         helper.checkTeleporterOverlap(teleporter);
 
         helper.messageLocation(playerAngle);
@@ -268,7 +270,7 @@ playGame.prototype = {
         //Handle keyboard input for the player
         helper.handleKeyboardInput(playerAngle);
 
-        helper.constrainVelocity(player,150);
+        gamePhysics.constrainVelocity(player,150);
     },
     render: function() {
     //     game.debug.body(player);

@@ -23,7 +23,7 @@ Enemy.prototype.constructor = Enemy;
 
 
 Enemy.prototype.create = function() {
-}
+};
 
 Enemy.prototype.update = function() {
     this.enemyAngle = this.handleEnemyRotation(this.sprite);
@@ -38,13 +38,13 @@ Enemy.prototype.update = function() {
         this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle + (Math.PI / 2)) ;
     }
 
-    helper.constrainVelocity(this.sprite,this.maxEnemyVel);
+    gamePhysics.constrainVelocity(this.sprite,this.maxEnemyVel);
 
     if (enemyCollision) {
         console.log("Enemy collide!");
         // this.enemyVel += 30;
         enemyCollision = false;
-        helper.resetLevel();
+        //helper.resetLevel();  Taken care of in deadState now.
     }
     this.sprite.update();
 };
@@ -64,7 +64,7 @@ Enemy.prototype.handleEnemyRotation = function(sprite) {
 };
 
 Enemy.prototype.enemyGravityToPlanets = function(gravObject) {
-    var p = helper.findClosestPlanet(gravObject);
+    var p = gamePhysics.findClosestPlanet(gravObject);
     var distanceFromPlanet = Phaser.Math.distance(gravObject.x,gravObject.y,p.x,p.y);
     var angle = Phaser.Math.angleBetween(gravObject.x,gravObject.y,p.x,p.y);
 

@@ -9,11 +9,13 @@ var playGame = function(game){};
 var game;
 var gamePhysics;
 var helper;
+var levelChanger;
 
 // groups containing crates and planets
 // var crateGroup;
 var planetGroup;
 var cursors;
+var levelComplete;
 
 //for the player & walk animations
 var player;
@@ -206,7 +208,8 @@ playGame.prototype = {
 
         gamePhysics = new Physics(game);
         helper = new Helper(game);
-        helper.createLevel();
+        levelChanger = new LevelChanger(game);
+        levelChanger.createLevel();
 
         player.body.setCategoryContactCallback(2, helper.gearCallback, this);
         player.body.setCategoryContactCallback(3,helper.startPadContactCallback,this);

@@ -1,13 +1,6 @@
 var LevelChanger = function(game){
 
 
-    // function to add a crate
-// function addCrate(e){
-//     var crateSprite = game.add.sprite(e.x, e.y, "crate");
-//     crateGroup.add(crateSprite);
-//     game.physics.box2d.enable(crateSprite);
-// }
-
     this.createLevel= function(){
         levelComplete = false;
         if(!level[currentLevel]) {
@@ -82,7 +75,6 @@ var LevelChanger = function(game){
     }
 
     function addStartPad(x, y, radians) {
-        //console.log("adding startPad");
         startPad = game.add.sprite(x, y, "startPad", 6);
         objectGroup.add(startPad);
         game.physics.box2d.enable(startPad);
@@ -90,8 +82,8 @@ var LevelChanger = function(game){
         startPad.body.rotation += radians;
         startPad.body.static = true;
         startPad.body.setCollisionCategory(3);
-        // startPad.body.setCategoryContactCallback();
 
+        //electricity animation when you come into the level
         startPadAnimations = game.add.sprite(x,y,"startPadAnimations");
         objectGroup.add(startPadAnimations);
         game.physics.box2d.enable(startPadAnimations);
@@ -99,20 +91,53 @@ var LevelChanger = function(game){
         startPadAnimations.body.static = true;
         startPadAnimations.body.rotation += radians;
         startPadAnimations.body.setCollisionMask(0);
-
+        //sound effect when you come into the level
         var teleportToPad = game.add.audio("teleportToPad");
         teleportToPad.play();
-
-        startPadActive = startPadAnimations.animations.add('active',[1,2,3,4,0],12,true);
+        //play the electricity animation
+        startPadActive = startPadAnimations.animations.add('active',[1,2,3,4,0],12,true); //it ends on the blank part of the spritesheet
         startPadAnimations.animations.play('active');
         startPadActive.onLoop.add(startPadAnimationLooped,this);
     }
 
+    //the startPadAnimation loops twice before the parameter controlling it is set to false
     function startPadAnimationLooped(){
         if(startPadActive.loopCount > 1){
             startPadActive.loop = false;
         }
     }
+
+    this.fadeStartPad = function(){
+        var platformTween = game.add.tween(startPad).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+        platformTween.onComplete.add(destroyStartPad, this);
+    };
+
+    function destroyStartPad(){
+        objectGroup.remove(startPad);
+        objectGroup.remove(startPadAnimations);
+        startPad.destroy();
+        startPadAnimations.destroy();
+    }
+
+    function addGear(x, y, sprite) {
+        var gear = game.add.sprite(x, y, sprite);
+        objectGroup.add(gear);
+        game.physics.box2d.enable(gear);
+        gear.body.setCollisionCategory(2);
+        gear.body.static = false;
+        spin = gear.animations.add('spin', [0, 1, 2, 3]);
+        gear.animations.play('spin', 10, true);
+    }
+
+    //move the one player sprite to a fresh location at the start of each level.
+    function movePlayer(x, y) {
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+        player.body.x = x;
+        player.body.y = y;
+        game.world.swap(player,teleporter); //makes the player 'younger' than the teleporter in every level, so it passes in front
+    }
+
 
     function addDashboard(){
         dashboard = game.add.sprite(-100,-600,"dashboard");
@@ -130,7 +155,8 @@ var LevelChanger = function(game){
         restart.anchor.set(1.9,0.55);
         dashboardGroup.add(restart);
 
-
+        // make the buttons work
+        //TODO: implement mute/unmute function
         pause.inputEnabled = true;
         pause.events.onInputUp.add(helper.pauseGame, self);
         restart.inputEnabled = true;
@@ -138,50 +164,11 @@ var LevelChanger = function(game){
         game.input.onDown.add(helper.unpauseGame, self);
     }
 
-    function addGear(x, y, sprite) {
-        var gear = game.add.sprite(x, y, sprite);
-        objectGroup.add(gear);
-        game.physics.box2d.enable(gear);
-        gear.body.setCollisionCategory(2);
-        gear.body.static = false;
-        spin = gear.animations.add('spin', [0, 1, 2, 3]);
-        gear.animations.play('spin', 10, true);
-    }
-
-    function movePlayer(x, y) {
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
-        player.body.x = x;
-        player.body.y = y;
-        game.world.swap(player,teleporter); //makes the player younger than the teleporter in every level, so it passes in front
-    }
-
-    this.fadeStartPad = function(){
-        var platformTween = game.add.tween(startPad).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
-        platformTween.onComplete.add(destroyStartPad, this);
-    };
-
-    function destroyStartPad(){
-        objectGroup.remove(startPad);
-        objectGroup.remove(startPadAnimations);
-        startPad.destroy();
-    }
-
-// function addRandomGears(numGears, spriteImage){
-//     for (var i = 0; i < numGears; i++) {
-//         var gear = game.add.sprite(game.world.randomX, game.world.randomY, spriteImage);
-//         objectGroup.add(gear);
-//         game.physics.box2d.enable(gear);
-//         gear.body.setCollisionCategory(2);
-//         // gear.body.sensor = true;
-//         gear.body.static = false;
-//         gear.animations.add(0,1,2,3);
-//     }
-// }
-
+    // a couple of housekeeping things to prepare to change between levels.
+    // stop taking in user input, reset all the buttons currently being pressed, make the player character stand,
+    // fade a black sprite over the screen to mark level change.
     this.changeLevel = function(){
-        player.body.velocity.x -= 100;
-        // player.body.velocity.y -= 100;
+        player.body.velocity.x -= 70;
         game.input.enabled = false;
 
         //will be in deadByEnemy
@@ -192,16 +179,17 @@ var LevelChanger = function(game){
         player.animations.play('stand');
 
         blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
-        blackScreen.scale.setTo(2, 2);
+        //TODO: does the blackscreen need to be so large? since its a solid color i think it could be tiny & scaled to fit the screen?
+        blackScreen.scale.setTo(2, 2); //if the blackscreen sprite is teensy you could scale at like 200x200?
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;
         var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
-        fade.onComplete.add(levelChanger.destroyGroups);
+        fade.onComplete.add(destroyGroups);
     };
 
-    this.destroyGroups = function(){
-        teleporter.destroy();
-        currentLevel++;
+    // destroy all the groups of objects, turn user input back on, delete the black sprite from changeLevel,
+    // then call to make a new level.
+    function destroyGroups(){
         planetGroup.destroy();
         planetGroup = game.add.group();
 
@@ -228,18 +216,17 @@ var LevelChanger = function(game){
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         score = 0;
+        currentLevel++;
 
         game.input.enabled = true;
         blackScreen.destroy();
         levelChanger.createLevel();
-    };
+    }
 
-
+    // reset the level without messing with states.
     this.resetLevel = function() {
         currentLevel -= 1;
-        // enemyCollision = false;
         levelChanger.changeLevel();
     };
-
 
 };

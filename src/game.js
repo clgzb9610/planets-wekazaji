@@ -122,8 +122,8 @@ var level = [
         {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
         {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
         {objectType: 'player', x: 0, y: 10},
-        {objectType: 'enemy1', x: 400, y: -20, sprite: "enemy"},
-        {objectType: 'enemy2', x: 650, y: -240, sprite: "enemy"},
+        {objectType: 'enemy1', x: 400, y: -20, sprite: "enemy1"},
+        {objectType: 'enemy2', x: 650, y: -240, sprite: "enemy1"},
         {objectType: 'hint', text: "Where are those gears?", delay: 1}
     ]
 ];
@@ -173,7 +173,7 @@ playGame.prototype = {
 
         game.time.desiredFps = 25;
 
-        background=game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
+        background = game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
         game.add.tileSprite(24, 24, 1024, 1024, 'space');
         game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
         game.add.tileSprite(24, -1000, 1024, 1024, 'space');
@@ -201,10 +201,10 @@ playGame.prototype = {
         player = game.add.sprite(-155, -45, "player");
         game.physics.box2d.enable(player);
         player.frame = 4;
-        walkR = player.animations.add('walkR',[5,6,7,8], 7, true);
-        walkL = player.animations.add('walkL', [0,1,2,3], 7, true);
-        stand = player.animations.add('stand',[4],1);
-        fall = player.animations.add('fall',[9],1);
+        walkR = player.animations.add('walkR', [5, 6, 7, 8], 7, true);
+        walkL = player.animations.add('walkL', [0, 1, 2, 3], 7, true);
+        stand = player.animations.add('stand', [4], 1);
+        fall = player.animations.add('fall', [9], 1);
 
         gamePhysics = new Physics(game);
         helper = new Helper(game);
@@ -212,45 +212,10 @@ playGame.prototype = {
         levelChanger.createLevel();
 
         player.body.setCategoryContactCallback(2, helper.gearCallback, this);
-        player.body.setCategoryContactCallback(3,helper.startPadContactCallback,this);
+        player.body.setCategoryContactCallback(3, helper.startPadContactCallback, this);
 
         cursors = game.input.keyboard.createCursorKeys();
         game.camera.follow(player);
-
-
-
-        // // add healthbar
-        // // bar = game.add.sprite.rect(350,250,50,10);
-        // // { fill: '#ffaaaa', font: '14pt Arial'})
-        // // bad.body.setRectangle(50,10);
-        // // bar.body.static = true;
-        //
-        // var maxHealthBar;
-        // var healthBar;
-        // var maxWidth = 50 // example;
-        // var maxHeight = 10 // example;
-        // var width = 25 // example;
-        // var height = 5 // example;
-        // var bmd = game.add.bitmapData(width, height);
-        // var bmd2 = game.add.bitmapData(width, height);
-        //
-        // bmd.ctx.beginPath();
-        // bmd.ctx.rect(0, 0, maxWidth, maxHeight);
-        // bmd.ctx.fillStyle = '#ffff00';
-        // bmd.ctx.fill();
-        // maxHealthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd);
-        // maxHealthBar.anchor.setTo(0.5, 0.5);
-        //
-        // bmd2.ctx.beginPath();
-        // bmd2.ctx.rect(0, 0, width, height);
-        // bmd2.ctx.fillStyle = '#ffffff';
-        // bmd2.ctx.fill();
-        // healthBar = game.add.sprite(game.world.centerX, game.world.centerY, bmd2);
-        // healthBar.anchor.setTo(0.5, 0.5);
-        //add score to the screen
-        //scoreCaption = game.add.text(300, 300, 'Score: ' + score, { fill: '#ffaaaa', font: '14pt Arial'});
-        //scoreCaption.fixedToCamera = true;
-        //scoreCaption.cameraOffset.setTo(300, 300);
     },
 
     update: function(){

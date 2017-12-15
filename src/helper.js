@@ -7,23 +7,7 @@ var Helper = function(game){
        HELPER FUNCTIONS
     =============================================================================*/
 
-
-
-// function drawHealthBar(x,y) {
-//     var bmd = this.game.add.bitmapData(250, 40);
-//     bmd.ctx.fillStyle = '#FEFF03';
-//     bmd.ctx.beginPath();
-//     bmd.ctx.rect(x, y, 250, 40);
-//     bmd.ctx.fill();
-//     // bmd.update();
-//
-//     // this.barSprite = this.game.add.sprite(this.x - this.bgSprite.width/2, this.y, bmd);
-//     // this.barSprite.anchor.y = 0.5;
-// }
-
-
-
-//=======adds text================================================================================================
+//=======Messages================================================================================================
     this.addMessage = function(text, delay){
         //add score to the screen
         if(lastCaption !== text || game.time.events.duration === 0) {
@@ -74,18 +58,8 @@ var Helper = function(game){
         }
     };
 
-    this.moveDashboard = function(angle){
-        for(var i = 0; i < dashboardGroup.total; i ++) {
-            var d = dashboardGroup.getChildAt(i);
-            d.x = player.x + 353 * Math.cos(angle);
-            d.y = player.y + 353 * Math.sin(angle);
-            d.angle = angle * 180 / Math.PI - 90;
-        }
-    };
-
 //=======================================================================================================
-
-
+//  ========== CONTACT CALLBACKS ========================================
 
 //rebounds the player sprite back after enemy collision
     //rebounds the player sprite back after enemy collision
@@ -104,7 +78,6 @@ var Helper = function(game){
         // helper.resetLevel();
         helper.deadByEnemy();
     };
-
 
 
 // kills the gear when touched
@@ -132,13 +105,6 @@ var Helper = function(game){
         body2.sprite.destroy();
     };
 
-// function planetContactCallback(body1, body2, fixture1, fixture2, begin) {
-//     // console.log("planet touch");
-//     if (!begin) {
-//         return;
-//     }
-//     //planetContact = true;
-// }
 
     this.startPadContactCallback = function(body1,body2,fixture1,fixture2,begin){
         if (!begin){
@@ -166,7 +132,8 @@ var Helper = function(game){
         }
     };
 
-
+//==============================================================================================================
+    // ==================== OTHER HELPER FUNCTIONS ==============================
 
     this.handleKeyboardInput = function(angle) {
         if (cursors.left.isDown) {
@@ -195,6 +162,16 @@ var Helper = function(game){
         }
         if (cursors.left.justUp || cursors.right.justUp) {
             player.animations.play('stand');
+        }
+    };
+
+
+    this.moveDashboard = function(angle){
+        for(var i = 0; i < dashboardGroup.total; i ++) {
+            var d = dashboardGroup.getChildAt(i);
+            d.x = player.x + 353 * Math.cos(angle);
+            d.y = player.y + 353 * Math.sin(angle);
+            d.angle = angle * 180 / Math.PI - 90;
         }
     };
 

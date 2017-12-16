@@ -188,24 +188,22 @@ var LevelChanger = function(game){
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;
         var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
-        fade.onComplete.add(destroyGroups);
+        game.time.events.add(500,levelChanger.destroyGroups,this);
+        game.time.events.add(501,addGroups,this);
     };
 
     // destroy all the groups of objects, turn user input back on, delete the black sprite from changeLevel,
     // then call to make a new level.
-    function destroyGroups(){
+    this.destroyGroups = function(){
+        console.log("destroy groups");
         planetGroup.destroy();
-        planetGroup = game.add.group();
 
         objectGroup.destroy();
-        objectGroup = game.add.group();
         teleporter.destroy();
 
         dashboardGroup.destroy();
-        dashboardGroup = game.add.group();
 
         messageGroup.destroy();
-        messageGroup = game.add.group();
 
         enemyGroup.destroy();
         if (enemy1Present) {
@@ -216,12 +214,19 @@ var LevelChanger = function(game){
             enemy2.destroySprite();
             enemy2Present = false;
         }
-        enemyGroup = game.add.group();
 
         gravityGraphics.destroy();
         gravityGraphics = game.add.graphics(0, 0);
-        gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+    }
 
+    function addGroups(){
+        console.log("add groups");
+        planetGroup = game.add.group();
+        objectGroup = game.add.group();
+        dashboardGroup = game.add.group();
+        messageGroup = game.add.group();
+        enemyGroup = game.add.group();
+        gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         currentLevel++;
 

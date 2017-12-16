@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="Merge branch 'master' of https://github.com/clgzb9610/planets-wekazaji&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/helper.js" afterPath="$PROJECT_DIR$/src/helper.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/levelChanger.js" afterPath="$PROJECT_DIR$/src/levelChanger.js" />
     </list>
@@ -36,8 +34,8 @@
       <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state relative-caret-position="-993">
+              <caret line="56" column="19" lean-forward="false" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -48,8 +46,8 @@
       <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="207" column="6" lean-forward="false" selection-start-line="207" selection-start-column="6" selection-end-line="207" selection-end-column="6" />
+            <state relative-caret-position="308">
+              <caret line="202" column="6" lean-forward="true" selection-start-line="202" selection-start-column="6" selection-end-line="202" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -58,8 +56,8 @@
       <file leaf-file-name="levelChanger.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/levelChanger.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="788">
-              <caret line="225" column="23" lean-forward="true" selection-start-line="225" selection-start-column="23" selection-end-line="225" selection-end-column="23" />
+            <state relative-caret-position="48">
+              <caret line="190" column="26" lean-forward="true" selection-start-line="190" selection-start-column="26" selection-end-line="190" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -68,7 +66,7 @@
       <file leaf-file-name="enemy.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/enemy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-513">
+            <state relative-caret-position="-457">
               <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
               <folding />
             </state>
@@ -78,7 +76,7 @@
       <file leaf-file-name="deadState.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/deadState.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
+            <state relative-caret-position="321">
               <caret line="43" column="29" lean-forward="true" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
               <folding />
             </state>
@@ -159,8 +157,8 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/physics.js" />
         <option value="$PROJECT_DIR$/src/enemy.js" />
-        <option value="$PROJECT_DIR$/src/levelChanger.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/levelChanger.js" />
         <option value="$PROJECT_DIR$/src/game.js" />
         <option value="$PROJECT_DIR$/src/helper.js" />
       </list>
@@ -310,14 +308,7 @@
       <workItem from="1513109208633" duration="514000" />
       <workItem from="1513113536587" duration="1782000" />
       <workItem from="1513130751662" duration="1434000" />
-      <workItem from="1513411576169" duration="1849000" />
-    </task>
-    <task id="LOCAL-00014" summary="created separate function for adding gears">
-      <created>1509729692064</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1509729692064</updated>
+      <workItem from="1513411576169" duration="3744000" />
     </task>
     <task id="LOCAL-00015" summary="renamed sprite name 'planet' to 'smallplanet'">
       <created>1509730131108</created>
@@ -655,11 +646,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513412926243</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="cleaned up some debugging stuff.">
+      <created>1513459988251</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1513459988251</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177381000" />
+    <option name="totallyTimeSpent" value="179276000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="23" width="1195" height="714" extended-state="0" />
@@ -748,7 +746,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge branch etc." />
     <MESSAGE value="moved all the functions to a file helper.js&#10;got the pause button to change by making it a spritesheet with the pause &amp; play buttons. Mute/unmute is also a spritesheet now.&#10;The functions in helper that are called from the game are declared this.name, while the functions only called by other functions are not." />
     <MESSAGE value="changed some of the planet sprites" />
     <MESSAGE value="Merged w zain's new enemy stuff &amp; fixed a bug where enemy collision only worked when the enemy was in the first level. (collision set up in the create part of the playGame.prototype was still in the last push though i thought i deleted it? who knows. &amp; the collision setup in addEnemy was called wrong for being the new file. my b).&#10;&#10;I think I got all zain's changes from the helper functions but the merge was really weird so you might want to double check." />
@@ -773,7 +770,8 @@
     <MESSAGE value="moved all the add functions and the createLevel and also the functions that change between levels out of the helper class and into levelChanger.js" />
     <MESSAGE value="adding and removing comments &amp; commented code. a couple other housekeeping things." />
     <MESSAGE value="Merge branch 'master' of https://github.com/clgzb9610/planets-wekazaji&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/clgzb9610/planets-wekazaji&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <MESSAGE value="cleaned up some debugging stuff." />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up some debugging stuff." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -953,21 +951,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/deadState.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="43" column="29" lean-forward="true" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/enemy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-513">
+        <state relative-caret-position="-457">
           <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game.js">
+    <entry file="file://$PROJECT_DIR$/src/levelChanger.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="48">
+          <caret line="190" column="26" lean-forward="true" selection-start-line="190" selection-start-column="26" selection-end-line="190" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -979,26 +983,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/deadState.js">
+    <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="43" column="29" lean-forward="true" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/levelChanger.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="788">
-          <caret line="225" column="23" lean-forward="true" selection-start-line="225" selection-start-column="23" selection-end-line="225" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="-993">
+          <caret line="56" column="19" lean-forward="false" selection-start-line="56" selection-start-column="19" selection-end-line="56" selection-end-column="19" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/helper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="207" column="6" lean-forward="false" selection-start-line="207" selection-start-column="6" selection-end-line="207" selection-end-column="6" />
+        <state relative-caret-position="308">
+          <caret line="202" column="6" lean-forward="true" selection-start-line="202" selection-start-column="6" selection-end-line="202" selection-end-column="6" />
           <folding />
         </state>
       </provider>

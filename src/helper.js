@@ -198,12 +198,17 @@ var Helper = function(game){
         // drop.to({ y: game.world.height-player.height }, 500, Phaser.Easing.Bounce.In);
         // drop.onComplete.add(helper.resetLevel, this);
         // drop.start();
+        game.camera.fade('#000000',500);
+        game.time.events.add(500,moveToDeadState,this);
+    };
+
+    function moveToDeadState(){
         bgm.pause();
         game.world.pivot.x = 0;
         game.world.pivot.y = 0;
         game.world.rotation = 0;
         game.camera.reset();
+        levelChanger.destroyGroups();
         game.state.start("DeadState", true, false, 0);
-
-    };
+    }
 };

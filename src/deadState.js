@@ -37,7 +37,8 @@ deadState.prototype = {
 
 function deadplayTheGame(){
     game.camera.fade('#000000',500);
-    game.camera.onFadeComplete.add(deadFadeComplete,this);
+    // game.camera.onFadeComplete.add(deadFadeComplete,this);
+    game.time.events.add(500, deadFadeComplete, this);
 }
 function deadFadeComplete(){
     deadplayButton.destroy();

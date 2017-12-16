@@ -19,7 +19,7 @@ var Helper = function(game){
             messageGroup.add(messageBack);
             messageGroup.add(messageCaption);
             lastCaption = text;
-            console.log("add message with delay:,", delay);
+           // console.log("add message with delay:,", delay);
             if (delay > 0) {
                 messageTimer(delay); //fades message
             }
@@ -31,7 +31,7 @@ var Helper = function(game){
     }
 
     function fadeMessage(){
-        console.log("start FADE MESSAGE");
+     //   console.log("start FADE MESSAGE");
         var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
         var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
         bubbleTween.onComplete.add(destroyMessage, this);
@@ -42,9 +42,9 @@ var Helper = function(game){
         messageGroup.remove(messageBack);
         messageGroup.remove(messageCaption);
         messageBack.destroy();
-        console.log("destroyed messageBack");
+       // console.log("destroyed messageBack");
         messageCaption.destroy();
-        console.log("destroyed caption");
+       // console.log("destroyed caption");
     }
 
     this.messageLocation = function(angle) {
@@ -67,7 +67,6 @@ var Helper = function(game){
         if (!begin) {
             return;
         }
-       // console.log("callback");
         if (enemyCounterClockwise === -1) {
             enemyCounterClockwise = 0;
         } else {
@@ -110,22 +109,22 @@ var Helper = function(game){
         if (!begin){
             return;
         }
-        //console.log("platform");
         game.time.events.add(Phaser.Timer.SECOND* 0.6, levelChanger.fadeStartPad, this);
     };
 
 
     this.checkTeleporterOverlap = function(teleporter) {
         if (levelComplete === false){
-            console.log("overlap called");
+            //console.log("overlap called");
             var teleporterBounds = teleporter.getBounds();
             var playerBounds = player.getBounds();
             if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
-                console.log('teleporter CONTACT');
+              //  console.log('teleporter CONTACT');
                 if(score < levelGoal) {
                     this.addMessage("This portal is broken.\nCollect gears to repair.", 3);
                 } else {
                     levelComplete = true;
+                    console.log("level beaten");
                     levelChanger.changeLevel();
                 }
             }

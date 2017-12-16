@@ -26,6 +26,9 @@ mainMenu.prototype = {
         // from http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/Home_Departure_Loop
     },
     create:function () {
+        console.log("creating main menu");
+        game.world.setBounds(0, 0, 700, 700);
+
         menuBack = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
 
         menuBGM = game.add.audio('menuBGM');
@@ -72,11 +75,15 @@ mainMenu.prototype = {
 
 function playTheGame(){
     game.camera.fade('#000000',500);
-    game.camera.onFadeComplete.add(fadeComplete,this);
+    console.log("playgame has been clicked");
+    // game.camera.onFadeComplete.add(fadeComplete,this);
+    game.time.events.add(500, fadeComplete, this);
 }
+
 
 function fadeComplete(){
     menuBGM.pause();
+    console.log("fadeComplete from main");
     game.state.start("PlayGame", true, false, 0);
 }
 

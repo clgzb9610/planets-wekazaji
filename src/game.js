@@ -130,6 +130,7 @@ var level = [
 
 playGame.prototype = {
     init:function(currentLevel){
+        console.log("init game");
         this.currentLevel = currentLevel;
     },
     preload: function () {
@@ -167,6 +168,7 @@ playGame.prototype = {
         game.load.audio('teleportToPad',"assets/music/zapsplat_magical_telekinesis_blast_002_12511.mp3");
     },
     create: function () {
+        console.log("creating game");
 
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-300, -320, 300, 320);
@@ -195,7 +197,7 @@ playGame.prototype = {
         bgm = game.add.audio('bgm');
         bgm.loop = true;
         bgm.volume = 0.6;
-        //bgm.play();
+        bgm.play();
 
         // game.input.onDown.add(addCrate, this);
         player = game.add.sprite(-155, -45, "player");

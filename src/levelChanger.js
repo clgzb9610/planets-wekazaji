@@ -3,9 +3,11 @@ var LevelChanger = function(game){
 
     this.createLevel= function(){
         levelComplete = false;
+        score = 0;
         if(!level[currentLevel]) {
             bgm.pause();
             // console.log("bgm paused");
+            player.destroy();
             game.physics.clear();
             // console.log("destroyed the physics");
             game.world.pivot.x = 0;
@@ -72,7 +74,8 @@ var LevelChanger = function(game){
         teleporter.body.rotation += radians;
         teleporter.body.static = true;
         teleporter.body.setCollisionMask(0);
-        levelGoal = goal;
+        //levelGoal = goal;
+        levelGoal = 0;
     }
 
     function addStartPad(x, y, radians) {
@@ -219,7 +222,7 @@ var LevelChanger = function(game){
         gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
-        score = 0;
+
         currentLevel++;
 
         game.input.enabled = true;

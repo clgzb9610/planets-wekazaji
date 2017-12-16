@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="lol i broke the teleporter yesterday but it's fine now.">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ending.js" afterPath="$PROJECT_DIR$/src/ending.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy.js" afterPath="$PROJECT_DIR$/src/enemy.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/levelChanger.js" afterPath="$PROJECT_DIR$/src/levelChanger.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -335,13 +331,6 @@
       <workItem from="1513109208633" duration="514000" />
       <workItem from="1513113536587" duration="1782000" />
       <workItem from="1513130751662" duration="1434000" />
-    </task>
-    <task id="LOCAL-00014" summary="created separate function for adding gears">
-      <created>1509729692064</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1509729692064</updated>
     </task>
     <task id="LOCAL-00015" summary="renamed sprite name 'planet' to 'smallplanet'">
       <created>1509730131108</created>
@@ -679,11 +668,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513403449448</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="lol i broke the teleporter yesterday but it's fine now.">
+      <created>1513406798363</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1513406798363</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="176673000" />
+    <option name="totallyTimeSpent" value="176711000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="23" width="1195" height="714" extended-state="0" />

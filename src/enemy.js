@@ -45,7 +45,6 @@ Enemy.prototype.update = function() {
 
     if (enemyCollision) {
         console.log("Enemy collide!");
-        // this.enemyVel += 30;
         enemyCollision = false;
         //helper.resetLevel();  Taken care of in deadState now.
     }

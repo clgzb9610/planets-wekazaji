@@ -204,5 +204,6 @@ var Helper = function(game){
         game.world.rotation = 0;
         game.camera.reset();
         game.state.start("DeadState", true, false, 0);
+
     };
 };

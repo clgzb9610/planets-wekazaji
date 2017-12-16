@@ -2,6 +2,7 @@
 *.xml
 *.xml
 .idea/.name
+.idea
 *.xml
 .idea/workspace.xml
 .idea/workspace.xml

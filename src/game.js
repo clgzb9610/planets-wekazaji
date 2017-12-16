@@ -133,7 +133,7 @@ playGame.prototype = {
         this.currentLevel = currentLevel;
     },
     preload: function () {
-        game.load.image("enemy", "assets/game/redcrate.png");
+        game.load.spritesheet("enemy", "assets/game/enemysmallsprites.png", 41,43);
         game.load.image("smallplanet", "assets/planets/planet.png");
         game.load.image("mediumplanet", "assets/planets/med_planet.png");
         game.load.image("bigplanet", "assets/planets/bigplanet.png");

@@ -77,4 +77,4 @@ Enemy.prototype.enemyGravityToPlanets = function(gravObject) {
 
 Enemy.prototype.destroySprite = function() {
     this.sprite.destroy();
-}
+};

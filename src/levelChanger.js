@@ -207,9 +207,11 @@ var LevelChanger = function(game){
         enemyGroup.destroy();
         if (enemy1Present) {
             enemy1.destroySprite();
+            enemy1Present = false;
         }
         if (enemy2Present) {
             enemy2.destroySprite();
+            enemy2Present = false;
         }
         enemyGroup = game.add.group();
 

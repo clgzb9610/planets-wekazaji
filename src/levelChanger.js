@@ -66,6 +66,7 @@ var LevelChanger = function(game){
     function addTeleporter(x, y, radians, goal) {
         teleporter = game.add.sprite(x, y, "teleporter", 6);
         game.physics.box2d.enable(teleporter);
+       // objectGroup.add(teleporter);
         teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 15, true);
         teleporter.body.setRectangle(48, 61);
         teleporter.body.rotation += radians;
@@ -195,6 +196,7 @@ var LevelChanger = function(game){
 
         objectGroup.destroy();
         objectGroup = game.add.group();
+        teleporter.destroy();
 
         dashboardGroup.destroy();
         dashboardGroup = game.add.group();

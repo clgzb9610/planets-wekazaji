@@ -10,6 +10,8 @@ var Enemy = function (game, x, y) {
     this.sprite.body.setCollisionCategory(1);
     this.sprite.body.setCollisionMask(1);
     player.body.setBodyContactCallback(this.sprite, helper.enemyContactCallback, this);
+    this.sprite.animations.add('moveR', [0, 1, 2], 7, true);
+    this.sprite.animations.add('moveL', [3, 4, 5], 7, true);
 
     enemyGroup.add(this.sprite);
 
@@ -32,10 +34,11 @@ Enemy.prototype.update = function() {
     if (enemyCounterClockwise === -1) {
         this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle - (Math.PI / 2)) ;
         this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle - (Math.PI / 2)) ;
-
+        this.sprite.animations.play('moveL');
     } else {
         this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle + (Math.PI / 2)) ;
         this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle + (Math.PI / 2)) ;
+        this.sprite.animations.play('moveR');
     }
 
     gamePhysics.constrainVelocity(this.sprite,this.maxEnemyVel);

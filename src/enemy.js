@@ -49,11 +49,11 @@ Enemy.prototype.update = function() {
 
     gamePhysics.constrainVelocity(this.sprite,this.maxEnemyVel);
 
-    if (enemyCollision) {
-        console.log("Enemy collide!");
-        enemyCollision = false;
-        //helper.resetLevel();  Taken care of in deadState now.
-    }
+    // if (enemyCollision) {
+    //     console.log("Enemy collide!");
+    //     levelChanger.resetLevel();
+    //     enemyCollision = false;
+    // }
     this.sprite.update();
 };
 

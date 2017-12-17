@@ -67,15 +67,15 @@ var Helper = function(game){
         if (!begin) {
             return;
         }
-        if (enemyCounterClockwise === -1) {
-            enemyCounterClockwise = 0;
-        } else {
-            enemyCounterClockwise = -1;
-        }
+        // if (enemyCounterClockwise === -1) {
+        //     enemyCounterClockwise = 0;
+        // } else {
+        //     enemyCounterClockwise = -1;
+        // }
+        levelChanger.resetLevel();
         enemyCollision = true;
 
-        // helper.resetLevel();
-        helper.deadByEnemy();
+        //helper.deadByEnemy();
     };
 
 
@@ -114,7 +114,7 @@ var Helper = function(game){
 
 
     this.checkTeleporterOverlap = function(teleporter) {
-        if (levelComplete === false){
+
             //console.log("overlap called");
             var teleporterBounds = teleporter.getBounds();
             var playerBounds = player.getBounds();
@@ -128,7 +128,7 @@ var Helper = function(game){
                     levelChanger.changeLevel();
                 }
             }
-        }
+
     };
 
 //==============================================================================================================

@@ -45,7 +45,7 @@ var forceReducer = 0.0007; //was .00175
 
 var playerVel = 25;
 
-var enemyCounterClockwise = -1;
+// var enemyCounterClockwise = -1;
 
 //var planetContact = false;
 
@@ -54,7 +54,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=5;
+var currentLevel=7;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -97,7 +97,7 @@ var level = [
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185},
-        {objectType: 'hint', text: "The gravity on the\nmidplanet is too strong to\nescape without an\noverlapping gravity field.", delay: 4}
+        {objectType: 'hint', text: "The gravity on the\nbaseball planet is too strong\nto escape without an\noverlapping gravity field.", delay: 4}
     ],
     [ //level 4 - enemy introduction
         {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallrainbow"},
@@ -263,7 +263,9 @@ playGame.prototype = {
         var playerAngle = gamePhysics.handlePlayerRotation(player);
 
         gamePhysics.applyGravityToObjects();
-        helper.checkTeleporterOverlap(teleporter);
+        if(levelComplete === false) {
+            helper.checkTeleporterOverlap(teleporter);
+        }
 
         helper.messageLocation(playerAngle);
         helper.moveDashboard(playerAngle);

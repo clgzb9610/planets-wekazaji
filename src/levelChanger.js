@@ -3,10 +3,11 @@ var LevelChanger = function(game){
 
     this.createLevel= function(){
         levelComplete = false;
+        enemyCollision = false;
         score = 0;
         if(!level[currentLevel]) {
-            bgm.pause();
-            // console.log("bgm paused");
+            bgm.destroy();
+             console.log("bgm paused");
             player.destroy();
             game.physics.clear();
             // console.log("destroyed the physics");
@@ -157,6 +158,7 @@ var LevelChanger = function(game){
         restart= game.add.sprite(-100,-600,"restart");
         restart.anchor.set(1.9,0.55);
         dashboardGroup.add(restart);
+        console.log('adding dashboard');
 
         // make the buttons work
         //TODO: implement mute/unmute function
@@ -216,7 +218,7 @@ var LevelChanger = function(game){
 
         gravityGraphics.destroy();
         gravityGraphics = game.add.graphics(0, 0);
-    }
+    };
 
     function addGroups(){
         console.log("add groups");
@@ -230,14 +232,16 @@ var LevelChanger = function(game){
         currentLevel++;
 
         game.input.enabled = true;
-        blackScreen.destroy();
+        console.log(blackScreen);
         levelChanger.createLevel();
     }
 
     // reset the level without messing with states.
     this.resetLevel = function() {
-        currentLevel -= 1;
-        levelChanger.changeLevel();
+        if(enemyCollision===false){
+            currentLevel -= 1;
+            levelChanger.changeLevel();
+        }
     };
 
 };

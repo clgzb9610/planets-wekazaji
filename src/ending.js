@@ -12,12 +12,13 @@ ending.prototype = {
         game.load.audio('endingBGM', "assets/music/Visager_-_05_-_Roots_Loop.mp3");
     },
     create:function () {
+
         endingBGM = game.add.audio('endingBGM');
         endingBGM.loop = true;
         endingBGM.volume = 0.6;
         endingBGM.play();
 
-        deadBack = game.add.tileSprite(-320, -320, 1024, 1024, 'deadspace');
+        endBack = game.add.tileSprite(-320, -320, 1024, 1024, 'deadspace');
 
         endplayButton = game.add.button(-115,0,"playAgain",replayTheGame,this);
         endplayButton.scale.setTo(0.5, 0.5);
@@ -26,16 +27,13 @@ ending.prototype = {
         backToMenuButton.scale.setTo(0.5, 0.5);
     },
     update:function() {
-        deadBack.tilePosition.x -= 1;
-        deadBack.tilePosition.y += 1;
+        endBack.tilePosition.x -= 1;
+        endBack.tilePosition.y += 1;
 
         if (endplayButton.input.pointerOver()) {endplayButton.loadTexture('playAgain_hover', 0);}
         else {endplayButton.loadTexture('playAgain', 0);}
         if (backToMenuButton.input.pointerOver()) {backToMenuButton.loadTexture('backToMenu_hover', 0);}
         else {backToMenuButton.loadTexture('backToMenu', 0);}
-    },
-    render:function(){
-
     }
 };
 
@@ -46,8 +44,7 @@ function replayTheGame(){
 }
 
 function refadeComplete(){
-    endingBGM.pause();
-    endplayButton.destroy();
+    destroyEndStateObjects();
     game.state.start("PlayGame", true, false, 0, currentLevel = 0);
 }
 
@@ -58,7 +55,15 @@ function endBackToMenu(){
 }
 function endFadeCompleteMenu(){
     //TODO: i think we need to destroy all the objects when we change states, not just this button
-    backToMenuButton.destroy();
+    destroyEndStateObjects();
+
     console.log("clicked go to main");
     game.state.start("MainMenu", true, false, currentLevel = 0);
+}
+
+function destroyEndStateObjects(){
+    endingBGM.destroy();
+    endBack.destroy();
+    endplayButton.destroy();
+    backToMenuButton.destroy();
 }

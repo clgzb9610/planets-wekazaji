@@ -232,7 +232,7 @@ var LevelChanger = function(game){
         currentLevel++;
 
         game.input.enabled = true;
-        console.log(blackScreen);
+        blackScreen.destroy();
         levelChanger.createLevel();
     }
 

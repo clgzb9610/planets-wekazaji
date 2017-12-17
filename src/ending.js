@@ -4,7 +4,7 @@ var endingBGM;
 
 ending.prototype = {
     preload:function(){
-        game.load.image("deadspace", "assets/deadState/deadBack.png");
+        game.load.image("spacebeach", "assets/game/vacationeb.png");
         game.load.image("playAgain", "assets/deadState/playAgain.png");
         game.load.image("playAgain_hover", "assets/deadState/playAgain_hover.png");
         game.load.image("backToMenu", "assets/deadState/backToMenu.png");
@@ -12,23 +12,23 @@ ending.prototype = {
         game.load.audio('endingBGM', "assets/music/Visager_-_05_-_Roots_Loop.mp3");
     },
     create:function () {
-
+        game.world.setBounds(-300, -320, 300, 320);
         endingBGM = game.add.audio('endingBGM');
         endingBGM.loop = true;
         endingBGM.volume = 0.6;
         endingBGM.play();
 
-        endBack = game.add.tileSprite(-320, -320, 1024, 1024, 'deadspace');
+        endBack = game.add.tileSprite(-320, -320, 1024, 1024, 'spacebeach');
 
-        endplayButton = game.add.button(-115,0,"playAgain",replayTheGame,this);
+        endplayButton = game.add.button(-115,-250,"playAgain",replayTheGame,this);
         endplayButton.scale.setTo(0.5, 0.5);
 
-        backToMenuButton = game.add.button(-150,100,"backToMenu",endBackToMenu,this);
+        backToMenuButton = game.add.button(-150,-150,"backToMenu",endBackToMenu,this);
         backToMenuButton.scale.setTo(0.5, 0.5);
     },
     update:function() {
-        endBack.tilePosition.x -= 1;
-        endBack.tilePosition.y += 1;
+        // endBack.tilePosition.x -= 1;
+        // endBack.tilePosition.y += 1;
 
         if (endplayButton.input.pointerOver()) {endplayButton.loadTexture('playAgain_hover', 0);}
         else {endplayButton.loadTexture('playAgain', 0);}

@@ -54,7 +54,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=4;
+var currentLevel=5;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -122,9 +122,41 @@ var level = [
         {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
         {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
         {objectType: 'player', x: 0, y: 10},
-        {objectType: 'enemy1', x: 400, y: -20, sprite: "enemy1"},
-        {objectType: 'enemy2', x: 650, y: -240, sprite: "enemy1"},
+        {objectType: 'enemy1', x: 400, y: -20, sprite: "enemy"},
         {objectType: 'hint', text: "Where are those gears?", delay: 1}
+    ],
+    [ //level 6 - fun with overlapping gravity fields
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 500, sprite: "mediumplanet"},
+        {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
+        {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
+        {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
+        {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
+        {objectType: 'teleporter', x: 100, y: 89, radians: 2.35, goal: 4},
+        {objectType: 'startPad', x: -75, y: 100, radians: -2.5},
+        {objectType: 'gear', x: 100, y: 300, sprite: "gear"},
+        {objectType: 'gear', x: -100, y: -300, sprite: "gear"},
+        {objectType: 'gear', x: 390, y: 20, sprite: "gear"},
+        {objectType: 'gear', x: -250, y: -100, sprite: "gear"},
+        {objectType: 'player', x: -100, y: 130},
+        {objectType: 'enemy1', x: -150, y: 0, sprite: "enemy"},
+        {objectType: 'enemy2', x: 150, y: 0, sprite: "enemy"},
+        {objectType: 'hint', text: "Now there are two of them!", delay: 1}
+    ],
+    [ //level 7 - fun with overlapping gravity fields
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 600, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'teleporter', x: 696, y: -70, radians: 0.92, goal: 4},
+        {objectType: 'startPad', x: -50, y: -110, radians: -0.4},
+        {objectType: 'gear', x: -20, y: 50, sprite: "gear"},
+        {objectType: 'gear', x: 390, y: 250, sprite: "gear"},
+        {objectType: 'gear', x: 250, y: -250, sprite: "gear"},
+        {objectType: 'gear', x: 580, y: -100, sprite: "gear"},
+        {objectType: 'player', x: -70, y: -140},
+        {objectType: 'enemy1', x: 360, y: -20, sprite: "enemy"},
+        {objectType: 'enemy2', x: 240, y: 20, sprite: "enemy"},
+        {objectType: 'hint', text: "Watch out!", delay: 1}
     ]
 ];
 

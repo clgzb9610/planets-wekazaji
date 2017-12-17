@@ -75,7 +75,6 @@ var LevelChanger = function(game){
         teleporter.body.static = true;
         teleporter.body.setCollisionMask(0);
         levelGoal = goal;
-        // levelGoal = 0;
     }
 
     function addStartPad(x, y, radians) {

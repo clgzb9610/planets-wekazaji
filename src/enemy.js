@@ -31,21 +31,26 @@ Enemy.prototype.update = function() {
     this.enemyAngle = this.handleEnemyRotation(this.sprite);
 
     // Keep the enemy moving
-    if (enemyCounterClockwise === -1) {
         this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle - (Math.PI / 2)) ;
         this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle - (Math.PI / 2)) ;
         this.sprite.animations.play('moveL');
-    } else {
-        this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle + (Math.PI / 2)) ;
-        this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle + (Math.PI / 2)) ;
-        this.sprite.animations.play('moveR');
-    }
+
+
+    // This is code if we desire the enemy to move counter clockwise after impact!
+    // if (enemyCounterClockwise === -1) {
+    //     this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle - (Math.PI / 2)) ;
+    //     this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle - (Math.PI / 2)) ;
+    //     this.sprite.animations.play('moveL');
+    // } else {
+    //     this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle + (Math.PI / 2)) ;
+    //     this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle + (Math.PI / 2)) ;
+    //     this.sprite.animations.play('moveR');
+    // }
 
     gamePhysics.constrainVelocity(this.sprite,this.maxEnemyVel);
 
     if (enemyCollision) {
         console.log("Enemy collide!");
-        // this.enemyVel += 30;
         enemyCollision = false;
         //helper.resetLevel();  Taken care of in deadState now.
     }

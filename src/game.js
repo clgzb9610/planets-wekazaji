@@ -52,14 +52,14 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=5;
+var currentLevel=0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "bigplanet"},
         {objectType:'teleporter', x:0, y: -155, radians: 0, goal:1},
         {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
-        {objectType: 'gear', x: -50, y: 200, sprite:"gear"},
+        {objectType: 'gear', x: 30, y: 200, sprite:"gear"},
         {objectType: 'player', x: -155, y: -45},
         {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move.", delay: 2}
     ],

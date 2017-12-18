@@ -149,9 +149,9 @@ var LevelChanger = function(game){
         mute = game.add.button(-100,-600,"mute", helper.muteSound,this);
         mute.inputEnabled = true;
         if(game.sound.mute){
-            mute.loadTexture("unmute",1);
-        }else{
             mute.loadTexture("mute",0);
+        }else{
+            mute.loadTexture("unMute",0);
         }
         mute.anchor.set(-0.9,0.5);
         dashboardGroup.add(mute);

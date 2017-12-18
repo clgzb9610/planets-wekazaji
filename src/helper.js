@@ -2,6 +2,7 @@ var Helper = function(game){
 
     var messageBack;
     var messageCaption;
+    var isMuted = false;
 
     /*=============================================================================
        HELPER FUNCTIONS
@@ -114,7 +115,6 @@ var Helper = function(game){
 
 
     this.checkTeleporterOverlap = function(teleporter) {
-
             //console.log("overlap called");
             var teleporterBounds = teleporter.getBounds();
             var playerBounds = player.getBounds();
@@ -187,19 +187,17 @@ var Helper = function(game){
         }
     };
 
-    this.muteGame = function(){
-        mute.frame = 1;
-        game.sound.mute = true;
-    };
-
-    this.unMuteGame = function(event){
-        var muteButton = mute.getBounds();
-        if(Phaser.Rectangle.contains(muteButton,event.x,event.y)) {
+    this.muteSound = function(){
+        if(isMuted === false){
+            game.sound.mute = true;
+            mute.loadTexture('unMute', 0);
+            isMuted = true;
+        } else {
             game.sound.mute = false;
-            mute.frame = 0;
+            mute.loadTexture('mute', 0);
+            isMuted = false;
         }
     };
-
 
     this.deadByEnemy = function(){
         // console.log("deadbyEnemy is called");

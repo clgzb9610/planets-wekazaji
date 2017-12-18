@@ -222,11 +222,11 @@ var LevelChanger = function(game){
 
     function addGroups(){
         console.log("add groups");
+        enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
         dashboardGroup = game.add.group();
         messageGroup = game.add.group();
-        enemyGroup = game.add.group();
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         currentLevel++;

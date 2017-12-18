@@ -54,7 +54,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=7;
+var currentLevel=5;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -269,6 +269,7 @@ playGame.prototype = {
 
         helper.messageLocation(playerAngle);
         helper.moveDashboard(playerAngle);
+        game.world.bringToTop(dashboardGroup);
 
 
         //Handle keyboard input for the player

@@ -15,8 +15,7 @@ var levelChanger;
 // var crateGroup;
 var planetGroup;
 var cursors;
-var levelComplete;
-
+var playingNow;
 //for the player & walk animations
 var player;
 var walkR;
@@ -29,7 +28,6 @@ var enemy2;
 
 var enemy1Present = false;
 var enemy2Present = false;
-var enemyCollision = false;
 
 var startPadActive;
 
@@ -264,7 +262,7 @@ playGame.prototype = {
         var playerAngle = gamePhysics.handlePlayerRotation(player);
 
         gamePhysics.applyGravityToObjects();
-        if(levelComplete === false) {
+        if(playingNow === true) {
             helper.checkTeleporterOverlap(teleporter);
         }
 

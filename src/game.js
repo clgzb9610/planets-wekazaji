@@ -59,7 +59,7 @@ var level = [
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "bigplanet"},
         {objectType:'teleporter', x:0, y: -155, radians: 0, goal:1},
         {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
-        {objectType: 'gear', x: -50, y: 200, sprite:"gear"},
+        {objectType: 'gear', x: 30, y: 200, sprite:"gear"},
         {objectType: 'player', x: -155, y: -45},
         {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move.", delay: 2}
     ],
@@ -110,10 +110,10 @@ var level = [
         {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
     ],
     [ //level 5 - fun with overlapping gravity fields
-        {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 390, sprite: "bigplanet"},
-        {objectType: 'planet', x: 140, y: 360, gravRadius: 120, gravForce: 300, sprite: "smallplanet"},
-        {objectType: 'planet', x: 370, y: -250, gravRadius: 150, gravForce: 270, sprite: "mediumplanet"},
-        {objectType: 'planet', x: 590, y: -380, gravRadius: 160, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 390, sprite: "wafelplanet"},
+        {objectType: 'planet', x: 140, y: 360, gravRadius: 120, gravForce: 300, sprite: "donutplanet"},
+        {objectType: 'planet', x: 370, y: -250, gravRadius: 150, gravForce: 270, sprite: "orangeplanet"},
+        {objectType: 'planet', x: 590, y: -380, gravRadius: 160, gravForce: 270, sprite: "cinnamonplanet"},
         {objectType: 'teleporter', x: 349, y: 140, radians: 1.82, goal: 3},
         {objectType: 'startPad', x: 30, y: 17, radians: -1.1},
         {objectType: 'gear', x: 5, y: 400, sprite: "gear"},
@@ -164,7 +164,7 @@ playGame.prototype = {
         this.currentLevel = currentLevel;
     },
     preload: function () {
-        game.load.spritesheet("enemy", "assets/game/enemysmallsprites.png", 41,43);
+        game.load.spritesheet("enemy", "assets/game/enemyblink.png", 41,43);
         game.load.image("smallplanet", "assets/planets/planet.png");
         game.load.image("mediumplanet", "assets/planets/med_planet.png");
         game.load.image("bigplanet", "assets/planets/bigplanet.png");
@@ -178,6 +178,10 @@ playGame.prototype = {
         game.load.image("rainbowplanet", "assets/planets/medplanet5.png");
         game.load.image("smallrainbow", "assets/planets/smallplanet5.png");
         game.load.image("otherrainbow", "assets/planets/smallplanet5a.png");
+        game.load.image("cinnamonplanet", "assets/planets/cinnamon roll planet.png");
+        game.load.image("orangeplanet", "assets/planets/medplanetorange.png");
+        game.load.image("donutplanet", "assets/planets/smallplanet7.png");
+        game.load.image("wafelplanet", "assets/planets/wafelplanet.png");
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.spritesheet('player',"assets/game/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/game/gearspritessmall.png',38,34);

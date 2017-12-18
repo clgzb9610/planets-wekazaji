@@ -12,7 +12,7 @@ var credits;
 mainMenu.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");
-        game.load.image("title", "assets/mainMenu/title.png");
+        game.load.spritesheet("title", "assets/mainMenu/title_sheet.png", 700, 124);
         game.load.image("play", "assets/mainMenu/play.png");
         game.load.image("play_hover", "assets/mainMenu/play_hover.png");
         game.load.image("wekazaji", "assets/mainMenu/wekazaji.png");
@@ -39,6 +39,8 @@ mainMenu.prototype = {
         var title = game.add.sprite(20, 100, "title");
         title.scale.x = 0.95;
         title.scale.y = 0.95;
+        title.animations.add('beaming',[1,2,3],4, true);
+        title.animations.play('beaming');
 
         playButton = game.add.button(200,330,"play",playTheGame,this);
         playButton.scale.x = 0.4;

@@ -108,7 +108,7 @@ var level = [
         {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -275, y: -495},
-        {objectType: 'enemy1' , x:-110, y: -240, sprite: "enemy"},
+        {objectType: 'enemy1' , x:-110, y: -240, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
     ],
     [ //level 5 - fun with overlapping gravity fields
@@ -122,7 +122,7 @@ var level = [
         {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
         {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
         {objectType: 'player', x: 0, y: 10},
-        {objectType: 'enemy1', x: 400, y: -20, sprite: "enemy"},
+        {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "Where are those gears?", delay: 1}
     ],
     [ //level 6 - fun with overlapping gravity fields
@@ -138,8 +138,8 @@ var level = [
         {objectType: 'gear', x: 390, y: 20, sprite: "gear"},
         {objectType: 'gear', x: -250, y: -100, sprite: "gear"},
         {objectType: 'player', x: -100, y: 130},
-        {objectType: 'enemy1', x: -150, y: 0, sprite: "enemy"},
-        {objectType: 'enemy2', x: 150, y: 0, sprite: "enemy"},
+        {objectType: 'enemy1', x: -150, y: 0, enemyVel: 25, sprite: "enemy"},
+        {objectType: 'enemy2', x: 150, y: 0, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "Now there are two of them!", delay: 1}
     ],
     [ //level 7 - fun with overlapping gravity fields
@@ -154,8 +154,8 @@ var level = [
         {objectType: 'gear', x: 250, y: -250, sprite: "gear"},
         {objectType: 'gear', x: 580, y: -100, sprite: "gear"},
         {objectType: 'player', x: -70, y: -140},
-        {objectType: 'enemy1', x: 360, y: -20, sprite: "enemy"},
-        {objectType: 'enemy2', x: 240, y: 20, sprite: "enemy"},
+        {objectType: 'enemy1', x: 360, y: -20, enemyVel: 25, sprite: "enemy"},
+        {objectType: 'enemy2', x: 240, y: 20, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "Watch out!", delay: 1}
     ]
 ];

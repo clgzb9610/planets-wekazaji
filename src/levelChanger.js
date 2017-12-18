@@ -35,11 +35,11 @@ var LevelChanger = function(game){
             }
             if(addition.objectType === 'enemy1'){
                 enemy1Present = true;
-                enemy1 = new Enemy(game, addition.x, addition.y);
+                enemy1 = new Enemy(game, addition.x, addition.y, addition.enemyVel);
             }
             if(addition.objectType === 'enemy2'){
                 enemy2Present = true;
-                enemy2 = new Enemy(game, addition.x, addition.y);
+                enemy2 = new Enemy(game, addition.x, addition.y, addition.enemyVel);
             }
             if(addition.objectType === 'player'){
                 movePlayer(addition.x,addition.y);

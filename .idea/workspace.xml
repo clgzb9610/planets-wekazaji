@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
+    <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="sets enemyVel while making the level.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/enemy.js" afterPath="$PROJECT_DIR$/src/enemy.js" />
       <change beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
       <change beforePath="$PROJECT_DIR$/src/levelChanger.js" afterPath="$PROJECT_DIR$/src/levelChanger.js" />
     </list>
@@ -21,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="47" lean-forward="true" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+            <state relative-caret-position="221">
+              <caret line="13" column="39" lean-forward="true" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -44,7 +45,7 @@
       <file leaf-file-name="physics.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/physics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="-1324">
               <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
@@ -54,8 +55,8 @@
       <file leaf-file-name="helper.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="74" column="31" lean-forward="false" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="31" />
+            <state relative-caret-position="-1914">
+              <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -64,8 +65,8 @@
       <file leaf-file-name="enemy.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/enemy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="32" lean-forward="true" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
+            <state relative-caret-position="136">
+              <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -81,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="275" column="4" lean-forward="false" selection-start-line="275" selection-start-column="4" selection-end-line="275" selection-end-column="4" />
+            <state relative-caret-position="160">
+              <caret line="49" column="18" lean-forward="false" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -96,8 +97,8 @@
       <file leaf-file-name="levelChanger.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/levelChanger.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="224" column="38" lean-forward="false" selection-start-line="224" selection-start-column="38" selection-end-line="224" selection-end-column="38" />
+            <state relative-caret-position="2635">
+              <caret line="178" column="32" lean-forward="false" selection-start-line="178" selection-start-column="27" selection-end-line="178" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -114,7 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>change</find>
       <find>gravityGraphics</find>
       <find>helper.</find>
       <find>teleporter</find>
@@ -141,9 +141,10 @@
       <find>fade</find>
       <find>back</find>
       <find>resetLevel</find>
-      <find>telepo</find>
       <find>bgm</find>
       <find>destroy</find>
+      <find>telepo</find>
+      <find>enemy</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -167,9 +168,9 @@
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/helper.js" />
         <option value="$PROJECT_DIR$/src/ending.js" />
-        <option value="$PROJECT_DIR$/src/enemy.js" />
         <option value="$PROJECT_DIR$/src/levelChanger.js" />
         <option value="$PROJECT_DIR$/src/game.js" />
+        <option value="$PROJECT_DIR$/src/enemy.js" />
       </list>
     </option>
   </component>
@@ -332,14 +333,7 @@
       <workItem from="1513113536587" duration="1782000" />
       <workItem from="1513130751662" duration="1434000" />
       <workItem from="1513546184175" duration="4562000" />
-      <workItem from="1513564585561" duration="2706000" />
-    </task>
-    <task id="LOCAL-00016" summary="created level variable">
-      <created>1509731284876</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1509731284876</updated>
+      <workItem from="1513564585561" duration="3159000" />
     </task>
     <task id="LOCAL-00017" summary="created basic structure for level design">
       <created>1509732152483</created>
@@ -677,16 +671,23 @@
       <option name="project" value="LOCAL" />
       <updated>1513566862500</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="fixed enemy appearing ahead of dashboard (dashboardGroup is now permanently set to the top)">
+      <created>1513567348064</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1513567348064</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186308000" />
+    <option name="totallyTimeSpent" value="186761000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17349927" sideWeight="0.4923664" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17349927" sideWeight="0.4923664" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39897698" sideWeight="0.50565773" order="14" side_tool="true" content_ui="tabs" />
@@ -769,7 +770,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed some of the planet sprites" />
     <MESSAGE value="Merged w zain's new enemy stuff &amp; fixed a bug where enemy collision only worked when the enemy was in the first level. (collision set up in the create part of the playGame.prototype was still in the last push though i thought i deleted it? who knows. &amp; the collision setup in addEnemy was called wrong for being the new file. my b).&#10;&#10;I think I got all zain's changes from the helper functions but the merge was really weird so you might want to double check." />
     <MESSAGE value="implement restart level button&#10;added 4th level" />
     <MESSAGE value="divided assets folder to subfolders" />
@@ -794,7 +794,8 @@
     <MESSAGE value="Added level 6 and 7." />
     <MESSAGE value="Added a function to delete all the end state objects when we leave that state.&#10;changed enemyCollision stuff to reset the level immediately and also not have problems with colliding with 2 enemies at once.&#10;uncommented the rest of the enemyCounterCLockwise code." />
     <MESSAGE value="fixed constant BlackScreen after levelChange" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed constant BlackScreen after levelChange" />
+    <MESSAGE value="fixed enemy appearing ahead of dashboard (dashboardGroup is now permanently set to the top)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed enemy appearing ahead of dashboard (dashboardGroup is now permanently set to the top)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -947,9 +948,17 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1914">
+          <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/physics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="-1324">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
@@ -959,22 +968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="47" lean-forward="true" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="74" column="31" lean-forward="false" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -989,27 +982,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/enemy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="32" lean-forward="true" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
+        <state relative-caret-position="136">
+          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/levelChanger.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="224" column="38" lean-forward="false" selection-start-line="224" selection-start-column="38" selection-end-line="224" selection-end-column="38" />
+        <state relative-caret-position="2635">
+          <caret line="178" column="32" lean-forward="false" selection-start-line="178" selection-start-column="27" selection-end-line="178" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="275" column="4" lean-forward="false" selection-start-line="275" selection-start-column="4" selection-end-line="275" selection-end-column="4" />
+        <state relative-caret-position="160">
+          <caret line="49" column="18" lean-forward="false" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="39" lean-forward="true" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -52,7 +52,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=5;
+var currentLevel=6;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -95,7 +95,7 @@ var level = [
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185},
-        {objectType: 'hint', text: "The gravity on the\nbaseball planet is too strong\nto escape without an\noverlapping gravity field.", delay: 4}
+        {objectType: 'hint', text: "The gravity on the baseball\nplanet is too strong\nto escape without an\noverlapping gravity field.", delay: 4}
     ],
     [ //level 4 - enemy introduction
         {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallrainbow"},
@@ -129,7 +129,7 @@ var level = [
         {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
         {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
         {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
-        {objectType: 'teleporter', x: 100, y: 89, radians: 2.35, goal: 4},
+        {objectType: 'teleporter', x: 100, y: 89, radians: 2.35, goal: 0},// 4},
         {objectType: 'startPad', x: -75, y: 100, radians: -2.5},
         {objectType: 'gear', x: 100, y: 300, sprite: "gear"},
         {objectType: 'gear', x: -100, y: -300, sprite: "gear"},

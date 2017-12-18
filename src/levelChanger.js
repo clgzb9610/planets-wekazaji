@@ -148,7 +148,11 @@ var LevelChanger = function(game){
         dashboardGroup.add(dashboard);
         mute = game.add.button(-100,-600,"mute", helper.muteSound,this);
         mute.inputEnabled = true;
-        mute.frame = 0;
+        if(game.sound.mute){
+            mute.loadTexture("unmute",1);
+        }else{
+            mute.loadTexture("mute",0);
+        }
         mute.anchor.set(-0.9,0.5);
         dashboardGroup.add(mute);
         pause = game.add.sprite(-100,-600,"pause");

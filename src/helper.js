@@ -73,7 +73,7 @@ var Helper = function(game){
         //     enemyCounterClockwise = -1;
         // }
         levelChanger.resetLevel();
-        enemyCollision = true;
+        playingNow = false;
 
         //helper.deadByEnemy();
     };
@@ -123,7 +123,7 @@ var Helper = function(game){
                 if(score < levelGoal) {
                     this.addMessage("This portal is broken.\nCollect gears to repair.", 3);
                 } else {
-                    levelComplete = true;
+                    playingNow = false;
                     console.log("level beaten");
                     levelChanger.changeLevel();
                 }

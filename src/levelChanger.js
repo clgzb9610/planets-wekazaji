@@ -2,8 +2,7 @@ var LevelChanger = function(game){
 
 
     this.createLevel= function(){
-        levelComplete = false;
-        enemyCollision = false;
+        playingNow = true;
         score = 0;
         if(!level[currentLevel]) {
             bgm.destroy();
@@ -158,7 +157,7 @@ var LevelChanger = function(game){
         restart = game.add.sprite(-100,-600,"restart");
         restart.anchor.set(1.9,0.55);
         dashboardGroup.add(restart);
-        console.log('adding dashboard');
+        // console.log('adding dashboard');
 
         // make the buttons work
         pause.inputEnabled = true;
@@ -241,8 +240,9 @@ var LevelChanger = function(game){
 
     // reset the level without messing with states.
     this.resetLevel = function() {
-        if(enemyCollision===false){
+        if(playingNow === true){
             currentLevel -= 1;
+            playingNow = false;
             levelChanger.changeLevel();
         }
     };

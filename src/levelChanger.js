@@ -35,11 +35,11 @@ var LevelChanger = function(game){
             }
             if(addition.objectType === 'enemy1'){
                 enemy1Present = true;
-                enemy1 = new Enemy(game, addition.x, addition.y);
+                enemy1 = new Enemy(game, addition.x, addition.y, addition.enemyVel);
             }
             if(addition.objectType === 'enemy2'){
                 enemy2Present = true;
-                enemy2 = new Enemy(game, addition.x, addition.y);
+                enemy2 = new Enemy(game, addition.x, addition.y, addition.enemyVel);
             }
             if(addition.objectType === 'player'){
                 movePlayer(addition.x,addition.y);
@@ -155,18 +155,21 @@ var LevelChanger = function(game){
         pause.frame = 0;
         pause.anchor.set(0.5, 0.55);
         dashboardGroup.add(pause);
-        restart= game.add.sprite(-100,-600,"restart");
+        restart = game.add.sprite(-100,-600,"restart");
         restart.anchor.set(1.9,0.55);
         dashboardGroup.add(restart);
         console.log('adding dashboard');
 
         // make the buttons work
-        //TODO: implement mute/unmute function
         pause.inputEnabled = true;
         pause.events.onInputUp.add(helper.pauseGame, self);
         restart.inputEnabled = true;
         restart.events.onInputUp.add(levelChanger.resetLevel,self);
-        game.input.onDown.add(helper.unpauseGame, self);
+        mute.inputEnabled = true;
+        mute.events.onInputUp.add(helper.muteGame, self);
+
+        game.input.onDown.add(helper.unPauseGame, self);
+        game.input.onDown.add(helper.unMuteGame, self);
     }
 
     // a couple of housekeeping things to prepare to change between levels.
@@ -222,11 +225,11 @@ var LevelChanger = function(game){
 
     function addGroups(){
         console.log("add groups");
+        enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
         dashboardGroup = game.add.group();
         messageGroup = game.add.group();
-        enemyGroup = game.add.group();
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         currentLevel++;

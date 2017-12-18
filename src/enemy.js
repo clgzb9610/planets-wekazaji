@@ -1,8 +1,12 @@
-var Enemy = function (game, x, y) {
+var Enemy = function (game, x, y, enemyVel) {
     this.sprite = game.add.sprite(x, y, 'enemy');
 
-    this.enemyVel = 25;
+    this.enemyVel = enemyVel;
     this.maxEnemyVel = 200;
+
+    if (this.maxEnemyVel < this.enemyVel) {
+        this.enemyVel = this.maxEnemyVel;
+    }
     // this.body.enable(true);
     game.physics.box2d.enable(this.sprite);
     this.sprite.body.static = false;

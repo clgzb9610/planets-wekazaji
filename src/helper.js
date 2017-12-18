@@ -179,11 +179,24 @@ var Helper = function(game){
         game.paused = true;
     };
 
-    this.unpauseGame = function(event){
+    this.unPauseGame = function(event){
         var pauseButton = pause.getBounds();
         if(Phaser.Rectangle.contains(pauseButton,event.x,event.y)) {
             game.paused = false;
             pause.frame = 0;
+        }
+    };
+
+    this.muteGame = function(){
+        mute.frame = 1;
+        game.sound.mute = true;
+    };
+
+    this.unMuteGame = function(event){
+        var muteButton = mute.getBounds();
+        if(Phaser.Rectangle.contains(muteButton,event.x,event.y)) {
+            game.sound.mute = false;
+            mute.frame = 0;
         }
     };
 

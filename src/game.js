@@ -121,7 +121,7 @@ var level = [
         {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
         {objectType: 'player', x: 0, y: 10},
         {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'hint', text: "Where are those gears?", delay: 1}
+        {objectType: 'hint', text: "Where are those gears?", delay: 0}
     ],
     [ //level 6 - fun with overlapping gravity fields
         {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 500, sprite: "mediumplanet"},
@@ -210,10 +210,25 @@ playGame.prototype = {
 
         game.time.desiredFps = 25;
 
-        background = game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
-        game.add.tileSprite(24, 24, 1024, 1024, 'space');
+        background = game.add.tileSprite(-2024, -2024, 1024, 1024, 'space');
+        game.add.tileSprite(-2024, -1000, 1024, 1024, 'space');
+        game.add.tileSprite(-2024, 24, 1024, 1024, 'space');
+        game.add.tileSprite(-2024, 1048, 1024, 1024, 'space');
+        game.add.tileSprite(-1000, -2024, 1024, 1024, 'space');
+        game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
         game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
+        game.add.tileSprite(-1000, 1048, 1024, 1024, 'space');
+        game.add.tileSprite(24, -2024, 1024, 1024, 'space');
         game.add.tileSprite(24, -1000, 1024, 1024, 'space');
+        game.add.tileSprite(24, 24, 1024, 1024, 'space');
+        game.add.tileSprite(24, 1048, 1024, 1024, 'space');
+        game.add.tileSprite(1048, -2024, 1024, 1024, 'space');
+        game.add.tileSprite(1048, -1000, 1024, 1024, 'space');
+        game.add.tileSprite(1048, 24, 1024, 1024, 'space');
+        game.add.tileSprite(1048, 1048, 1024, 1024, 'space');
+
+
+
 
         enemyGroup = game.add.group();
         planetGroup = game.add.group();

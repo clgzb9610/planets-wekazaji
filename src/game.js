@@ -190,7 +190,8 @@ playGame.prototype = {
         game.load.image('blackScreen', "assets/game/blackScreen.png");
 
         game.load.image("dashboard","assets/game/dashboard.png",300,52);
-        game.load.spritesheet("mute","assets/buttons/mute.png",52,52);
+        game.load.image("mute","assets/buttons/mute.png",52,52);
+        game.load.image("unMute", "assets/buttons/unMute.png", 52, 52);
         game.load.spritesheet("pause","assets/buttons/pause.png",52,52);
         game.load.image("restart","assets/buttons/restart.png",52,52);
 

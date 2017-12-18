@@ -147,7 +147,8 @@ var LevelChanger = function(game){
         dashboard = game.add.sprite(-100,-600,"dashboard");
         dashboard.anchor.set(0.5);
         dashboardGroup.add(dashboard);
-        mute = game.add.sprite(-100,-600,"mute");
+        mute = game.add.button(-100,-600,"mute", helper.muteSound,this);
+        mute.inputEnabled = true;
         mute.frame = 0;
         mute.anchor.set(-0.9,0.5);
         dashboardGroup.add(mute);
@@ -165,11 +166,8 @@ var LevelChanger = function(game){
         pause.events.onInputUp.add(helper.pauseGame, self);
         restart.inputEnabled = true;
         restart.events.onInputUp.add(levelChanger.resetLevel,self);
-        mute.inputEnabled = true;
-        mute.events.onInputUp.add(helper.muteGame, self);
 
         game.input.onDown.add(helper.unPauseGame, self);
-        game.input.onDown.add(helper.unMuteGame, self);
     }
 
     // a couple of housekeeping things to prepare to change between levels.

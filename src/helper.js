@@ -29,8 +29,8 @@ var Helper = function(game){
 
     function fadeMessage(){
      //   console.log("start FADE MESSAGE");
-        var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 200, Phaser.Easing.Linear.None, true);
-        var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 200, Phaser.Easing.Linear.None, true);
+        var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true); //100 -> 400
+        var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
         bubbleTween.onComplete.add(destroyMessage, this);
         textTween.onComplete.add(destroyMessage, this);
     }

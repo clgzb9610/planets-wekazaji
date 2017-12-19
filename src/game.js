@@ -91,7 +91,7 @@ var level = [
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 30, y: 185},
-        {objectType: 'hint', text: "The gravity on the baseball\nplanet is too strong\nto escape without an\noverlapping gravity field.", delay: 4}
+        {objectType: 'hint', text: "The gravity on the baseball\nplanet is too strong\nto escape without an\noverlapping gravity field.", delay: 5}
     ],
     [ //level 4 - enemy introduction
         {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallrainbow"},
@@ -137,10 +137,10 @@ var level = [
     ],
     [ //level 7 - fun with overlapping gravity fields
         {objectType: 'planet', x: 0, y: 0, gravRadius: 200, gravForce: 500, sprite: "catplanet"},
-        {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 902, sprite: "blueyarn"},
-        {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 902, sprite: "redyarn"},
-        {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 902, sprite: "greenyarn"},
-        {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 902, sprite: "purpleyarn"},
+        {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 850, sprite: "blueyarn"},
+        {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 850, sprite: "redyarn"},
+        {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 850, sprite: "greenyarn"},
+        {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 850, sprite: "purpleyarn"},
         {objectType: 'teleporter', x: 100, y: 89, radians: 2.35, goal: 4},
         {objectType: 'startPad', x: -75, y: 100, radians: -2.5},
         {objectType: 'gear', x: 100, y: 300, sprite: "gear"},
@@ -208,7 +208,7 @@ playGame.prototype = {
         game.load.audio('teleportToPad',"assets/music/zapsplat_magical_telekinesis_blast_002_12511.mp3");
     },
     create: function () {
-        console.log("creating game");
+        // console.log("creating game");
 
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-300, -320, 300, 320);
@@ -290,6 +290,7 @@ playGame.prototype = {
 
         helper.messageLocation(playerAngle);
         helper.moveDashboard(playerAngle);
+        game.world.bringToTop(messageGroup);
         game.world.bringToTop(dashboardGroup);
 
         //Handle keyboard input for the player

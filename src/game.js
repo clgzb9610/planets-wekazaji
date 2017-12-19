@@ -190,7 +190,7 @@ playGame.prototype = {
         game.load.image("roseplanet", "assets/planets/rosebush.png");
         game.load.image("hydrangea", "assets/planets/hydrangeas.png");
         game.load.image("lilac", "assets/planets/lilacbush.png");
-        game.load.image("hibiscus", "assets/planets/hibiscus");
+        game.load.image("hibiscus", "assets/planets/hibiscus.png");
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.spritesheet('player',"assets/game/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/game/gearspritessmall.png',38,34);

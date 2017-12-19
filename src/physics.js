@@ -39,14 +39,13 @@ var Physics = function(game){
     };
 
     /* Shortest distance between two angles in range -pi to pi.
-    *
+     * (there's a possibility this needs to be updated - maybe it turns the same direction every time? im not sure)
     */
     function radiansDelta(fromAngle, toAngle){
         return normalizedRadians(fromAngle - toAngle + Math.PI) - Math.PI;
     }
 
     /* normalizes a angle to the range 0 to 2 pi.
-    *
     */
     function normalizedRadians(rawAngle){
         var TAU = Math.PI * 2;
@@ -101,6 +100,9 @@ var Physics = function(game){
         return closestPlanet;
     };
 
+    /* apply gravity to the things in the objectGroup
+     *
+     */
     this.applyGravityToObjects = function(){
         for (var i = 0; i < objectGroup.total; i++){
             var o = objectGroup.getChildAt(i);

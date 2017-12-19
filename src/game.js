@@ -49,7 +49,7 @@ var gravityGraphics;
 var bgm;
 
 var currentLevel=0;
-/* x position, y position, gravity radius, gravity force, graphic asset */
+
 var level = [
     [ //level 0 - collect gears to activate portal
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "bigplanet"},
@@ -119,7 +119,7 @@ var level = [
         {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "Where are those gears?", delay: 0}
     ],
-    [ //level 6 - fun with overlapping gravity fields
+    [ //level 6 - two enemies
         {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 270, sprite: "roseplanet"},
         {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 600, sprite: "hydrangea"},
         {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 600, sprite: "lilac"},
@@ -135,7 +135,7 @@ var level = [
         {objectType: 'enemy2', x: 240, y: 20, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "Now there are two of them!", delay: 1}
     ],
-    [ //level 7 - fun with overlapping gravity fields
+    [ //level 7 - two enemies circling center planet
         {objectType: 'planet', x: 0, y: 0, gravRadius: 200, gravForce: 500, sprite: "catplanet"},
         {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 850, sprite: "blueyarn"},
         {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 850, sprite: "redyarn"},
@@ -215,6 +215,7 @@ playGame.prototype = {
 
         game.time.desiredFps = 25;
 
+        //tiled background image to cover a wide enough area
         background = game.add.tileSprite(-2024, -2024, 1024, 1024, 'space');
         game.add.tileSprite(-2024, -1000, 1024, 1024, 'space');
         game.add.tileSprite(-2024, 24, 1024, 1024, 'space');
@@ -252,7 +253,7 @@ playGame.prototype = {
         bgm.volume = 0.6;
         bgm.play();
 
-        // game.input.onDown.add(addCrate, this);
+        //one player exists for all levels
         player = game.add.sprite(-155, -45, "player");
         game.physics.box2d.enable(player);
         player.frame = 4;
@@ -261,11 +262,13 @@ playGame.prototype = {
         stand = player.animations.add('stand', [4], 1);
         fall = player.animations.add('fall', [9], 1);
 
+        //all the helper classes
         gamePhysics = new Physics(game);
         helper = new Helper(game);
         levelChanger = new LevelChanger(game);
         levelChanger.createLevel();
 
+        //player collides with gears and start pad
         player.body.setCategoryContactCallback(2, helper.gearCallback, this);
         player.body.setCategoryContactCallback(3, helper.startPadContactCallback, this);
 
@@ -274,6 +277,7 @@ playGame.prototype = {
     },
 
     update: function(){
+        //two enemies operate separately, when they exist in a level
         if (enemy1Present) {
             enemy1.update();
         }
@@ -284,18 +288,20 @@ playGame.prototype = {
         var playerAngle = gamePhysics.handlePlayerRotation(player);
 
         gamePhysics.applyGravityToObjects();
-        if(playingNow === true) {
+
+        if(playingNow === true) {       //this function isn't called when the game is between levels or changing states
             helper.checkTeleporterOverlap(teleporter);
         }
 
-        helper.messageLocation(playerAngle);
+        helper.messageLocation(playerAngle);    //the messages and the dashboard move around relative to the player, since the camera can't spin
         helper.moveDashboard(playerAngle);
+
         game.world.bringToTop(messageGroup);
         game.world.bringToTop(dashboardGroup);
 
         //Handle keyboard input for the player
         helper.handleKeyboardInput(playerAngle);
 
-        gamePhysics.constrainVelocity(player,150);
+        gamePhysics.constrainVelocity(player,150);      //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
     }
 };

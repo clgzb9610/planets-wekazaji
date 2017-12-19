@@ -4,7 +4,7 @@ var LevelChanger = function(game){
     this.createLevel= function(){
         playingNow = true;
         score = 0;
-        if(!level[currentLevel]) {
+        if(!level[currentLevel]) {          //go to ending state if you pass the last level
             bgm.destroy();
              console.log("bgm paused");
             player.destroy();
@@ -17,7 +17,7 @@ var LevelChanger = function(game){
             game.state.start("Ending", true, false, 0);
             return;
         }
-        for (var i = 0; i < level[currentLevel].length; i++) {
+        for (var i = 0; i < level[currentLevel].length; i++) {      //create level objects
             var addition = level[currentLevel][i];
             if (addition.objectType === 'planet') {
                 addPlanet(addition.x, addition.y,
@@ -61,7 +61,6 @@ var LevelChanger = function(game){
 
         planet.body.setCircle(planet.width / 2);
         gravityGraphics.drawCircle(planet.x, planet.y, planet.width + planet.gravityRadius);
-        //game.world.moveDown(gravityGraphics);       Some combo of moveDown or moveToBack then a few moveUp's will put the gravityGraphics in the right place.
         planet.body.setCollisionCategory(1);
     }
 
@@ -181,7 +180,7 @@ var LevelChanger = function(game){
         player.body.velocity.x -= 70;
         game.input.enabled = false;
 
-        //will be in deadByEnemy
+        //will be in deadByi      
         cursors.left.reset(true);
         cursors.right.reset(true);
         cursors.up.reset(true);
@@ -189,7 +188,7 @@ var LevelChanger = function(game){
         player.animations.play('stand');
 
         blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
-        //TODO: does the blackscreen need to be so large? since its a solid color i think it could be tiny & scaled to fit the screen?
+        //does the blackscreen need to be so large? since its a solid color i think it could be tiny & scaled to fit the screen?
         blackScreen.scale.setTo(2, 2); //if the blackscreen sprite is teensy you could scale at like 200x200?
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;
@@ -198,8 +197,7 @@ var LevelChanger = function(game){
         game.time.events.add(501,addGroups,this);
     };
 
-    // destroy all the groups of objects, turn user input back on, delete the black sprite from changeLevel,
-    // then call to make a new level.
+    // destroy all the groups of objects
     this.destroyGroups = function(){
         console.log("destroy groups");
         planetGroup.destroy();
@@ -225,6 +223,7 @@ var LevelChanger = function(game){
         gravityGraphics = game.add.graphics(0, 0);
     };
 
+    //add all the groups back in to put the level objects in for a new level.
     function addGroups(){
         console.log("add groups");
         enemyGroup = game.add.group();

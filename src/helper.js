@@ -23,18 +23,20 @@ var Helper = function(game){
         }
     };
 
+    //will start to fade the message after a delay
     function messageTimer(delay){
         game.time.events.add(Phaser.Timer.SECOND * delay, fadeMessage, this);
     }
 
     function fadeMessage(){
-     //   console.log("start FADE MESSAGE");
+     //  adds a tween to fade the message out
         var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true); //100 -> 400
         var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
         bubbleTween.onComplete.add(destroyMessage, this);
         textTween.onComplete.add(destroyMessage, this);
     }
 
+    //remove message objects after the tween fade is complete, and remove them from the group
     function destroyMessage(){
         messageGroup.remove(messageBack);
         messageGroup.remove(messageCaption);
@@ -44,6 +46,7 @@ var Helper = function(game){
        // console.log("destroyed caption");
     }
 
+    //move the message relative to the player
     this.messageLocation = function(angle) {
         if(messageBack !== null) {
             messageBack.x = player.x - 190 * Math.cos(angle);
@@ -58,8 +61,7 @@ var Helper = function(game){
 //=======================================================================================================
 //  ========== CONTACT CALLBACKS ========================================
 
-//rebounds the player sprite back after enemy collision
-    //rebounds the player sprite back after enemy collision
+// resets the level when player makes contact with an enemy
     this.enemyContactCallback = function(body1, body2, fixture1, fixture2, begin) {
         if (!begin) {
             return;
@@ -101,7 +103,7 @@ var Helper = function(game){
         body2.sprite.destroy();
     };
 
-
+    //will start event to fade startPad a certain amount of time after it register the player's contact.
     this.startPadContactCallback = function(body1,body2,fixture1,fixture2,begin){
         if (!begin){
             return;
@@ -110,6 +112,7 @@ var Helper = function(game){
     };
 
 
+    // a custom function to check player contact with the teleporter.
     this.checkTeleporterOverlap = function(teleporter) {
             //console.log("overlap called");
             var teleporterBounds = teleporter.getBounds();
@@ -130,6 +133,7 @@ var Helper = function(game){
 //==============================================================================================================
     // ==================== OTHER HELPER FUNCTIONS ==============================
 
+    //changes the x & y velocty of the player for every arrow key press, and changes the animation
     this.handleKeyboardInput = function(angle) {
         if (cursors.left.isDown) {
             // player.body.moveLeft(90);
@@ -160,7 +164,7 @@ var Helper = function(game){
         }
     };
 
-
+    //moves the dashboard relative to the player
     this.moveDashboard = function(angle){
         for(var i = 0; i < dashboardGroup.total; i ++) {
             var d = dashboardGroup.getChildAt(i);

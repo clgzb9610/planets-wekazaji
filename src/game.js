@@ -52,7 +52,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=7;
+var currentLevel=0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -125,8 +125,8 @@ var level = [
     ],
     [ //level 6 - fun with overlapping gravity fields
         {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 600, sprite: "smallplanet"},
+        {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 600, sprite: "smallplanet"},
         {objectType: 'planet', x: 600, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
         {objectType: 'teleporter', x: 696, y: -70, radians: 0.92, goal: 4},
         {objectType: 'startPad', x: -50, y: -110, radians: -0.4},
@@ -140,11 +140,11 @@ var level = [
         {objectType: 'hint', text: "Now there are two of them!", delay: 1}
     ],
     [ //level 7 - fun with overlapping gravity fields
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 500, sprite: "mediumplanet"},
-        {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 902.6, sprite: "smallplanet"},
-        {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 902.6, sprite: "smallplanet"},
-        {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 902.6, sprite: "smallplanet"},
-        {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 902.6, sprite: "smallplanet"},
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 200, gravForce: 500, sprite: "mediumplanet"},
+        {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 902, sprite: "smallplanet"},
+        {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 902, sprite: "smallplanet"},
+        {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 902, sprite: "smallplanet"},
+        {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 902, sprite: "smallplanet"},
         {objectType: 'teleporter', x: 100, y: 89, radians: 2.35, goal: 4},
         {objectType: 'startPad', x: -75, y: 100, radians: -2.5},
         {objectType: 'gear', x: 100, y: 300, sprite: "gear"},

@@ -70,7 +70,7 @@ var LevelChanger = function(game){
         game.physics.box2d.enable(teleporter);
        // objectGroup.add(teleporter);
         teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 15, true);
-        teleporter.body.setRectangle(48, 61);
+        teleporter.body.setRectangle(38, 55);
         teleporter.body.rotation += radians;
         teleporter.body.static = true;
         teleporter.body.setCollisionMask(0);
@@ -126,6 +126,7 @@ var LevelChanger = function(game){
         var gear = game.add.sprite(x, y, sprite);
         objectGroup.add(gear);
         game.physics.box2d.enable(gear);
+        gear.body.setRectangle(25,30);
         gear.body.setCollisionCategory(2);
         gear.body.static = false;
         spin = gear.animations.add('spin', [0, 1, 2, 3]);

@@ -124,6 +124,22 @@ var level = [
         {objectType: 'hint', text: "Where are those gears?", delay: 0}
     ],
     [ //level 6 - fun with overlapping gravity fields
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 600, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'teleporter', x: 696, y: -70, radians: 0.92, goal: 4},
+        {objectType: 'startPad', x: -50, y: -110, radians: -0.4},
+        {objectType: 'gear', x: -20, y: 50, sprite: "gear"},
+        {objectType: 'gear', x: 390, y: 250, sprite: "gear"},
+        {objectType: 'gear', x: 250, y: -250, sprite: "gear"},
+        {objectType: 'gear', x: 580, y: -100, sprite: "gear"},
+        {objectType: 'player', x: -70, y: -140},
+        {objectType: 'enemy1', x: 360, y: -20, enemyVel: 25, sprite: "enemy"},
+        {objectType: 'enemy2', x: 240, y: 20, enemyVel: 25, sprite: "enemy"},
+        {objectType: 'hint', text: "Now there are two of them!", delay: 1}
+    ],
+    [ //level 7 - fun with overlapping gravity fields
         {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 500, sprite: "mediumplanet"},
         {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
         {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
@@ -138,22 +154,6 @@ var level = [
         {objectType: 'player', x: -100, y: 130},
         {objectType: 'enemy1', x: -150, y: 0, enemyVel: 25, sprite: "enemy"},
         {objectType: 'enemy2', x: 150, y: 0, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'hint', text: "Now there are two of them!", delay: 1}
-    ],
-    [ //level 7 - fun with overlapping gravity fields
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'planet', x: 600, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'teleporter', x: 696, y: -70, radians: 0.92, goal: 4},
-        {objectType: 'startPad', x: -50, y: -110, radians: -0.4},
-        {objectType: 'gear', x: -20, y: 50, sprite: "gear"},
-        {objectType: 'gear', x: 390, y: 250, sprite: "gear"},
-        {objectType: 'gear', x: 250, y: -250, sprite: "gear"},
-        {objectType: 'gear', x: 580, y: -100, sprite: "gear"},
-        {objectType: 'player', x: -70, y: -140},
-        {objectType: 'enemy1', x: 360, y: -20, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'enemy2', x: 240, y: 20, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "Watch out!", delay: 1}
     ]
 ];

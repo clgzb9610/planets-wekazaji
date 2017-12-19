@@ -10,7 +10,7 @@ var Enemy = function (game, x, y, enemyVel) {
     // this.body.enable(true);
     game.physics.box2d.enable(this.sprite);
     this.sprite.body.static = false;
-    this.sprite.body.setRectangle(41,43);
+    this.sprite.body.setRectangle(20,43);
     this.sprite.body.setCollisionCategory(1);
     this.sprite.body.setCollisionMask(1);
     player.body.setBodyContactCallback(this.sprite, helper.enemyContactCallback, this);

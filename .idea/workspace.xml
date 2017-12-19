@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="05b95ff5-2e83-4110-8a33-1fb4f63c110b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/enemy.js" afterPath="$PROJECT_DIR$/src/enemy.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game.js" afterPath="$PROJECT_DIR$/src/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/levelChanger.js" afterPath="$PROJECT_DIR$/src/levelChanger.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" column="60" lean-forward="true" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+              <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -42,6 +40,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="physics.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/physics.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="mainmenu.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mainmenu.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -52,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
@@ -162,8 +170,6 @@
         <option value="$PROJECT_DIR$/game.js" />
         <option value="$PROJECT_DIR$/src/deadState.js" />
         <option value="$PROJECT_DIR$/src/physics,js.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/physics.js" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/ending.js" />
         <option value="$PROJECT_DIR$/src/helper.js" />
@@ -171,6 +177,8 @@
         <option value="$PROJECT_DIR$/src/enemy.js" />
         <option value="$PROJECT_DIR$/src/levelChanger.js" />
         <option value="$PROJECT_DIR$/src/game.js" />
+        <option value="$PROJECT_DIR$/src/physics.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -224,7 +232,8 @@
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="planets-wekazaji" type="cbb8eebc:String" user="planets-wekazaji" />
-              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="assets" type="cbb8eebc:String" user="assets" />
+              <item name="game" type="cbb8eebc:String" user="game" />
             </path>
           </expand>
           <select />
@@ -347,14 +356,7 @@
       <workItem from="1513546184175" duration="5085000" />
       <workItem from="1513633728342" duration="1215000" />
       <workItem from="1513635319031" duration="123000" />
-      <workItem from="1513639156341" duration="1535000" />
-    </task>
-    <task id="LOCAL-00020" summary="reorganized render (moved teleporter up a few lines) and moved check for teleporter-on animation in to gear contact callback">
-      <created>1510160296032</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1510160296032</updated>
+      <workItem from="1513639156341" duration="3658000" />
     </task>
     <task id="LOCAL-00021" summary="registers when the sprite overlaps the teleporter">
       <created>1510205901398</created>
@@ -692,11 +694,18 @@
       <option name="project" value="LOCAL" />
       <updated>1513645899411</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="move levels around">
+      <created>1513646977734</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1513646977734</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189573000" />
+    <option name="totallyTimeSpent" value="191696000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="18" y="23" width="1195" height="714" extended-state="0" />
@@ -765,7 +774,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="divided assets folder to subfolders" />
     <MESSAGE value="pushing assets folder again" />
     <MESSAGE value="fading between each level works, but it doesn't work with main menu enabled :( :(" />
     <MESSAGE value="merge &amp; debugging teleporter collision on level 4" />
@@ -790,7 +798,8 @@
     <MESSAGE value="message fades faster" />
     <MESSAGE value="made music page" />
     <MESSAGE value="merge &amp; changed some body rectangle sizes" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge &amp; changed some body rectangle sizes" />
+    <MESSAGE value="move levels around" />
+    <option name="LAST_COMMIT_MESSAGE" value="move levels around" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -799,7 +808,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/teleporterspritesheet.png" />
     <entry file="file://$PROJECT_DIR$/assets/startPadAnimationSpriteSheet.png" />
     <entry file="file://$PROJECT_DIR$/assets/zapsplat_magical_portal_open_001_12505.mp3" />
     <entry file="file://$PROJECT_DIR$/assets/seamlessspacebright.png" />
@@ -926,14 +934,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/physics.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/planets/smallplanet7.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -954,14 +954,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2970">
           <caret line="198" column="9" lean-forward="false" selection-start-line="198" selection-start-column="9" selection-end-line="198" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1003,14 +995,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="60" lean-forward="true" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/enemy.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1034,6 +1018,35 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/game/nebsprites.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/physics.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>

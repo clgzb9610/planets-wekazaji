@@ -33,3 +33,6 @@ We used [Webstorm](https://www.jetbrains.com/webstorm/download) for our project 
 
 * Our game is based on [Simulate planet gravity with Phaser + Box2D as seen on Angry Birds Space](http://www.emanueleferonato.com/2015/06/19/simulate-planet-gravity-with-phaser-box2d-as-seen-on-angry-birds-space/) by [Emanuele Feronato](http://www.emanueleferonato.com/)
 * Background musics are from [Songs from an Unmade Forest World](http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/) by [Visager](http://freemusicarchive.org/music/Visager/)
+* Teleporter sound is obtained from [ZAPSPLAT](https://www.zapsplat.com/music/magical-portal-open-1/)
+* Gear pickup sound is obtained from [soundbible](http://soundbible.com/1628-Ting.html)
+* Starting pad sound is obtained from [ZAPSPLAT](https://www.zapsplat.com/music/telekinesis-blast-magical-zap-2/)

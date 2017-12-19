@@ -52,7 +52,7 @@ var gravityGraphics;
 
 var bgm;
 
-var currentLevel=0;
+var currentLevel=6;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -124,10 +124,10 @@ var level = [
         {objectType: 'hint', text: "Where are those gears?", delay: 0}
     ],
     [ //level 6 - fun with overlapping gravity fields
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
-        {objectType: 'planet', x: 600, y: 0, gravRadius: 150, gravForce: 270, sprite: "smallplanet"},
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 270, sprite: "roseplanet"},
+        {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 600, sprite: "hydrangea"},
+        {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 600, sprite: "lilac"},
+        {objectType: 'planet', x: 600, y: 0, gravRadius: 150, gravForce: 270, sprite: "hibiscus"},
         {objectType: 'teleporter', x: 696, y: -70, radians: 0.92, goal: 4},
         {objectType: 'startPad', x: -50, y: -110, radians: -0.4},
         {objectType: 'gear', x: -20, y: 50, sprite: "gear"},
@@ -140,12 +140,12 @@ var level = [
         {objectType: 'hint', text: "Now there are two of them!", delay: 1}
     ],
     [ //level 7 - fun with overlapping gravity fields
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 500, sprite: "mediumplanet"},
-        {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
-        {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
-        {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
-        {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 200, sprite: "smallplanet"},
-        {objectType: 'teleporter', x: 100, y: 89, radians: 2.35, goal: 0},// 4},
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 200, gravForce: 500, sprite: "catplanet"},
+        {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 902, sprite: "blueyarn"},
+        {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 902, sprite: "redyarn"},
+        {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 902, sprite: "greenyarn"},
+        {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 902, sprite: "purpleyarn"},
+        {objectType: 'teleporter', x: 100, y: 89, radians: 2.35, goal: 4},
         {objectType: 'startPad', x: -75, y: 100, radians: -2.5},
         {objectType: 'gear', x: 100, y: 300, sprite: "gear"},
         {objectType: 'gear', x: -100, y: -300, sprite: "gear"},
@@ -154,7 +154,7 @@ var level = [
         {objectType: 'player', x: -100, y: 130},
         {objectType: 'enemy1', x: -150, y: 0, enemyVel: 25, sprite: "enemy"},
         {objectType: 'enemy2', x: 150, y: 0, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'hint', text: "Watch out!", delay: 1}
+        {objectType: 'hint', text: "Face the devil planet!", delay: 1}
     ]
 ];
 
@@ -182,6 +182,15 @@ playGame.prototype = {
         game.load.image("orangeplanet", "assets/planets/medplanetorange.png");
         game.load.image("donutplanet", "assets/planets/smallplanet7.png");
         game.load.image("wafelplanet", "assets/planets/wafelplanet.png");
+        game.load.image("catplanet", "assets/planets/mediumcat.png");
+        game.load.image("blueyarn", "assets/planets/blueyarn.png");
+        game.load.image("redyarn", "assets/planets/redyarn.png");
+        game.load.image("greenyarn", "assets/planets/greenyarn.png");
+        game.load.image("purpleyarn", "assets/planets/yarnplanet.png");
+        game.load.image("roseplanet", "assets/planets/rosebush.png");
+        game.load.image("hydrangea", "assets/planets/hydrangeas.png");
+        game.load.image("lilac", "assets/planets/lilacbush.png");
+        game.load.image("hibiscus", "assets/planets/hibiscus.png");
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.spritesheet('player',"assets/game/nebspritesv2.5.png",40,47);
         game.load.spritesheet('gear', 'assets/game/gearspritessmall.png',38,34);
@@ -287,6 +296,7 @@ playGame.prototype = {
 
         helper.messageLocation(playerAngle);
         helper.moveDashboard(playerAngle);
+        game.world.bringToTop(messageGroup);
         game.world.bringToTop(dashboardGroup);
 
 

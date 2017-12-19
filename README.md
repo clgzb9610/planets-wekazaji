@@ -14,7 +14,11 @@ Do you want to be a part of this project? Well, here's how you can start!
 
 We used Javascript for our game. You can use any Javascript editor that you like. But you have to have a local server running to test play the game.
 
-We used [Webstorm](https://www.jetbrains.com/webstorm/download) for our project that it supports built-in server. Also, if you're student, you can download the full version not the 30-day free trial one.
+We used [Webstorm](https://www.jetbrains.com/webstorm/download) for our project that it supports built-in server. Also, if you're student, you can download the full version with your student account.
+
+### Clone with Webstorm
+
+Click 'Check out from Version Control' in Webstorm start menu. Log in to your github account. Copy our github repository URL and paste it to 'Git Repository URL'.
 
 ## Built With
 

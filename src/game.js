@@ -114,11 +114,11 @@ var level = [
         {objectType: 'planet', x: 140, y: 360, gravRadius: 120, gravForce: 300, sprite: "donutplanet"},
         {objectType: 'planet', x: 370, y: -250, gravRadius: 150, gravForce: 270, sprite: "orangeplanet"},
         {objectType: 'planet', x: 590, y: -380, gravRadius: 160, gravForce: 270, sprite: "cinnamonplanet"},
-        {objectType: 'teleporter', x: 349, y: 140, radians: 1.82, goal: 2},
+        {objectType: 'teleporter', x: 349, y: 140, radians: 1.82, goal: 3},
         {objectType: 'startPad', x: 30, y: 17, radians: -1.1},
         {objectType: 'gear', x: 5, y: 400, sprite: "gear"},
         {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
-        // {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
+        {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
         {objectType: 'player', x: 0, y: 10},
         {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "Where are those gears?", delay: 0}
@@ -235,7 +235,7 @@ playGame.prototype = {
         game.add.tileSprite(1048, -1000, 1024, 1024, 'space');
         game.add.tileSprite(1048, 24, 1024, 1024, 'space');
         game.add.tileSprite(1048, 1048, 1024, 1024, 'space');
-        
+
 
         enemyGroup = game.add.group();
         planetGroup = game.add.group();

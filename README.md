@@ -14,7 +14,7 @@ Do you want to be a part of this project? Well, here's how you can start!
 
 We used Javascript for our game. You can use any Javascript editor that you like. But you have to have a local server running to test play the game.
 
-We used Webstorm(https://www.jetbrains.com/webstorm/download) for our project that it supports built-in server. Also, if you're student, you can download the full version not the 30-day free trial one.
+We used [Webstorm](https://www.jetbrains.com/webstorm/download) for our project that it supports built-in server. Also, if you're student, you can download the full version not the 30-day free trial one.
 
 ## Built With
 
@@ -31,5 +31,5 @@ We used Webstorm(https://www.jetbrains.com/webstorm/download) for our project th
 
 ## Acknowledgments
 
-* Our game is based on [Simulate planet gravity with Phaser + Box2D as seen on Angry Birds Space](http://www.emanueleferonato.com/2015/06/19/simulate-planet-gravity-with-phaser-box2d-as-seen-on-angry-birds-space/) by Emanuele Feronato(http://www.emanueleferonato.com/)
-* Background musics are from Songs from an Unmade Forest World(http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/) by Visager(http://freemusicarchive.org/music/Visager/)
+* Our game is based on [Simulate planet gravity with Phaser + Box2D as seen on Angry Birds Space](http://www.emanueleferonato.com/2015/06/19/simulate-planet-gravity-with-phaser-box2d-as-seen-on-angry-birds-space/) by [Emanuele Feronato](http://www.emanueleferonato.com/)
+* Background musics are from [Songs from an Unmade Forest World](http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/) by [Visager](http://freemusicarchive.org/music/Visager/)

@@ -17,9 +17,10 @@ mainMenu.prototype = {
         game.load.image("play_hover", "assets/mainMenu/play_hover.png");
         game.load.image("wekazaji", "assets/mainMenu/wekazaji.png");
         game.load.image("wekazaji_hover", "assets/mainMenu/wekazaji_hover.png");
-        game.load.image("credits", "assets/mainMenu/credits.png");
-        game.load.image("credits_hover", "assets/mainMenu/credits_hover.png");
+        game.load.image("music", "assets/mainMenu/music.png");
+        game.load.image("music_hover", "assets/mainMenu/music_hover.png");
         game.load.image("wekazaji_page", "assets/mainMenu/wakazajiPage.png");
+        game.load.image("music_page", "assets/mainMenu/musicPage.png");
         game.load.image("close", "assets/mainMenu/x.png");
 
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
@@ -52,10 +53,10 @@ mainMenu.prototype = {
         wekazaji.scale.y = 0.4;
         wekazaji.inputEnabled = true;
 
-        credits = game.add.button(200,530,"credits",null, this);
-        credits.scale.x = 0.4;
-        credits.scale.y = 0.4;
-        credits.inputEnabled = true;
+        music = game.add.button(200,530,"music",openMusic, this);
+        music.scale.x = 0.4;
+        music.scale.y = 0.4;
+        music.inputEnabled = true;
 
     },
     update:function() {
@@ -67,8 +68,8 @@ mainMenu.prototype = {
         if (wekazaji.input.pointerOver()) {wekazaji.loadTexture('wekazaji_hover', 0);}
         else {wekazaji.loadTexture('wekazaji', 0);}
 
-        if (credits.input.pointerOver()) {credits.loadTexture('credits_hover', 0);}
-        else {credits.loadTexture('credits', 0);}
+        if (music.input.pointerOver()) {music.loadTexture('music_hover', 0);}
+        else {music.loadTexture('music', 0);}
     },
     render:function(){
 
@@ -106,4 +107,23 @@ function openWekazaj(){
 
 function closeWekazaji(){
     wekazajiPOP.destroy();
+}
+
+function openMusic(){
+    musicPop = game.add.sprite(game.world.centerX, game.world.centerY, 'music_page');
+    musicPop.anchor.set(0.5, 0.5);
+    musicPop.inputEnabled = true;
+
+    var closeButton = game.make.sprite(280, -330, 'close');
+    closeButton.scale.set(0.3);
+    closeButton.inputEnabled = true;
+    closeButton.input.priorityID = 1;
+    closeButton.input.useHandCursor = true;
+    closeButton.events.onInputDown.add(closeMusic, this);
+
+    musicPop.addChild(closeButton);
+}
+
+function closeMusic(){
+    musicPop.destroy();
 }

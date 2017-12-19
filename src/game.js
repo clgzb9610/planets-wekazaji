@@ -11,11 +11,10 @@ var gamePhysics;
 var helper;
 var levelChanger;
 
-// groups containing crates and planets
-// var crateGroup;
 var planetGroup;
 var cursors;
 var playingNow;
+
 //for the player & walk animations
 var player;
 var walkR;
@@ -43,16 +42,13 @@ var forceReducer = 0.0007; //was .00175
 
 var playerVel = 25;
 
-// var enemyCounterClockwise = -1;
-
-//var planetContact = false;
 
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
 var bgm;
 
-var currentLevel=6;
+var currentLevel=0;
 /* x position, y position, gravity radius, gravity force, graphic asset */
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -237,8 +233,6 @@ playGame.prototype = {
         game.add.tileSprite(1048, 1048, 1024, 1024, 'space');
 
 
-
-
         enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
@@ -298,16 +292,9 @@ playGame.prototype = {
         helper.moveDashboard(playerAngle);
         game.world.bringToTop(dashboardGroup);
 
-
         //Handle keyboard input for the player
         helper.handleKeyboardInput(playerAngle);
 
         gamePhysics.constrainVelocity(player,150);
-    },
-    render: function() {
-    //     game.debug.body(player);
-    //     game.debug.body(teleporter);
-        // game.debug.cameraInfo(game.camera, 32, 32);
-        // game.debug.spriteCoords(player, 32, 500);
     }
 };

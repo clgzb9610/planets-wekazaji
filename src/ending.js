@@ -5,10 +5,10 @@ var endingBGM;
 ending.prototype = {
     preload:function(){
         game.load.image("spacebeach", "assets/game/vacationeb.png");
-        game.load.image("playAgain", "assets/deadState/playAgain.png");
-        game.load.image("playAgain_hover", "assets/deadState/playAgain_hover.png");
-        game.load.image("backToMenu", "assets/deadState/backToMenu.png");
-        game.load.image("backToMenu_hover", "assets/deadState/backtoMenu_hover.png");
+        game.load.image("playAgain", "assets/buttons/playAgain.png");
+        game.load.image("playAgain_hover", "assets/buttons/playAgain_hover.png");
+        game.load.image("backToMenu", "assets/buttons/backToMenu.png");
+        game.load.image("backToMenu_hover", "assets/buttons/backtoMenu_hover.png");
         game.load.audio('endingBGM', "assets/music/Visager_-_05_-_Roots_Loop.mp3");
     },
     create:function () {

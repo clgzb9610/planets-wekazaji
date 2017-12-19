@@ -3,10 +3,6 @@ var Helper = function(game){
     var messageBack;
     var messageCaption;
 
-    /*=============================================================================
-       HELPER FUNCTIONS
-    =============================================================================*/
-
 //=======Messages================================================================================================
     this.addMessage = function(text, delay){
         //add score to the screen
@@ -18,6 +14,7 @@ var Helper = function(game){
             messageCaption.anchor.set(0.5);
             messageGroup.add(messageBack);
             messageGroup.add(messageCaption);
+            messageGroup.z = 200;
             lastCaption = text;
            // console.log("add message with delay:,", delay);
             if (delay > 0) {
@@ -195,28 +192,4 @@ var Helper = function(game){
             mute.loadTexture('unMute', 0);
         }
     };
-
-    // this.deadByEnemy = function(){
-    //     // console.log("deadbyEnemy is called");
-    //     // player.body.velocity.x = 0;
-    //     // player.body.velocity.y = 0;
-    //     // game.input.enabled = false;
-    //     //
-    //     // var drop = game.add.tween(player);
-    //     // drop.to({ y: game.world.height-player.height }, 500, Phaser.Easing.Bounce.In);
-    //     // drop.onComplete.add(helper.resetLevel, this);
-    //     // drop.start();
-    //     game.camera.fade('#000000',500);
-    //     game.time.events.add(500,moveToDeadState,this);
-    // };
-
-    function moveToDeadState(){
-        bgm.pause();
-        game.world.pivot.x = 0;
-        game.world.pivot.y = 0;
-        game.world.rotation = 0;
-        game.camera.reset();
-        levelChanger.destroyGroups();
-        game.state.start("DeadState", true, false, 0);
-    }
 };

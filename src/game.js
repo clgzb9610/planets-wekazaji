@@ -296,6 +296,7 @@ playGame.prototype = {
 
         helper.messageLocation(playerAngle);
         helper.moveDashboard(playerAngle);
+        game.world.bringToTop(messageGroup);
         game.world.bringToTop(dashboardGroup);
 
 

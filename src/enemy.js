@@ -1,3 +1,7 @@
+/*
+    *Creates and sets up enemy sprite based on the parameters passed by the levels and adds it to the game
+ */
+
 var Enemy = function (game, x, y, enemyVel) {
     this.sprite = game.add.sprite(x, y, 'enemy');
 
@@ -5,15 +9,15 @@ var Enemy = function (game, x, y, enemyVel) {
     this.maxEnemyVel = 200;
 
     if (this.maxEnemyVel < this.enemyVel) {
-        this.enemyVel = this.maxEnemyVel;
+        this.enemyVel = this.maxEnemyVel; //incase enemyVel > 200
     }
-    // this.body.enable(true);
+
     game.physics.box2d.enable(this.sprite);
     this.sprite.body.static = false;
     this.sprite.body.setRectangle(20,43);
     this.sprite.body.setCollisionCategory(1);
     this.sprite.body.setCollisionMask(1);
-    player.body.setBodyContactCallback(this.sprite, helper.enemyContactCallback, this);
+    player.body.setBodyContactCallback(this.sprite, helper.enemyContactCallback, this); //sets up function called if player collides with enemy
     this.sprite.animations.add('moveR', [0, 1, 2], 7, true);
     this.sprite.animations.add('moveL', [3, 4, 5], 7, true);
 
@@ -35,9 +39,9 @@ Enemy.prototype.update = function() {
     this.enemyAngle = this.handleEnemyRotation(this.sprite);
 
     // Keep the enemy moving
-        this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle - (Math.PI / 2)) ;
-        this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle - (Math.PI / 2)) ;
-        this.sprite.animations.play('moveL');
+    this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle - (Math.PI / 2)) ;
+    this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle - (Math.PI / 2)) ;
+    this.sprite.animations.play('moveL');
 
 
     // This is code if we desire the enemy to move counter clockwise after impact!
@@ -53,16 +57,15 @@ Enemy.prototype.update = function() {
 
     gamePhysics.constrainVelocity(this.sprite,this.maxEnemyVel);
 
-    // if (enemyCollision) {
-    //     console.log("Enemy collide!");
-    //     levelChanger.resetLevel();
-    //     enemyCollision = false;
-    // }
     this.sprite.update();
 };
 
 // ---
 
+
+/* calculates angle between the enemy and the planet it is gravitationally attracted to.
+ * Orients the enemy's feet to the ground.
+*/
 Enemy.prototype.handleEnemyRotation = function(sprite) {
     var angle = this.enemyGravityToPlanets(sprite);
     if (angle > -361) { // angle == -361 if the player is not in any gravity field.
@@ -75,6 +78,10 @@ Enemy.prototype.handleEnemyRotation = function(sprite) {
     return angle;
 };
 
+
+/*
+ * Similar to the physics.js/gravityToPlanets(), which has the necessary documentation
+ */
 Enemy.prototype.enemyGravityToPlanets = function(gravObject) {
     var p = gamePhysics.findClosestPlanet(gravObject);
     var distanceFromPlanet = Phaser.Math.distance(gravObject.x,gravObject.y,p.x,p.y);
@@ -87,6 +94,10 @@ Enemy.prototype.enemyGravityToPlanets = function(gravObject) {
     return angle;
 };
 
+
+/*
+  * Destroys the sprite for levelChange
+ */
 Enemy.prototype.destroySprite = function() {
     this.sprite.destroy();
 };

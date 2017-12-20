@@ -66,7 +66,7 @@ var Helper = function(game){
         if (!begin) {
             return;
         }
-        // if (enemyCounterClockwise === -1) {
+        // if (enemyCounterClockwise === -1) { //switches the enemyCounterClockwise boolean so enemy can move the other way
         //     enemyCounterClockwise = 0;
         // } else {
         //     enemyCounterClockwise = -1;

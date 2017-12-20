@@ -22,9 +22,9 @@ var walkL;
 var stand;
 var fall;
 
+//for the two enemies, populated in levelChanger
 var enemy1;
 var enemy2;
-
 var enemy1Present = false;
 var enemy2Present = false;
 
@@ -296,8 +296,8 @@ playGame.prototype = {
         helper.messageLocation(playerAngle);    //the messages and the dashboard move around relative to the player, since the camera can't spin
         helper.moveDashboard(playerAngle);
 
-        game.world.bringToTop(messageGroup);
-        game.world.bringToTop(dashboardGroup);
+        game.world.bringToTop(messageGroup); //this makes the messageGroup appear on top of all the other objects on screen
+        game.world.bringToTop(dashboardGroup);  //so that enemies/objects can't appear above dashboard
 
         //Handle keyboard input for the player
         helper.handleKeyboardInput(playerAngle);

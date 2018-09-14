@@ -5,20 +5,32 @@ Deep Space Diver is a platformer game where you jump between planets through ove
 ## Play our Game
 
 You can play our game by clicking this link: https://clgzb9610.github.io/planets-wekazaji/
+OR
+Opening the index.html file in a browser of your choice.
 
 ## Getting involved
 
-Do you want to be a part of this project? Well, here's how you can start!
+Do you want to be a part of this project? Well, here’s how you can start!
 
-### Prerequisites
+### What we used
 
-Deep Space Diver is written in Javascript. You can use any Javascript editor that you like. But you have to spin up a local server to test play the game.
+We used Javascript for our game. You can use any Javascript editor that you like. But you have to have a local server running to test play the game. Webstorm gave us a solution.
 
-We used [Webstorm](https://www.jetbrains.com/webstorm/download) for our project, since it has a built-in server. If you are student, you can download the full version of WebStorm for free with your student account.
+### Download Webstorm
+
+We used [Webstorm](https://www.jetbrains.com/webstorm/download) for our project that it supports built-in local server. Also, if you’re student, you can download the full version with your student account.
 
 ### Clone with Webstorm
 
-Click 'Check out from Version Control' in Webstorm start menu. Log in to your github account. Copy our github repository URL and paste it to 'Git Repository URL'.
+Click ‘VCS’ >> ‘Check out from Version Control’ >> Git in Webstorm start menu. Log in to your github account. Copy our github repository URL and paste it to ‘Git Repository URL’ textbox.
+
+### Running the game on Webstorm
+
+Webstorm has its own local server. Open index.html in Webstorm and on the upper-right side, click on the brower icon you want to run.
+
+### Phaser Documentation
+
+Please see [Phaser Example website](https://phaser.io/examples) to learn how Phaser works. Also check out [Phaser 2.6.2 Documentation](https://phaser.io/docs/2.6.2/index).
 
 ### Known bugs
 

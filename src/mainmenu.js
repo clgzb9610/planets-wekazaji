@@ -15,6 +15,7 @@ mainMenu.prototype = {
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.spritesheet("title", "assets/mainMenu/title_sheet.png", 700, 124);
         game.load.image("play", "assets/mainMenu/play.png");
+        game.load.image("levels", "assets/mainMenu/levels.png")
         game.load.image("play_hover", "assets/mainMenu/play_hover.png");
         game.load.image("wekazaji", "assets/mainMenu/wekazaji.png");
         game.load.image("wekazaji_hover", "assets/mainMenu/wekazaji_hover.png");
@@ -44,23 +45,23 @@ mainMenu.prototype = {
         title.animations.add('beaming',[1,2,3],4, true);
         title.animations.play('beaming');
 
-        playButton = game.add.button(200,250,"play",playTheGame,this);
+        playButton = game.add.button(210,260,"play",playTheGame,this);
         playButton.scale.x = 0.4;
         playButton.scale.y = 0.4;
         playButton.inputEnabled = true;
         
-//        levelButton = game.add.button(200,320,"levels",playTheGame,this);
-//        levelButton.scale.x = 0.4;
-//        levelButton.scale.y = 0.4;
-//        levelButton.inputEnabled = true;
+        levelButton = game.add.button(210,360,"levels",playTheGame,this);
+        levelButton.scale.x = 0.4;
+        levelButton.scale.y = 0.4;
+        levelButton.inputEnabled = true;
 
 
-        wekazaji = game.add.button(200,430,"wekazaji",openWekazaj, this);
+        wekazaji = game.add.button(210,460,"wekazaji",openWekazaj, this);
         wekazaji.scale.x = 0.4;
         wekazaji.scale.y = 0.4;
         wekazaji.inputEnabled = true;
 
-        music = game.add.button(200,530,"music",openMusic, this);
+        music = game.add.button(210,560,"music",openMusic, this);
         music.scale.x = 0.4;
         music.scale.y = 0.4;
         music.inputEnabled = true;

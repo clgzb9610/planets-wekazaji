@@ -211,7 +211,7 @@ playGame.prototype = {
         // console.log("creating game");
 
         // new boundaries are centered on 0,0 so the world can rotate
-        game.world.setBounds(-300, -320, 300, 320);
+        game.world.setBounds(-350, -320, 350, 320);
 
         game.time.desiredFps = 25;
 
@@ -273,7 +273,6 @@ playGame.prototype = {
         player.body.setCategoryContactCallback(3, helper.startPadContactCallback, this);
 
         cursors = game.input.keyboard.createCursorKeys();
-        game.camera.follow(player);
     },
 
     update: function(){

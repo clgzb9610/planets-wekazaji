@@ -6,6 +6,7 @@ var menuBGM;
 var wekazajiPOP;
 
 var playButton;
+var levelButton;
 var wekazaji;
 var credits;
 
@@ -43,10 +44,16 @@ mainMenu.prototype = {
         title.animations.add('beaming',[1,2,3],4, true);
         title.animations.play('beaming');
 
-        playButton = game.add.button(200,330,"play",playTheGame,this);
+        playButton = game.add.button(200,250,"play",playTheGame,this);
         playButton.scale.x = 0.4;
         playButton.scale.y = 0.4;
         playButton.inputEnabled = true;
+        
+//        levelButton = game.add.button(200,320,"levels",playTheGame,this);
+//        levelButton.scale.x = 0.4;
+//        levelButton.scale.y = 0.4;
+//        levelButton.inputEnabled = true;
+
 
         wekazaji = game.add.button(200,430,"wekazaji",openWekazaj, this);
         wekazaji.scale.x = 0.4;

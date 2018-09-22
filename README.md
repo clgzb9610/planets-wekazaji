@@ -20,9 +20,13 @@ We used Javascript for our game. You can use any Javascript editor that you like
 
 We used [Webstorm](https://www.jetbrains.com/webstorm/download) for our project that it supports built-in local server. Also, if you’re student, you can download the full version with your student account.
 
+We use [yarn](https://yarnpkg.com) for dependency management, so you'll need to install that as well.
+
 ### Clone with Webstorm
 
 Click ‘VCS’ >> ‘Check out from Version Control’ >> Git in Webstorm start menu. Log in to your github account. Copy our github repository URL and paste it to ‘Git Repository URL’ textbox.
+
+After you clone it, WebStorm should pop up a message in the bottom right asking if you want to install dependencies using yarn - say yes if it does. If it doesn't ask, just open the `package.json` file and it will pop up the message.
 
 ### Running the game on Webstorm
 

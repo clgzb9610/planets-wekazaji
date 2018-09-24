@@ -7,6 +7,7 @@ var wekazajiPOP;
 
 var playButton;
 var levelButton;
+var levelSelectCheck;
 var wekazaji;
 var credits;
 
@@ -50,11 +51,10 @@ mainMenu.prototype = {
         playButton.scale.y = 0.4;
         playButton.inputEnabled = true;
         
-        levelButton = game.add.button(210,360,"levels",playTheGame,this);
+        levelButton = game.add.button(210,360,"levels",openLevelSelect,this);
         levelButton.scale.x = 0.4;
         levelButton.scale.y = 0.4;
         levelButton.inputEnabled = true;
-
 
         wekazaji = game.add.button(210,460,"wekazaji",openWekazaj, this);
         wekazaji.scale.x = 0.4;
@@ -72,6 +72,9 @@ mainMenu.prototype = {
 
         if (playButton.input.pointerOver()) {playButton.loadTexture('play_hover', 0);}
         else {playButton.loadTexture('play', 0);}
+        
+//        if (levelButton.input.pointerOver()) {levelButton.loadTexture('level_hover', 0);}
+//        else {playButton.loadTexture('levels', 0);}
 
         if (wekazaji.input.pointerOver()) {wekazaji.loadTexture('wekazaji_hover', 0);}
         else {wekazaji.loadTexture('wekazaji', 0);}
@@ -91,12 +94,21 @@ function playTheGame(){
     game.time.events.add(500, fadeComplete, this);
 }
 
+function openLevelSelect(){
+    levelSelectCheck = 1;
+    levelSelectPOP = game.add.sprite(game.world.centerX, game.world.centerY, 'space');
+    levelSelectPOP.anchor.set(0.5, 0.5);
+    levelSelectPOP.inputEnabled = true;
+}
 
 function fadeComplete(){
     menuBGM.pause();
     console.log("fadeComplete from main");
     game.state.start("PlayGame", true, false, 0);
 }
+
+
+
 
 function openWekazaj(){
     wekazajiPOP = game.add.sprite(game.world.centerX, game.world.centerY, 'wekazaji_page');

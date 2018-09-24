@@ -266,7 +266,7 @@ playGame.prototype = {
         game.load.image("log", "assets/game/shipslog.png");
         game.load.image('blackScreen', "assets/game/blackScreen.png");
 
-        game.load.spritesheet("flames", "assets/game/flameSprites.png", 4, 4);
+        game.load.spritesheet("flames", "assets/game/flameSprites.png", 8, 8);
 
         game.load.image("dashboard","assets/game/dashboard.png",300,52);
         game.load.image("mute","assets/buttons/mute.png",52,52);
@@ -330,7 +330,8 @@ playGame.prototype = {
         emitter.minParticleSpeed.setTo(-20, -20);
         emitter.maxParticleSpeed.setTo(20, 20);
         emitter.gravity = 0;
-        emitter.setAlpha(0.75, 0, 1000);
+        emitter.setAlpha(0.55, 0, 1000);
+        emitter.setScale(1, 0, 1, 0, 1000);
 
         //one player exists for all levels
         player = game.add.sprite(-155, -45, "player");

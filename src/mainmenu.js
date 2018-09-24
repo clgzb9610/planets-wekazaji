@@ -7,7 +7,6 @@ var wekazajiPOP;
 
 var playButton;
 var levelButton;
-var levelSelectCheck;
 var wekazaji;
 var credits;
 
@@ -95,10 +94,7 @@ function playTheGame(){
 }
 
 function openLevelSelect(){
-    levelSelectCheck = 1;
-    levelSelectPOP = game.add.sprite(game.world.centerX, game.world.centerY, 'space');
-    levelSelectPOP.anchor.set(0.5, 0.5);
-    levelSelectPOP.inputEnabled = true;
+    game.state.start("levelSelect", true, false, 0);
 }
 
 function fadeComplete(){

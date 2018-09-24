@@ -219,6 +219,10 @@ var LevelChanger = function(game){
             enemy2Present = false;
         }
 
+        emitter.forEachExists((particle) => {
+            particle.kill();
+        }, this);
+
         gravityGraphics.destroy();
         gravityGraphics = game.add.graphics(0, 0);
     };

@@ -167,7 +167,18 @@ var Helper = function(game){
             player.animations.play('stand');
         }
 
-        if (keyDown) {
+        var distanceToSurface = 10;
+        var closestPlanet = gamePhysics.findClosestPlanet(player);
+
+        if(closestPlanet !== undefined) {
+            var distanceToPlanet;
+
+            distanceToPlanet = Phaser.Math.distance(player.x, player.y, closestPlanet.x, closestPlanet.y) - player.height / 2;
+
+            distanceToSurface = distanceToPlanet - closestPlanet.width / 2;
+        }
+
+        if (keyDown && distanceToSurface > 5) {
             emitter.x = player.x;
             emitter.y = player.y;
             emitter.start(true, 3000, null, 4);

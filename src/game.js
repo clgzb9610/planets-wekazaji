@@ -46,6 +46,8 @@ var playerVel = 25;
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 
+var emitter;
+
 var bgm;
 
 var currentLevel=0;
@@ -196,6 +198,8 @@ playGame.prototype = {
         game.load.image("log", "assets/game/shipslog.png");
         game.load.image('blackScreen', "assets/game/blackScreen.png");
 
+        game.load.spritesheet("flames", "assets/game/flameSprites.png", 4, 4);
+
         game.load.image("dashboard","assets/game/dashboard.png",300,52);
         game.load.image("mute","assets/buttons/mute.png",52,52);
         game.load.image("unMute", "assets/buttons/unMute.png", 52, 52);
@@ -252,6 +256,13 @@ playGame.prototype = {
         bgm.loop = true;
         bgm.volume = 0.6;
         bgm.play();
+
+        emitter = game.add.emitter(0, 0, 2000);
+        emitter.makeParticles('flames', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+        emitter.minParticleSpeed.setTo(-20, -20);
+        emitter.maxParticleSpeed.setTo(20, 20);
+        emitter.gravity = 0;
+        emitter.setAlpha(0.75, 0, 1000);
 
         //one player exists for all levels
         player = game.add.sprite(-155, -45, "player");

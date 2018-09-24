@@ -135,32 +135,42 @@ var Helper = function(game){
 
     //changes the x & y velocty of the player for every arrow key press, and changes the animation
     this.handleKeyboardInput = function(angle) {
+        var keyDown = false;
+
         if (cursors.left.isDown) {
             // player.body.moveLeft(90);
             player.body.velocity.x += playerVel * Math.cos(angle + (Math.PI / 2));
             player.body.velocity.y += playerVel * Math.sin(angle + (Math.PI / 2));
             player.animations.play('walkL');
+            keyDown = true;
         }
         else if (cursors.right.isDown) {
             // player.body.moveRight(90);
             player.body.velocity.x += playerVel * Math.cos(angle - (Math.PI / 2));
             player.body.velocity.y += playerVel * Math.sin(angle - (Math.PI / 2));
             player.animations.play('walkR');
+            keyDown = true;
         }
         if (cursors.up.isDown) {
             player.body.velocity.x += -playerVel * Math.cos(angle);
             player.body.velocity.y += -playerVel * Math.sin(angle);
             player.animations.play('fall');
-
+            keyDown = true;
         }
         if (cursors.down.isDown) {
             player.body.velocity.x += playerVel * Math.cos(angle);
             player.body.velocity.y += playerVel * Math.sin(angle);
             player.animations.play('stand');
-
+            keyDown = true;
         }
         if (cursors.left.justUp || cursors.right.justUp) {
             player.animations.play('stand');
+        }
+
+        if (keyDown) {
+            emitter.x = player.x;
+            emitter.y = player.y;
+            emitter.start(true, 3000, null, 4);
         }
     };
 

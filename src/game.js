@@ -38,9 +38,9 @@ var score = 0;
 var lastCaption = "";
 
 // a force reducer to let the simulation run smoothly
-var forceReducer = 0.0007; //was .00175
+var forceReducer = 0.00024; //was .00175
 
-var playerVel = 25;
+var playerVel = 40;
 
 
 // graphic object where to draw planet gravity area

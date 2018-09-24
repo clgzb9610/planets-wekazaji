@@ -177,7 +177,7 @@ var LevelChanger = function(game){
     // stop taking in user input, reset all the buttons currently being pressed, make the player character stand,
     // fade a black sprite over the screen to mark level change.
     this.changeLevel = function(){
-        player.body.velocity.x -= 70;
+        player.body.velocity.x -= 110;
         game.input.enabled = false;
 
         //will be in deadByi      
@@ -192,7 +192,7 @@ var LevelChanger = function(game){
         blackScreen.scale.setTo(2, 2); //if the blackscreen sprite is teensy you could scale at like 200x200?
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;
-        var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
+        // var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
         game.time.events.add(500,levelChanger.destroyGroups,this);
         game.time.events.add(501,addGroups,this);
     };

@@ -15,7 +15,7 @@ var Physics = function(game){
         if (angleToPlanet > -361){ // angle == -361 if the player is not in any gravity field.
             //orients players feet toward the ground. Uses var angle as degrees offset by -90
             var playerRotationToGravity = radiansDelta(playerLastAngle, angleToPlanet);
-            var maxPlayerRotationSpeed = 0.15;
+            var maxPlayerRotationSpeed = 0.25;
 
             if (Math.abs(playerRotationToGravity) <= maxPlayerRotationSpeed){
                 playerAngle = angleToPlanet;

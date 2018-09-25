@@ -17,6 +17,9 @@ var tenButton;
 
 //level button backgrounds
 
+//other
+var start;
+
 
 levelSelect.prototype = {
     preload:function(){
@@ -41,6 +44,7 @@ levelSelect.prototype = {
         oneButton.scale.x = 0.3;
         oneButton.scale.y = 0.3;
         oneButton.inputEnabled = true;
+//        oneButton.onInputDown(startLevel, this);
         
         //Level Two
         twoButtonBG = game.add.button(271,191,"background",startLevel,this);
@@ -51,6 +55,7 @@ levelSelect.prototype = {
         twoButton.scale.x = 0.3;
         twoButton.scale.y = 0.3;
         twoButton.inputEnabled = true;
+//        twoButton.onInputDown(startLevel, this);
         
 
 
@@ -68,19 +73,19 @@ levelSelect.prototype = {
 function test() {}
 
 function startLevel(level) {
-    if (level == "one") {
-        start = 1;
-        replayTheGame(start);
+    if (level == 0) {
+        start = 0;
+        refadeComplete();
     }
 }
 
-function replayTheGame(start){
-    game.camera.fade('#000000',500);
-    // game.camera.onFadeComplete.add(refadeComplete,this);
-    game.time.events.add(500, refadeComplete(start), this);
-}
+//function replayTheGame(start){
+//    game.camera.fade('#000000',500);
+//    // game.camera.onFadeComplete.add(refadeComplete,this);
+//    game.time.events.add(500, refadeComplete(start), this);
+//}
 
 function refadeComplete(start){
     destroyEndStateObjects();
-    game.state.start("PlayGame", true, false, 0,currentLevel = start);
+    game.state.start("PlayGame", true, false, currentLevel = 0);
 }

@@ -3,30 +3,55 @@ var levelSelect = function (game) {};
 
 var levelBackground;
 
+//level button variables
+var oneButton;
+var twoButton;
+var threeButton;
+var fourButton;
+var fiveButton;
+var sixButton;
+var sevenButton;
+var eightButton;
+var nineButton;
+var tenButton;
+
+//level button backgrounds
+
 
 levelSelect.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");
-        game.load.spritesheet("title", "assets/mainMenu/title_sheet.png", 700, 124);
-        game.load.image("play", "assets/mainMenu/play.png");
-        game.load.image("levels", "assets/mainMenu/levels.png")
-        game.load.image("play_hover", "assets/mainMenu/play_hover.png");
-        game.load.image("wekazaji", "assets/mainMenu/wekazaji.png");
-        game.load.image("wekazaji_hover", "assets/mainMenu/wekazaji_hover.png");
-        game.load.image("music", "assets/mainMenu/music.png");
-        game.load.image("music_hover", "assets/mainMenu/music_hover.png");
-        game.load.image("wekazaji_page", "assets/mainMenu/wakazajiPage.png");
-        game.load.image("music_page", "assets/mainMenu/musicPage.png");
-        game.load.image("close", "assets/mainMenu/x.png");
+        game.load.image("one", "assets/levelSelect/1.png");
+        game.load.image("two", "assets/levelSelect/2.png");
+        game.load.image("background", "assets/levelSelect/background.png");
 
-        game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
-        // from http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/Home_Departure_Loop
     },
     create:function () {
-        console.log("creating main menu");
+        console.log("creating level select");
         game.world.setBounds(0, 0, 700, 700);
 
         levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
+        
+        //Level One
+        oneButtonBG = game.add.button(41,191,"background",startLevel,this);
+        oneButtonBG.scale.x = 0.3;
+        oneButtonBG.scale.y = 0.3;
+        
+        oneButton = game.add.button(50,200,"one",startLevel,this);
+        oneButton.scale.x = 0.3;
+        oneButton.scale.y = 0.3;
+        oneButton.inputEnabled = true;
+        
+        //Level Two
+        twoButtonBG = game.add.button(271,191,"background",startLevel,this);
+        twoButtonBG.scale.x = 0.3;
+        twoButtonBG.scale.y = 0.3;
+        
+        twoButton = game.add.button(280,200,"two",startLevel,this);
+        twoButton.scale.x = 0.3;
+        twoButton.scale.y = 0.3;
+        twoButton.inputEnabled = true;
+        
 
 
     },
@@ -38,3 +63,24 @@ levelSelect.prototype = {
 
     }
 };
+
+
+function test() {}
+
+function startLevel(level) {
+    if (level == "one") {
+        start = 1;
+        replayTheGame(start);
+    }
+}
+
+function replayTheGame(start){
+    game.camera.fade('#000000',500);
+    // game.camera.onFadeComplete.add(refadeComplete,this);
+    game.time.events.add(500, refadeComplete(start), this);
+}
+
+function refadeComplete(start){
+    destroyEndStateObjects();
+    game.state.start("PlayGame", true, false, 0,currentLevel = start);
+}

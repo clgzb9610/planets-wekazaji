@@ -36,22 +36,22 @@ levelSelect.prototype = {
         levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
         
         //Level One
-        oneButtonBG = game.add.button(41,191,"background",startLevel,this);
+        oneButtonBG = game.add.button(41,191,"background",buttonOne,this);
         oneButtonBG.scale.x = 0.3;
         oneButtonBG.scale.y = 0.3;
         
-        oneButton = game.add.button(50,200,"one",startLevel,this);
+        oneButton = game.add.button(50,200,"one",buttonOne,this);
         oneButton.scale.x = 0.3;
         oneButton.scale.y = 0.3;
         oneButton.inputEnabled = true;
 //        oneButton.onInputDown(startLevel, this);
         
         //Level Two
-        twoButtonBG = game.add.button(271,191,"background",startLevel,this);
+        twoButtonBG = game.add.button(271,191,"background",buttonTwo,this);
         twoButtonBG.scale.x = 0.3;
         twoButtonBG.scale.y = 0.3;
         
-        twoButton = game.add.button(280,200,"two",startLevel,this);
+        twoButton = game.add.button(280,200,"two",buttonTwo,this);
         twoButton.scale.x = 0.3;
         twoButton.scale.y = 0.3;
         twoButton.inputEnabled = true;
@@ -77,6 +77,14 @@ function startLevel(level) {
         start = 0;
         refadeComplete();
     }
+}
+
+function buttonOne() {
+    game.state.start("PlayGame", true, false, currentLevel = 0);
+}
+
+function buttonTwo() {
+    game.state.start("PlayGame", true, false, currentLevel = 1);
 }
 
 //function replayTheGame(start){

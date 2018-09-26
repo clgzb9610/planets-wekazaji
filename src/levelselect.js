@@ -26,6 +26,7 @@ levelSelect.prototype = {
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.image("one", "assets/levelSelect/1.png");
         game.load.image("two", "assets/levelSelect/2.png");
+        game.load.image("three", "assets/levelSelect/3.png");
         game.load.image("background", "assets/levelSelect/background.png");
 
     },
@@ -44,18 +45,26 @@ levelSelect.prototype = {
         oneButton.scale.x = 0.3;
         oneButton.scale.y = 0.3;
         oneButton.inputEnabled = true;
-//        oneButton.onInputDown(startLevel, this);
         
         //Level Two
-        twoButtonBG = game.add.button(271,191,"background",buttonTwo,this);
+        twoButtonBG = game.add.button(256,191,"background",buttonTwo,this);
         twoButtonBG.scale.x = 0.3;
         twoButtonBG.scale.y = 0.3;
         
-        twoButton = game.add.button(280,200,"two",buttonTwo,this);
+        twoButton = game.add.button(265,200,"two",buttonTwo,this);
         twoButton.scale.x = 0.3;
         twoButton.scale.y = 0.3;
         twoButton.inputEnabled = true;
-//        twoButton.onInputDown(startLevel, this);
+        
+        //Level Three
+        threeButtonBG = game.add.button(471,191,"background",buttonTwo,this);
+        threeButtonBG.scale.x = 0.3;
+        threeButtonBG.scale.y = 0.3;
+        
+        threeButton = game.add.button(480,200,"three",buttonThree,this);
+        threeButton.scale.x = 0.3;
+        threeButton.scale.y = 0.3;
+        threeButton.inputEnabled = true;
         
 
 
@@ -85,6 +94,10 @@ function buttonOne() {
 
 function buttonTwo() {
     game.state.start("PlayGame", true, false, currentLevel = 1);
+}
+
+function buttonThree() {
+    game.state.start("PlayGame", true, false, currentLevel = 2);
 }
 
 //function replayTheGame(start){

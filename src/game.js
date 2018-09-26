@@ -257,7 +257,7 @@ playGame.prototype = {
         game.load.image("gearPlanet", "assets/planets/sample_Planet_mid.png");
 
         game.load.image("space", "assets/game/seamlessspacebright.png");
-        game.load.spritesheet('player',"assets/game/nebspritesv2.5.png",40,47);
+        game.load.spritesheet('player',"assets/game/nebspritesv3.0.png",40,47);
         game.load.spritesheet("enemy", "assets/game/enemyblink.png", 41,43);
         game.load.spritesheet('gear', 'assets/game/gearspritessmall.png',38,34);
         game.load.spritesheet('teleporter', 'assets/game/teleporterspritesheet.png', 48, 61);
@@ -285,7 +285,7 @@ playGame.prototype = {
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-350, -320, 350, 320);
 
-        game.time.desiredFps = 25;
+        game.time.desiredFps = 70;
 
         //tiled background image to cover a wide enough area
         background = game.add.tileSprite(-2024, -2024, 1024, 1024, 'space');

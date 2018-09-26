@@ -285,7 +285,7 @@ playGame.prototype = {
         // new boundaries are centered on 0,0 so the world can rotate
         game.world.setBounds(-350, -320, 350, 320);
 
-        game.time.desiredFps = 25;
+        game.time.desiredFps = 70;
 
         //tiled background image to cover a wide enough area
         background = game.add.tileSprite(-2024, -2024, 1024, 1024, 'space');

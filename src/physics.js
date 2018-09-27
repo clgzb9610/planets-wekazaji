@@ -4,45 +4,63 @@ var Physics = function(game){
     * Orients the player's feet to the ground & handles all the world rotation.
     */
     this.handlePlayerRotation = function(player){
+        // These parameters control how fast the player rotates to keep their feet pointing
+        // down as they move through gravity fields, and how fast the camera rotates to keep
+        // up with the player.
+        //
+        // The two *MaxRotationRate values limit how fast each rotation can happen in radians/sec.
+        //
+        // The two *RotationEagerness values control how quickly each rotation works toward
+        // its goal when the current and target angles are close. Lower values cause the
+        // player/camera to drift gently to rest; higher values cause it to stop abruptly.
+        //
+        // Note that the keyboard control work relative to the camera angle, so low camera
+        // rotate parameters can make the player launch off the ground even when pressing
+        // only left/right.
+        //
+        const playerMaxRotationRate = 8;
+        const playerRotationEagerness = 7;
+        const cameraMaxRotationRate = 4.2;
+        const cameraRotationEagerness = 10;
 
         var angleToPlanet = gravityToPlanets(player);
-        var playerAngle;
+        var playerAngle = Phaser.Math.degToRad(player.body.angle + 90);
+        var cameraAngle = -game.world.rotation + Math.PI / 2;
 
-        if (playerLastAngle === undefined){
-            playerAngle = angleToPlanet;
-            playerLastAngle = playerAngle;
-        }
-        if (angleToPlanet > -361){ // angle == -361 if the player is not in any gravity field.
-            //orients players feet toward the ground. Uses var angle as degrees offset by -90
-            var playerRotationToGravity = radiansDelta(playerLastAngle, angleToPlanet);
-            var maxPlayerRotationSpeed = 0.25;
+        if (angleToPlanet != -361) { // angle == -361 if the player is not in any gravity field.
+            player.body.angularVelocity = radiansRotation(
+                playerAngle, angleToPlanet,
+                playerRotationEagerness,
+                playerMaxRotationRate);
 
-            if (Math.abs(playerRotationToGravity) <= maxPlayerRotationSpeed){
-                playerAngle = angleToPlanet;
-            } else if ( playerRotationToGravity > Math.PI){
-                playerAngle = playerLastAngle + maxPlayerRotationSpeed;
-            } else {
-                playerAngle = playerLastAngle - maxPlayerRotationSpeed;
-            }
-
-            player.body.angle = angleToPlanet * 180 / Math.PI - 90;
-            playerLastAngle = playerAngle;
-        } else{
-            playerAngle = playerLastAngle;
+            cameraAngle += radiansRotation(
+                cameraAngle, playerAngle,
+                cameraRotationEagerness * game.time.physicsElapsed, // multiply by physics dt because we're doing
+                cameraMaxRotationRate * game.time.physicsElapsed);  // absolute addition, not setting velocity
         }
 
         game.world.pivot.x = player.x;          //these two rotate the world around the player
         game.world.pivot.y = player.y;
-        game.world.rotation = -playerAngle + (Math.PI/2);     //rotates the world so the controls aren't global
+        game.world.rotation = -cameraAngle + Math.PI / 2;     //rotates the world so the controls aren't global
 
-        return playerAngle;
+        return cameraAngle;
+    };
+
+    /**
+     * A rotation from fromAngle in the direction of toAngle, multiplied by rate,
+     * then pinned to the range [-maxStep, maxStep].
+     */
+    function radiansRotation(fromAngle, toAngle, rate, maxStep) {
+        return Math.min(maxStep,
+            Math.max(-maxStep,
+                radiansDelta(fromAngle, toAngle) * rate));
     };
 
     /* Shortest distance between two angles in range -pi to pi.
      * (there's a possibility this needs to be updated - maybe it turns the same direction every time? im not sure)
     */
     function radiansDelta(fromAngle, toAngle){
-        return normalizedRadians(fromAngle - toAngle + Math.PI) - Math.PI;
+        return normalizedRadians(toAngle - fromAngle + Math.PI) - Math.PI;
     }
 
     /* normalizes a angle to the range 0 to 2 pi.
@@ -69,8 +87,9 @@ var Physics = function(game){
             angle = Phaser.Math.angleBetween(gravObject.x, gravObject.y, p.x, p.y);
 
             // add gravity force to the gravObject in the direction of planet center
-            gravObject.body.applyForce(p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet - p.width / 2),
-                p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet - p.width / 2));
+            gravObject.body.applyForce(
+                p.gravityForce * Math.cos(angle) * forceReducer * (distanceFromPlanet),
+                p.gravityForce * Math.sin(angle) * forceReducer * (distanceFromPlanet));
         }
         return angle;
     }
@@ -126,7 +145,7 @@ var Physics = function(game){
             vy = Math.sin(angle) * maxVelocity;
             body.velocity.x = vx;
             body.velocity.y = vy;
-            // console.log('limited speed to: '+ maxVelocity);
+            // console.log('limited speed of ', sprite, 'from:', currVelocitySqr, ' to: ', maxVelocity);
         }
     };
 

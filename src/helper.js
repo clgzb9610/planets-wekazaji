@@ -133,39 +133,61 @@ var Helper = function(game){
 //==============================================================================================================
     // ==================== OTHER HELPER FUNCTIONS ==============================
 
+    // Calculates thew new speeds for the emitter particles
+    this.calculateParticleVelocities = function (xSpeed, ySpeed) {
+        if (xSpeed > 0) {
+            emitter.setXSpeed(-1 * playerVel, 0);
+        }
+        else {
+            emitter.setXSpeed(0, playerVel);
+        }
+        if (ySpeed > 0) {
+            emitter.setYSpeed(-1 * playerVel, 0);
+        }
+        else {
+            emitter.setYSpeed(0, playerVel);
+        }
+    };
+
     //changes the x & y velocty of the player for every arrow key press, and changes the animation
     this.handleKeyboardInput = function(angle) {
         var keyDown = false;
 
+        var xSpeedAdjustment = 0,
+            ySpeedAdjustment = 0;
+
         if (cursors.left.isDown) {
             // player.body.moveLeft(90);
-            player.body.velocity.x += playerVel * Math.cos(angle + (Math.PI / 2));
-            player.body.velocity.y += playerVel * Math.sin(angle + (Math.PI / 2));
+            xSpeedAdjustment += playerVel * Math.cos(angle + (Math.PI / 2));
+            ySpeedAdjustment += playerVel * Math.sin(angle + (Math.PI / 2));
             player.animations.play('walkL');
             keyDown = true;
         }
         else if (cursors.right.isDown) {
             // player.body.moveRight(90);
-            player.body.velocity.x += playerVel * Math.cos(angle - (Math.PI / 2));
-            player.body.velocity.y += playerVel * Math.sin(angle - (Math.PI / 2));
+            xSpeedAdjustment += playerVel * Math.cos(angle - (Math.PI / 2));
+            ySpeedAdjustment += playerVel * Math.sin(angle - (Math.PI / 2));
             player.animations.play('walkR');
             keyDown = true;
         }
         if (cursors.up.isDown) {
-            player.body.velocity.x += -playerVel * Math.cos(angle);
-            player.body.velocity.y += -playerVel * Math.sin(angle);
+            xSpeedAdjustment += -playerVel * Math.cos(angle);
+            ySpeedAdjustment += -playerVel * Math.sin(angle);
             player.animations.play('fall');
             keyDown = true;
         }
         if (cursors.down.isDown) {
-            player.body.velocity.x += playerVel * Math.cos(angle);
-            player.body.velocity.y += playerVel * Math.sin(angle);
+            xSpeedAdjustment += playerVel * Math.cos(angle);
+            ySpeedAdjustment += playerVel * Math.sin(angle);
             player.animations.play('stand');
             keyDown = true;
         }
         if (cursors.left.justUp || cursors.right.justUp) {
             player.animations.play('stand');
         }
+
+        player.body.velocity.x += xSpeedAdjustment;
+        player.body.velocity.y += ySpeedAdjustment;
 
         var distanceToSurface = 10;
         var closestPlanet = gamePhysics.findClosestPlanet(player);
@@ -179,9 +201,10 @@ var Helper = function(game){
         }
 
         if (keyDown && distanceToSurface > 5) {
+            this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
             emitter.x = player.x;
             emitter.y = player.y;
-            emitter.start(true, 3000, null, 4);
+            emitter.start(true, 3000, null, 2);
         }
     };
 

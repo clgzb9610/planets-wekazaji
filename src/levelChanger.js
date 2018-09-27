@@ -58,6 +58,7 @@ var LevelChanger = function(game){
         planetGroup.add(planet);
         game.physics.box2d.enable(planet);
         planet.body.static = true;
+        planet.body.friction = 1;
 
         planet.body.setCircle(planet.width / 2);
         gravityGraphics.drawCircle(planet.x, planet.y, planet.width + planet.gravityRadius);

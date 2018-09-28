@@ -154,7 +154,7 @@ var level = [
         {objectType: 'hint', text: "Face the devil planet!", delay: 1}
     ], // level 7
     [ //level 8 - find the hidden gear
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 500, sprite: "treasureBig"},
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 400, sprite: "treasureBig"},
         {objectType: 'planet', x: 0, y: 650, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
         {objectType: 'planet', x: 0, y: 1165, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
         {objectType: 'planet', x: -550, y: 340, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},

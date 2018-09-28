@@ -351,6 +351,7 @@ playGame.prototype = {
         //player collides with gears and start pad
         player.body.setCategoryContactCallback(2, helper.gearCallback, this);
         player.body.setCategoryContactCallback(3, helper.startPadContactCallback, this);
+        player.body.friction = 1;
 
         cursors = game.input.keyboard.createCursorKeys();
     },

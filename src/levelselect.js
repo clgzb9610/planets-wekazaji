@@ -28,6 +28,7 @@ levelSelect.prototype = {
         game.load.image("six", "assets/levelSelect/6.png");
         game.load.image("seven", "assets/levelSelect/7.png");
         game.load.image("eight", "assets/levelSelect/8.png");
+        game.load.image("nine", "assets/levelSelect/9.png");
         game.load.image("background", "assets/levelSelect/background.png");
 
     },
@@ -124,10 +125,10 @@ levelSelect.prototype = {
         nineButtonBG.scale.x = 0.3;
         nineButtonBG.scale.y = 0.3;
         
-//        threeButton = game.add.button(480,200,"three",buttonThree,this);
-//        threeButton.scale.x = 0.3;
-//        threeButton.scale.y = 0.3;
-//        threeButton.inputEnabled = true;
+        threeButton = game.add.button(480,535,"nine",buttonNine,this);
+        threeButton.scale.x = 0.3;
+        threeButton.scale.y = 0.3;
+        threeButton.inputEnabled = true;
 
     },
     update:function() {

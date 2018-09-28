@@ -132,8 +132,8 @@ var level = [
         {objectType: 'gear', x: 250, y: -250, sprite: "gear"},
         {objectType: 'gear', x: 580, y: -100, sprite: "gear"},
         {objectType: 'player', x: -70, y: -140},
-        {objectType: 'enemy1', x: 360, y: -20, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'enemy2', x: 240, y: 20, enemyVel: 25, sprite: "enemy"},
+        {objectType: 'enemy1', x: 360, y: -20, enemyVel: 15, sprite: "enemy"},
+        {objectType: 'enemy2', x: 240, y: 20, enemyVel: 15, sprite: "enemy"},
         {objectType: 'hint', text: "Now there are two of them!", delay: 1}
     ], // level 6
     [ //level 7 - two enemies circling center planet
@@ -150,7 +150,7 @@ var level = [
         {objectType: 'gear', x: -250, y: -100, sprite: "gear"},
         {objectType: 'player', x: -100, y: 130},
         {objectType: 'enemy1', x: -150, y: 0, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'enemy2', x: 150, y: 0, enemyVel: 25, sprite: "enemy"},
+        {objectType: 'enemy2', x: 150, y: 0, enemyVel: 45, sprite: "enemy"},
         {objectType: 'hint', text: "Face the devil planet!", delay: 1}
     ], // level 7
     [ //level 8 - find the hidden gear

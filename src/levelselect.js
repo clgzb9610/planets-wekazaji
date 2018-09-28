@@ -30,6 +30,8 @@ levelSelect.prototype = {
         game.load.image("eight", "assets/levelSelect/8.png");
         game.load.image("nine", "assets/levelSelect/9.png");
         game.load.image("background", "assets/levelSelect/background.png");
+        
+        game.load.image("nextArrow", "assets/levelSelect/nextArrow.png");
 
     },
     create:function () {
@@ -38,10 +40,23 @@ levelSelect.prototype = {
 
         levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
         
+        //Next Screen Arrow Right
+        nextArrowR = game.add.button(630, 60, "nextArrow", test, this);
+        nextArrowR.scale.x = 0.1;
+        nextArrowR.scale.y = 0.1;
+        
+        //Next Screen Arrow Left
+        nextArrowL = game.add.button(70, 60, "nextArrow", test, this);
+        nextArrowL.scale.x = -0.1;
+        nextArrowL.scale.y = 0.1;
+        
         //Level One
         oneButtonBG = game.add.button(41,191,"background",buttonOne,this);
+//        oneButtonBG = game.add.sprite(41, 191, "background");
         oneButtonBG.scale.x = 0.3;
         oneButtonBG.scale.y = 0.3;
+//        oneButtonBG.alpha = 0.8;
+        
         
         oneButton = game.add.button(50,200,"one",buttonOne,this);
         oneButton.scale.x = 0.3;
@@ -100,35 +115,35 @@ levelSelect.prototype = {
         
         
         //Level Seven
-        sevenButtonBG = game.add.button(41,526,"background",buttonSeven,this);
+        sevenButtonBG = game.add.button(41,521,"background",buttonSeven,this);
         sevenButtonBG.scale.x = 0.3;
         sevenButtonBG.scale.y = 0.3;
         
-        sevenButton = game.add.button(50,535,"seven",buttonSeven,this);
+        sevenButton = game.add.button(50,530,"seven",buttonSeven,this);
         sevenButton.scale.x = 0.3;
         sevenButton.scale.y = 0.3;
         sevenButton.inputEnabled = true;
         
-//        //Level Eight
-        eightButtonBG = game.add.button(256,526,"background",buttonEight,this);
+        //Level Eight
+        eightButtonBG = game.add.button(256,521,"background",buttonEight,this);
         eightButtonBG.scale.x = 0.3;
         eightButtonBG.scale.y = 0.3;
         
-        eightButton = game.add.button(265,535,"eight",buttonThree,this);
+        eightButton = game.add.button(265,530,"eight",buttonThree,this);
         eightButton.scale.x = 0.3;
         eightButton.scale.y = 0.3;
         eightButton.inputEnabled = true;
         
         
-//        //Level Nine
-        nineButtonBG = game.add.button(471,526,"background",buttonNine,this);
+        //Level Nine
+        nineButtonBG = game.add.button(471,521,"background",buttonNine,this);
         nineButtonBG.scale.x = 0.3;
         nineButtonBG.scale.y = 0.3;
         
-        threeButton = game.add.button(480,535,"nine",buttonNine,this);
-        threeButton.scale.x = 0.3;
-        threeButton.scale.y = 0.3;
-        threeButton.inputEnabled = true;
+        nineButton = game.add.button(480,530,"nine",buttonNine,this);
+        nineButton.scale.x = 0.3;
+        nineButton.scale.y = 0.3;
+        nineButton.inputEnabled = true;
 
     },
     update:function() {

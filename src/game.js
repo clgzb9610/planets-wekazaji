@@ -50,7 +50,7 @@ var emitter;
 
 var bgm;
 
-var currentLevel=8;
+var currentLevel=0;
 
 var level = [
     [ //level 0 - collect gears to activate portal

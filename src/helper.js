@@ -2,6 +2,8 @@ var Helper = function(game){
 
     var messageBack;
     var messageCaption;
+    var particleFrequency = 5;
+    var frameCounter = 0;
 
 //=======Messages================================================================================================
     this.addMessage = function(text, delay){
@@ -199,12 +201,16 @@ var Helper = function(game){
 
             distanceToSurface = distanceToPlanet - closestPlanet.width / 2;
         }
-
-        if (keyDown && distanceToSurface > 5) {
+        
+        if (keyDown && distanceToSurface > 5 && frameCounter === 0) {
             this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
             emitter.x = player.x;
             emitter.y = player.y;
-            emitter.start(true, 3000, null, 2);
+            emitter.start(true, 3000, null, 1);
+        }
+        frameCounter += 1;
+        if (frameCounter >= particleFrequency) {
+            frameCounter = 0;
         }
     };
 

@@ -2,7 +2,7 @@ var Helper = function(game){
 
     var messageBack;
     var messageCaption;
-    var particleFrequency = 5;
+    var particleFrequency = 4;
     var frameCounter = 0;
 
 //=======Messages================================================================================================
@@ -137,18 +137,16 @@ var Helper = function(game){
 
     // Calculates thew new speeds for the emitter particles
     this.calculateParticleVelocities = function (xSpeed, ySpeed) {
-        if (xSpeed > 0) {
-            emitter.setXSpeed(-1 * playerVel, 0);
-        }
-        else {
-            emitter.setXSpeed(0, playerVel);
-        }
-        if (ySpeed > 0) {
-            emitter.setYSpeed(-1 * playerVel, 0);
-        }
-        else {
-            emitter.setYSpeed(0, playerVel);
-        }
+        // var minXSpeed = -playerVel / 2,
+        //     maxXSpeed = playerVel / 2,
+        //     minYSpeed = -playerVel / 2,
+        //     maxYSpeed = playerVel / 2;
+
+        // emitter.setXSpeed(minXSpeed + xSpeed, maxXSpeed + xSpeed);
+        // emitter.setYSpeed(minYSpeed + ySpeed, maxYSpeed + ySpeed);
+
+        emitter.setXSpeed(-xSpeed, -xSpeed);
+        emitter.setYSpeed(-ySpeed, -ySpeed);
     };
 
     //changes the x & y velocty of the player for every arrow key press, and changes the animation

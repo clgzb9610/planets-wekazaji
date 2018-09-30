@@ -330,8 +330,8 @@ playGame.prototype = {
         emitter.minParticleSpeed.setTo(-20, -20);
         emitter.maxParticleSpeed.setTo(20, 20);
         emitter.gravity = 0;
-        emitter.setAlpha(1, 0, 1000);
-        emitter.setScale(1, 3, 1, 3, 1000);
+        emitter.setAlpha(1, 0, 700);
+        emitter.setScale(0.5, 2, 0.5, 2, 700);
 
         //one player exists for all levels
         player = game.add.sprite(-155, -45, "player");

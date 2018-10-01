@@ -136,7 +136,19 @@ function openMusic(){
     closeButton.input.useHandCursor = true;
     closeButton.events.onInputDown.add(closeMusic, this);
 
+    var musicLinkButton = new Phaser.Button(game, 211 - 350, 111 - 350, null, openMusicLink);
+    musicLinkButton.inputEnabled = true;
+    musicLinkButton.input.useHandCursor = true;
+    musicLinkButton.width = 274;
+    musicLinkButton.height = 274;
+
+    musicPop.addChild(musicLinkButton);
     musicPop.addChild(closeButton);
+}
+
+function openMusicLink() {
+    console.log("Music Link was clicked");
+    window.open("https://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/", "_blank");
 }
 
 function closeMusic(){

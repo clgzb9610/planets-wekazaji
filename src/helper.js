@@ -6,61 +6,6 @@ var Helper = function(game){
     var particleFrequency = 4;
     var frameCounter = 0;
 
-//=======Messages================================================================================================
-    this.addMessage = function(text, delay){
-        //add score to the screen
-        if(lastCaption !== text || game.time.events.duration === 0) {
-            messageBack = game.add.sprite(1000, 1000, "log");
-            messageBack.scale.setTo(0.5, 0.5);
-            messageBack.anchor.set(0.5);
-            messageCaption = game.add.text(1000, 1000, text, {fill: '#72fa80', font: '10pt Courier'});
-            messageCaption.anchor.set(0.5);
-            messageGroup.add(messageBack);
-            messageGroup.add(messageCaption);
-            messageGroup.z = 200;
-            lastCaption = text;
-           // console.log("add message with delay:,", delay);
-            if (delay > 0) {
-                messageTimer(delay); //fades message
-            }
-        }
-    };
-
-    //will start to fade the message after a delay
-    function messageTimer(delay){
-        game.time.events.add(Phaser.Timer.SECOND * delay, fadeMessage, this);
-    }
-
-    function fadeMessage(){
-     //  adds a tween to fade the message out
-        var bubbleTween = game.add.tween(messageBack).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true); //100 -> 400
-        var textTween = game.add.tween(messageCaption).to( { alpha: 0 }, 400, Phaser.Easing.Linear.None, true);
-        bubbleTween.onComplete.add(destroyMessage, this);
-        textTween.onComplete.add(destroyMessage, this);
-    }
-
-    //remove message objects after the tween fade is complete, and remove them from the group
-    function destroyMessage(){
-        messageGroup.remove(messageBack);
-        messageGroup.remove(messageCaption);
-        messageBack.destroy();
-       // console.log("destroyed messageBack");
-        messageCaption.destroy();
-       // console.log("destroyed caption");
-    }
-
-    //move the message relative to the player
-    this.messageLocation = function(angle) {
-        if(messageBack !== null) {
-            messageBack.x = player.x - 190 * Math.cos(angle);
-            messageBack.y = player.y - 190 * Math.sin(angle);
-            messageCaption.x = player.x - 190 * Math.cos(angle);
-            messageCaption.y = player.y - 190 * Math.sin(angle);
-            messageBack.angle = angle * 180 / Math.PI - 90;
-            messageCaption.angle = angle * 180 / Math.PI - 90;
-        }
-    };
-
 //=======================================================================================================
 //  ========== CONTACT CALLBACKS ========================================
 
@@ -97,7 +42,6 @@ var Helper = function(game){
         ting.volume = 0.6;
         ting.play();
         score += 1;
-        helper.addMessage(score + " / " + levelGoal, 0.7);
         if (score >= levelGoal) {
             teleporter.animations.play('swirl');
             var teleporterOpenSound = game.add.audio("teleporterOpen");
@@ -123,7 +67,7 @@ var Helper = function(game){
             if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
               //  console.log('teleporter CONTACT');
                 if(score < levelGoal) {
-                    this.addMessage("This portal is broken.\nCollect gears to repair.", 3);
+                    console.log("portal does not work yet, collect gears!");
                 } else {
                     playingNow = false;
                     console.log("level beaten");

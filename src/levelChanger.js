@@ -43,9 +43,6 @@ var LevelChanger = function(game){
             if(addition.objectType === 'player'){
                 movePlayer(addition.x,addition.y);
             }
-            if(addition.objectType === 'hint'){
-                helper.addMessage(addition.text,3);
-            }
         }
         addDashboard();
     };
@@ -209,8 +206,6 @@ var LevelChanger = function(game){
 
         dashboardGroup.destroy();
 
-        messageGroup.destroy();
-
         enemyGroup.destroy();
         if (enemy1Present) {
             enemy1.destroySprite();
@@ -236,7 +231,6 @@ var LevelChanger = function(game){
         planetGroup = game.add.group();
         objectGroup = game.add.group();
         dashboardGroup = game.add.group();
-        messageGroup = game.add.group();
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         currentLevel++;

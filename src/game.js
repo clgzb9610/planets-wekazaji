@@ -58,8 +58,7 @@ var level = [
         {objectType:'teleporter', x:0, y: -215, radians: 0, goal:1},
         {objectType: 'startPad', x: -230,y: -115,radians: -1.1},
         {objectType: 'gear', x: 30, y: 200, sprite:"gear"},
-        {objectType: 'player', x: -240, y: -150},
-        {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move.", delay: 2}
+        {objectType: 'player', x: -240, y: -150}
     ], // level 0
     [//level 1 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 350, sprite: "smallstar"},
@@ -69,8 +68,7 @@ var level = [
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: -430, y: -50},
-        {objectType: 'hint', text: "The portal's so far!\nMaybe you can jump?", delay: 2}
+        {objectType: 'player', x: -430, y: -50}
     ], // level 1
     [//level 2 - start in void
         {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 250, sprite: "axoplanet"},
@@ -80,8 +78,7 @@ var level = [
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: 23, y: -30},
-        {objectType: 'hint', text: "Whoa!\nYou're not on a planet!", delay:1}
+        {objectType: 'player', x: 23, y: -30}
     ], // level 2
     [//level 3 - jumping to planets through void
         {objectType: 'planet', x: -440, y: -120, gravRadius: 260, gravForce: 600, sprite: "soccerplanet"},
@@ -91,8 +88,7 @@ var level = [
         {objectType: 'startPad', x: 60, y: 215, radians: 1.8 + Math.PI },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 0, y: 200},
-        {objectType: 'hint', text: "The gravity on the baseball\nplanet is too strong\nto escape without an\noverlapping gravity field.", delay: 5}
+        {objectType: 'player', x: 0, y: 200}
     ], // level 3
     [ //level 4 - enemy introduction
         {objectType: 'planet', x: -170, y: -400, gravRadius: 220, gravForce: 400, sprite: "rainbowplanet"},
@@ -103,8 +99,7 @@ var level = [
         {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -360, y: -570},
-        {objectType: 'enemy1' , x:-110, y: -240, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
+        {objectType: 'enemy1' , x:-110, y: -240, enemyVel: 25, sprite: "enemy"}
     ], // level 4
     [ //level 5 - fun with overlapping gravity fields
         {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 390, sprite: "wafelplanet"},
@@ -117,8 +112,7 @@ var level = [
         {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
         {objectType: 'gear', x: 860, y: -480, sprite: "gear"},
         {objectType: 'player', x: -45, y: -25},
-        {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'hint', text: "Where are those gears?", delay: 0}
+        {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"}
     ], // level 5
     [ //level 6 - two enemies
         {objectType: 'planet', x: 0, y: 0, gravRadius: 230, gravForce: 350, sprite: "roseplanet"},
@@ -133,8 +127,7 @@ var level = [
         {objectType: 'gear', x: 800, y: -100, sprite: "gear"},
         {objectType: 'player', x: -240, y: 0},
         {objectType: 'enemy1', x: 450, y: 180, enemyVel: 15, sprite: "enemy"},
-        {objectType: 'enemy2', x: 450, y: -180, enemyVel: 15, sprite: "enemy"},
-        {objectType: 'hint', text: "Now there are two of them!", delay: 1}
+        {objectType: 'enemy2', x: 450, y: -180, enemyVel: 15, sprite: "enemy"}
     ], // level 6
     [ //level 7 - two enemies circling center planet
         {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 500, sprite: "catplanet"},
@@ -150,8 +143,7 @@ var level = [
         {objectType: 'gear', x: -250, y: -100, sprite: "gear"},
         {objectType: 'player', x: -160, y: 230},
         {objectType: 'enemy1', x: -150, y: 0, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'enemy2', x: 150, y: 0, enemyVel: 45, sprite: "enemy"},
-        {objectType: 'hint', text: "Face the devil planet!", delay: 1}
+        {objectType: 'enemy2', x: 150, y: 0, enemyVel: 45, sprite: "enemy"}
     ], // level 7
     [ //level 8 - find the hidden gear
         {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 80, sprite: "treasureBig"},
@@ -166,8 +158,7 @@ var level = [
         {objectType: 'teleporter', x: 0, y: 338, radians: -3.2, goal: 1},
         {objectType: 'startPad', x: 140, y: 300, radians: 2.5},
         {objectType: 'gear', x: 0, y: 1765, sprite: "gear"},
-        {objectType: 'player', x: 150, y: 300},
-        {objectType: 'hint', text: "It is near.", delay: 1}
+        {objectType: 'player', x: 150, y: 300}
     ], // level 8
     [ //level 9 - crazy gears
         {objectType: 'planet', x: 0, y: 0, gravRadius: 400, gravForce: 500, sprite: "gearPlanet"},
@@ -215,8 +206,7 @@ var level = [
         {objectType: 'gear', x: -180, y: -10, sprite: "gear"},
         {objectType: 'gear', x: -190, y: 0, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -10, sprite: "gear"},
-        {objectType: 'player', x: -90, y: 240},
-        {objectType: 'hint', text: "mmmmmwwwwahahahahahaha", delay: 1}
+        {objectType: 'player', x: -90, y: 240}
     ] // level 9
 ];
 
@@ -310,7 +300,6 @@ playGame.prototype = {
         planetGroup = game.add.group();
         objectGroup = game.add.group();
         dashboardGroup = game.add.group();
-        messageGroup = game.add.group();
 
         // adding gravitiy line
         gravityGraphics = game.add.graphics(0, 0);
@@ -372,11 +361,10 @@ playGame.prototype = {
         if(playingNow === true) {       //this function isn't called when the game is between levels or changing states
             helper.checkTeleporterOverlap(teleporter);
         }
-
-        helper.messageLocation(playerAngle);    //the messages and the dashboard move around relative to the player, since the camera can't spin
+        
+        //the dashboard moves around relative to the player, since the camera can't spin
         helper.moveDashboard(playerAngle);
 
-        game.world.bringToTop(messageGroup); //this makes the messageGroup appear on top of all the other objects on screen
         game.world.bringToTop(dashboardGroup);  //so that enemies/objects can't appear above dashboard
 
         //Handle keyboard input for the player

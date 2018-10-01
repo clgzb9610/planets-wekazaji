@@ -30,7 +30,7 @@ levelSelect.prototype = {
         game.load.image("eight", "assets/levelSelect/8.png");
         game.load.image("nine", "assets/levelSelect/9.png");
         game.load.image("background", "assets/levelSelect/background.png");
-        
+        game.load.spritesheet("level_title", "assets/levelSelect/LevelSelectTitle_spritesheet.png", 700, 90);
         game.load.image("nextArrow", "assets/levelSelect/nextArrow.png");
 
     },
@@ -39,7 +39,13 @@ levelSelect.prototype = {
         game.world.setBounds(0, 0, 700, 700);
 
         levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
-        
+
+        var level_title = game.add.sprite(120, 70, "level_title");
+        level_title.scale.x = 0.7;
+        level_title.scale.y = 0.7;
+        level_title.animations.add('beaming_level',[1,2,3],4, true);
+        level_title.animations.play('beaming_level');
+
         //Next Screen Arrow Right
         nextArrowR = game.add.button(630, 60, "nextArrow", test, this);
         nextArrowR.scale.x = 0.1;

@@ -53,6 +53,7 @@ var LevelChanger = function(game){
 
     function addPlanet(posX, posY, gravityRadius, gravityForce, asset) {
         var planet = game.add.sprite(posX, posY, asset);
+        planet.scale.setTo(1.5, 1.5);
         planet.gravityRadius = gravityRadius;
         planet.gravityForce = gravityForce;
         planetGroup.add(planet);

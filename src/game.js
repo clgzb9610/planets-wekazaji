@@ -50,21 +50,21 @@ var emitter;
 
 var bgm;
 
-var currentLevel=0;
+var currentLevel = 0;
 
 var level = [
     [ //level 0 - collect gears to activate portal
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "bigplanet"},
-        {objectType:'teleporter', x:0, y: -155, radians: 0, goal:1},
-        {objectType: 'startPad', x: -150,y: -40,radians: 0.2-Math.PI/2},
+        {objectType:'teleporter', x:0, y: -215, radians: 0, goal:1},
+        {objectType: 'startPad', x: -230,y: -115,radians: -1.1},
         {objectType: 'gear', x: 30, y: 200, sprite:"gear"},
-        {objectType: 'player', x: -155, y: -45},
+        {objectType: 'player', x: -240, y: -150},
         {objectType: 'hint', text: "You're on a journey!\nUse arrow keys to move.", delay: 2}
     ], // level 0
     [//level 1 - jumping between planets
-        {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 250, sprite: "smallstar"},
-        {objectType: 'planet', x: 130, y: 150, gravRadius: 400, gravForce: 250, sprite: "starplanet"},
-        {objectType: 'teleporter', x: 130, y: -3, radians: 0, goal: 3},
+        {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 350, sprite: "smallstar"},
+        {objectType: 'planet', x: 200, y: 220, gravRadius: 400, gravForce: 350, sprite: "starplanet"},
+        {objectType: 'teleporter', x: 150, y: 10, radians: -0.2, goal: 3},
         {objectType: 'startPad', x: -425, y: -50 , radians:1.15 + Math.PI},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
@@ -73,9 +73,9 @@ var level = [
         {objectType: 'hint', text: "The portal's so far!\nMaybe you can jump?", delay: 2}
     ], // level 1
     [//level 2 - start in void
-        {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 150, sprite: "axoplanet"},
-        {objectType: 'planet', x: 370, y: 350, gravRadius: 400, gravForce: 250, sprite: "fishplanet"},
-        {objectType: 'teleporter', x: 395, y: 202, radians: 0.2, goal: 3},
+        {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 250, sprite: "axoplanet"},
+        {objectType: 'planet', x: 400, y: 400, gravRadius: 400, gravForce: 350, sprite: "fishplanet"},
+        {objectType: 'teleporter', x: 500, y: 210, radians: 0.5, goal: 3},
         {objectType: 'startPad', x: 20, y: -15 , radians: 0},
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
@@ -84,89 +84,89 @@ var level = [
         {objectType: 'hint', text: "Whoa!\nYou're not on a planet!", delay:1}
     ], // level 2
     [//level 3 - jumping to planets through void
-        {objectType: 'planet', x: -280, y: -100, gravRadius: 230, gravForce: 170, sprite: "soccerplanet"},
-        {objectType: 'planet', x: 160, y: 150, gravRadius: 130, gravForce: 140, sprite: "tennisplanet"},
-        {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 470, sprite: "baseballplanet"},
-        {objectType: 'teleporter', x: 278, y: 140, radians: 1.485, goal: 2},
-        {objectType: 'startPad', x: 50, y: 180, radians: 1.4 + Math.PI },
+        {objectType: 'planet', x: -440, y: -120, gravRadius: 260, gravForce: 600, sprite: "soccerplanet"},
+        {objectType: 'planet', x: 260, y: 250, gravRadius: 270, gravForce: 250, sprite: "tennisplanet"},
+        {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 740, sprite: "baseballplanet"},
+        {objectType: 'teleporter', x: 385, y: 140, radians: 0.9, goal: 2},
+        {objectType: 'startPad', x: 60, y: 215, radians: 1.8 + Math.PI },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 30, y: 185},
+        {objectType: 'player', x: 0, y: 200},
         {objectType: 'hint', text: "The gravity on the baseball\nplanet is too strong\nto escape without an\noverlapping gravity field.", delay: 5}
     ], // level 3
     [ //level 4 - enemy introduction
-        {objectType: 'planet', x: 200, y: 100, gravRadius: 130, gravForce: 240, sprite: "smallrainbow"},
-        {objectType: 'planet', x: 150, y: -160, gravRadius: 200, gravForce: 370, sprite: "otherrainbow"},
-        {objectType: 'planet', x: -170, y: -400, gravRadius: 180, gravForce: 400, sprite: "rainbowplanet"},
-        {objectType: 'teleporter', x: 318, y: 90, radians: 1.5, goal: 2}, //317, 90
-        {objectType: 'startPad', x: -270, y: -490, radians: -0.8 },
+        {objectType: 'planet', x: -170, y: -400, gravRadius: 220, gravForce: 400, sprite: "rainbowplanet"},
+        {objectType: 'planet', x: 200, y: -80, gravRadius: 220, gravForce: 370, sprite: "otherrainbow"},
+        {objectType: 'planet', x: 280, y: 350, gravRadius: 200, gravForce: 240, sprite: "smallrainbow"},
+        {objectType: 'teleporter', x: 440, y: 350, radians: 1.6, goal: 2}, //317, 90
+        {objectType: 'startPad', x: -330, y: -540, radians: -0.8 },
         {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
-        {objectType: 'player', x: -275, y: -495},
+        {objectType: 'player', x: -360, y: -570},
         {objectType: 'enemy1' , x:-110, y: -240, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
     ], // level 4
     [ //level 5 - fun with overlapping gravity fields
         {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 390, sprite: "wafelplanet"},
-        {objectType: 'planet', x: 140, y: 360, gravRadius: 120, gravForce: 300, sprite: "donutplanet"},
-        {objectType: 'planet', x: 370, y: -250, gravRadius: 150, gravForce: 270, sprite: "orangeplanet"},
-        {objectType: 'planet', x: 590, y: -380, gravRadius: 160, gravForce: 270, sprite: "cinnamonplanet"},
-        {objectType: 'teleporter', x: 349, y: 140, radians: 1.82, goal: 3},
-        {objectType: 'startPad', x: 30, y: 17, radians: -1.1},
-        {objectType: 'gear', x: 5, y: 400, sprite: "gear"},
+        {objectType: 'planet', x: 140, y: 610, gravRadius: 190, gravForce: 330, sprite: "donutplanet"},
+        {objectType: 'planet', x: 400, y: -380, gravRadius: 200, gravForce: 300, sprite: "orangeplanet"},
+        {objectType: 'planet', x: 860, y: -470, gravRadius: 200, gravForce: 300, sprite: "cinnamonplanet"},
+        {objectType: 'teleporter', x: 350, y: 250, radians: 2.35, goal: 3},
+        {objectType: 'startPad', x: 0, y: 0, radians: -1.1},
+        {objectType: 'gear', x: 100, y: 400, sprite: "gear"},
         {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
-        {objectType: 'gear', x: 600, y: -400, sprite: "gear"},
-        {objectType: 'player', x: 0, y: 10},
+        {objectType: 'gear', x: 860, y: -480, sprite: "gear"},
+        {objectType: 'player', x: -45, y: -25},
         {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"},
         {objectType: 'hint', text: "Where are those gears?", delay: 0}
     ], // level 5
     [ //level 6 - two enemies
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 150, gravForce: 270, sprite: "roseplanet"},
-        {objectType: 'planet', x: 300, y: -150, gravRadius: 150, gravForce: 600, sprite: "hydrangea"},
-        {objectType: 'planet', x: 300, y: 150, gravRadius: 150, gravForce: 600, sprite: "lilac"},
-        {objectType: 'planet', x: 600, y: 0, gravRadius: 150, gravForce: 270, sprite: "hibiscus"},
-        {objectType: 'teleporter', x: 696, y: -70, radians: 0.92, goal: 4},
-        {objectType: 'startPad', x: -50, y: -110, radians: -0.4},
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 230, gravForce: 350, sprite: "roseplanet"},
+        {objectType: 'planet', x: 400, y: -230, gravRadius: 230, gravForce: 600, sprite: "hydrangea"},
+        {objectType: 'planet', x: 400, y: 230, gravRadius: 230, gravForce: 600, sprite: "lilac"},
+        {objectType: 'planet', x: 800, y: 0, gravRadius: 230, gravForce: 350, sprite: "hibiscus"},
+        {objectType: 'teleporter', x: 950, y: -70, radians: 1.1, goal: 4},
+        {objectType: 'startPad', x: -190, y: 0, radians: -1.5},
         {objectType: 'gear', x: -20, y: 50, sprite: "gear"},
         {objectType: 'gear', x: 390, y: 250, sprite: "gear"},
         {objectType: 'gear', x: 250, y: -250, sprite: "gear"},
-        {objectType: 'gear', x: 580, y: -100, sprite: "gear"},
-        {objectType: 'player', x: -70, y: -140},
-        {objectType: 'enemy1', x: 360, y: -20, enemyVel: 15, sprite: "enemy"},
-        {objectType: 'enemy2', x: 240, y: 20, enemyVel: 15, sprite: "enemy"},
+        {objectType: 'gear', x: 800, y: -100, sprite: "gear"},
+        {objectType: 'player', x: -240, y: 0},
+        {objectType: 'enemy1', x: 450, y: 180, enemyVel: 15, sprite: "enemy"},
+        {objectType: 'enemy2', x: 450, y: -180, enemyVel: 15, sprite: "enemy"},
         {objectType: 'hint', text: "Now there are two of them!", delay: 1}
     ], // level 6
     [ //level 7 - two enemies circling center planet
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 200, gravForce: 500, sprite: "catplanet"},
-        {objectType: 'planet', x: 0, y: -300, gravRadius: 100, gravForce: 850, sprite: "blueyarn"},
-        {objectType: 'planet', x: 0, y: 300, gravRadius: 100, gravForce: 850, sprite: "redyarn"},
-        {objectType: 'planet', x: 300, y: 0, gravRadius: 100, gravForce: 850, sprite: "greenyarn"},
-        {objectType: 'planet', x: -300, y: 0, gravRadius: 100, gravForce: 850, sprite: "purpleyarn"},
-        {objectType: 'teleporter', x: 100, y: 89, radians: 2.35, goal: 4},
-        {objectType: 'startPad', x: -75, y: 100, radians: -2.5},
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 500, sprite: "catplanet"},
+        {objectType: 'planet', x: 0, y: -470, gravRadius: 200, gravForce: 700, sprite: "blueyarn"},
+        {objectType: 'planet', x: 0, y: 470, gravRadius: 200, gravForce: 700, sprite: "redyarn"},
+        {objectType: 'planet', x: 470, y: 0, gravRadius: 200, gravForce: 700, sprite: "greenyarn"},
+        {objectType: 'planet', x: -470, y: 0, gravRadius: 200, gravForce: 700, sprite: "purpleyarn"},
+        {objectType: 'teleporter', x: 100, y: 150, radians: 2.6, goal: 4},
+        {objectType: 'startPad', x: -100, y: 200, radians: -2.8},
         {objectType: 'gear', x: 100, y: 300, sprite: "gear"},
         {objectType: 'gear', x: -100, y: -300, sprite: "gear"},
         {objectType: 'gear', x: 390, y: 20, sprite: "gear"},
         {objectType: 'gear', x: -250, y: -100, sprite: "gear"},
-        {objectType: 'player', x: -100, y: 130},
+        {objectType: 'player', x: -160, y: 230},
         {objectType: 'enemy1', x: -150, y: 0, enemyVel: 25, sprite: "enemy"},
         {objectType: 'enemy2', x: 150, y: 0, enemyVel: 45, sprite: "enemy"},
         {objectType: 'hint', text: "Face the devil planet!", delay: 1}
     ], // level 7
     [ //level 8 - find the hidden gear
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 400, sprite: "treasureBig"},
-        {objectType: 'planet', x: 0, y: 650, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
-        {objectType: 'planet', x: 0, y: 1165, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
-        {objectType: 'planet', x: -550, y: 340, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
-        {objectType: 'planet', x: 510, y: 400, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
-        {objectType: 'planet', x: -600, y: -250, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
-        {objectType: 'planet', x: -150, y: -630, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
-        {objectType: 'planet', x: 400, y: -510, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
-        {objectType: 'planet', x: 650, y: -100, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 80, sprite: "treasureBig"},
+        {objectType: 'planet', x: 0, y: 640, gravRadius: 200, gravForce: 80, sprite: "treasureSmall"},
+        {objectType: 'planet', x: 0, y: 1650, gravRadius: 200, gravForce: 250, sprite: "treasureSmall"},
+        // {objectType: 'planet', x: -550, y: 340, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
+        // {objectType: 'planet', x: 510, y: 400, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
+        // {objectType: 'planet', x: -600, y: -250, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
+        // {objectType: 'planet', x: -150, y: -630, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
+        // {objectType: 'planet', x: 400, y: -510, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
+        // {objectType: 'planet', x: 650, y: -100, gravRadius: 180, gravForce: 250, sprite: "treasureSmall"},
         {objectType: 'teleporter', x: 0, y: 338, radians: -3.2, goal: 1},
-        {objectType: 'startPad', x: -170, y: 330, radians: 10},
-        {objectType: 'gear', x: 0, y: 1165, sprite: "gear"},
-        {objectType: 'player', x: -190, y: 382},
+        {objectType: 'startPad', x: 140, y: 300, radians: 2.5},
+        {objectType: 'gear', x: 0, y: 1765, sprite: "gear"},
+        {objectType: 'player', x: 150, y: 300},
         {objectType: 'hint', text: "It is near.", delay: 1}
     ], // level 8
     [ //level 9 - crazy gears

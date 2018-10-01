@@ -15,7 +15,7 @@ mainMenu.prototype = {
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.spritesheet("title", "assets/mainMenu/title_sheet.png", 700, 124);
         game.load.image("play", "assets/mainMenu/play.png");
-        game.load.image("levels", "assets/mainMenu/levels.png")
+        game.load.image("levels", "assets/mainMenu/levels.png");
         game.load.image("play_hover", "assets/mainMenu/play_hover.png");
         game.load.image("wekazaji", "assets/mainMenu/wekazaji.png");
         game.load.image("wekazaji_hover", "assets/mainMenu/wekazaji_hover.png");

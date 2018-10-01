@@ -16,6 +16,10 @@ var nineButton;
 var tenButton;
 
 
+var screen2;
+screen2 = false;
+
+
 
 levelSelect.prototype = {
     preload:function(){
@@ -32,6 +36,7 @@ levelSelect.prototype = {
         game.load.image("background", "assets/levelSelect/background.png");
         game.load.spritesheet("level_title", "assets/levelSelect/LevelSelectTitle_spritesheet.png", 700, 90);
         game.load.image("nextArrow", "assets/levelSelect/nextArrow.png");
+        
 
     },
     create:function () {
@@ -39,30 +44,28 @@ levelSelect.prototype = {
         game.world.setBounds(0, 0, 700, 700);
 
         levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
-
-        var level_title = game.add.sprite(120, 70, "level_title");
+        
+        var level_title = game.add.sprite(110, 70, "level_title");
         level_title.scale.x = 0.7;
         level_title.scale.y = 0.7;
         level_title.animations.add('beaming_level',[1,2,3],4, true);
         level_title.animations.play('beaming_level');
-
+        
         //Next Screen Arrow Right
-        nextArrowR = game.add.button(630, 60, "nextArrow", test, this);
+        nextArrowR = game.add.button(630, 60, "nextArrow", openNextPage, this);
         nextArrowR.scale.x = 0.1;
         nextArrowR.scale.y = 0.1;
         
         //Next Screen Arrow Left
-        nextArrowL = game.add.button(70, 60, "nextArrow", test, this);
+        nextArrowL = game.add.sprite(70, 60, "nextArrow",this);
         nextArrowL.scale.x = -0.1;
         nextArrowL.scale.y = 0.1;
+        nextArrowL.alpha = 0.5;
         
         //Level One
         oneButtonBG = game.add.button(41,191,"background",buttonOne,this);
-//        oneButtonBG = game.add.sprite(41, 191, "background");
         oneButtonBG.scale.x = 0.3;
         oneButtonBG.scale.y = 0.3;
-//        oneButtonBG.alpha = 0.8;
-        
         
         oneButton = game.add.button(50,200,"one",buttonOne,this);
         oneButton.scale.x = 0.3;
@@ -154,6 +157,8 @@ levelSelect.prototype = {
     },
     update:function() {
         levelBackground.tilePosition.x -= 1;
+        if (screen2 == true) {levelBackground2.tilePosition.x -= 1;
+        };
 
     },
     render:function(){
@@ -164,12 +169,6 @@ levelSelect.prototype = {
 
 function test() {}
 
-function startLevel(level) {
-    if (level == 0) {
-        start = 0;
-        refadeComplete();
-    }
-}
 
 function buttonOne() {
     game.state.start("PlayGame", true, false, currentLevel = 0);
@@ -205,4 +204,32 @@ function buttonEight() {
 
 function buttonNine() {
     game.state.start("PlayGame", true, false, currentLevel = 8);
+}
+
+function openNextPage(){
+    levelBackground2 = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
+    screen2 = true;
+    
+    var level_title2 = game.add.sprite(110, 70, "level_title");
+    level_title2.scale.x = 0.7;
+    level_title2.scale.y = 0.7;
+    level_title2.animations.add('beaming_level',[1,2,3],4, true);
+    level_title2.animations.play('beaming_level');
+    
+    nextArrowL2 = game.add.button(70, 60, "nextArrow", closeNextPage, this);
+    nextArrowL2.scale.x = -0.1;
+    nextArrowL2.scale.y = 0.1;
+    
+    nextArrowR2 = game.add.sprite(630, 60, "nextArrow", this);
+    nextArrowR2.scale.x = 0.1;
+    nextArrowR2.scale.y = 0.1;
+    nextArrowR2.alpha = 0.5;
+}
+
+function closeNextPage(){
+    levelBackground2.destroy();
+    screen2 = false;
+    
+    level_title2.destroy();
+    nextArrowR2.destroy();
 }

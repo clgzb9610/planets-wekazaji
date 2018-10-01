@@ -3,6 +3,9 @@ var Helper = function(game){
     var messageBack;
     var messageCaption;
 
+    var particleFrequency = 4;
+    var frameCounter = 0;
+
 //=======Messages================================================================================================
     this.addMessage = function(text, delay){
         //add score to the screen
@@ -135,18 +138,10 @@ var Helper = function(game){
 
     // Calculates thew new speeds for the emitter particles
     this.calculateParticleVelocities = function (xSpeed, ySpeed) {
-        if (xSpeed > 0) {
-            emitter.setXSpeed(-1 * playerVel, 0);
-        }
-        else {
-            emitter.setXSpeed(0, playerVel);
-        }
-        if (ySpeed > 0) {
-            emitter.setYSpeed(-1 * playerVel, 0);
-        }
-        else {
-            emitter.setYSpeed(0, playerVel);
-        }
+        let speedSpread = 17;
+
+        emitter.setXSpeed(-xSpeed - speedSpread, -xSpeed + speedSpread);
+        emitter.setYSpeed(-ySpeed - speedSpread, -ySpeed + speedSpread);
     };
 
     //changes the x & y velocty of the player for every arrow key press, and changes the animation
@@ -199,12 +194,16 @@ var Helper = function(game){
 
             distanceToSurface = distanceToPlanet - closestPlanet.width / 2;
         }
-
-        if (keyDown && distanceToSurface > 5) {
+        
+        if (keyDown && distanceToSurface > 5 && frameCounter === 0) {
             this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
             emitter.x = player.x;
             emitter.y = player.y;
-            emitter.start(true, 3000, null, 2);
+            emitter.start(true, 1000, null, 1);
+        }
+        frameCounter += 1;
+        if (frameCounter >= particleFrequency) {
+            frameCounter = 0;
         }
     };
 

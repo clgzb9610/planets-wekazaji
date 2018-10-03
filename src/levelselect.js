@@ -19,6 +19,11 @@ var tenButton;
 var screen2;
 screen2 = false;
 
+var nextArrowL2;
+
+var L2on;
+L2on = true;
+
 
 
 levelSelect.prototype = {
@@ -157,8 +162,40 @@ levelSelect.prototype = {
     },
     update:function() {
         levelBackground.tilePosition.x -= 1;
-        if (screen2 == true) {levelBackground2.tilePosition.x -= 1;
-        };
+        if (screen2 == true) {levelBackground2.tilePosition.x -= 1;};
+        
+        if (L2on == false) {
+            nextArrowL2.destroy();
+            L2on = true;
+        }
+        
+        
+        if (oneButton.input.pointerOver()) {oneButton.alpha=0.7;}
+        else {oneButton.alpha=1;}
+        
+        if (twoButton.input.pointerOver()) {twoButton.alpha=0.7;}
+        else {twoButton.alpha=1;}
+        
+        if (threeButton.input.pointerOver()) {threeButton.alpha=0.7;}
+        else {threeButton.alpha=1;}
+        
+        if (fourButton.input.pointerOver()) {fourButton.alpha=0.7;}
+        else {fourButton.alpha=1;}
+        
+        if (fiveButton.input.pointerOver()) {fiveButton.alpha=0.7;}
+        else {fiveButton.alpha=1;}
+        
+        if (sixButton.input.pointerOver()) {sixButton.alpha=0.7;}
+        else {sixButton.alpha=1;}
+        
+        if (sevenButton.input.pointerOver()) {sevenButton.alpha=0.7;}
+        else {sevenButton.alpha=1;}
+        
+        if (eightButton.input.pointerOver()) {eightButton.alpha=0.7;}
+        else {eightButton.alpha=1;}
+        
+        if (nineButton.input.pointerOver()) {nineButton.alpha=0.7;}
+        else {nineButton.alpha=1;}
 
     },
     render:function(){
@@ -232,4 +269,5 @@ function closeNextPage(){
     
     level_title2.destroy();
     nextArrowR2.destroy();
+    L2on = false;
 }

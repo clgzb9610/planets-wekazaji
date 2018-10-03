@@ -79,7 +79,7 @@ var LevelChanger = function(game){
         startPad = game.add.sprite(x, y, "startPad", 6);
         objectGroup.add(startPad);
         game.physics.box2d.enable(startPad);
-        startPad.body.setRectangle(48, 2);
+        startPad.body.setRectangle(50, 5);
         startPad.body.rotation += radians;
         startPad.body.static = true;
         startPad.body.setCollisionCategory(3);
@@ -109,7 +109,7 @@ var LevelChanger = function(game){
     }
 
     this.fadeStartPad = function(){
-        var platformTween = game.add.tween(startPad).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
+        var platformTween = game.add.tween(startPad).to( { alpha: 0 }, 1500, Phaser.Easing.Linear.None, true);
         platformTween.onComplete.add(destroyStartPad, this);
     };
 
@@ -216,9 +216,9 @@ var LevelChanger = function(game){
             enemy2Present = false;
         }
 
-        emitter.forEachExists((particle) => {
-            particle.kill();
-        }, this);
+        // emitter.forEachExists((particle) => {
+        //     particle.kill();
+        // }, this);
 
         gravityGraphics.destroy();
         gravityGraphics = game.add.graphics(0, 0);

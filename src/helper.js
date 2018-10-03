@@ -55,7 +55,7 @@ var Helper = function(game){
         if (!begin){
             return;
         }
-        game.time.events.add(Phaser.Timer.SECOND* 0.6, levelChanger.fadeStartPad, this);
+        game.time.events.add(Phaser.Timer.SECOND* 0.4, levelChanger.fadeStartPad, this);
     };
 
 

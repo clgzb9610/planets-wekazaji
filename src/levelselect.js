@@ -53,7 +53,7 @@ levelSelect.prototype = {
         var level_title = game.add.sprite(110, 70, "level_title");
         level_title.scale.x = 0.7;
         level_title.scale.y = 0.7;
-        level_title.animations.add('beaming_level',[1,2,3],4, true);
+        level_title.animations.add('beaming_level',[0,1,2],4, true);
         level_title.animations.play('beaming_level');
         
         //Next Screen Arrow Right

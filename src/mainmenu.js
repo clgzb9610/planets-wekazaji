@@ -13,19 +13,23 @@ var credits;
 mainMenu.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");
-        game.load.spritesheet("title", "assets/mainMenu/title_sheet.png", 700, 124);
-        game.load.image("play", "assets/mainMenu/play.png");
-        game.load.image("levels", "assets/mainMenu/levels.png");
-        game.load.image("play_hover", "assets/mainMenu/play_hover.png");
-        game.load.image("wekazaji", "assets/mainMenu/wekazaji.png");
-        game.load.image("wekazaji_hover", "assets/mainMenu/wekazaji_hover.png");
-        game.load.image("music", "assets/mainMenu/music.png");
-        game.load.image("music_hover", "assets/mainMenu/music_hover.png");
         game.load.image("wekazaji_page", "assets/mainMenu/wakazajiPage.png");
         game.load.image("music_page", "assets/mainMenu/musicPage.png");
         game.load.image("close", "assets/mainMenu/x.png");
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
         // from http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/Home_Departure_Loop
+
+        game.load.spritesheet("newTitle", "assets/mainMenu/bigTitleSheet.png", 700, 700);
+        game.load.image("newPlay", "assets/mainMenu/play1.png");
+        game.load.image("newPlayHover", "assets/mainMenu/play2.png");
+        game.load.image("newLevels", "assets/mainMenu/levels1.png");
+        game.load.image("newLevelHover", "assets/mainMenu/levels2.png");
+        game.load.image("newCredit", "assets/mainMenu/credits1.png");
+        game.load.image("newCreditHover", "assets/mainMenu/credits2.png");
+        game.load.image("newMusic", "assets/mainMenu/music1.png");
+        game.load.image("newMusicHover", "assets/mainMenu/music2.png");
+        game.load.image("blank", "assets/mainMenu/transparent.png");
+
     },
     create:function () {
         console.log("creating main menu");
@@ -38,47 +42,47 @@ mainMenu.prototype = {
         menuBGM.volume = 0.6;
         menuBGM.play();
 
-        var title = game.add.sprite(20, 100, "title");
-        title.scale.x = 0.95;
-        title.scale.y = 0.95;
-        title.animations.add('beaming',[1,2,3],4, true);
+        var title = game.add.sprite(70, 4, "newTitle");
+        title.scale.x = 0.8;
+        title.scale.y = 0.8;
+        title.animations.add('beaming',[0,1,2],10, true);
         title.animations.play('beaming');
 
-        playButton = game.add.button(210,260,"play",playTheGame,this);
+        playButton = game.add.button(220,560,"newPlay",playTheGame,this);
         playButton.scale.x = 0.4;
         playButton.scale.y = 0.4;
         playButton.inputEnabled = true;
         
-        levelButton = game.add.button(210,360,"levels",openLevelSelect,this);
-        levelButton.scale.x = 0.4;
-        levelButton.scale.y = 0.4;
+        levelButton = game.add.button(270,640,"newLevels",openLevelSelect,this);
+        levelButton.scale.x = 0.25;
+        levelButton.scale.y = 0.25;
         levelButton.inputEnabled = true;
 
-        wekazaji = game.add.button(210,460,"wekazaji",openWekazaj, this);
-        wekazaji.scale.x = 0.4;
-        wekazaji.scale.y = 0.4;
+        wekazaji = game.add.button(100,648,"newCredit",openWekazaj, this);
+        wekazaji.scale.x = 0.2;
+        wekazaji.scale.y = 0.2;
         wekazaji.inputEnabled = true;
 
-        music = game.add.button(210,560,"music",openMusic, this);
-        music.scale.x = 0.4;
-        music.scale.y = 0.4;
+        music = game.add.button(450,648,"newMusic",openMusic, this);
+        music.scale.x = 0.2;
+        music.scale.y = 0.2;
         music.inputEnabled = true;
 
     },
     update:function() {
         menuBack.tilePosition.x -= 1;
 
-        if (playButton.input.pointerOver()) {playButton.loadTexture('play_hover', 0);}
-        else {playButton.loadTexture('play', 0);}
+        if (playButton.input.pointerOver()) {playButton.loadTexture('newPlayHover', 0);}
+        else {playButton.loadTexture('newPlay', 0);}
         
-//        if (levelButton.input.pointerOver()) {levelButton.loadTexture('level_hover', 0);}
-//        else {playButton.loadTexture('levels', 0);}
+       if (levelButton.input.pointerOver()) {levelButton.loadTexture('newLevelHover', 0);}
+       else {levelButton.loadTexture('newLevels', 0);}
 
-        if (wekazaji.input.pointerOver()) {wekazaji.loadTexture('wekazaji_hover', 0);}
-        else {wekazaji.loadTexture('wekazaji', 0);}
+        if (wekazaji.input.pointerOver()) {wekazaji.loadTexture('newCreditHover', 0);}
+        else {wekazaji.loadTexture('newCredit', 0);}
 
-        if (music.input.pointerOver()) {music.loadTexture('music_hover', 0);}
-        else {music.loadTexture('music', 0);}
+        if (music.input.pointerOver()) {music.loadTexture('newMusicHover', 0);}
+        else {music.loadTexture('newMusic', 0);}
     },
     render:function(){
 

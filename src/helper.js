@@ -1,8 +1,4 @@
 var Helper = function(game){
-
-    var messageBack;
-    var messageCaption;
-
     var particleFrequency = 4;
     var frameCounter = 0;
 
@@ -155,8 +151,8 @@ var Helper = function(game){
     this.moveDashboard = function(angle){
         for(var i = 0; i < dashboardGroup.total; i ++) {
             var d = dashboardGroup.getChildAt(i);
-            d.x = player.x + 353 * Math.cos(angle);
-            d.y = player.y + 353 * Math.sin(angle);
+            d.x = player.x + 354 * Math.cos(angle);
+            d.y = player.y + 354 * Math.sin(angle);
             d.angle = angle * 180 / Math.PI - 90;
         }
     };

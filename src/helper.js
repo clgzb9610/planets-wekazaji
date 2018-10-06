@@ -160,6 +160,7 @@ var Helper = function(game){
     this.pauseGame = function(){
         pause.frame = 1;
         game.paused = true;
+        levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
     };
 
     this.unPauseGame = function(event){

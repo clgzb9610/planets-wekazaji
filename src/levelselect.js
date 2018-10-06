@@ -24,6 +24,9 @@ var nextArrowL2;
 var L2on;
 L2on = true;
 
+var level_title2;
+var nextArrowL2;
+
 
 
 levelSelect.prototype = {
@@ -53,7 +56,7 @@ levelSelect.prototype = {
         var level_title = game.add.sprite(110, 70, "level_title");
         level_title.scale.x = 0.7;
         level_title.scale.y = 0.7;
-        level_title.animations.add('beaming_level',[1,2,3],4, true);
+        level_title.animations.add('beaming_level',[0,1,2],4, true);
         level_title.animations.play('beaming_level');
         
         //Next Screen Arrow Right
@@ -158,17 +161,14 @@ levelSelect.prototype = {
         nineButton.scale.x = 0.3;
         nineButton.scale.y = 0.3;
         nineButton.inputEnabled = true;
+        
+        
+        
 
     },
     update:function() {
         levelBackground.tilePosition.x -= 1;
         if (screen2 == true) {levelBackground2.tilePosition.x -= 1;};
-        
-        if (L2on == false) {
-            nextArrowL2.destroy();
-            L2on = true;
-        }
-        
         
         if (oneButton.input.pointerOver()) {oneButton.alpha=0.7;}
         else {oneButton.alpha=1;}
@@ -259,6 +259,9 @@ function openNextPage(){
     nextArrowL2.scale.x = -0.1;
     nextArrowL2.scale.y = 0.1;
     
+    nextArrowL2.events.onInputDown.add(destroyScreen2,this);
+    
+    nextArrowR.destroy();
     nextArrowR2 = game.add.sprite(630, 60, "nextArrow", this);
     nextArrowR2.scale.x = 0.1;
     nextArrowR2.scale.y = 0.1;
@@ -268,8 +271,17 @@ function openNextPage(){
 function closeNextPage(){
     levelBackground2.destroy();
     screen2 = false;
+        
+    nextArrowR = game.add.button(630, 60, "nextArrow", openNextPage, this);
+    nextArrowR.scale.x = 0.1;
+    nextArrowR.scale.y = 0.1;
     
+    
+}
+
+
+function destroyScreen2() {
+    console.log("this function is fucking doing something");
     level_title2.destroy();
     nextArrowR2.destroy();
-    L2on = false;
 }

@@ -6,6 +6,8 @@ source: https://phaser.io/news/2015/07/simulate-planet-gravity-with-box2d-tutori
 */
 var playGame = function(game){};
 
+var showFPS = true;
+
 var game;
 var gamePhysics;
 var helper;
@@ -371,5 +373,10 @@ playGame.prototype = {
         helper.handleKeyboardInput(playerAngle);
 
         gamePhysics.constrainVelocity(player,150);      //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
+    },
+    render: function () {
+        if (showFPS) {
+            game.debug.text(game.time.fps, 2, 14, "#00ff00");
+        }
     }
 };

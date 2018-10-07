@@ -147,14 +147,11 @@ var Helper = function(game){
         }
     };
 
-    //moves the dashboard relative to the player
-    this.moveDashboard = function(angle){
-        for(var i = 0; i < dashboardGroup.total; i ++) {
-            var d = dashboardGroup.getChildAt(i);
-            d.x = player.x + 354 * Math.cos(angle);
-            d.y = player.y + 354 * Math.sin(angle);
-            d.angle = angle * 180 / Math.PI - 90;
-        }
+    //moves the user interface relative to the player
+    this.moveUI = function(angle){
+        userInterface.x = player.x;
+        userInterface.y = player.y;
+        userInterface.angle = angle * 180 / Math.PI - 90;
     };
 
     this.pauseGame = function(){

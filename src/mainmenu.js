@@ -87,7 +87,7 @@ mainMenu.prototype = {
         else {music.loadTexture('newMusic', 0);}
     },
     render: function () {
-        if (showFPS) {
+        if (showDebugInfo) {
             game.debug.text(game.time.fps, 2, 14, "#00ff00");
         }
     }

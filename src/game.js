@@ -53,8 +53,9 @@ var gravityGraphics;
 var emitter;
 
 var bgm;
+var jetpackAudio;
 
-var currentLevel = 9;
+var currentLevel = 0;
 
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -271,6 +272,7 @@ playGame.prototype = {
         game.load.spritesheet("pause","assets/buttons/pause.png",52,52);
         game.load.image("restart","assets/buttons/restart.png",52,52);
 
+        game.load.audio('jetpack', "assets/music/jetpackAudio.mp3"); // http://soundbible.com/2125-Wind-Blowing.html
         game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/music/Ting-Popup_Pixels-349896185.mp3");
         game.load.audio('teleporterOpen', "assets/music/zapsplat_magical_portal_open_001_12505.mp3");
@@ -320,6 +322,9 @@ playGame.prototype = {
         bgm.loop = true;
         bgm.volume = 0.6;
         bgm.play();
+
+        jetpackAudio = game.add.audio("jetpack", 0, true);
+        jetpackAudio.play();
 
         emitter = game.add.emitter(0, 0, 2000);
         emitter.makeParticles('flames', [0, 1, 3, 4]);

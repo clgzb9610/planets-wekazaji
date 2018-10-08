@@ -148,11 +148,22 @@ var Helper = function(game){
             distanceToSurface = distanceToPlanet - closestPlanet.width / 2;
         }
         
-        if (keyDown && distanceToSurface > 5 && frameCounter === 0) {
-            this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
-            emitter.x = player.x;
-            emitter.y = player.y;
-            emitter.start(true, 1000, null, 1);
+        if (keyDown && distanceToSurface > 3) {
+            if (frameCounter === 0) {
+                this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
+                emitter.x = player.x;
+                emitter.y = player.y;
+                emitter.start(true, 1000, null, 1);
+            }
+            if (jetpackAudio.volume === 0) { 
+                jetpackAudio.play();
+                jetpackAudio.fadeTo(100, 0.9);
+            }
+        }
+        else {
+            if (jetpackAudio.volume > 0) {
+                jetpackAudio.fadeTo(100, 0);
+            }
         }
         frameCounter += 1;
         if (frameCounter >= particleFrequency) {

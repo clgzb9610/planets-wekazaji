@@ -74,6 +74,7 @@ levelSelect.prototype = {
         oneButtonBG = game.add.button(41,191,"background",buttonOne,this);
         oneButtonBG.scale.x = 0.3;
         oneButtonBG.scale.y = 0.3;
+        oneButtonBG.alpha = 0.88;
         
         oneButton = game.add.button(50,200,"one",buttonOne,this);
         oneButton.scale.x = 0.3;
@@ -84,6 +85,7 @@ levelSelect.prototype = {
         twoButtonBG = game.add.button(256,191,"background",buttonTwo,this);
         twoButtonBG.scale.x = 0.3;
         twoButtonBG.scale.y = 0.3;
+        twoButtonBG.alpha = 0.88;
         
         twoButton = game.add.button(265,200,"two",buttonTwo,this);
         twoButton.scale.x = 0.3;
@@ -94,6 +96,7 @@ levelSelect.prototype = {
         threeButtonBG = game.add.button(471,191,"background",buttonThree,this);
         threeButtonBG.scale.x = 0.3;
         threeButtonBG.scale.y = 0.3;
+        threeButtonBG.alpha = 0.88;
         
         threeButton = game.add.button(480,200,"three",buttonThree,this);
         threeButton.scale.x = 0.3;
@@ -104,6 +107,7 @@ levelSelect.prototype = {
         fourButtonBG = game.add.button(41,356,"background",buttonFour,this);
         fourButtonBG.scale.x = 0.3;
         fourButtonBG.scale.y = 0.3;
+        fourButtonBG.alpha = 0.88;
         
         fourButton = game.add.button(50,365,"four",buttonFour,this);
         fourButton.scale.x = 0.3;
@@ -114,6 +118,7 @@ levelSelect.prototype = {
         fiveButtonBG = game.add.button(256,356,"background",buttonFive,this);
         fiveButtonBG.scale.x = 0.3;
         fiveButtonBG.scale.y = 0.3;
+        fiveButtonBG.alpha = 0.88;
         
         fiveButton = game.add.button(265,365,"five",buttonFive,this);
         fiveButton.scale.x = 0.3;
@@ -124,6 +129,7 @@ levelSelect.prototype = {
         sixButtonBG = game.add.button(471,356,"background",buttonSix,this);
         sixButtonBG.scale.x = 0.3;
         sixButtonBG.scale.y = 0.3;
+        sixButtonBG.alpha = 0.88;
         
         sixButton = game.add.button(480,365,"six",buttonSix,this);
         sixButton.scale.x = 0.3;
@@ -135,6 +141,7 @@ levelSelect.prototype = {
         sevenButtonBG = game.add.button(41,521,"background",buttonSeven,this);
         sevenButtonBG.scale.x = 0.3;
         sevenButtonBG.scale.y = 0.3;
+        sevenButtonBG.alpha = 0.88;
         
         sevenButton = game.add.button(50,530,"seven",buttonSeven,this);
         sevenButton.scale.x = 0.3;
@@ -145,6 +152,7 @@ levelSelect.prototype = {
         eightButtonBG = game.add.button(256,521,"background",buttonEight,this);
         eightButtonBG.scale.x = 0.3;
         eightButtonBG.scale.y = 0.3;
+        eightButtonBG.alpha = 0.88;
         
         eightButton = game.add.button(265,530,"eight",buttonThree,this);
         eightButton.scale.x = 0.3;
@@ -156,6 +164,7 @@ levelSelect.prototype = {
         nineButtonBG = game.add.button(471,521,"background",buttonNine,this);
         nineButtonBG.scale.x = 0.3;
         nineButtonBG.scale.y = 0.3;
+        nineButtonBG
         
         nineButton = game.add.button(480,530,"nine",buttonNine,this);
         nineButton.scale.x = 0.3;

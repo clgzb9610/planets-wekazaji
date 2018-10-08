@@ -148,7 +148,7 @@ var Helper = function(game){
             distanceToSurface = distanceToPlanet - closestPlanet.width / 2;
         }
         
-        if (keyDown && distanceToSurface > 3) {
+        if (keyDown && distanceToSurface > 1) {
             if (frameCounter === 0) {
                 this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
                 emitter.x = player.x;

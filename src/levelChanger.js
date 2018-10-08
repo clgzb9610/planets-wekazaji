@@ -71,7 +71,7 @@ var LevelChanger = function(game){
         teleporter = game.add.sprite(x, y, "teleporter", 6);
         game.physics.box2d.enable(teleporter);
        // objectGroup.add(teleporter);
-        teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 15, true);
+        teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 25, true);
         teleporter.body.setRectangle(38, 55);
         teleporter.body.rotation += radians;
         teleporter.body.static = true;
@@ -92,7 +92,7 @@ var LevelChanger = function(game){
         startPadAnimations = game.add.sprite(x,y,"startPadAnimations");
         objectGroup.add(startPadAnimations);
         game.physics.box2d.enable(startPadAnimations);
-        startPadAnimations.body.setRectangle(50,17);
+        startPadAnimations.body.setRectangle(30,17);
         startPadAnimations.body.static = true;
         startPadAnimations.body.rotation += radians;
         startPadAnimations.body.setCollisionMask(0);
@@ -100,7 +100,7 @@ var LevelChanger = function(game){
         var teleportToPad = game.add.audio("teleportToPad");
         teleportToPad.play();
         //play the electricity animation
-        startPadActive = startPadAnimations.animations.add('active',[1,2,3,4,0],12,true); //it ends on the blank part of the spritesheet
+        startPadActive = startPadAnimations.animations.add('active',[1,2,3,4,0],15,true); //it ends on the blank part of the spritesheet
         startPadAnimations.animations.play('active');
         startPadActive.onLoop.add(startPadAnimationLooped,this);
     }
@@ -132,7 +132,7 @@ var LevelChanger = function(game){
         gear.body.setCollisionCategory(2);
         gear.body.static = false;
         spin = gear.animations.add('spin', [0, 1, 2, 3]);
-        gear.animations.play('spin', 10, true);
+        gear.animations.play('spin', 15, true);
     }
 
     //move the one player sprite to a fresh location at the start of each level.

@@ -34,6 +34,11 @@ ending.prototype = {
         else {endplayButton.loadTexture('playAgain', 0);}
         if (backToMenuButton.input.pointerOver()) {backToMenuButton.loadTexture('backToMenu_hover', 0);}
         else {backToMenuButton.loadTexture('backToMenu', 0);}
+    },
+    render: function () {
+        if (showDebugInfo) {
+            game.debug.text(game.time.fps, 2, 14, "#00ff00");
+        }
     }
 };
 

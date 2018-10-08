@@ -6,6 +6,8 @@ source: https://phaser.io/news/2015/07/simulate-planet-gravity-with-box2d-tutori
 */
 var playGame = function(game){};
 
+var showDebugInfo = true;
+
 var game;
 var gamePhysics;
 var helper;
@@ -37,6 +39,8 @@ var playerLastAngle;
 var score = 0;
 var lastCaption = "";
 
+var gearUIScale = 0.5;
+
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.00024; //was .00175
 
@@ -49,6 +53,7 @@ var gravityGraphics;
 var emitter;
 
 var bgm;
+var jetpackAudio;
 
 var currentLevel = 0;
 
@@ -301,12 +306,16 @@ playGame.prototype = {
 
         game.load.spritesheet("flames", "assets/game/flameSprites2.png", 20, 20);
 
+        game.load.image("gearOutline", "assets/game/gearOutline.png", 300, 300);
+        game.load.image("filledInGear", "assets/game/filledGear.png", 300, 300);
+
         game.load.image("dashboard","assets/game/dashboard.png",300,52);
         game.load.image("mute","assets/buttons/mute.png",52,52);
         game.load.image("unMute", "assets/buttons/unMute.png", 52, 52);
         game.load.spritesheet("pause","assets/buttons/pause.png",52,52);
         game.load.image("restart","assets/buttons/restart.png",52,52);
 
+        game.load.audio('jetpack', "assets/music/jetpackAudio.mp3"); // http://soundbible.com/2125-Wind-Blowing.html
         game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/music/Ting-Popup_Pixels-349896185.mp3");
         game.load.audio('teleporterOpen', "assets/music/zapsplat_magical_portal_open_001_12505.mp3");
@@ -342,7 +351,7 @@ playGame.prototype = {
         enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
-        dashboardGroup = game.add.group();
+        userInterface = game.add.group();
 
         // adding gravitiy line
         gravityGraphics = game.add.graphics(0, 0);
@@ -356,6 +365,9 @@ playGame.prototype = {
         bgm.loop = true;
         bgm.volume = 0.6;
         bgm.play();
+
+        jetpackAudio = game.add.audio("jetpack", 0, true);
+        jetpackAudio.play();
 
         emitter = game.add.emitter(0, 0, 2000);
         emitter.makeParticles('flames', [0, 1, 3, 4]);
@@ -408,14 +420,25 @@ playGame.prototype = {
             helper.checkTeleporterOverlap(teleporter);
         }
         
-        //the dashboard moves around relative to the player, since the camera can't spin
-        helper.moveDashboard(playerAngle);
+        //the user interface moves around relative to the player, since the camera can't spin
+        helper.moveUI(playerAngle);
 
-        game.world.bringToTop(dashboardGroup);  //so that enemies/objects can't appear above dashboard
+        game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
 
         //Handle keyboard input for the player
         helper.handleKeyboardInput(playerAngle);
 
         gamePhysics.constrainVelocity(player,150);      //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
+    },
+    render: function () {
+        if (showDebugInfo) {
+            game.debug.text("FPS: " + game.time.fps, 2, 14, "#00ff00");
+            game.debug.text("Player X: " + player.x, 2, 28, "#00ff00");
+            game.debug.text("Player Y: " + player.y, 2, 42, "#00ff00");
+            game.debug.text("Camera X: " + game.camera.x, 2, 56, "#00ff00");
+            game.debug.text("Camera Y: " + game.camera.y, 2, 70, "#00ff00");
+            game.debug.text("Camera W: " + game.camera.width, 2, 84, "#00ff00");
+            game.debug.text("Camera H: " + game.camera.height, 2, 98, "#00ff00");
+        }
     }
 };

@@ -44,7 +44,7 @@ var LevelChanger = function(game){
                 movePlayer(addition.x,addition.y);
             }
         }
-        addDashboard();
+        addUI();
     };
 
 
@@ -141,11 +141,11 @@ var LevelChanger = function(game){
     }
 
 
-    function addDashboard(){
-        dashboard = game.add.sprite(-100,-600,"dashboard");
+    function addUI(){
+        dashboard = game.add.sprite(0, 354,"dashboard");
         dashboard.anchor.set(0.5);
-        dashboardGroup.add(dashboard);
-        mute = game.add.button(-100,-600,"mute", helper.muteSound,this);
+        userInterface.add(dashboard);
+        mute = game.add.button(0, 354,"mute", helper.muteSound,this);
         mute.inputEnabled = true;
         if(game.sound.mute){
             mute.loadTexture("mute",0);
@@ -153,14 +153,14 @@ var LevelChanger = function(game){
             mute.loadTexture("unMute",0);
         }
         mute.anchor.set(-0.9,0.5);
-        dashboardGroup.add(mute);
-        pause = game.add.sprite(-100,-600,"pause");
+        userInterface.add(mute);
+        pause = game.add.sprite(0, 354,"pause");
         pause.frame = 0;
         pause.anchor.set(0.5, 0.55);
-        dashboardGroup.add(pause);
-        restart = game.add.sprite(-100,-600,"restart");
+        userInterface.add(pause);
+        restart = game.add.sprite(0, 354,"restart");
         restart.anchor.set(1.9,0.55);
-        dashboardGroup.add(restart);
+        userInterface.add(restart);
         // console.log('adding dashboard');
 
         // make the buttons work
@@ -170,6 +170,24 @@ var LevelChanger = function(game){
         restart.events.onInputUp.add(levelChanger.resetLevel,self);
 
         game.input.onDown.add(helper.unPauseGame, self);
+
+        addGearOutlines();
+    }
+
+    function addGearOutlines () {
+        for (var i = 0; i < levelGoal; i++) {
+            let gearOutline = game.add.image(0, 0, "gearOutline"),
+                gearOutlineWidth = gearOutline.width * gearUIScale,
+                gearOutlineHeight = gearOutline.height * gearUIScale,
+                gearsPerRow = Math.floor(350 / (gearOutlineWidth + 2));
+
+            gearOutline.setScaleMinMax(gearUIScale);
+            gearOutline.anchor.set(1, 0);
+            userInterface.add(gearOutline);
+
+            gearOutline.x = 350 - 2 - (gearOutlineWidth + 2) * (i % gearsPerRow);
+            gearOutline.y = -320 + 2 + (gearOutlineHeight + 2) * Math.floor(i / gearsPerRow);
+        }
     }
 
     // a couple of housekeeping things to prepare to change between levels.
@@ -204,7 +222,7 @@ var LevelChanger = function(game){
         objectGroup.destroy();
         teleporter.destroy();
 
-        dashboardGroup.destroy();
+        userInterface.destroy();
 
         enemyGroup.destroy();
         if (enemy1Present) {
@@ -230,7 +248,7 @@ var LevelChanger = function(game){
         enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
-        dashboardGroup = game.add.group();
+        userInterface = game.add.group();
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
         currentLevel++;

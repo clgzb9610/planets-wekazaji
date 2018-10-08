@@ -1,8 +1,4 @@
 var Helper = function(game){
-
-    var messageBack;
-    var messageCaption;
-
     var particleFrequency = 4;
     var frameCounter = 0;
 
@@ -38,6 +34,19 @@ var Helper = function(game){
         if (!begin) {
             return;
         }
+
+        let filledInGear = game.add.image(0, 0, "filledInGear"),
+            imageWidth = filledInGear.width * gearUIScale,
+            imageHeight = filledInGear.height * gearUIScale,
+            gearsPerRow = Math.floor(350 / (imageWidth + 2));
+
+        filledInGear.anchor.set(1, 0);
+        filledInGear.setScaleMinMax(gearUIScale);
+        userInterface.add(filledInGear);
+
+        filledInGear.x = 350 - 2 - (imageWidth + 2) * (score % gearsPerRow);
+        filledInGear.y = -320 + 2 + (imageHeight + 2) * Math.floor(score / gearsPerRow);
+
         var ting = game.add.audio('ting');
         ting.volume = 0.6;
         ting.play();
@@ -139,11 +148,22 @@ var Helper = function(game){
             distanceToSurface = distanceToPlanet - closestPlanet.width / 2;
         }
         
-        if (keyDown && distanceToSurface > 5 && frameCounter === 0) {
-            this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
-            emitter.x = player.x;
-            emitter.y = player.y;
-            emitter.start(true, 1000, null, 1);
+        if (keyDown && distanceToSurface > 3) {
+            if (frameCounter === 0) {
+                this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
+                emitter.x = player.x;
+                emitter.y = player.y;
+                emitter.start(true, 1000, null, 1);
+            }
+            if (jetpackAudio.volume === 0) { 
+                jetpackAudio.play();
+                jetpackAudio.fadeTo(100, 0.9);
+            }
+        }
+        else {
+            if (jetpackAudio.volume > 0) {
+                jetpackAudio.fadeTo(100, 0);
+            }
         }
         frameCounter += 1;
         if (frameCounter >= particleFrequency) {
@@ -151,14 +171,11 @@ var Helper = function(game){
         }
     };
 
-    //moves the dashboard relative to the player
-    this.moveDashboard = function(angle){
-        for(var i = 0; i < dashboardGroup.total; i ++) {
-            var d = dashboardGroup.getChildAt(i);
-            d.x = player.x + 353 * Math.cos(angle);
-            d.y = player.y + 353 * Math.sin(angle);
-            d.angle = angle * 180 / Math.PI - 90;
-        }
+    //moves the user interface relative to the player
+    this.moveUI = function(angle){
+        userInterface.x = player.x;
+        userInterface.y = player.y;
+        userInterface.angle = angle * 180 / Math.PI - 90;
     };
 
     this.pauseGame = function(){

@@ -33,6 +33,8 @@ mainMenu.prototype = {
     },
     create:function () {
         console.log("creating main menu");
+        game.time.advancedTiming = true;
+
         game.world.setBounds(0, 0, 700, 700);
 
         menuBack = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
@@ -84,8 +86,10 @@ mainMenu.prototype = {
         if (music.input.pointerOver()) {music.loadTexture('newMusicHover', 0);}
         else {music.loadTexture('newMusic', 0);}
     },
-    render:function(){
-
+    render: function () {
+        if (showDebugInfo) {
+            game.debug.text(game.time.fps, 2, 14, "#00ff00");
+        }
     }
 };
 

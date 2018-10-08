@@ -15,6 +15,18 @@ var eightButton;
 var nineButton;
 var tenButton;
 
+//level button backgrounds
+var oneButtonBG;
+var twoButtonBG;
+var threeButtonBG;
+var fourButtonBG;
+var fiveButtonBG;
+var sixButtonBG;
+var sevenButtonBG;
+var eightButtonBG;
+var nineButtonBG;
+var tenButtonBG;
+
 
 var screen2;
 screen2 = false;
@@ -79,7 +91,6 @@ levelSelect.prototype = {
         oneButton = game.add.button(50,200,"one",buttonOne,this);
         oneButton.scale.x = 0.3;
         oneButton.scale.y = 0.3;
-        oneButton.inputEnabled = true;
         
         //Level Two
         twoButtonBG = game.add.button(256,191,"background",buttonTwo,this);
@@ -171,7 +182,7 @@ levelSelect.prototype = {
         nineButton.scale.y = 0.3;
         nineButton.inputEnabled = true;
         
-        
+        enableMenu1Inputs();
         
 
     },
@@ -255,6 +266,7 @@ function buttonNine() {
 }
 
 function openNextPage(){
+    disableMenu1Inputs();
     levelBackground2 = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
     screen2 = true;
 
@@ -289,6 +301,8 @@ function closeNextPage(){
     nextArrowL.scale.x = -0.1;
     nextArrowL.scale.y = 0.1;
     
+    enableMenu1Inputs();
+    
 }
 
 
@@ -301,4 +315,48 @@ function destroyScreen2() {
 
 function backtoMenu() {
     game.state.start("MainMenu",1,1);
+}
+
+function enableMenu1Inputs() {
+    oneButton.inputEnabled = true;
+    twoButton.inputEnabled = true;
+    threeButton.inputEnabled = true;
+    fourButton.inputEnabled = true;
+    fiveButton.inputEnabled = true;
+    sixButton.inputEnabled = true;
+    sevenButton.inputEnabled = true;
+    eightButton.inputEnabled = true;
+    nineButton.inputEnabled = true;
+    
+    oneButtonBG.inputEnabled = true;
+    twoButtonBG.inputEnabled = true;
+    threeButtonBG.inputEnabled = true;
+    fourButtonBG.inputEnabled = true;
+    fiveButtonBG.inputEnabled = true;
+    sixButtonBG.inputEnabled = true;
+    sevenButtonBG.inputEnabled = true;
+    eightButtonBG.inputEnabled = true;
+    nineButtonBG.inputEnabled = true;
+}
+
+function disableMenu1Inputs() {
+    oneButton.inputEnabled = false;
+    twoButton.inputEnabled = false;
+    threeButton.inputEnabled = false;
+    fourButton.inputEnabled = false;
+    fiveButton.inputEnabled = false;
+    sixButton.inputEnabled = false;
+    sevenButton.inputEnabled = false;
+    eightButton.inputEnabled = false;
+    nineButton.inputEnabled = false;
+    
+    oneButtonBG.inputEnabled = false;
+    twoButtonBG.inputEnabled = false;
+    threeButtonBG.inputEnabled = false;
+    fourButtonBG.inputEnabled = false;
+    fiveButtonBG.inputEnabled = false;
+    sixButtonBG.inputEnabled = false;
+    sevenButtonBG.inputEnabled = false;
+    eightButtonBG.inputEnabled = false;
+    nineButtonBG.inputEnabled = false;
 }

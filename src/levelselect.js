@@ -219,39 +219,39 @@ function test() {}
 
 
 function buttonOne() {
-    game.state.start("PlayGame", true, false, currentLevel = 0);
+    game.state.start("PlayGame", true, true, currentLevel = 0);
 }
 
 function buttonTwo() {
-    game.state.start("PlayGame", true, false, currentLevel = 1);
+    game.state.start("PlayGame", true, true, currentLevel = 1);
 }
 
 function buttonThree() {
-    game.state.start("PlayGame", true, false, currentLevel = 2);
+    game.state.start("PlayGame", true, true, currentLevel = 2);
 }
 
 function buttonFour() {
-    game.state.start("PlayGame", true, false, currentLevel = 3);
+    game.state.start("PlayGame", true, true, currentLevel = 3);
 }
 
 function buttonFive() {
-    game.state.start("PlayGame", true, false, currentLevel = 4);
+    game.state.start("PlayGame", true, true, currentLevel = 4);
 }
 
 function buttonSix() {
-    game.state.start("PlayGame", true, false, currentLevel = 5);
+    game.state.start("PlayGame", true, true, currentLevel = 5);
 }
 
 function buttonSeven() {
-    game.state.start("PlayGame", true, false, currentLevel = 6);
+    game.state.start("PlayGame", true, true, currentLevel = 6);
 }
 
 function buttonEight() {
-    game.state.start("PlayGame", true, false, currentLevel = 7);
+    game.state.start("PlayGame", true, true, currentLevel = 7);
 }
 
 function buttonNine() {
-    game.state.start("PlayGame", true, false, currentLevel = 8);
+    game.state.start("PlayGame", true, true, currentLevel = 8);
 }
 
 function openNextPage(){

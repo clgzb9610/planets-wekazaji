@@ -39,6 +39,8 @@ var playerLastAngle;
 var score = 0;
 var lastCaption = "";
 
+var gearUIScale = 0.5;
+
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.00024; //was .00175
 
@@ -52,7 +54,7 @@ var emitter;
 
 var bgm;
 
-var currentLevel = 0;
+var currentLevel = 9;
 
 var level = [
     [ //level 0 - collect gears to activate portal
@@ -259,6 +261,9 @@ playGame.prototype = {
         game.load.image('blackScreen', "assets/game/blackScreen.png");
 
         game.load.spritesheet("flames", "assets/game/flameSprites2.png", 20, 20);
+
+        game.load.image("gearOutline", "assets/game/gearOutline.png", 300, 300);
+        game.load.image("filledInGear", "assets/game/filledGear.png", 300, 300);
 
         game.load.image("dashboard","assets/game/dashboard.png",300,52);
         game.load.image("mute","assets/buttons/mute.png",52,52);

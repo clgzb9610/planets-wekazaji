@@ -170,6 +170,24 @@ var LevelChanger = function(game){
         restart.events.onInputUp.add(levelChanger.resetLevel,self);
 
         game.input.onDown.add(helper.unPauseGame, self);
+
+        addGearOutlines();
+    }
+
+    function addGearOutlines () {
+        for (var i = 0; i < levelGoal; i++) {
+            let gearOutline = game.add.image(0, 0, "gearOutline"),
+                gearOutlineWidth = gearOutline.width * gearUIScale,
+                gearOutlineHeight = gearOutline.height * gearUIScale,
+                gearsPerRow = Math.floor(350 / (gearOutlineWidth + 2));
+
+            gearOutline.setScaleMinMax(gearUIScale);
+            gearOutline.anchor.set(1, 0);
+            userInterface.add(gearOutline);
+
+            gearOutline.x = 350 - 2 - (gearOutlineWidth + 2) * (i % gearsPerRow);
+            gearOutline.y = -320 + 2 + (gearOutlineHeight + 2) * Math.floor(i / gearsPerRow);
+        }
     }
 
     // a couple of housekeeping things to prepare to change between levels.

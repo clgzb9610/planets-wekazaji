@@ -34,6 +34,19 @@ var Helper = function(game){
         if (!begin) {
             return;
         }
+
+        let filledInGear = game.add.image(0, 0, "filledInGear"),
+            imageWidth = filledInGear.width * gearUIScale,
+            imageHeight = filledInGear.height * gearUIScale,
+            gearsPerRow = Math.floor(350 / (imageWidth + 2));
+
+        filledInGear.anchor.set(1, 0);
+        filledInGear.setScaleMinMax(gearUIScale);
+        userInterface.add(filledInGear);
+
+        filledInGear.x = 350 - 2 - (imageWidth + 2) * (score % gearsPerRow);
+        filledInGear.y = -320 + 2 + (imageHeight + 2) * Math.floor(score / gearsPerRow);
+
         var ting = game.add.audio('ting');
         ting.volume = 0.6;
         ting.play();

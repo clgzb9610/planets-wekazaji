@@ -39,7 +39,7 @@ var playerLastAngle;
 var score = 0;
 var lastCaption = "";
 
-var gearUIScale = 0.5;
+var gearUIScale = 0.6;
 
 // a force reducer to let the simulation run smoothly
 var forceReducer = 0.00024; //was .00175

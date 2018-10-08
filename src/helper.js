@@ -157,12 +157,12 @@ var Helper = function(game){
             }
             if (jetpackAudio.volume === 0) { 
                 jetpackAudio.play();
-                jetpackAudio.fadeTo(100, 0.9);
+                jetpackAudio.fadeTo(100, 0.75);
             }
         }
         else {
             if (jetpackAudio.volume > 0) {
-                jetpackAudio.fadeTo(100, 0);
+                jetpackAudio.fadeTo(50, 0);
             }
         }
         frameCounter += 1;

@@ -44,6 +44,7 @@ levelSelect.prototype = {
         game.load.image("background", "assets/levelSelect/background.png");
         game.load.spritesheet("level_title", "assets/levelSelect/levelSelectSheet.png", 700, 90);
         game.load.image("nextArrow", "assets/levelSelect/nextArrow.png");
+        game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         
 
     },
@@ -65,10 +66,9 @@ levelSelect.prototype = {
         nextArrowR.scale.y = 0.1;
         
         //Next Screen Arrow Left
-        nextArrowL = game.add.sprite(70, 60, "nextArrow",this);
+        nextArrowL = game.add.button(70, 60, "nextArrow",backtoMenu, this);
         nextArrowL.scale.x = -0.1;
         nextArrowL.scale.y = 0.1;
-        nextArrowL.alpha = 0.5;
         
         //Level One
         oneButtonBG = game.add.button(41,191,"background",buttonOne,this);
@@ -285,6 +285,9 @@ function closeNextPage(){
     nextArrowR.scale.x = 0.1;
     nextArrowR.scale.y = 0.1;
     
+    nextArrowL = game.add.button(70, 60, "nextArrow",backtoMenu, this);
+    nextArrowL.scale.x = -0.1;
+    nextArrowL.scale.y = 0.1;
     
 }
 
@@ -293,4 +296,9 @@ function destroyScreen2() {
     console.log("this function is fucking doing something");
     level_title2.destroy();
     nextArrowR2.destroy();
+}
+
+
+function backtoMenu() {
+    game.state.start("MainMenu",1,1);
 }

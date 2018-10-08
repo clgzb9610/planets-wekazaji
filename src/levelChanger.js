@@ -51,6 +51,10 @@ var LevelChanger = function(game){
     function addPlanet(posX, posY, gravityRadius, gravityForce, asset) {
         var planet = game.add.sprite(posX, posY, asset);
         planet.scale.setTo(1.5, 1.5);
+
+        planet.animations.add('beaming',[0,1,2,3],5, true);
+        planet.animations.play('beaming');
+
         planet.gravityRadius = gravityRadius;
         planet.gravityForce = gravityForce;
         planetGroup.add(planet);

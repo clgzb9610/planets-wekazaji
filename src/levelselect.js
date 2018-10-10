@@ -91,11 +91,7 @@ levelSelect.prototype = {
         oneButton = game.add.button(50,200,"one",buttonOne,this);
         oneButton.scale.x = 0.3;
         oneButton.scale.y = 0.3;
-        
-        if (localStorage.getItem("Level2") == "true") {
-            oneButton.destroy();
-        }
-        
+      
         //Level Two
         twoButtonBG = game.add.button(256,191,"background",buttonTwo,this);
         twoButtonBG.scale.x = 0.3;
@@ -187,6 +183,59 @@ levelSelect.prototype = {
         nineButton.inputEnabled = true;
         
         enableMenu1Inputs();
+        
+        
+        
+        
+        //Level Unlock Logic
+        if (localStorage.getItem("Level2") != "true") {
+            twoButton.alpha = 0.1;
+            twoButtonBG.alpha = 0.1;
+            twoButton.inputEnabled = false;
+            twoButtonBG.inputEnabled = false;
+        }
+        if (localStorage.getItem("Level3") != "true") {
+            threeButton.alpha = 0.1;
+            threeButtonBG.alpha = 0.1;
+            threeButton.inputEnabled = false;
+            threeButtonBG.inputEnabled = false;
+        }
+        if (localStorage.getItem("Level4") != "true") {
+            fourButton.alpha = 0.1;
+            fourButtonBG.alpha = 0.1;
+            fourButton.inputEnabled = false;
+            fourButtonBG.inputEnabled = false;
+        }
+        if (localStorage.getItem("Level5") != "true") {
+            fiveButton.alpha = 0.1;
+            fiveButtonBG.alpha = 0.1;
+            fiveButton.inputEnabled = false;
+            fiveButtonBG.inputEnabled = false;
+        }
+        if (localStorage.getItem("Level6") != "true") {
+            sixButton.alpha = 0.1;
+            sixButtonBG.alpha = 0.1;
+            sixButton.inputEnabled = false;
+            sixButtonBG.inputEnabled = false;
+        }
+        if (localStorage.getItem("Level7") != "true") {
+            sevenButton.alpha = 0.1;
+            sevenButtonBG.alpha = 0.1;
+            sevenButton.inputEnabled = false;
+            sevenButtonBG.inputEnabled = false;
+        }
+        if (localStorage.getItem("Level8") != "true") {
+            eightButton.alpha = 0.1;
+            eightButtonBG.alpha = 0.1;
+            eightButton.inputEnabled = false;
+            eightButtonBG.inputEnabled = false;
+        }
+        if (localStorage.getItem("Level9") != "true") {
+            nineButton.alpha = 0.1;
+            nineButtonBG.alpha = 0.1;
+            nineButton.inputEnabled = false;
+            nineButtonBG.inputEnabled = false;
+        }
         
 
     },
@@ -323,24 +372,39 @@ function backtoMenu() {
 
 function enableMenu1Inputs() {
     oneButton.inputEnabled = true;
-    twoButton.inputEnabled = true;
-    threeButton.inputEnabled = true;
-    fourButton.inputEnabled = true;
-    fiveButton.inputEnabled = true;
-    sixButton.inputEnabled = true;
-    sevenButton.inputEnabled = true;
-    eightButton.inputEnabled = true;
-    nineButton.inputEnabled = true;
-    
     oneButtonBG.inputEnabled = true;
-    twoButtonBG.inputEnabled = true;
-    threeButtonBG.inputEnabled = true;
-    fourButtonBG.inputEnabled = true;
-    fiveButtonBG.inputEnabled = true;
-    sixButtonBG.inputEnabled = true;
-    sevenButtonBG.inputEnabled = true;
-    eightButtonBG.inputEnabled = true;
-    nineButtonBG.inputEnabled = true;
+    if (localStorage.getItem("Level2") == "true") {
+        twoButton.inputEnabled = true;
+        twoButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level3") == "true") {
+        threeButton.inputEnabled = true;
+        threeButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level4") == "true") {
+        fourButton.inputEnabled = true;
+        fourButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level5") == "true") {
+        fiveButton.inputEnabled = true;
+        fiveButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level6") == "true") {
+        sixButton.inputEnabled = true;
+        sixButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level7") == "true") {
+        sevenButton.inputEnabled = true;
+        sevenButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level8") == "true") {
+        eightButton.inputEnabled = true;
+        eightButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level9") == "true") {
+        nineButton.inputEnabled = true;
+        nineButtonBG.inputEnabled = true;
+    }
 }
 
 function disableMenu1Inputs() {

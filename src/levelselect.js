@@ -92,6 +92,10 @@ levelSelect.prototype = {
         oneButton.scale.x = 0.3;
         oneButton.scale.y = 0.3;
         
+        if (localStorage.getItem("Level2") == "true") {
+            oneButton.destroy();
+        }
+        
         //Level Two
         twoButtonBG = game.add.button(256,191,"background",buttonTwo,this);
         twoButtonBG.scale.x = 0.3;
@@ -360,3 +364,4 @@ function disableMenu1Inputs() {
     eightButtonBG.inputEnabled = false;
     nineButtonBG.inputEnabled = false;
 }
+

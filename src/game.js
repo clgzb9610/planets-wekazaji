@@ -57,6 +57,9 @@ var jetpackAudio;
 
 var currentLevel = 0;
 
+//var levelUnlock1 = localStorage.setItem("Level1","1");
+
+
 var level = [
     [ //level 0 - collect gears to activate portal
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "level0_planet1"},
@@ -64,6 +67,7 @@ var level = [
         {objectType: 'startPad', x: -230,y: -115,radians: -1.1},
         {objectType: 'gear', x: 30, y: 200, sprite:"gear"},
         {objectType: 'player', x: -240, y: -150}
+    
     ], // level 0
     [ //level 9 - crazy gears
         {objectType: 'planet', x: 0, y: 0, gravRadius: 400, gravForce: 350, sprite: "level1_planet1"},
@@ -281,6 +285,34 @@ playGame.prototype = {
     init:function(currentLevel){
         console.log("init game");
         this.currentLevel = currentLevel;
+        
+        //level unlock checker
+        if (currentLevel == 1) {
+        var unlock2 = localStorage.setItem("Level2","true");
+        }
+        if (currentLevel == 2) {
+        var unlock3 = localStorage.setItem("Level3","true");
+        }
+        if (currentLevel == 3) {
+        var unlock4 = localStorage.setItem("Level4","true");
+        }
+        if (currentLevel == 4) {
+        var unlock5 = localStorage.setItem("Level5","true");
+        }
+        if (currentLevel == 5) {
+        var unlock6 = localStorage.setItem("Level6","true");
+        }
+        if (currentLevel == 6) {
+        var unlock7 = localStorage.setItem("Level7","true");
+        }
+        if (currentLevel == 7) {
+        var unlock8 = localStorage.setItem("Level8","true");
+        }
+        if (currentLevel == 8) {
+        var unlock9 = localStorage.setItem("Level9","true");
+        }
+        
+        
     },
     preload: function () {
         game.load.image("level0_planet1", "assets/planets/planet_level0.png");
@@ -465,3 +497,5 @@ playGame.prototype = {
         }
     }
 };
+
+

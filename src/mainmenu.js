@@ -44,13 +44,30 @@ mainMenu.prototype = {
         menuBGM.volume = 0.6;
         menuBGM.play();
 
-        var title = game.add.sprite(70, 4, "newTitle");
-        title.scale.x = 0.8;
-        title.scale.y = 0.8;
-        title.animations.add('beaming',[0,1,2],10, true);
-        title.animations.play('beaming');
+        // var title = game.add.sprite(70, 4, "newTitle");
+        // title.scale.x = 0.8;
+        // title.scale.y = 0.8;
+        // title.animations.add('beaming',[0,1,2],3, true);
+        // title.animations.play('beaming');
+        for (var i = 0; i < 3; i++) {
+            var item1 = game.add.sprite(70, 4, 'newTitle', i);
+            item1.alpha = 1;
+            item1.scale.x = 0.8;
+            item1.scale.y = 0.8;
+            var tween1 = game.add.tween(item1).to({alpha:0}, 2000, Phaser.Easing.Linear.None, true, 0, false);
+            tween1.yoyo(true, 1000);
+            var j = i + 1;
+            if (j === 3){j = 0;}
+            var item2 = game.add.sprite(70, 4, 'newTitle', j);
+            item2.alpha = 0;
+            item2.scale.x = 0.8;
+            item2.scale.y = 0.8;
+            var tween2 = game.add.tween(item2).to({alpha:1}, 2000, Phaser.Easing.Linear.None, true, 0, false);
+            tween2.yoyo(true, 1000);
+        }
 
-        playButton = game.add.button(220,560,"newPlay",playTheGame,this);
+
+        playButton = game.add.button(200,560,"newPlay",playTheGame,this);
         playButton.scale.x = 0.4;
         playButton.scale.y = 0.4;
         playButton.inputEnabled = true;

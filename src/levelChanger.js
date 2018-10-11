@@ -147,7 +147,9 @@ var LevelChanger = function(game){
 
     function addUI(){
         dashboard = game.add.sprite(0, 354,"dashboard");
+        // dashboard = game.add.sprite(0, 330,"dashboard");
         dashboard.anchor.set(0.5);
+        // dashboard.scale.setTo(1.6, 1.6);
         userInterface.add(dashboard);
         mute = game.add.button(0, 354,"mute", helper.muteSound,this);
         mute.inputEnabled = true;

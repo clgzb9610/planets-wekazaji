@@ -241,8 +241,14 @@ levelSelect.prototype = {
     },
     update:function() {
         levelBackground.tilePosition.x -= 1;
-        if (screen2 == true) {levelBackground2.tilePosition.x -= 1;};
-        
+        if (screen2 == true) {levelBackground2.tilePosition.x -= 1;}
+
+        if (nextArrowR.input.pointerOver()) {nextArrowR.alpha=0.7;}
+        else {nextArrowR.alpha=1;}
+
+        if (nextArrowL.input.pointerOver()) {nextArrowL.alpha=0.7;}
+        else {nextArrowL.alpha=1;}
+
         if (oneButton.input.pointerOver()) {oneButton.alpha=0.7;}
         else {oneButton.alpha=1;}
         

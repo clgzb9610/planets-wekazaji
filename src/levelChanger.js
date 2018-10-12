@@ -4,6 +4,33 @@ var LevelChanger = function(game){
     this.createLevel= function(){
         playingNow = true;
         score = 0;
+        
+        //level unlock checker
+        if (currentLevel == 1) {
+        var unlock2 = localStorage.setItem("Level2","true");
+        }
+        if (currentLevel == 2) {
+        var unlock3 = localStorage.setItem("Level3","true");
+        }
+        if (currentLevel == 3) {
+        var unlock4 = localStorage.setItem("Level4","true");
+        }
+        if (currentLevel == 4) {
+        var unlock5 = localStorage.setItem("Level5","true");
+        }
+        if (currentLevel == 5) {
+        var unlock6 = localStorage.setItem("Level6","true");
+        }
+        if (currentLevel == 6) {
+        var unlock7 = localStorage.setItem("Level7","true");
+        }
+        if (currentLevel == 7) {
+        var unlock8 = localStorage.setItem("Level8","true");
+        }
+        if (currentLevel == 8) {
+        var unlock9 = localStorage.setItem("Level9","true");
+        }
+        
         if(!level[currentLevel]) {          //go to ending state if you pass the last level
             bgm.destroy();
              console.log("bgm paused");

@@ -14,9 +14,6 @@ var credits;
 mainMenu.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");
-        game.load.image("wekazaji_page", "assets/mainMenu/wakazajiPage.png");
-        // game.load.image("music_page", "assets/mainMenu/musicPage.png");
-        game.load.image("close", "assets/mainMenu/x.png");
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
         // from http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/Home_Departure_Loop
 

@@ -15,7 +15,7 @@ mainMenu.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.image("wekazaji_page", "assets/mainMenu/wakazajiPage.png");
-        game.load.image("music_page", "assets/mainMenu/musicPage.png");
+        // game.load.image("music_page", "assets/mainMenu/musicPage.png");
         game.load.image("close", "assets/mainMenu/x.png");
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
         // from http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/Home_Departure_Loop
@@ -32,6 +32,7 @@ mainMenu.prototype = {
         game.load.image("blank", "assets/mainMenu/transparent.png");
 
         game.load.image("credits", "assets/mainMenu/newCredit.png");
+        game.load.image("music_page", "assets/mainMenu/newMusic.png");
         game.load.image("closeButton", "assets/mainMenu/closeButton.png");
         game.load.image("closeButton_hover", "assets/mainMenu/closeButton_hover.png");
 
@@ -159,18 +160,18 @@ function openMusic(){
     musicPop.anchor.set(0.5, 0.5);
     musicPop.inputEnabled = true;
 
-    var closeButton = game.make.sprite(280, -330, 'close');
-    closeButton.scale.set(0.3);
+    var closeButton = game.make.sprite(200, -200, 'closeButton');
+    closeButton.scale.set(0.2);
     closeButton.inputEnabled = true;
     closeButton.input.priorityID = 1;
     closeButton.input.useHandCursor = true;
     closeButton.events.onInputDown.add(closeMusic, this);
 
-    var musicLinkButton = new Phaser.Button(game, 211 - 350, 111 - 350, null, openMusicLink);
+    var musicLinkButton = new Phaser.Button(game, 211 - 310, 111 - 250, null, openMusicLink);
     musicLinkButton.inputEnabled = true;
     musicLinkButton.input.useHandCursor = true;
-    musicLinkButton.width = 274;
-    musicLinkButton.height = 274;
+    musicLinkButton.width = 210;
+    musicLinkButton.height = 210;
 
     musicPop.addChild(musicLinkButton);
     musicPop.addChild(closeButton);

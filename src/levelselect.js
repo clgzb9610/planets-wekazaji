@@ -53,6 +53,8 @@ levelSelect.prototype = {
         game.load.image("seven", "assets/levelSelect/7.png");
         game.load.image("eight", "assets/levelSelect/8.png");
         game.load.image("nine", "assets/levelSelect/9.png");
+        game.load.image("reset_placeholder", "assets/levelSelect/resetplaceholder.png");
+        game.load.image("unlock_placeholder", "assets/levelSelect/unlockplaceholder.png");
         game.load.image("background", "assets/levelSelect/background.png");
         game.load.spritesheet("level_title", "assets/levelSelect/levelSelectSheet.png", 700, 90);
         game.load.image("nextArrow", "assets/levelSelect/nextArrow.png");
@@ -182,6 +184,20 @@ levelSelect.prototype = {
         nineButton.scale.y = 0.3;
         nineButton.inputEnabled = true;
         
+        //reset progress button
+        resetButton = game.add.button(205, 145, "reset_placeholder", resetProgress, this);
+        resetButton.scale.x = 0.3;
+        resetButton.scale.y = 0.3;
+        resetButton.inputEnabled = true;
+        
+        //unlock all levels button
+        unlockButton = game.add.button(355, 145, "unlock_placeholder", unlockAll, this);
+        unlockButton.scale.x = 0.3;
+        unlockButton.scale.y = 0.3;
+        unlockButton.inputEnabled = true;
+        
+        
+        //enable level buttons
         enableMenu1Inputs();
         
         
@@ -371,11 +387,6 @@ function destroyScreen2() {
     nextArrowR2.destroy();
 }
 
-
-function backtoMenu() {
-    game.state.start("MainMenu",1,1);
-}
-
 function enableMenu1Inputs() {
     oneButton.inputEnabled = true;
     oneButtonBG.inputEnabled = true;
@@ -435,3 +446,23 @@ function disableMenu1Inputs() {
     nineButtonBG.inputEnabled = false;
 }
 
+function backtoMenu() {
+    game.state.start("MainMenu",1,1);
+}
+
+function resetProgress() {
+    localStorage.clear();
+    backtoMenu();
+}
+
+function unlockAll() {
+    var unlock2 = localStorage.setItem("Level2","true");
+    var unlock3 = localStorage.setItem("Level3","true");
+    var unlock4 = localStorage.setItem("Level4","true");
+    var unlock5 = localStorage.setItem("Level5","true");
+    var unlock6 = localStorage.setItem("Level6","true");
+    var unlock7 = localStorage.setItem("Level7","true");
+    var unlock8 = localStorage.setItem("Level8","true");
+    var unlock9 = localStorage.setItem("Level9","true");
+    backtoMenu();
+}

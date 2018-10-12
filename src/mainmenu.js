@@ -6,6 +6,7 @@ var menuBGM;
 var wekazajiPOP;
 
 var playButton;
+var closeButton;
 var levelButton;
 var wekazaji;
 var credits;
@@ -29,6 +30,10 @@ mainMenu.prototype = {
         game.load.image("newMusic", "assets/mainMenu/music1.png");
         game.load.image("newMusicHover", "assets/mainMenu/music2.png");
         game.load.image("blank", "assets/mainMenu/transparent.png");
+
+        game.load.image("credits", "assets/mainMenu/newCredit.png");
+        game.load.image("closeButton", "assets/mainMenu/closeButton.png");
+        game.load.image("closeButton_hover", "assets/mainMenu/closeButton_hover.png");
 
     },
     create:function () {
@@ -77,10 +82,10 @@ mainMenu.prototype = {
         levelButton.scale.y = 0.25;
         levelButton.inputEnabled = true;
 
-        wekazaji = game.add.button(100,648,"newCredit",openWekazaj, this);
-        wekazaji.scale.x = 0.2;
-        wekazaji.scale.y = 0.2;
-        wekazaji.inputEnabled = true;
+        credits = game.add.button(100,648,"newCredit",openCredits, this);
+        credits.scale.x = 0.2;
+        credits.scale.y = 0.2;
+        credits.inputEnabled = true;
 
         music = game.add.button(450,648,"newMusic",openMusic, this);
         music.scale.x = 0.2;
@@ -97,8 +102,8 @@ mainMenu.prototype = {
        if (levelButton.input.pointerOver()) {levelButton.loadTexture('newLevelHover', 0);}
        else {levelButton.loadTexture('newLevels', 0);}
 
-        if (wekazaji.input.pointerOver()) {wekazaji.loadTexture('newCreditHover', 0);}
-        else {wekazaji.loadTexture('newCredit', 0);}
+        if (credits.input.pointerOver()) {credits.loadTexture('newCreditHover', 0);}
+        else {credits.loadTexture('newCredit', 0);}
 
         if (music.input.pointerOver()) {music.loadTexture('newMusicHover', 0);}
         else {music.loadTexture('newMusic', 0);}
@@ -130,23 +135,23 @@ function fadeComplete(){
 
 
 
-function openWekazaj(){
-    wekazajiPOP = game.add.sprite(game.world.centerX, game.world.centerY, 'wekazaji_page');
-    wekazajiPOP.anchor.set(0.5, 0.5);
-    wekazajiPOP.inputEnabled = true;
+function openCredits(){
+    creditPop = game.add.sprite(game.world.centerX, game.world.centerY, 'credits');
+    creditPop.anchor.set(0.5, 0.5);
+    creditPop.inputEnabled = true;
 
-    var closeButton = game.make.sprite(280, -330, 'close');
-    closeButton.scale.set(0.3);
+    closeButton = game.make.sprite(200, -200, 'closeButton');
+    closeButton.scale.set(0.2);
     closeButton.inputEnabled = true;
     closeButton.input.priorityID = 1;
     closeButton.input.useHandCursor = true;
-    closeButton.events.onInputDown.add(closeWekazaji, this);
+    closeButton.events.onInputDown.add(closeCredits, this);
 
-    wekazajiPOP.addChild(closeButton);
+    creditPop.addChild(closeButton);
 }
 
-function closeWekazaji(){
-    wekazajiPOP.destroy();
+function closeCredits(){
+    creditPop.destroy();
 }
 
 function openMusic(){

@@ -172,36 +172,116 @@ var LevelChanger = function(game){
 
 
     function addUI(){
-        dashboard = game.add.sprite(0, 354,"dashboard");
-        // dashboard = game.add.sprite(0, 330,"dashboard");
-        dashboard.anchor.set(0.5);
-        // dashboard.scale.setTo(1.6, 1.6);
-        userInterface.add(dashboard);
-        mute = game.add.button(0, 354,"mute", helper.muteSound,this);
-        mute.inputEnabled = true;
-        if(game.sound.mute){
-            mute.loadTexture("mute",0);
-        }else{
-            mute.loadTexture("unMute",0);
+        //pause button in game
+        newPause = game.add.button(304, 334, "newPause");
+        newPause.anchor.set(0.5);
+        newPause.scale.setTo(0.3, 0.3);
+        userInterface.add(newPause);
+        newPause.inputEnabled = true;
+        newPause.events.onInputUp.add(helper.pauseClicked, self);
+        newPause.onInputOver.add(helper.pauseOver, this);
+        newPause.onInputOut.add(helper.pauseOut, this);
+
+        //Popup when pausebutton is clicked
+        pausePop = game.add.sprite(0, 30, 'pausePage');
+        pausePop.anchor.set(0.5);
+        userInterface.add(pausePop);
+        pausePop.inputEnabled = true;
+        pausePop.visible = false;
+        newPause.events.onInputUp.add(helper.showPausePop, self);
+
+        // close button for popup
+        closeButton = game.add.button(310, 30 - 110, 'closeButton');
+        userInterface.add(closeButton);
+        closeButton.scale.set(0.2);
+        closeButton.anchor.set(0.5);
+        closeButton.inputEnabled = true;
+        closeButton.input.priorityID = 1;
+        closeButton.input.useHandCursor = true;
+        closeButton.visible = false;
+        newPause.events.onInputUp.add(helper.showCloseButton, self);
+        closeButton.events.onInputUp.add(helper.closePause, self);
+        closeButton.events.onInputOver.add(helper.closeOver, this);
+        closeButton.events.onInputOut.add(helper.closeOut, this);
+
+        // resume button
+        resumeButton = game.add.button(0, -25, "resumeButton");
+        userInterface.add(resumeButton);
+        resumeButton.anchor.set(0.5);
+        resumeButton.inputEnabled = true;
+        resumeButton.input.priorityID = 1;
+        resumeButton.input.useHandCursor = true;
+        resumeButton.visible = false;
+        newPause.events.onInputUp.add(helper.showResumeButton, self);
+        resumeButton.events.onInputUp.add(helper.closePause, self);
+        resumeButton.events.onInputOver.add(helper.resumeOver, this);
+        resumeButton.events.onInputOut.add(helper.resumeOut, this);
+
+        // mute button
+        muteButton = game.add.button(0, 45, "muteButton");
+        userInterface.add(muteButton);
+        muteButton.anchor.set(0.5);
+        muteButton.inputEnabled = true;
+        muteButton.input.priorityID = 1;
+        muteButton.input.useHandCursor = true;
+        muteButton.visible = false;
+        newPause.events.onInputUp.add(helper.showMuteButton, self);
+        muteButton.events.onInputUp.add(helper.muteSound, self);
+        if(game.sound.mute===false) { //when sound is on
+            muteButton.events.onInputOver.add(helper.muteSoundOver, this);
+            muteButton.events.onInputOut.add(helper.muteSoundOut, this);
+        } else { // when sound is off
+            muteButton.events.onInputOver.add(helper.playSoundOver, this);
+            muteButton.events.onInputOut.add(helper.playSoundOut, this);
         }
-        mute.anchor.set(-0.9,0.5);
-        userInterface.add(mute);
-        pause = game.add.sprite(0, 354,"pause");
-        pause.frame = 0;
-        pause.anchor.set(0.5, 0.55);
-        userInterface.add(pause);
-        restart = game.add.sprite(0, 354,"restart");
-        restart.anchor.set(1.9,0.55);
-        userInterface.add(restart);
-        // console.log('adding dashboard');
 
-        // make the buttons work
-        pause.inputEnabled = true;
-        pause.events.onInputUp.add(helper.pauseGame, self);
-        restart.inputEnabled = true;
-        restart.events.onInputUp.add(levelChanger.resetLevel,self);
+        // go to main button
+        gotoMainButton = game.add.button(0, 115, "toMainButton");
+        userInterface.add(gotoMainButton);
+        gotoMainButton.anchor.set(0.5);
+        gotoMainButton.inputEnabled = true;
+        gotoMainButton.input.priorityID = 1;
+        gotoMainButton.input.useHandCursor = true;
+        gotoMainButton.visible = false;
+        newPause.events.onInputUp.add(helper.showMainButton, self);
+        gotoMainButton.events.onInputUp.add(helper.gotoMain, self);
+        gotoMainButton.events.onInputOver.add(helper.gotoMainOver, this);
+        gotoMainButton.events.onInputOut.add(helper.gotoMainOut, this);
 
-        game.input.onDown.add(helper.unPauseGame, self);
+
+        // dashboard = game.add.sprite(0, 354,"dashboard");
+        // // dashboard = game.add.sprite(0, 330,"dashboard");
+        // dashboard.anchor.set(0.5);
+        // // dashboard.scale.setTo(1.6, 1.6);
+        // userInterface.add(dashboard);
+        //
+        // mute = game.add.button(0, 354,"mute", helper.muteSound,this);
+        // mute.inputEnabled = true;
+        // if(game.sound.mute){
+        //     mute.loadTexture("mute",0);
+        // }else{
+        //     mute.loadTexture("unMute",0);
+        // }
+        // mute.anchor.set(-0.9,0.5);
+        // userInterface.add(mute);
+        //
+        // pause = game.add.sprite(0, 354,"pause");
+        // pause.frame = 0;
+        // pause.anchor.set(0.5, 0.55);
+        // userInterface.add(pause);
+        //
+        // restart = game.add.sprite(0, 354,"restart");
+        // restart.anchor.set(1.9,0.55);
+        // userInterface.add(restart);
+        // // console.log('adding dashboard');
+        //
+        // // make the buttons work
+        // pause.inputEnabled = true;
+        // pause.events.onInputUp.add(helper.pauseGame, self);
+        // restart.inputEnabled = true;
+        // restart.events.onInputUp.add(levelChanger.resetLevel,self);
+        //
+        // game.input.onDown.add(helper.unPauseGame, self);
 
         addGearOutlines();
     }

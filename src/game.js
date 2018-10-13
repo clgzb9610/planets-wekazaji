@@ -373,6 +373,20 @@ playGame.prototype = {
         game.load.spritesheet("pause","assets/buttons/pause.png",52,52);
         game.load.image("restart","assets/buttons/restart.png",52,52);
 
+        game.load.image("newPause", "assets/game/pauseButton.png");
+        game.load.image("newPause_hover", "assets/game/pauseButton_hover.png");
+        game.load.image("pausePage", "assets/game/settingPopUp.png");
+        game.load.image("closeButton", "assets/mainMenu/closeButton.png");
+        game.load.image("closeButton_hover", "assets/mainMenu/closeButton_hover.png");
+        game.load.image("muteButton", "assets/game/muteButton.png");
+        game.load.image("muteButton_hover", "assets/game/muteButton_hover.png");
+        game.load.image("playSoundButton", "assets/game/playSoundButton.png");
+        game.load.image("playSoundButton_hover", "assets/game/pauseButton_hover.png");
+        game.load.image("resumeButton", "assets/game/resumeButton.png");
+        game.load.image("resumeButton_hover", "assets/game/resumeButton_hover.png");
+        game.load.image("toMainButton", "assets/game/toMainButton.png");
+        game.load.image("toMainButton_hover", "assets/game/toMainButton_hover.png");
+
         game.load.audio('jetpack', "assets/music/jetpackAudio.mp3"); // http://soundbible.com/2125-Wind-Blowing.html
         game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/music/Ting-Popup_Pixels-349896185.mp3");
@@ -404,7 +418,6 @@ playGame.prototype = {
         game.add.tileSprite(1048, -1000, 1024, 1024, 'space');
         game.add.tileSprite(1048, 24, 1024, 1024, 'space');
         game.add.tileSprite(1048, 1048, 1024, 1024, 'space');
-
 
         enemyGroup = game.add.group();
         planetGroup = game.add.group();
@@ -459,6 +472,8 @@ playGame.prototype = {
     },
 
     update: function(){
+        // game.sound.mute = true;
+
         if (!transitioning) {
             //two enemies operate separately, when they exist in a level
             if (enemy1Present) {
@@ -484,7 +499,8 @@ playGame.prototype = {
             //Handle keyboard input for the player
             helper.handleKeyboardInput(playerAngle);
 
-            gamePhysics.constrainVelocity(player,150);      //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
+            //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
+            gamePhysics.constrainVelocity(player,150);
         }
     },
     render: function () {

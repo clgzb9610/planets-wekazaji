@@ -231,13 +231,120 @@ var Helper = function(game){
         }
     };
 
+    this.pauseOver = function(){
+        newPause.loadTexture('newPause_hover', 0);
+    };
+
+    this.pauseOut = function(){
+        newPause.loadTexture("newPause", 0);
+    };
+
+    this.showPausePop = function(){
+        pausePop.visible = true;
+    };
+
+    this.showCloseButton = function(){
+        closeButton.visible = true;
+    };
+
+    this.closeOver = function(){
+        closeButton.loadTexture("closeButton_hover", 0);
+    };
+
+    this.closeOut = function(){
+        closeButton.loadTexture("closeButton", 0)
+    };
+
+    this.showResumeButton = function(){
+        resumeButton.visible = true;
+    };
+
+    this.resumeOver = function(){
+        resumeButton.loadTexture("resumeButton_hover");
+    };
+
+    this.resumeOut = function(){
+        resumeButton.loadTexture("resumeButton");
+    };
+
+    this.showMuteButton = function(){
+        muteButton.visible = true;
+    };
+
+    this.muteSoundOver = function(){
+        muteButton.loadTexture("muteButton_hover");
+    };
+
+    this.muteSoundOut = function(){
+        muteButton.loadTexture("muteButton");
+    };
+
+    this.playSoundOver = function(){
+        muteButton.loadTexture("playSoundButton_hover");
+    };
+
+    this.playSoundOut = function(){
+        muteButton.loadTexture("playSoundButton");
+    };
+
+    this.closePause = function(){
+        console.log("pausePop page closed");
+        pausePop.visible = false;
+        closeButton.visible = false;
+        resumeButton.visible = false;
+        muteButton.visible = false;
+        gotoMainButton.visible = false;
+        game.input.keyboard.enabled = true;
+    };
+
+    this.showMainButton = function(){
+        gotoMainButton.visible = true;
+    };
+
+    this.gotoMainOver = function(){
+        gotoMainButton.loadTexture("toMainButton_hover");
+    };
+
+    this.gotoMainOut = function(){
+        gotoMainButton.loadTexture("toMainButton");
+    };
+
+    this.gotoMain = function(){
+        game.input.keyboard.enabled = true;
+        bgm.destroy();
+        player.destroy();
+        game.physics.clear();
+        game.world.pivot.x = 0;
+        game.world.pivot.y = 0;
+        game.world.rotation = 0;
+        game.camera.reset();
+        game.state.start("MainMenu", true, false, 0);
+    };
+
+    this.pauseClicked = function(){
+        console.log("paused clicked");
+        if(game.input.keyboard.enabled === true) { // pause game
+            game.input.keyboard.enabled = false;
+        }
+    };
+
+    // this.muteSound = function(){
+    //     if(game.sound.mute===false){
+    //         game.sound.mute = true;
+    //         mute.loadTexture('mute', 0);
+    //     } else {
+    //         game.sound.mute = false;
+    //         mute.loadTexture('unMute', 0);
+    //     }
+    // };
+
     this.muteSound = function(){
         if(game.sound.mute===false){
             game.sound.mute = true;
-            mute.loadTexture('mute', 0);
+            muteButton.loadTexture('playSoundButton', 0);
         } else {
             game.sound.mute = false;
-            mute.loadTexture('unMute', 0);
+            // muteButton.loadTexture('muteButton', 0);
         }
     };
 };

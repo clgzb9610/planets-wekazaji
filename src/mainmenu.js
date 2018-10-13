@@ -96,9 +96,9 @@ mainMenu.prototype = {
 
         if (playButton.input.pointerOver()) {playButton.loadTexture('newPlayHover', 0);}
         else {playButton.loadTexture('newPlay', 0);}
-        
-       if (levelButton.input.pointerOver()) {levelButton.loadTexture('newLevelHover', 0);}
-       else {levelButton.loadTexture('newLevels', 0);}
+
+        if (levelButton.input.pointerOver()) {levelButton.loadTexture('newLevelHover', 0);}
+        else {levelButton.loadTexture('newLevels', 0);}
 
         if (credits.input.pointerOver()) {credits.loadTexture('newCreditHover', 0);}
         else {credits.loadTexture('newCredit', 0);}
@@ -130,20 +130,19 @@ function fadeComplete(){
     game.state.start("PlayGame", true, false, 0);
 }
 
-
-
-
 function openCredits(){
     creditPop = game.add.sprite(game.world.centerX, game.world.centerY, 'credits');
     creditPop.anchor.set(0.5, 0.5);
     creditPop.inputEnabled = true;
 
-    closeButton = game.make.sprite(200, -200, 'closeButton');
+    closeButton = game.add.button(200, -200, 'closeButton', closeCredits, this);
     closeButton.scale.set(0.2);
     closeButton.inputEnabled = true;
     closeButton.input.priorityID = 1;
     closeButton.input.useHandCursor = true;
-    closeButton.events.onInputDown.add(closeCredits, this);
+
+    closeButton.onInputOver.add(closeOver, this);
+    closeButton.onInputOut.add(closeOut, this);
 
     creditPop.addChild(closeButton);
 }
@@ -157,12 +156,14 @@ function openMusic(){
     musicPop.anchor.set(0.5, 0.5);
     musicPop.inputEnabled = true;
 
-    var closeButton = game.make.sprite(200, -200, 'closeButton');
+    closeButton = game.add.button(200, -200, 'closeButton', closeMusic, this);
     closeButton.scale.set(0.2);
     closeButton.inputEnabled = true;
     closeButton.input.priorityID = 1;
     closeButton.input.useHandCursor = true;
-    closeButton.events.onInputDown.add(closeMusic, this);
+
+    closeButton.onInputOver.add(closeOver, this);
+    closeButton.onInputOut.add(closeOut, this);
 
     var musicLinkButton = new Phaser.Button(game, 211 - 310, 111 - 250, null, openMusicLink);
     musicLinkButton.inputEnabled = true;
@@ -181,4 +182,12 @@ function openMusicLink() {
 
 function closeMusic(){
     musicPop.destroy();
+}
+
+function closeOver(){
+    closeButton.loadTexture('closeButton_hover', 0);
+}
+
+function closeOut(){
+    closeButton.loadTexture("closeButton", 0);
 }

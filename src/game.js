@@ -14,6 +14,7 @@ var helper;
 var levelChanger;
 
 var planetGroup;
+var objectGroup;
 var cursors;
 var playingNow;
 
@@ -45,6 +46,8 @@ var gearUIScale = 0.6;
 var forceReducer = 0.00035; //was .00175
 
 var playerVel = 40;
+
+var transitioning = false;
 
 
 // graphic object where to draw planet gravity area
@@ -326,6 +329,7 @@ playGame.prototype = {
         game.load.spritesheet('startPadAnimations','assets/game/startPadAnimationSpriteSheet.png',50,17);
         game.load.image("log", "assets/game/shipslog.png");
         game.load.image('blackScreen', "assets/game/blackScreen.png");
+        game.load.image("whiteScreen", "assets/game/whiteScreen.png");
 
         game.load.spritesheet("flames", "assets/game/flameSprites2.png", 20, 20);
 
@@ -424,34 +428,33 @@ playGame.prototype = {
     },
 
     update: function(){
+        if (!transitioning) {
+            //two enemies operate separately, when they exist in a level
+            if (enemy1Present) {
+                enemy1.update();
+            }
+            if (enemy1Present && enemy2Present) {
+                enemy2.update();
+            }
 
-        // game.sound.mute = true;
+            var playerAngle = gamePhysics.handlePlayerRotation(player);
 
-        //two enemies operate separately, when they exist in a level
-        if (enemy1Present) {
-            enemy1.update();
+            gamePhysics.applyGravityToObjects();
+
+            if(playingNow === true) {       //this function isn't called when the game is between levels or changing states
+                helper.checkTeleporterOverlap(teleporter);
+            }
+            
+            //the user interface moves around relative to the player, since the camera can't spin
+            helper.moveUI(playerAngle);
+
+            game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
+
+            //Handle keyboard input for the player
+            helper.handleKeyboardInput(playerAngle);
+
+            gamePhysics.constrainVelocity(player,150);      //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
         }
-        if (enemy1Present && enemy2Present) {
-            enemy2.update();
-        }
-
-        var playerAngle = gamePhysics.handlePlayerRotation(player);
-
-        gamePhysics.applyGravityToObjects();
-
-        if(playingNow === true) {       //this function isn't called when the game is between levels or changing states
-            helper.checkTeleporterOverlap(teleporter);
-        }
-        
-        //the user interface moves around relative to the player, since the camera can't spin
-        helper.moveUI(playerAngle);
-
-        game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
-
-        //Handle keyboard input for the player
-        helper.handleKeyboardInput(playerAngle);
-
-        gamePhysics.constrainVelocity(player,150);      //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
     },
     render: function () {
         if (showDebugInfo) {

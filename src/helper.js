@@ -10,15 +10,54 @@ var Helper = function(game){
         if (!begin) {
             return;
         }
-        // if (enemyCounterClockwise === -1) { //switches the enemyCounterClockwise boolean so enemy can move the other way
-        //     enemyCounterClockwise = 0;
-        // } else {
-        //     enemyCounterClockwise = -1;
-        // }
-        levelChanger.resetLevel();
-        playingNow = false;
 
-        //helper.deadByEnemy();
+        // Freezes all entity movement on the screen
+        transitioning = true;
+        game.physics.box2d.paused = true;
+        emitter.exists = false;
+        objectGroup.exists = false;
+        emitter.forEachAlive(function (particle) {
+            if (particle.scaleData === null || particle._s === null) { return; }
+            
+            let currentScaleIndex = particle._s,
+                currentScaleX = particle.scaleData[currentScaleIndex].x,
+                currentScaleY = particle.scaleData[currentScaleIndex].y;
+            
+            particle.scaleData = particle.scaleData.map(function (obj) {
+                 return { x: currentScaleX, y: currentScaleY };
+             }); 
+        });
+
+
+        if (jetpackAudio.volume > 0) {
+            jetpackAudio.fadeTo(50, 0);
+        }
+
+        // Causes the screen to flash white
+        var whiteScreen = game.add.sprite(player.x, player.y, "whiteScreen");
+        whiteScreen.bringToTop();
+        whiteScreen.anchor.set(0.5);
+        whiteScreen.angle = player.angle;
+        whiteScreen.alpha = 0;
+        whiteScreen.setScaleMinMax(2, 2);
+        let screenTween = game.add.tween(whiteScreen).to({ alpha: 1 }, 200);
+        screenTween.start();
+        screenTween.onComplete.add(function () {
+            game.time.events.add(150, function () { // Waits for 150ms to pass before running events
+                game.time.slowMotion = 1;
+                levelChanger.resetLevel();
+                whiteScreen.bringToTop();
+
+                // Allows entity movement / animation to run again
+                transitioning = false;
+                game.physics.box2d.paused = false;
+                emitter.exists = true;
+                objectGroup.exists = true;
+
+                screenTween = game.add.tween(whiteScreen).to({ alpha: 0 }, 200);
+                screenTween.start();
+            });
+        });
     };
 
 
@@ -148,7 +187,7 @@ var Helper = function(game){
             distanceToSurface = distanceToPlanet - closestPlanet.width / 2;
         }
         
-        if (keyDown && distanceToSurface > 2) {
+        if ((keyDown && distanceToSurface > 2) || cursors.down.isDown || cursors.up.isDown) {
             if (frameCounter === 0) {
                 this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
                 emitter.x = player.x;

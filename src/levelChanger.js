@@ -6,7 +6,6 @@ var LevelChanger = function(game){
         score = 0;
         if(!level[currentLevel]) {          //go to ending state if you pass the last level
             bgm.destroy();
-             console.log("bgm paused");
             player.destroy();
             game.physics.clear();
             // console.log("destroyed the physics");
@@ -214,8 +213,8 @@ var LevelChanger = function(game){
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;
         // var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
-        game.time.events.add(500,levelChanger.destroyGroups,this);
-        game.time.events.add(501,addGroups,this);
+        levelChanger.destroyGroups();
+        addGroups();
     };
 
     // destroy all the groups of objects

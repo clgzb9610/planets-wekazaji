@@ -194,8 +194,10 @@ var LevelChanger = function(game){
         userInterface.add(newPause);
         newPause.inputEnabled = true;
         newPause.events.onInputUp.add(helper.pauseClicked, self);
-        newPause.onInputOver.add(helper.pauseOver, this);
-        newPause.onInputOut.add(helper.pauseOut, this);
+        if(game.paused === false){
+            newPause.onInputOver.add(helper.pauseOver, this);
+            newPause.onInputOut.add(helper.pauseOut, this);
+        }
 
         //Popup when pausebutton is clicked
         pausePop = game.add.sprite(0, 30, 'pausePage');
@@ -228,7 +230,6 @@ var LevelChanger = function(game){
         resumeButton.input.useHandCursor = true;
         resumeButton.visible = false;
         newPause.events.onInputUp.add(helper.showResumeButton, self);
-        resumeButton.events.onInputUp.add(helper.closePause, self);
         resumeButton.events.onInputOver.add(helper.resumeOver, this);
         resumeButton.events.onInputOut.add(helper.resumeOut, this);
 
@@ -241,7 +242,6 @@ var LevelChanger = function(game){
         muteButton.input.useHandCursor = true;
         muteButton.visible = false;
         newPause.events.onInputUp.add(helper.showMuteButton, self);
-        muteButton.events.onInputUp.add(helper.muteSound, self);
         if(game.sound.mute===false) { //when sound is on
             muteButton.events.onInputOver.add(helper.muteSoundOver, this);
             muteButton.events.onInputOut.add(helper.muteSoundOut, this);
@@ -259,9 +259,10 @@ var LevelChanger = function(game){
         gotoMainButton.input.useHandCursor = true;
         gotoMainButton.visible = false;
         newPause.events.onInputUp.add(helper.showMainButton, self);
-        gotoMainButton.events.onInputUp.add(helper.gotoMain, self);
         gotoMainButton.events.onInputOver.add(helper.gotoMainOver, this);
         gotoMainButton.events.onInputOut.add(helper.gotoMainOut, this);
+
+        game.input.onDown.add(helper.unPauseGame, self);
 
 
         // dashboard = game.add.sprite(0, 354,"dashboard");

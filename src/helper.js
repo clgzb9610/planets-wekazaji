@@ -216,18 +216,70 @@ var Helper = function(game){
         userInterface.angle = angle * 180 / Math.PI - 90;
     };
 
-    this.pauseGame = function(){
-        pause.frame = 1;
+    this.pauseClicked = function(){
+        console.log("paused clicked");
+        helper.showPausePop();
         game.paused = true;
-        levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
+        game.sound.mute = false;
     };
 
     this.unPauseGame = function(event){
-        var pauseButton = pause.getBounds();
-        if(Phaser.Rectangle.contains(pauseButton,event.x,event.y)) {
+        var closeButtonOnPop = closeButton.getBounds();
+        if(Phaser.Rectangle.contains(closeButtonOnPop,event.x,event.y)) {
             game.paused = false;
-            pause.frame = 0;
+            helper.closePause();
+            newPause.loadTexture("newPause", 0);
+            closeButton.loadTexture("closeButton", 0);
         }
+        var pauseButtonOnPop = resumeButton.getBounds();
+        if(Phaser.Rectangle.contains(pauseButtonOnPop,event.x,event.y)) {
+            game.paused = false;
+            helper.closePause();
+            newPause.loadTexture("newPause", 0);
+            resumeButton.loadTexture("resumeButton");
+        }
+        var mainButtonOnPop = gotoMainButton.getBounds();
+        if(Phaser.Rectangle.contains(mainButtonOnPop,event.x,event.y)) {
+            game.paused = false;
+            helper.gotoMain();
+            newPause.loadTexture("newPause", 0);
+            gotoMainButton.loadTexture("toMainButton");
+        }
+        var muteSoundOnPop = muteButton.getBounds();
+        if(Phaser.Rectangle.contains(muteSoundOnPop,event.x,event.y)) {
+            helper.muteSound();
+            newPause.loadTexture("newPause", 0);
+        }
+    };
+
+    this.muteSound = function(){
+        if(game.sound.mute===false){
+            game.sound.mute = true;
+            muteButton.loadTexture('playSoundButton', 0);
+        } else {
+            game.sound.mute = false;
+            muteButton.loadTexture('muteButton', 0);
+        }
+    };
+
+    this.closePause = function(){
+        pausePop.visible = false;
+        closeButton.visible = false;
+        resumeButton.visible = false;
+        muteButton.visible = false;
+        gotoMainButton.visible = false;
+    };
+
+    this.gotoMain = function(){
+        game.input.keyboard.enabled = true;
+        bgm.destroy();
+        player.destroy();
+        game.physics.clear();
+        game.world.pivot.x = 0;
+        game.world.pivot.y = 0;
+        game.world.rotation = 0;
+        game.camera.reset();
+        game.state.start("MainMenu", true, false, 0);
     };
 
     this.pauseOver = function(){
@@ -251,7 +303,7 @@ var Helper = function(game){
     };
 
     this.closeOut = function(){
-        closeButton.loadTexture("closeButton", 0)
+        closeButton.loadTexture("closeButton", 0);
     };
 
     this.showResumeButton = function(){
@@ -286,16 +338,6 @@ var Helper = function(game){
         muteButton.loadTexture("playSoundButton");
     };
 
-    this.closePause = function(){
-        console.log("pausePop page closed");
-        pausePop.visible = false;
-        closeButton.visible = false;
-        resumeButton.visible = false;
-        muteButton.visible = false;
-        gotoMainButton.visible = false;
-        game.input.keyboard.enabled = true;
-    };
-
     this.showMainButton = function(){
         gotoMainButton.visible = true;
     };
@@ -308,42 +350,4 @@ var Helper = function(game){
         gotoMainButton.loadTexture("toMainButton");
     };
 
-    this.gotoMain = function(){
-        game.input.keyboard.enabled = true;
-        bgm.destroy();
-        player.destroy();
-        game.physics.clear();
-        game.world.pivot.x = 0;
-        game.world.pivot.y = 0;
-        game.world.rotation = 0;
-        game.camera.reset();
-        game.state.start("MainMenu", true, false, 0);
-    };
-
-    this.pauseClicked = function(){
-        console.log("paused clicked");
-        if(game.input.keyboard.enabled === true) { // pause game
-            game.input.keyboard.enabled = false;
-        }
-    };
-
-    // this.muteSound = function(){
-    //     if(game.sound.mute===false){
-    //         game.sound.mute = true;
-    //         mute.loadTexture('mute', 0);
-    //     } else {
-    //         game.sound.mute = false;
-    //         mute.loadTexture('unMute', 0);
-    //     }
-    // };
-
-    this.muteSound = function(){
-        if(game.sound.mute===false){
-            game.sound.mute = true;
-            muteButton.loadTexture('playSoundButton', 0);
-        } else {
-            game.sound.mute = false;
-            // muteButton.loadTexture('muteButton', 0);
-        }
-    };
 };

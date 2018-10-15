@@ -63,6 +63,7 @@ levelSelect.prototype = {
 
     },
     create:function () {
+        //set up background and title banners
         console.log("creating level select");
         game.world.setBounds(0, 0, 700, 700);
 
@@ -74,184 +75,17 @@ levelSelect.prototype = {
         level_title.animations.add('beaming_level',[0,1,2],5, true);
         level_title.animations.play('beaming_level');
         
-        //Next Screen Arrow Right
-        nextArrowR = game.add.button(630, 60, "nextArrow", openNextPage, this);
-        nextArrowR.scale.x = 0.1;
-        nextArrowR.scale.y = 0.1;
         
-        //Next Screen Arrow Left
-        nextArrowL = game.add.button(70, 60, "nextArrow",backtoMenu, this);
-        nextArrowL.scale.x = -0.1;
-        nextArrowL.scale.y = 0.1;
-        
-        //Level One
-        oneButtonBG = game.add.button(41,191,"background",buttonOne,this);
-        oneButtonBG.scale.x = 0.3;
-        oneButtonBG.scale.y = 0.3;
-        oneButtonBG.alpha = 0.88;
-        
-        oneButton = game.add.button(50,200,"one",buttonOne,this);
-        oneButton.scale.x = 0.3;
-        oneButton.scale.y = 0.3;
-      
-        //Level Two
-        twoButtonBG = game.add.button(256,191,"background",buttonTwo,this);
-        twoButtonBG.scale.x = 0.3;
-        twoButtonBG.scale.y = 0.3;
-        twoButtonBG.alpha = 0.88;
-        
-        twoButton = game.add.button(265,200,"two",buttonTwo,this);
-        twoButton.scale.x = 0.3;
-        twoButton.scale.y = 0.3;
-        twoButton.inputEnabled = true;
-        
-        //Level Three
-        threeButtonBG = game.add.button(471,191,"background",buttonThree,this);
-        threeButtonBG.scale.x = 0.3;
-        threeButtonBG.scale.y = 0.3;
-        threeButtonBG.alpha = 0.88;
-        
-        threeButton = game.add.button(480,200,"three",buttonThree,this);
-        threeButton.scale.x = 0.3;
-        threeButton.scale.y = 0.3;
-        threeButton.inputEnabled = true;
-        
-        //Level Four
-        fourButtonBG = game.add.button(41,356,"background",buttonFour,this);
-        fourButtonBG.scale.x = 0.3;
-        fourButtonBG.scale.y = 0.3;
-        fourButtonBG.alpha = 0.88;
-        
-        fourButton = game.add.button(50,365,"four",buttonFour,this);
-        fourButton.scale.x = 0.3;
-        fourButton.scale.y = 0.3;
-        fourButton.inputEnabled = true;
-        
-        //Level Five
-        fiveButtonBG = game.add.button(256,356,"background",buttonFive,this);
-        fiveButtonBG.scale.x = 0.3;
-        fiveButtonBG.scale.y = 0.3;
-        fiveButtonBG.alpha = 0.88;
-        
-        fiveButton = game.add.button(265,365,"five",buttonFive,this);
-        fiveButton.scale.x = 0.3;
-        fiveButton.scale.y = 0.3;
-        fiveButton.inputEnabled = true;
-        
-        //Level Six
-        sixButtonBG = game.add.button(471,356,"background",buttonSix,this);
-        sixButtonBG.scale.x = 0.3;
-        sixButtonBG.scale.y = 0.3;
-        sixButtonBG.alpha = 0.88;
-        
-        sixButton = game.add.button(480,365,"six",buttonSix,this);
-        sixButton.scale.x = 0.3;
-        sixButton.scale.y = 0.3;
-        sixButton.inputEnabled = true;
-        
-        
-        //Level Seven
-        sevenButtonBG = game.add.button(41,521,"background",buttonSeven,this);
-        sevenButtonBG.scale.x = 0.3;
-        sevenButtonBG.scale.y = 0.3;
-        sevenButtonBG.alpha = 0.88;
-        
-        sevenButton = game.add.button(50,530,"seven",buttonSeven,this);
-        sevenButton.scale.x = 0.3;
-        sevenButton.scale.y = 0.3;
-        sevenButton.inputEnabled = true;
-        
-        //Level Eight
-        eightButtonBG = game.add.button(256,521,"background",buttonEight,this);
-        eightButtonBG.scale.x = 0.3;
-        eightButtonBG.scale.y = 0.3;
-        eightButtonBG.alpha = 0.88;
-        
-        eightButton = game.add.button(265,530,"eight",buttonThree,this);
-        eightButton.scale.x = 0.3;
-        eightButton.scale.y = 0.3;
-        eightButton.inputEnabled = true;
-        
-        
-        //Level Nine
-        nineButtonBG = game.add.button(471,521,"background",buttonNine,this);
-        nineButtonBG.scale.x = 0.3;
-        nineButtonBG.scale.y = 0.3;
-        nineButtonBG
-        
-        nineButton = game.add.button(480,530,"nine",buttonNine,this);
-        nineButton.scale.x = 0.3;
-        nineButton.scale.y = 0.3;
-        nineButton.inputEnabled = true;
-        
-        //reset progress button
-        resetButton = game.add.button(205, 145, "reset_placeholder", resetProgress, this);
-        resetButton.scale.x = 0.3;
-        resetButton.scale.y = 0.3;
-        resetButton.inputEnabled = true;
-        
-        //unlock all levels button
-        unlockButton = game.add.button(355, 145, "unlock_placeholder", unlockAll, this);
-        unlockButton.scale.x = 0.3;
-        unlockButton.scale.y = 0.3;
-        unlockButton.inputEnabled = true;
-        
+        //add level buttons
+        addPageOneButtons();
         
         //enable level buttons
         enableMenu1Inputs();
         
         
-        
-        
         //Level Unlock Logic
-        if (localStorage.getItem("Level2") != "true") {
-            twoButton.alpha = 0.1;
-            twoButtonBG.alpha = 0.1;
-            twoButton.inputEnabled = false;
-            twoButtonBG.inputEnabled = false;
-        }
-        if (localStorage.getItem("Level3") != "true") {
-            threeButton.alpha = 0.1;
-            threeButtonBG.alpha = 0.1;
-            threeButton.inputEnabled = false;
-            threeButtonBG.inputEnabled = false;
-        }
-        if (localStorage.getItem("Level4") != "true") {
-            fourButton.alpha = 0.1;
-            fourButtonBG.alpha = 0.1;
-            fourButton.inputEnabled = false;
-            fourButtonBG.inputEnabled = false;
-        }
-        if (localStorage.getItem("Level5") != "true") {
-            fiveButton.alpha = 0.1;
-            fiveButtonBG.alpha = 0.1;
-            fiveButton.inputEnabled = false;
-            fiveButtonBG.inputEnabled = false;
-        }
-        if (localStorage.getItem("Level6") != "true") {
-            sixButton.alpha = 0.1;
-            sixButtonBG.alpha = 0.1;
-            sixButton.inputEnabled = false;
-            sixButtonBG.inputEnabled = false;
-        }
-        if (localStorage.getItem("Level7") != "true") {
-            sevenButton.alpha = 0.1;
-            sevenButtonBG.alpha = 0.1;
-            sevenButton.inputEnabled = false;
-            sevenButtonBG.inputEnabled = false;
-        }
-        if (localStorage.getItem("Level8") != "true") {
-            eightButton.alpha = 0.1;
-            eightButtonBG.alpha = 0.1;
-            eightButton.inputEnabled = false;
-            eightButtonBG.inputEnabled = false;
-        }
-        if (localStorage.getItem("Level9") != "true") {
-            nineButton.alpha = 0.1;
-            nineButtonBG.alpha = 0.1;
-            nineButton.inputEnabled = false;
-            nineButtonBG.inputEnabled = false;
-        }
+        checkLevelProgress();
+        
         
 
     },
@@ -465,4 +299,180 @@ function unlockAll() {
     var unlock8 = localStorage.setItem("Level8","true");
     var unlock9 = localStorage.setItem("Level9","true");
     backtoMenu();
+}
+
+function addPageOneButtons() {
+    //Next Screen Arrow Right
+    nextArrowR = game.add.button(630, 60, "nextArrow", openNextPage, this);
+    nextArrowR.scale.x = 0.1;
+    nextArrowR.scale.y = 0.1;
+
+    //Next Screen Arrow Left
+    nextArrowL = game.add.button(70, 60, "nextArrow",backtoMenu, this);
+    nextArrowL.scale.x = -0.1;
+    nextArrowL.scale.y = 0.1;
+
+    //Level One
+    oneButtonBG = game.add.button(41,191,"background",buttonOne,this);
+    oneButtonBG.scale.x = 0.3;
+    oneButtonBG.scale.y = 0.3;
+    oneButtonBG.alpha = 0.8;
+
+    oneButton = game.add.button(50,200,"one",buttonOne,this);
+    oneButton.scale.x = 0.3;
+    oneButton.scale.y = 0.3;
+
+    //Level Two
+    twoButtonBG = game.add.button(256,191,"background",buttonTwo,this);
+    twoButtonBG.scale.x = 0.3;
+    twoButtonBG.scale.y = 0.3;
+    twoButtonBG.alpha = 0.88;
+
+    twoButton = game.add.button(265,200,"two",buttonTwo,this);
+    twoButton.scale.x = 0.3;
+    twoButton.scale.y = 0.3;
+    twoButton.inputEnabled = true;
+
+    //Level Three
+    threeButtonBG = game.add.button(471,191,"background",buttonThree,this);
+    threeButtonBG.scale.x = 0.3;
+    threeButtonBG.scale.y = 0.3;
+    threeButtonBG.alpha = 0.88;
+
+    threeButton = game.add.button(480,200,"three",buttonThree,this);
+    threeButton.scale.x = 0.3;
+    threeButton.scale.y = 0.3;
+    threeButton.inputEnabled = true;
+
+    //Level Four
+    fourButtonBG = game.add.button(41,356,"background",buttonFour,this);
+    fourButtonBG.scale.x = 0.3;
+    fourButtonBG.scale.y = 0.3;
+    fourButtonBG.alpha = 0.88;
+
+    fourButton = game.add.button(50,365,"four",buttonFour,this);
+    fourButton.scale.x = 0.3;
+    fourButton.scale.y = 0.3;
+    fourButton.inputEnabled = true;
+
+    //Level Five
+    fiveButtonBG = game.add.button(256,356,"background",buttonFive,this);
+    fiveButtonBG.scale.x = 0.3;
+    fiveButtonBG.scale.y = 0.3;
+    fiveButtonBG.alpha = 0.88;
+
+    fiveButton = game.add.button(265,365,"five",buttonFive,this);
+    fiveButton.scale.x = 0.3;
+    fiveButton.scale.y = 0.3;
+    fiveButton.inputEnabled = true;
+
+    //Level Six
+    sixButtonBG = game.add.button(471,356,"background",buttonSix,this);
+    sixButtonBG.scale.x = 0.3;
+    sixButtonBG.scale.y = 0.3;
+    sixButtonBG.alpha = 0.88;
+
+    sixButton = game.add.button(480,365,"six",buttonSix,this);
+    sixButton.scale.x = 0.3;
+    sixButton.scale.y = 0.3;
+    sixButton.inputEnabled = true;
+
+
+    //Level Seven
+    sevenButtonBG = game.add.button(41,521,"background",buttonSeven,this);
+    sevenButtonBG.scale.x = 0.3;
+    sevenButtonBG.scale.y = 0.3;
+    sevenButtonBG.alpha = 0.88;
+
+    sevenButton = game.add.button(50,530,"seven",buttonSeven,this);
+    sevenButton.scale.x = 0.3;
+    sevenButton.scale.y = 0.3;
+    sevenButton.inputEnabled = true;
+
+    //Level Eight
+    eightButtonBG = game.add.button(256,521,"background",buttonEight,this);
+    eightButtonBG.scale.x = 0.3;
+    eightButtonBG.scale.y = 0.3;
+    eightButtonBG.alpha = 0.88;
+
+    eightButton = game.add.button(265,530,"eight",buttonThree,this);
+    eightButton.scale.x = 0.3;
+    eightButton.scale.y = 0.3;
+    eightButton.inputEnabled = true;
+
+
+    //Level Nine
+    nineButtonBG = game.add.button(471,521,"background",buttonNine,this);
+    nineButtonBG.scale.x = 0.3;
+    nineButtonBG.scale.y = 0.3;
+    nineButtonBG
+
+    nineButton = game.add.button(480,530,"nine",buttonNine,this);
+    nineButton.scale.x = 0.3;
+    nineButton.scale.y = 0.3;
+    nineButton.inputEnabled = true;
+
+    //reset progress button
+    resetButton = game.add.button(205, 145, "reset_placeholder", resetProgress, this);
+    resetButton.scale.x = 0.3;
+    resetButton.scale.y = 0.3;
+    resetButton.inputEnabled = true;
+
+    //unlock all levels button
+    unlockButton = game.add.button(355, 145, "unlock_placeholder", unlockAll, this);
+    unlockButton.scale.x = 0.3;
+    unlockButton.scale.y = 0.3;
+    unlockButton.inputEnabled = true;
+}
+
+
+function checkLevelProgress() {
+    if (localStorage.getItem("Level2") != "true") {
+            twoButton.alpha = 0.1;
+            twoButtonBG.alpha = 0.1;
+            twoButton.inputEnabled = false;
+            twoButtonBG.inputEnabled = false;
+        }
+    if (localStorage.getItem("Level3") != "true") {
+        threeButton.alpha = 0.1;
+        threeButtonBG.alpha = 0.1;
+        threeButton.inputEnabled = false;
+        threeButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level4") != "true") {
+        fourButton.alpha = 0.1;
+        fourButtonBG.alpha = 0.1;
+        fourButton.inputEnabled = false;
+        fourButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level5") != "true") {
+        fiveButton.alpha = 0.1;
+        fiveButtonBG.alpha = 0.1;
+        fiveButton.inputEnabled = false;
+        fiveButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level6") != "true") {
+        sixButton.alpha = 0.1;
+        sixButtonBG.alpha = 0.1;
+        sixButton.inputEnabled = false;
+        sixButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level7") != "true") {
+        sevenButton.alpha = 0.1;
+        sevenButtonBG.alpha = 0.1;
+        sevenButton.inputEnabled = false;
+        sevenButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level8") != "true") {
+        eightButton.alpha = 0.1;
+        eightButtonBG.alpha = 0.1;
+        eightButton.inputEnabled = false;
+        eightButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level9") != "true") {
+        nineButton.alpha = 0.1;
+        nineButtonBG.alpha = 0.1;
+        nineButton.inputEnabled = false;
+        nineButtonBG.inputEnabled = false;
+    }
 }

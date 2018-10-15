@@ -143,6 +143,21 @@ var LevelChanger = function(game){
         platformTween.onComplete.add(destroyStartPad, this);
     };
 
+    this.finishLevel = function () {
+        transitioning = true;
+        game.physics.box2d.paused = true;
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+
+        let scaleTween = game.add.tween(player.scale).to({x: 0, y: 0}, 750, Phaser.Easing.Back.In),
+            positionTween = game.add.tween(player.body).to({x: teleporter.x, y: teleporter.y, angle: player.angle + 600}, 750, Phaser.Easing.Back.In);
+
+        scaleTween.start();
+        positionTween.start();
+        
+        positionTween.onComplete.add(this.changeLevel);
+    };
+
     function destroyStartPad(){
         objectGroup.remove(startPad);
         objectGroup.remove(startPadAnimations);
@@ -321,9 +336,17 @@ var LevelChanger = function(game){
         blackScreen.scale.setTo(2, 2); //if the blackscreen sprite is teensy you could scale at like 200x200?
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;
-        // var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
-        levelChanger.destroyGroups();
-        addGroups();
+        game.add.tween(blackScreen).to( { alpha: 1 }, 200, Phaser.Easing.Linear.None, true).onComplete.add(function () {
+            game.add.tween(player.scale).to( {x: 1, y: 1}, 10, Phaser.Easing.Linear.None, true);
+            transitioning = false;
+            game.physics.box2d.paused = false;
+            levelChanger.destroyGroups();
+            addGroups();
+            blackScreen.bringToTop();
+            game.time.events.add(100, function () {
+                game.add.tween(blackScreen).to( {alpha: 0}, 150, Phaser.Easing.Linear.None, true);
+            });
+        });
     };
 
     // destroy all the groups of objects
@@ -366,7 +389,6 @@ var LevelChanger = function(game){
         currentLevel++;
 
         game.input.enabled = true;
-        blackScreen.destroy();
         levelChanger.createLevel();
     }
 
@@ -375,7 +397,18 @@ var LevelChanger = function(game){
         if(playingNow === true){
             currentLevel -= 1;
             playingNow = false;
-            levelChanger.changeLevel();
+
+            player.body.velocity.x -= 110;
+            game.input.enabled = false;
+
+            cursors.left.reset(true);
+            cursors.right.reset(true);
+            cursors.up.reset(true);
+            cursors.down.reset(true);
+            player.animations.play('stand');
+
+            levelChanger.destroyGroups();
+            addGroups();
         }
     };
 

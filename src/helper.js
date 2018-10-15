@@ -103,7 +103,7 @@ var Helper = function(game){
         if (!begin){
             return;
         }
-        game.time.events.add(Phaser.Timer.SECOND* 0.4, levelChanger.fadeStartPad, this);
+        game.time.events.add(400, levelChanger.fadeStartPad, this);
     };
 
 
@@ -118,8 +118,7 @@ var Helper = function(game){
                     console.log("portal does not work yet, collect gears!");
                 } else {
                     playingNow = false;
-                    console.log("level beaten");
-                    levelChanger.changeLevel();
+                    levelChanger.finishLevel();
                 }
             }
 

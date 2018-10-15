@@ -219,8 +219,11 @@ var Helper = function(game){
     this.pauseClicked = function(){
         console.log("paused clicked");
         helper.showPausePop();
+        let musicPaused = game.sound.mute;
         game.paused = true;
-        game.sound.mute = false;
+        if (!musicPaused) {
+            game.sound.mute = false;
+        }
     };
 
     this.unPauseGame = function(event){
@@ -253,12 +256,19 @@ var Helper = function(game){
     };
 
     this.muteSound = function(){
-        if(game.sound.mute===false){
+
+        muteButton.events.onInputOver.removeAll();
+        muteButton.events.onInputOut.removeAll();
+        if(game.sound.mute===false) { //when sound is on
             game.sound.mute = true;
-            muteButton.loadTexture('playSoundButton', 0);
-        } else {
+            muteButton.loadTexture('playSoundButton_hover', 0);
+            muteButton.events.onInputOver.add(helper.playSoundOver, this);
+            muteButton.events.onInputOut.add(helper.playSoundOut, this);
+        } else { // when sound is off
             game.sound.mute = false;
-            muteButton.loadTexture('muteButton', 0);
+            muteButton.events.onInputOver.add(helper.muteSoundOver, this);
+            muteButton.events.onInputOut.add(helper.muteSoundOut, this);
+            muteButton.loadTexture('muteButton_hover', 0);
         }
     };
 

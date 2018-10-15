@@ -381,7 +381,7 @@ playGame.prototype = {
         game.load.image("muteButton", "assets/game/muteButton.png");
         game.load.image("muteButton_hover", "assets/game/muteButton_hover.png");
         game.load.image("playSoundButton", "assets/game/playSoundButton.png");
-        game.load.image("playSoundButton_hover", "assets/game/pauseButton_hover.png");
+        game.load.image("playSoundButton_hover", "assets/game/playSoundButton_hover.png");
         game.load.image("resumeButton", "assets/game/resumeButton.png");
         game.load.image("resumeButton_hover", "assets/game/resumeButton_hover.png");
         game.load.image("toMainButton", "assets/game/toMainButton.png");

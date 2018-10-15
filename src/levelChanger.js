@@ -242,6 +242,8 @@ var LevelChanger = function(game){
         muteButton.input.useHandCursor = true;
         muteButton.visible = false;
         newPause.events.onInputUp.add(helper.showMuteButton, self);
+        muteButton.events.onInputOver.removeAll();
+        muteButton.events.onInputOut.removeAll();
         if(game.sound.mute===false) { //when sound is on
             muteButton.events.onInputOver.add(helper.muteSoundOver, this);
             muteButton.events.onInputOut.add(helper.muteSoundOut, this);

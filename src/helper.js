@@ -266,9 +266,9 @@ var Helper = function(game){
             muteButton.events.onInputOut.add(helper.playSoundOut, this);
         } else { // when sound is off
             game.sound.mute = false;
+            muteButton.loadTexture('muteButton_hover', 0);
             muteButton.events.onInputOver.add(helper.muteSoundOver, this);
             muteButton.events.onInputOut.add(helper.muteSoundOut, this);
-            muteButton.loadTexture('muteButton_hover', 0);
         }
     };
 

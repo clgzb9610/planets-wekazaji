@@ -245,9 +245,11 @@ var LevelChanger = function(game){
         muteButton.events.onInputOver.removeAll();
         muteButton.events.onInputOut.removeAll();
         if(game.sound.mute===false) { //when sound is on
+            muteButton.loadTexture('muteButton', 0);
             muteButton.events.onInputOver.add(helper.muteSoundOver, this);
             muteButton.events.onInputOut.add(helper.muteSoundOut, this);
         } else { // when sound is off
+            muteButton.loadTexture('playSoundButton', 0);
             muteButton.events.onInputOver.add(helper.playSoundOver, this);
             muteButton.events.onInputOut.add(helper.playSoundOut, this);
         }

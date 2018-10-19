@@ -30,6 +30,21 @@ var LevelChanger = function(game){
         if (currentLevel == 8) {
         var unlock9 = localStorage.setItem("Level9","true");
         }
+        if (currentLevel == 9) {
+        var unlock10 = localStorage.setItem("Level10","true");
+        }
+        if (currentLevel == 10) {
+        var unlock11 = localStorage.setItem("Level11","true");
+        }
+        if (currentLevel == 11) {
+        var unlock12 = localStorage.setItem("Level12","true");
+        }
+        if (currentLevel == 12) {
+        var unlock13 = localStorage.setItem("Level13","true");
+        }
+        if (currentLevel == 13) {
+        var unlock14 = localStorage.setItem("Level14","true");
+        }
         
         if(!level[currentLevel]) {          //go to ending state if you pass the last level
             bgm.destroy();

@@ -135,8 +135,6 @@ levelSelect.prototype = {
 };
 
 
-function test() {}
-
 
 function buttonOne() {
     game.state.start("PlayGame", true, true, currentLevel = 0);
@@ -174,28 +172,37 @@ function buttonNine() {
     game.state.start("PlayGame", true, true, currentLevel = 8);
 }
 
+function buttonTen() {
+    game.state.start("PlayGame", true, true, currentLevel = 9);
+}
+
+function buttonEleven() {
+    game.state.start("PlayGame", true, true, currentLevel = 10);
+}
+
+function buttonTwelve() {
+    game.state.start("PlayGame", true, true, currentLevel = 11);
+}
+
+function buttonThirteen() {
+    game.state.start("PlayGame", true, true, currentLevel = 12);
+}
+
+function buttonFourteen() {
+    game.state.start("PlayGame", true, true, currentLevel = 13);
+}
+
+
+
 function openNextPage(){
     disableMenu1Inputs();
     levelBackground2 = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
     screen2 = true;
 
-    var level_title2 = game.add.sprite(75, 50, "level_title");
-    level_title2.scale.x = 0.8;
-    level_title2.scale.y = 0.8;
-    level_title2.animations.add('beaming_level',[0,1,2],5, true);
-    level_title2.animations.play('beaming_level');
+    addPageTwoButtons();
+    enableMenu2Inputs();
+    checkLevelProgress();
     
-    nextArrowL2 = game.add.button(70, 60, "nextArrow", closeNextPage, this);
-    nextArrowL2.scale.x = -0.1;
-    nextArrowL2.scale.y = 0.1;
-    
-    nextArrowL2.events.onInputDown.add(destroyScreen2,this);
-    
-    nextArrowR.destroy();
-    nextArrowR2 = game.add.sprite(630, 60, "nextArrow", this);
-    nextArrowR2.scale.x = 0.1;
-    nextArrowR2.scale.y = 0.1;
-    nextArrowR2.alpha = 0.5;
 }
 
 function closeNextPage(){
@@ -216,9 +223,24 @@ function closeNextPage(){
 
 
 function destroyScreen2() {
-    console.log("this function is fucking doing something");
+    tenButtonBG.destroy();
+    tenButton.destroy();
+    
+    elevenButtonBG.destroy();
+    elevenButton.destroy();
+    
+    twelveButtonBG.destroy();
+    twelveButton.destroy();
+    
+    thirteenButtonBG.destroy();
+    thirteenButton.destroy();
+    
+    fourteenButtonBG.destroy();
+    fourteenButton.destroy();
+    
     level_title2.destroy();
     nextArrowR2.destroy();
+    
 }
 
 function enableMenu1Inputs() {
@@ -255,6 +277,29 @@ function enableMenu1Inputs() {
     if (localStorage.getItem("Level9") == "true") {
         nineButton.inputEnabled = true;
         nineButtonBG.inputEnabled = true;
+    }
+}
+
+function enableMenu2Inputs() {
+    if (localStorage.getItem("Level10") == "true") {
+        tenButton.inputEnabled = true;
+        tenButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level11") == "true") {
+        elevenButton.inputEnabled = true;
+        elevenButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level12") == "true") {
+        twelveButton.inputEnabled = true;
+        twelveButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level13") == "true") {
+        thirteenButton.inputEnabled = true;
+        thirteenButtonBG.inputEnabled = true;
+    }
+    if (localStorage.getItem("Level14") == "true") {
+        fourteenButton.inputEnabled = true;
+        fourteenButtonBG.inputEnabled = true;
     }
 }
 
@@ -298,6 +343,11 @@ function unlockAll() {
     var unlock7 = localStorage.setItem("Level7","true");
     var unlock8 = localStorage.setItem("Level8","true");
     var unlock9 = localStorage.setItem("Level9","true");
+    var unlock10 = localStorage.setItem("Level10","true");
+    var unlock11 = localStorage.setItem("Level11","true");
+    var unlock12 = localStorage.setItem("Level12","true");
+    var unlock13 = localStorage.setItem("Level13","true");
+    var unlock14 = localStorage.setItem("Level14","true");
     backtoMenu();
 }
 
@@ -395,7 +445,7 @@ function addPageOneButtons() {
     eightButtonBG.scale.y = 0.3;
     eightButtonBG.alpha = 0.88;
 
-    eightButton = game.add.button(265,530,"eight",buttonThree,this);
+    eightButton = game.add.button(265,530,"eight",buttonEight,this);
     eightButton.scale.x = 0.3;
     eightButton.scale.y = 0.3;
     eightButton.inputEnabled = true;
@@ -423,6 +473,81 @@ function addPageOneButtons() {
     unlockButton.scale.x = 0.3;
     unlockButton.scale.y = 0.3;
     unlockButton.inputEnabled = true;
+}
+
+function addPageTwoButtons() {
+    //top buttons
+    var level_title2 = game.add.sprite(75, 50, "level_title");
+    level_title2.scale.x = 0.8;
+    level_title2.scale.y = 0.8;
+    level_title2.animations.add('beaming_level',[0,1,2],5, true);
+    level_title2.animations.play('beaming_level');
+    
+    nextArrowL2 = game.add.button(70, 60, "nextArrow", closeNextPage, this);
+    nextArrowL2.scale.x = -0.1;
+    nextArrowL2.scale.y = 0.1;
+    
+    nextArrowL2.events.onInputDown.add(destroyScreen2,this);
+    
+    nextArrowR.destroy();
+    nextArrowR2 = game.add.sprite(630, 60, "nextArrow", this);
+    nextArrowR2.scale.x = 0.1;
+    nextArrowR2.scale.y = 0.1;
+    nextArrowR2.alpha = 0.5;
+
+    //Level ten
+    tenButtonBG = game.add.button(41,191,"background",buttonTen,this);
+    tenButtonBG.scale.x = 0.3;
+    tenButtonBG.scale.y = 0.3;
+    tenButtonBG.alpha = 0.8;
+
+    tenButton = game.add.button(50,200,"one",buttonTen,this);
+    tenButton.scale.x = 0.3;
+    tenButton.scale.y = 0.3;
+
+    //Level Eleven
+    elevenButtonBG = game.add.button(256,191,"background",buttonEleven,this);
+    elevenButtonBG.scale.x = 0.3;
+    elevenButtonBG.scale.y = 0.3;
+    elevenButtonBG.alpha = 0.88;
+
+    elevenButton = game.add.button(265,200,"two",buttonEleven,this);
+    elevenButton.scale.x = 0.3;
+    elevenButton.scale.y = 0.3;
+    elevenButton.inputEnabled = true;
+
+    //Level Twelve
+    twelveButtonBG = game.add.button(471,191,"background",buttonTwelve,this);
+    twelveButtonBG.scale.x = 0.3;
+    twelveButtonBG.scale.y = 0.3;
+    twelveButtonBG.alpha = 0.88;
+
+    twelveButton = game.add.button(480,200,"three",buttonTwelve,this);
+    twelveButton.scale.x = 0.3;
+    twelveButton.scale.y = 0.3;
+    twelveButton.inputEnabled = true;
+
+    //Level Thirteen
+    thirteenButtonBG = game.add.button(41,356,"background",buttonThirteen,this);
+    thirteenButtonBG.scale.x = 0.3;
+    thirteenButtonBG.scale.y = 0.3;
+    thirteenButtonBG.alpha = 0.88;
+
+    thirteenButton = game.add.button(50,365,"four",buttonThirteen,this);
+    thirteenButton.scale.x = 0.3;
+    thirteenButton.scale.y = 0.3;
+    thirteenButton.inputEnabled = true;
+
+    //Level Fourteen
+    fourteenButtonBG = game.add.button(256,356,"background",buttonFourteen,this);
+    fourteenButtonBG.scale.x = 0.3;
+    fourteenButtonBG.scale.y = 0.3;
+    fourteenButtonBG.alpha = 0.88;
+
+    fourteenButton = game.add.button(265,365,"five",buttonFourteen,this);
+    fourteenButton.scale.x = 0.3;
+    fourteenButton.scale.y = 0.3;
+    fourteenButton.inputEnabled = true;
 }
 
 
@@ -474,5 +599,30 @@ function checkLevelProgress() {
         nineButtonBG.alpha = 0.1;
         nineButton.inputEnabled = false;
         nineButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level10") != "true") {
+        tenButtonBG.alpha = 0.1;
+        tenButton.inputEnabled = false;
+        tenButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level11") != "true") {
+        elevenButtonBG.alpha = 0.1;
+        elevenButton.inputEnabled = false;
+        elevenButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level12") != "true") {
+        twelveButtonBG.alpha = 0.1;
+        twelveButton.inputEnabled = false;
+        twelveButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level13") != "true") {
+        thirteenButtonBG.alpha = 0.1;
+        thirteenButton.inputEnabled = false;
+        thirteenButtonBG.inputEnabled = false;
+    }
+    if (localStorage.getItem("Level14") != "true") {
+        fourteenButtonBG.alpha = 0.1;
+        fourteenButton.inputEnabled = false;
+        fourteenButtonBG.inputEnabled = false;
     }
 }

@@ -53,6 +53,11 @@ levelSelect.prototype = {
         game.load.image("seven", "assets/levelSelect/7.png");
         game.load.image("eight", "assets/levelSelect/8.png");
         game.load.image("nine", "assets/levelSelect/9.png");
+        game.load.image("ten", "assets/levelSelect/10.png");
+        game.load.image("eleven", "assets/levelSelect/11.png");
+        game.load.image("twelve", "assets/levelSelect/12.png");
+        game.load.image("thirteen", "assets/levelSelect/13.png");
+        game.load.image("fourteen", "assets/levelSelect/14.png");
         game.load.image("reset_placeholder", "assets/levelSelect/resetplaceholder.png");
         game.load.image("unlock_placeholder", "assets/levelSelect/unlockplaceholder.png");
         game.load.image("background", "assets/levelSelect/background.png");
@@ -501,7 +506,7 @@ function addPageTwoButtons() {
     tenButtonBG.scale.y = 0.3;
     tenButtonBG.alpha = 0.8;
 
-    tenButton = game.add.button(50,200,"one",buttonTen,this);
+    tenButton = game.add.button(50,200,"ten",buttonTen,this);
     tenButton.scale.x = 0.3;
     tenButton.scale.y = 0.3;
 
@@ -511,7 +516,7 @@ function addPageTwoButtons() {
     elevenButtonBG.scale.y = 0.3;
     elevenButtonBG.alpha = 0.88;
 
-    elevenButton = game.add.button(265,200,"two",buttonEleven,this);
+    elevenButton = game.add.button(265,200,"eleven",buttonEleven,this);
     elevenButton.scale.x = 0.3;
     elevenButton.scale.y = 0.3;
     elevenButton.inputEnabled = true;
@@ -522,7 +527,7 @@ function addPageTwoButtons() {
     twelveButtonBG.scale.y = 0.3;
     twelveButtonBG.alpha = 0.88;
 
-    twelveButton = game.add.button(480,200,"three",buttonTwelve,this);
+    twelveButton = game.add.button(480,200,"twelve",buttonTwelve,this);
     twelveButton.scale.x = 0.3;
     twelveButton.scale.y = 0.3;
     twelveButton.inputEnabled = true;
@@ -533,7 +538,7 @@ function addPageTwoButtons() {
     thirteenButtonBG.scale.y = 0.3;
     thirteenButtonBG.alpha = 0.88;
 
-    thirteenButton = game.add.button(50,365,"four",buttonThirteen,this);
+    thirteenButton = game.add.button(50,365,"thirteen",buttonThirteen,this);
     thirteenButton.scale.x = 0.3;
     thirteenButton.scale.y = 0.3;
     thirteenButton.inputEnabled = true;
@@ -544,7 +549,7 @@ function addPageTwoButtons() {
     fourteenButtonBG.scale.y = 0.3;
     fourteenButtonBG.alpha = 0.88;
 
-    fourteenButton = game.add.button(265,365,"five",buttonFourteen,this);
+    fourteenButton = game.add.button(265,365,"fourteen",buttonFourteen,this);
     fourteenButton.scale.x = 0.3;
     fourteenButton.scale.y = 0.3;
     fourteenButton.inputEnabled = true;

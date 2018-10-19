@@ -118,8 +118,7 @@ var level = [
         {objectType: 'gear', x: -180, y: -10, sprite: "gear"},
         {objectType: 'gear', x: -190, y: 0, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -10, sprite: "gear"},
-        {objectType: 'player', x: -90, y: 360},
-        {objectType: 'hint', text: "mmmmmwwwwahahahahahaha", delay: 1}
+        {objectType: 'player', x: -90, y: 360}
     ], // level 2 - crazy gears
     [//level 3 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 350, sprite: "smallstar"},
@@ -163,8 +162,7 @@ var level = [
         {objectType: 'gear', x: 900, y:200, sprite: "gear"},
         {objectType: 'gear', x: 1000, y:500, sprite: "gear"},
         {objectType: 'gear', x: 920, y:750, sprite: "gear"},
-        {objectType: 'player', x: 0, y: -230},
-        {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
+        {objectType: 'player', x: 0, y: -230}
     ], //level 6 - gears in void
     [ //level 7 - enemy introduction
         {objectType: 'planet', x: -170, y: -400, gravRadius: 220, gravForce: 350, sprite: "rainbowplanet"},
@@ -185,8 +183,7 @@ var level = [
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -100, y: 230},
         {objectType: 'enemy1' , x:110, y: -110, enemyVel: 15, sprite: "enemy"},
-        {objectType: 'enemy2' , x:-110, y: 110, enemyVel: 15, sprite: "enemy"},
-        {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
+        {objectType: 'enemy2' , x:-110, y: 110, enemyVel: 15, sprite: "enemy"}
     ], // level 8 - small planet with two enemies
     [ //level 9 - fun with overlapping gravity fields
         {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 350, sprite: "wafelplanet"},
@@ -210,8 +207,7 @@ var level = [
         {objectType: 'teleporter', x: -650, y: 50, radians: 2.85, goal: 1}, //317, 90
         {objectType: 'startPad', x: -100, y: 120, radians: -2.5 },
         {objectType: 'gear', x: -480, y: -230, sprite: "gear"},
-        {objectType: 'player', x: -130, y: 100},
-        {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
+        {objectType: 'player', x: -130, y: 100}
     ], //level 10 - circular planet chains
     [ //level 11 - find the hidden gear
         {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 300, sprite: "treasureBig"},
@@ -225,8 +221,7 @@ var level = [
         {objectType: 'teleporter', x: 0, y: 290, radians: -3.1, goal: 1},
         {objectType: 'startPad', x: 140, y: 300, radians: 2.5},
         {objectType: 'gear', x: 0, y: 1265, sprite: "gear"},
-        {objectType: 'player', x: 150, y: 300},
-        {objectType: 'hint', text: "It is near.", delay: 1}
+        {objectType: 'player', x: 150, y: 300}
     ], // level 11 - find hidden gear
     [ //level 12 - two enemies
         {objectType: 'planet', x: 0, y: 0, gravRadius: 230, gravForce: 350, sprite: "roseplanet"},
@@ -278,8 +273,7 @@ var level = [
         {objectType: 'startPad', x: -1000, y: -160, radians: 6.2 },
         {objectType: 'gear', x: -1450, y:-700, sprite: "gear"},
         {objectType: 'gear', x: -350, y:-1000, sprite: "gear"},
-        {objectType: 'player', x: -1000, y: -230},
-        {objectType: 'hint', text: "There's an enemy\nguarding this planet!", delay: 1}
+        {objectType: 'player', x: -1000, y: -230}
     ] //level 14 - maze
 ];
 
@@ -394,15 +388,12 @@ playGame.prototype = {
         game.load.audio('teleportToPad',"assets/music/zapsplat_magical_telekinesis_blast_002_12511.mp3");
     },
     create: function () {
-        // console.log("creating game");
-
-        // new boundaries are centered on 0,0 so the world can rotate
-        game.world.setBounds(-350, -320, 350, 320);
-
         game.time.desiredFps = 80;
 
+        game.world.setBounds(-350, -320, 700, 700);
+
         //tiled background image to cover a wide enough area
-        var background = game.add.tileSprite(-2024, -2024, 1024, 1024, 'space');
+        game.add.tileSprite(-2024, -2024, 1024, 1024, 'space');
         game.add.tileSprite(-2024, -1000, 1024, 1024, 'space');
         game.add.tileSprite(-2024, 24, 1024, 1024, 'space');
         game.add.tileSprite(-2024, 1048, 1024, 1024, 'space');
@@ -472,8 +463,6 @@ playGame.prototype = {
     },
 
     update: function(){
-        // game.sound.mute = true;
-
         if (!transitioning) {
             //two enemies operate separately, when they exist in a level
             if (enemy1Present) {
@@ -508,10 +497,7 @@ playGame.prototype = {
             game.debug.text("FPS: " + game.time.fps, 2, 14, "#00ff00");
             game.debug.text("Player X: " + player.x, 2, 28, "#00ff00");
             game.debug.text("Player Y: " + player.y, 2, 42, "#00ff00");
-            game.debug.text("Camera X: " + game.camera.x, 2, 56, "#00ff00");
-            game.debug.text("Camera Y: " + game.camera.y, 2, 70, "#00ff00");
-            game.debug.text("Camera W: " + game.camera.width, 2, 84, "#00ff00");
-            game.debug.text("Camera H: " + game.camera.height, 2, 98, "#00ff00");
+            game.debug.cameraInfo(this.game.camera, 2, 56, "#00ff00");
         }
     }
 };

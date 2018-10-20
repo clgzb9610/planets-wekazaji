@@ -170,6 +170,8 @@ var LevelChanger = function(game){
         scaleTween.start();
         positionTween.start();
         
+        vortexAudio.play();
+        
         positionTween.onComplete.add(this.changeLevel);
     };
 

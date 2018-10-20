@@ -382,6 +382,7 @@ playGame.prototype = {
         game.load.image("toMainButton_hover", "assets/game/toMainButton_hover.png");
 
         game.load.audio('jetpack', "assets/music/jetpackAudio.mp3"); // http://soundbible.com/2125-Wind-Blowing.html
+        game.load.audio('vortex', "assets/music/VortexSoundEffect.mp3");
         game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/music/Ting-Popup_Pixels-349896185.mp3");
         game.load.audio('teleporterOpen', "assets/music/zapsplat_magical_portal_open_001_12505.mp3");
@@ -430,6 +431,8 @@ playGame.prototype = {
 
         jetpackAudio = game.add.audio("jetpack", 0, true);
         jetpackAudio.play();
+
+        vortexAudio = game.add.audio("vortex", 2.5);
 
         emitter = game.add.emitter(0, 0, 2000);
         emitter.makeParticles('flames', [0, 1, 3, 4]);

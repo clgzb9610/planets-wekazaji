@@ -64,6 +64,8 @@ var emitter;
 
 var bgm;
 var jetpackAudio;
+var vortexAudio;
+var gearTing;
 
 var currentLevel = 0;
 
@@ -446,6 +448,8 @@ playGame.prototype = {
         jetpackAudio.play();
 
         vortexAudio = game.add.audio("vortex", 2.5);
+
+        gearTing = game.add.audio('ting', 0.75);
 
         emitter = game.add.emitter(0, 0, 2000);
         emitter.makeParticles('flames', [0, 1, 3, 4]);

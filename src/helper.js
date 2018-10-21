@@ -62,15 +62,14 @@ var Helper = function(game){
 
 
 // kills the gear when touched
-    this.gearCallback = function(body1, body2, fixture1, fixture2, begin) {
-        //body1, body2, fixture1, fixture2, begin
+    this.gearCallback = function(playerBody, gearBody, playerFixture, gearFixture, beginContact) {
         // body1 is the player because it's the body that owns the callback
         // body2 is the body it impacted with, in this case the gear
         // fixture1 is the fixture of body1 that was touched
         // fixture2 is the fixture of body2 that was touched
 
         // This callback is also called for EndContact events, which we are not interested in.
-        if (!begin) {
+        if (!beginContact) {
             return;
         }
 
@@ -86,16 +85,31 @@ var Helper = function(game){
         filledInGear.x = 350 - 2 - (imageWidth + 2) * (score % gearsPerRow);
         filledInGear.y = -320 + 2 + (imageHeight + 2) * Math.floor(score / gearsPerRow);
 
-        var ting = game.add.audio('ting');
-        ting.volume = 0.6;
-        ting.play();
+        gearTing.play();
+
+        gearBody.kill(); // Stops gear from colliding physically with player
+
         score += 1;
         if (score >= levelGoal) {
             teleporter.animations.play('swirl');
             var teleporterOpenSound = game.add.audio("teleporterOpen");
             teleporterOpenSound.play();
         }
-        body2.sprite.destroy();
+
+        game.add.tween(gearBody).to(
+            {x: playerBody.x, y: playerBody.y},
+            200,
+            Phaser.Easing.Linear.None,
+            true
+        );
+        game.add.tween(gearBody.sprite.scale).to(
+            {x: 0, y: 0},
+            200,
+            Phaser.Easing.Linear.None,
+            true
+        ).onComplete.add(function () {
+            gearBody.destroy()
+        });
     };
 
     //will start event to fade startPad a certain amount of time after it register the player's contact.
@@ -195,7 +209,7 @@ var Helper = function(game){
             }
             if (jetpackAudio.volume === 0) { 
                 jetpackAudio.play();
-                jetpackAudio.fadeTo(100, 0.75);
+                jetpackAudio.fadeTo(100, 0.65);
             }
         }
         else {

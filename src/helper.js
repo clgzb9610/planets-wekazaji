@@ -87,9 +87,7 @@ var Helper = function(game){
 
         gearTing.play();
 
-        //gearBody.kill(); // Stops gear from colliding physically with player
-
-        gearBody.sprite.destroy();
+        gearBody.removeFromWorld(); // Stops gear from colliding physically with player
 
         score += 1;
         if (score >= levelGoal) {
@@ -98,20 +96,20 @@ var Helper = function(game){
             teleporterOpenSound.play();
         }
 
-        // game.add.tween(gearBody).to(
-        //     {x: playerBody.x, y: playerBody.y},
-        //     200,
-        //     Phaser.Easing.Linear.None,
-        //     true
-        // );
-        // game.add.tween(gearBody.sprite.scale).to(
-        //     {x: 0.1, y: 0.1},
-        //     200,
-        //     Phaser.Easing.Linear.None,
-        //     true
-        // ).onComplete.add(function () {
-        //     gearBody.sprite.destroy();
-        // });
+        game.add.tween(gearBody).to(
+            {x: playerBody.x, y: playerBody.y},
+            150,
+            Phaser.Easing.Linear.None,
+            true
+        );
+        game.add.tween(gearBody.sprite.scale).to(
+            {x: 0, y: 0},
+            150,
+            Phaser.Easing.Linear.None,
+            true
+        ).onComplete.add(function () {
+            gearBody.sprite.destroy();
+        });
     };
 
     //will start event to fade startPad a certain amount of time after it register the player's contact.
@@ -125,17 +123,16 @@ var Helper = function(game){
 
     // a custom function to check player contact with the teleporter.
     this.checkTeleporterOverlap = function(teleporter) {
-            var teleporterBounds = teleporter.getBounds();
-            var playerBounds = player.getBounds();
-            if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
-                if(score < levelGoal) {
-                    // Portal is not yet active
-                } else {
-                    playingNow = false;
-                    levelChanger.finishLevel();
-                }
+        var teleporterBounds = teleporter.getBounds();
+        var playerBounds = player.getBounds();
+        if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
+            if(score < levelGoal) {
+                // Portal is not yet active
+            } else {
+                playingNow = false;
+                levelChanger.finishLevel();
             }
-
+        }
     };
 
 //==============================================================================================================

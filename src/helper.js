@@ -360,4 +360,11 @@ var Helper = function(game){
         gotoMainButton.loadTexture("toMainButton");
     };
 
+    this.playerDistanceFromAnchor = function () {
+        let a = player.x - anchorX,
+            b = player.y - anchorY;
+
+        return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    };
+
 };

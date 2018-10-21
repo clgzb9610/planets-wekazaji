@@ -84,7 +84,13 @@ var LevelChanger = function(game){
             if(addition.objectType === 'player'){
                 movePlayer(addition.x,addition.y);
             }
+            if (addition.objectType === 'anchor') {
+                anchorX = addition.x;
+                anchorY = addition.y;
+                anchorRadius = addition.radius;
+            }
         }
+        anchorGraphics.drawCircle(anchorX, anchorY, anchorRadius*2);
         addUI();
     };
 
@@ -396,7 +402,7 @@ var LevelChanger = function(game){
         // }, this);
 
         gravityGraphics.destroy();
-        gravityGraphics = game.add.graphics(0, 0);
+        anchorGraphics.destroy();
     };
 
     //add all the groups back in to put the level objects in for a new level.
@@ -406,7 +412,13 @@ var LevelChanger = function(game){
         planetGroup = game.add.group();
         objectGroup = game.add.group();
         userInterface = game.add.group();
+        gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+        anchorGraphics = game.add.graphics(0, 0);
+        anchorGraphics.lineStyle(12, 0xADD8E6, 0.35);
+        anchorX = 0;
+        anchorY = 0;
+        anchorRadius = 2000;
 
         currentLevel++;
 

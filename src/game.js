@@ -49,9 +49,16 @@ var playerVel = 40;
 
 var transitioning = false;
 
+var anchorX = 0,
+    anchorY = 0,
+    anchorRadius = 2000;
+
+var playerPrevX = 0;
+    playerPrevY = 0;
 
 // graphic object where to draw planet gravity area
 var gravityGraphics;
+var anchorGraphics;
 
 var emitter;
 
@@ -69,8 +76,8 @@ var level = [
         {objectType:'teleporter', x:0, y: -215, radians: 0, goal:1},
         {objectType: 'startPad', x: -230,y: -115,radians: -1.1},
         {objectType: 'gear', x: 30, y: 200, sprite:"gear"},
-        {objectType: 'player', x: -240, y: -150}
-    
+        {objectType: 'player', x: -240, y: -150},
+        {objectType: 'anchor', x: 0, y: 0, radius: 1000}
     ], // level 0
     [ //level 1 - crazy gears
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 200, sprite: "level1_planet1"},
@@ -118,7 +125,8 @@ var level = [
         {objectType: 'gear', x: -180, y: -10, sprite: "gear"},
         {objectType: 'gear', x: -190, y: 0, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -10, sprite: "gear"},
-        {objectType: 'player', x: -90, y: 360}
+        {objectType: 'player', x: -90, y: 360},
+        {objectType: 'anchor', x: 0, y: 0, radius: 1000}
     ], // level 2 - crazy gears
     [//level 3 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 350, sprite: "smallstar"},
@@ -128,7 +136,8 @@ var level = [
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: -430, y: -50}
+        {objectType: 'player', x: -430, y: -50},
+        {objectType: 'anchor', x: -40, y: 60, radius: 1200}
     ], // level 3 - jumping between planets
     [//level 4 - start in void
         {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 250, sprite: "axoplanet"},
@@ -138,7 +147,8 @@ var level = [
         {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: 23, y: -30}
+        {objectType: 'player', x: 23, y: -30},
+        {objectType: 'anchor', x: 50, y: 175, radius: 1500}
     ], // level 4 - start in void
     [//level 5 - jumping to planets through void
         {objectType: 'planet', x: -440, y: -120, gravRadius: 260, gravForce: 350, sprite: "soccerplanet"},
@@ -148,7 +158,8 @@ var level = [
         {objectType: 'startPad', x: 60, y: 215, radians: 1.8 + Math.PI },
         {objectType: 'gear', x: 100, y: -50, sprite: "gear"},
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
-        {objectType: 'player', x: 0, y: 200}
+        {objectType: 'player', x: 0, y: 200},
+        {objectType: 'anchor', x: -40, y: -10, radius: 1200}
     ], // level 5 - jumping to planets through void
     [ //level 6 - gears in void
         {objectType: 'planet', x: 0, y: 0, gravRadius: 200, gravForce: 350, sprite: "smallstar"},
@@ -162,7 +173,8 @@ var level = [
         {objectType: 'gear', x: 900, y:200, sprite: "gear"},
         {objectType: 'gear', x: 1000, y:500, sprite: "gear"},
         {objectType: 'gear', x: 920, y:750, sprite: "gear"},
-        {objectType: 'player', x: 0, y: -230}
+        {objectType: 'player', x: 0, y: -230},
+        {objectType: 'anchor', x: 500, y: 350, radius: 1200}
     ], //level 6 - gears in void
     [ //level 7 - enemy introduction
         {objectType: 'planet', x: -170, y: -400, gravRadius: 220, gravForce: 350, sprite: "rainbowplanet"},
@@ -173,7 +185,8 @@ var level = [
         {objectType: 'gear', x: -180, y: -350, sprite: "gear"},
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -360, y: -570},
-        {objectType: 'enemy1' , x:-110, y: -240, enemyVel: 25, sprite: "enemy"}
+        {objectType: 'enemy1' , x:-110, y: -240, enemyVel: 25, sprite: "enemy"},
+        {objectType: 'anchor', x: 100, y: -50, radius: 1100}
     ], // level 7 - enemy introduction
     [ //level 8 - enemy hard
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 350, sprite: "smallstar"},
@@ -183,7 +196,8 @@ var level = [
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
         {objectType: 'player', x: -100, y: 230},
         {objectType: 'enemy1' , x:110, y: -110, enemyVel: 15, sprite: "enemy"},
-        {objectType: 'enemy2' , x:-110, y: 110, enemyVel: 15, sprite: "enemy"}
+        {objectType: 'enemy2' , x:-110, y: 110, enemyVel: 15, sprite: "enemy"},
+        {objectType: 'anchor', x: 0, y: 0, radius: 750}
     ], // level 8 - small planet with two enemies
     [ //level 9 - fun with overlapping gravity fields
         {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 350, sprite: "wafelplanet"},
@@ -196,7 +210,8 @@ var level = [
         {objectType: 'gear', x: 390, y: -300, sprite: "gear"},
         {objectType: 'gear', x: 860, y: -480, sprite: "gear"},
         {objectType: 'player', x: -45, y: -25},
-        {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"}
+        {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"},
+        {objectType: 'anchor', x: 300, y: -100, radius: 1300}
     ], // level 9 - fun with overlapping gravity fields
     [ //level 10 - circular planet chains
         {objectType: 'planet', x: 0, y: 0, gravRadius: 220, gravForce: 350, sprite: "smallstar"},
@@ -207,7 +222,8 @@ var level = [
         {objectType: 'teleporter', x: -650, y: 50, radians: 2.85, goal: 1}, //317, 90
         {objectType: 'startPad', x: -100, y: 120, radians: -2.5 },
         {objectType: 'gear', x: -480, y: -230, sprite: "gear"},
-        {objectType: 'player', x: -130, y: 100}
+        {objectType: 'player', x: -130, y: 100},
+        {objectType: 'anchor', x: -400, y: 100, radius: 1300}
     ], //level 10 - circular planet chains
     [ //level 11 - find the hidden gear
         {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 300, sprite: "treasureBig"},
@@ -221,7 +237,8 @@ var level = [
         {objectType: 'teleporter', x: 0, y: 290, radians: -3.1, goal: 1},
         {objectType: 'startPad', x: 140, y: 300, radians: 2.5},
         {objectType: 'gear', x: 0, y: 1265, sprite: "gear"},
-        {objectType: 'player', x: 150, y: 300}
+        {objectType: 'player', x: 150, y: 300},
+        {objectType: 'anchor', x: 0, y: 0, radius: 1700}
     ], // level 11 - find hidden gear
     [ //level 12 - two enemies
         {objectType: 'planet', x: 0, y: 0, gravRadius: 230, gravForce: 350, sprite: "roseplanet"},
@@ -236,7 +253,8 @@ var level = [
         {objectType: 'gear', x: 800, y: -100, sprite: "gear"},
         {objectType: 'player', x: -240, y: 0},
         {objectType: 'enemy1', x: 450, y: 180, enemyVel: 15, sprite: "enemy"},
-        {objectType: 'enemy2', x: 450, y: -180, enemyVel: 15, sprite: "enemy"}
+        {objectType: 'enemy2', x: 450, y: -180, enemyVel: 15, sprite: "enemy"},
+        {objectType: 'anchor', x: 400, y: 0, radius: 1100}
     ], // level 12 - two enemies
     [ //level 13 - two enemies circling center planet
         {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 350, sprite: "catplanet"},
@@ -252,7 +270,8 @@ var level = [
         {objectType: 'gear', x: -250, y: -100, sprite: "gear"},
         {objectType: 'player', x: -160, y: 230},
         {objectType: 'enemy1', x: -150, y: 0, enemyVel: 25, sprite: "enemy"},
-        {objectType: 'enemy2', x: 150, y: 0, enemyVel: 45, sprite: "enemy"}
+        {objectType: 'enemy2', x: 150, y: 0, enemyVel: 45, sprite: "enemy"},
+        {objectType: 'anchor', x: 0, y: 0, radius: 1200}
     ], // level 13 - two enemies circling center planet
     [ //level 14 - maze
         {objectType: 'planet', x: -1000, y: 0, gravRadius: 200, gravForce: 350, sprite: "smallstar"}, //base
@@ -273,7 +292,8 @@ var level = [
         {objectType: 'startPad', x: -1000, y: -160, radians: 6.2 },
         {objectType: 'gear', x: -1450, y:-700, sprite: "gear"},
         {objectType: 'gear', x: -350, y:-1000, sprite: "gear"},
-        {objectType: 'player', x: -1000, y: -230}
+        {objectType: 'player', x: -1000, y: -230},
+        {objectType: 'anchor', x: -800, y: 0, radius: 1900}
     ] //level 14 - maze
 ];
 
@@ -394,22 +414,11 @@ playGame.prototype = {
         game.world.setBounds(-350, -320, 700, 700);
 
         //tiled background image to cover a wide enough area
-        game.add.tileSprite(-2024, -2024, 1024, 1024, 'space');
-        game.add.tileSprite(-2024, -1000, 1024, 1024, 'space');
-        game.add.tileSprite(-2024, 24, 1024, 1024, 'space');
-        game.add.tileSprite(-2024, 1048, 1024, 1024, 'space');
-        game.add.tileSprite(-1000, -2024, 1024, 1024, 'space');
-        game.add.tileSprite(-1000, -1000, 1024, 1024, 'space');
-        game.add.tileSprite(-1000, 24, 1024, 1024, 'space');
-        game.add.tileSprite(-1000, 1048, 1024, 1024, 'space');
-        game.add.tileSprite(24, -2024, 1024, 1024, 'space');
-        game.add.tileSprite(24, -1000, 1024, 1024, 'space');
-        game.add.tileSprite(24, 24, 1024, 1024, 'space');
-        game.add.tileSprite(24, 1048, 1024, 1024, 'space');
-        game.add.tileSprite(1048, -2024, 1024, 1024, 'space');
-        game.add.tileSprite(1048, -1000, 1024, 1024, 'space');
-        game.add.tileSprite(1048, 24, 1024, 1024, 'space');
-        game.add.tileSprite(1048, 1048, 1024, 1024, 'space');
+        for (var i = 0; i < 6; i++) {
+            for (var j = 0; j < 6; j++) {
+                game.add.tileSprite(-3048 + 1024*i, -3048 + 1024*j, 1024, 1024, 'space');
+            }
+        }
 
         enemyGroup = game.add.group();
         planetGroup = game.add.group();
@@ -419,6 +428,10 @@ playGame.prototype = {
         // adding gravitiy line
         gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+
+        // adding level limit line
+        anchorGraphics = game.add.graphics(0, 0);
+        anchorGraphics.lineStyle(12, 0xADD8E6, 0.35);
 
         game.stage.backgroundColor = "#222222";
 
@@ -493,6 +506,18 @@ playGame.prototype = {
 
             //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
             gamePhysics.constrainVelocity(player,150);
+
+            if (helper.playerDistanceFromAnchor() >= anchorRadius) {
+                player.body.x = playerPrevX;
+                player.body.y = playerPrevY;
+
+                // player.body.velocity.x *= -0.7;
+                // player.body.velocity.y *= -0.7;
+            }
+            else {
+                playerPrevX = player.body.x;
+                playerPrevY = player.body.y;
+            }
         }
     },
     render: function () {

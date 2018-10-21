@@ -403,7 +403,7 @@ playGame.prototype = {
         game.load.image("toMainButton", "assets/game/toMainButton.png");
         game.load.image("toMainButton_hover", "assets/game/toMainButton_hover.png");
 
-        game.load.audio('jetpack', "assets/music/jetpackAudio.mp3"); // http://soundbible.com/2125-Wind-Blowing.html
+        game.load.audio('jetpack', "assets/music/jetpackAudio.mp3");
         game.load.audio('vortex', "assets/music/VortexSoundEffect.mp3");
         game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
         game.load.audio('ting', "assets/music/Ting-Popup_Pixels-349896185.mp3");

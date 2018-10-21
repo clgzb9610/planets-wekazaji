@@ -15,7 +15,6 @@ mainMenu.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
-        // from http://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/Home_Departure_Loop
 
         game.load.spritesheet("newTitle", "assets/mainMenu/bigTitleSheet.png", 700, 700);
         game.load.image("newPlay", "assets/mainMenu/play1.png");
@@ -35,7 +34,6 @@ mainMenu.prototype = {
 
     },
     create:function () {
-        console.log("creating main menu");
         game.time.advancedTiming = true;
 
         game.world.setBounds(0, 0, 700, 700);
@@ -115,8 +113,6 @@ mainMenu.prototype = {
 
 function playTheGame(){
     game.camera.fade('#000000',500);
-    console.log("playgame has been clicked");
-    // game.camera.onFadeComplete.add(fadeComplete,this);
     game.time.events.add(500, fadeComplete, this);
 }
 
@@ -126,7 +122,6 @@ function openLevelSelect(){
 
 function fadeComplete(){
     menuBGM.pause();
-    console.log("fadeComplete from main");
     game.state.start("PlayGame", true, false, 0);
 }
 
@@ -176,7 +171,6 @@ function openMusic(){
 }
 
 function openMusicLink() {
-    console.log("Music Link was clicked");
     window.open("https://freemusicarchive.org/music/Visager/Songs_from_an_Unmade_Forest_World/", "_blank");
 }
 

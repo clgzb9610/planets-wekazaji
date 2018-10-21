@@ -301,7 +301,6 @@ var level = [
 
 playGame.prototype = {
     init:function(currentLevel){
-        console.log("init game");
         this.currentLevel = currentLevel;
         
         //level unlock checker

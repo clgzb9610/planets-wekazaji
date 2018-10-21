@@ -123,13 +123,11 @@ var Helper = function(game){
 
     // a custom function to check player contact with the teleporter.
     this.checkTeleporterOverlap = function(teleporter) {
-            //console.log("overlap called");
             var teleporterBounds = teleporter.getBounds();
             var playerBounds = player.getBounds();
             if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
-              //  console.log('teleporter CONTACT');
                 if(score < levelGoal) {
-                    console.log("portal does not work yet, collect gears!");
+                    // Portal is not yet active
                 } else {
                     playingNow = false;
                     levelChanger.finishLevel();
@@ -157,14 +155,12 @@ var Helper = function(game){
             ySpeedAdjustment = 0;
 
         if (cursors.left.isDown) {
-            // player.body.moveLeft(90);
             xSpeedAdjustment += playerVel * Math.cos(angle + (Math.PI / 2));
             ySpeedAdjustment += playerVel * Math.sin(angle + (Math.PI / 2));
             player.animations.play('walkL');
             keyDown = true;
         }
         else if (cursors.right.isDown) {
-            // player.body.moveRight(90);
             xSpeedAdjustment += playerVel * Math.cos(angle - (Math.PI / 2));
             ySpeedAdjustment += playerVel * Math.sin(angle - (Math.PI / 2));
             player.animations.play('walkR');
@@ -231,7 +227,6 @@ var Helper = function(game){
     };
 
     this.pauseClicked = function(){
-        console.log("paused clicked");
         helper.showPausePop();
         let musicPaused = game.sound.mute;
         game.paused = true;

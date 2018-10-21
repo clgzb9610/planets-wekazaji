@@ -50,7 +50,6 @@ var LevelChanger = function(game){
             bgm.destroy();
             player.destroy();
             game.physics.clear();
-            // console.log("destroyed the physics");
             game.world.pivot.x = 0;
             game.world.pivot.y = 0;
             game.world.rotation = 0;
@@ -117,7 +116,6 @@ var LevelChanger = function(game){
     function addTeleporter(x, y, radians, goal) {
         teleporter = game.add.sprite(x, y, "teleporter", 6);
         game.physics.box2d.enable(teleporter);
-       // objectGroup.add(teleporter);
         teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 25, true);
         teleporter.body.setRectangle(38, 55);
         teleporter.body.rotation += radians;
@@ -291,41 +289,6 @@ var LevelChanger = function(game){
 
         game.input.onDown.add(helper.unPauseGame, self);
 
-
-        // dashboard = game.add.sprite(0, 354,"dashboard");
-        // // dashboard = game.add.sprite(0, 330,"dashboard");
-        // dashboard.anchor.set(0.5);
-        // // dashboard.scale.setTo(1.6, 1.6);
-        // userInterface.add(dashboard);
-        //
-        // mute = game.add.button(0, 354,"mute", helper.muteSound,this);
-        // mute.inputEnabled = true;
-        // if(game.sound.mute){
-        //     mute.loadTexture("mute",0);
-        // }else{
-        //     mute.loadTexture("unMute",0);
-        // }
-        // mute.anchor.set(-0.9,0.5);
-        // userInterface.add(mute);
-        //
-        // pause = game.add.sprite(0, 354,"pause");
-        // pause.frame = 0;
-        // pause.anchor.set(0.5, 0.55);
-        // userInterface.add(pause);
-        //
-        // restart = game.add.sprite(0, 354,"restart");
-        // restart.anchor.set(1.9,0.55);
-        // userInterface.add(restart);
-        // // console.log('adding dashboard');
-        //
-        // // make the buttons work
-        // pause.inputEnabled = true;
-        // pause.events.onInputUp.add(helper.pauseGame, self);
-        // restart.inputEnabled = true;
-        // restart.events.onInputUp.add(levelChanger.resetLevel,self);
-        //
-        // game.input.onDown.add(helper.unPauseGame, self);
-
         addGearOutlines();
     }
 
@@ -360,8 +323,7 @@ var LevelChanger = function(game){
         player.animations.play('stand');
 
         blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
-        //does the blackscreen need to be so large? since its a solid color i think it could be tiny & scaled to fit the screen?
-        blackScreen.scale.setTo(2, 2); //if the blackscreen sprite is teensy you could scale at like 200x200?
+        blackScreen.scale.setTo(2, 2);
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;
         game.add.tween(blackScreen).to( { alpha: 1 }, 200, Phaser.Easing.Linear.None, true).onComplete.add(function () {
@@ -379,7 +341,6 @@ var LevelChanger = function(game){
 
     // destroy all the groups of objects
     this.destroyGroups = function(){
-        console.log("destroy groups");
         planetGroup.destroy();
 
         objectGroup.destroy();
@@ -397,17 +358,12 @@ var LevelChanger = function(game){
             enemy2Present = false;
         }
 
-        // emitter.forEachExists((particle) => {
-        //     particle.kill();
-        // }, this);
-
         gravityGraphics.destroy();
         anchorGraphics.destroy();
     };
 
     //add all the groups back in to put the level objects in for a new level.
     function addGroups(){
-        console.log("add groups");
         enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();

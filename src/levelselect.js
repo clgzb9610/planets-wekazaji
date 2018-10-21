@@ -69,7 +69,6 @@ levelSelect.prototype = {
     },
     create:function () {
         //set up background and title banners
-        console.log("creating level select");
         game.world.setBounds(0, 0, 700, 700);
 
         levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
@@ -80,19 +79,14 @@ levelSelect.prototype = {
         level_title.animations.add('beaming_level',[0,1,2],5, true);
         level_title.animations.play('beaming_level');
         
-        
         //add level buttons
         addPageOneButtons();
         
         //enable level buttons
         enableMenu1Inputs();
-        
-        
+
         //Level Unlock Logic
         checkLevelProgress();
-        
-        
-
     },
     update:function() {
         levelBackground.tilePosition.x -= 1;
@@ -138,8 +132,6 @@ levelSelect.prototype = {
         }
     }
 };
-
-
 
 function buttonOne() {
     game.state.start("PlayGame", true, true, currentLevel = 0);

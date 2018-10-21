@@ -145,7 +145,6 @@ var Physics = function(game){
             vy = Math.sin(angle) * maxVelocity;
             body.velocity.x = vx;
             body.velocity.y = vy;
-            // console.log('limited speed of ', sprite, 'from:', currVelocitySqr, ' to: ', maxVelocity);
         }
     };
 

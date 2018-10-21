@@ -446,7 +446,7 @@ playGame.prototype = {
         jetpackAudio = game.add.audio("jetpack", 0, true);
         jetpackAudio.play();
 
-        vortexAudio = game.add.audio("vortex", 2.5);
+        vortexAudio = game.add.audio("vortex", 2);
 
         gearTing = game.add.audio('ting', 0.75);
 

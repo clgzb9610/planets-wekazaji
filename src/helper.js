@@ -368,7 +368,7 @@ var Helper = function(game){
         gotoMainButton.loadTexture("toMainButton");
     };
 
-    this.playerDistanceFromAnchor = function () {
+    this.playerDistanceFromLevelCenter = function () {
         let a = player.x - levelCenterX,
             b = player.y - levelCenterY;
 

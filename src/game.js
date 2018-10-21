@@ -129,8 +129,8 @@ var level = [
         {objectType: 'gear', x: -200, y: -10, sprite: "gear"},
         {objectType: 'player', x: -90, y: 360},
         {objectType: 'levelBoundary', x: 0, y: 0, radius: 1000}
-    ], // level 2 - crazy gears
-    [//level 3 - jumping between planets
+    ], // level 1 - crazy gears
+    [//level 2 - jumping between planets
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 350, sprite: "smallstar"},
         {objectType: 'planet', x: 200, y: 220, gravRadius: 350, gravForce: 350, sprite: "starplanet"},
         {objectType: 'teleporter', x: 150, y: 10, radians: -0.2, goal: 3},
@@ -140,8 +140,8 @@ var level = [
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
         {objectType: 'player', x: -430, y: -50},
         {objectType: 'levelBoundary', x: -40, y: 60, radius: 1200}
-    ], // level 3 - jumping between planets
-    [//level 4 - start in void
+    ], // level 2 - jumping between planets
+    [//level 3 - start in void
         {objectType: 'planet', x: -300, y: -50, gravRadius: 250, gravForce: 250, sprite: "axoplanet"},
         {objectType: 'planet', x: 400, y: 400, gravRadius: 350, gravForce: 350, sprite: "fishplanet"},
         {objectType: 'teleporter', x: 500, y: 210, radians: 0.5, goal: 3},
@@ -151,8 +151,8 @@ var level = [
         {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
         {objectType: 'player', x: 23, y: -30},
         {objectType: 'levelBoundary', x: 50, y: 175, radius: 1500}
-    ], // level 4 - start in void
-    [//level 5 - jumping to planets through void
+    ], // level 3 - start in void
+    [//level 4 - jumping to planets through void
         {objectType: 'planet', x: -440, y: -120, gravRadius: 260, gravForce: 350, sprite: "soccerplanet"},
         {objectType: 'planet', x: 260, y: 250, gravRadius: 270, gravForce: 250, sprite: "tennisplanet"},
         {objectType: 'planet', x: 60, y: -180, gravRadius: 200, gravForce: 350, sprite: "baseballplanet"},
@@ -162,11 +162,11 @@ var level = [
         {objectType: 'gear', x: -180, y: -150, sprite: "gear"},
         {objectType: 'player', x: 0, y: 200},
         {objectType: 'levelBoundary', x: -40, y: -10, radius: 1200}
-    ], // level 5 - jumping to planets through void
-    [ //level 6 - gears in void
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 200, gravForce: 350, sprite: "smallstar"},
-        {objectType: 'planet', x: 900, y: 900, gravRadius: 230, gravForce: 350, sprite: "smallstar"},
-        {objectType: 'teleporter', x: 785, y: 785, radians: 5.45, goal: 7}, //317, 90
+    ], // level 4 - jumping to planets through void
+    [ //level 5 - gears in void
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 350, sprite: "level5_planet1"},
+        {objectType: 'planet', x: 900, y: 900, gravRadius: 230, gravForce: 350, sprite: "level5_planet2"},
+        {objectType: 'teleporter', x: 786, y: 786, radians: 5.5, goal: 7}, //317, 90
         {objectType: 'startPad', x: 0, y: -160, radians: 6.2 },
         {objectType: 'gear', x: 150, y: 30, sprite: "gear"},
         {objectType: 'gear', x: 350, y: 50, sprite: "gear"},
@@ -177,8 +177,8 @@ var level = [
         {objectType: 'gear', x: 920, y:750, sprite: "gear"},
         {objectType: 'player', x: 0, y: -230},
         {objectType: 'levelBoundary', x: 500, y: 350, radius: 1200}
-    ], //level 6 - gears in void
-    [ //level 7 - enemy introduction
+    ], //level 5 - gears in void
+    [ //level 6 - enemy introduction
         {objectType: 'planet', x: -170, y: -400, gravRadius: 220, gravForce: 350, sprite: "rainbowplanet"},
         {objectType: 'planet', x: 200, y: -80, gravRadius: 220, gravForce: 350, sprite: "otherrainbow"},
         {objectType: 'planet', x: 280, y: 350, gravRadius: 200, gravForce: 240, sprite: "smallrainbow"},
@@ -189,19 +189,19 @@ var level = [
         {objectType: 'player', x: -360, y: -570},
         {objectType: 'enemy1' , x:-110, y: -240, enemyVel: 25, sprite: "enemy"},
         {objectType: 'levelBoundary', x: 100, y: -50, radius: 1100}
-    ], // level 7 - enemy introduction
-    [ //level 8 - enemy hard
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 350, sprite: "smallstar"},
+    ], // level 6 - enemy introduction
+    [ //level 7 - enemy hard
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 350, sprite: "level7_planet1"},
         {objectType: 'teleporter', x: 115, y: 115, radians: 2.4, goal: 2}, //317, 90
-        {objectType: 'startPad', x: -90, y: 160, radians: -3 },
+        {objectType: 'startPad', x: -70, y: -160, radians: -0.5 },
         {objectType: 'gear', x: -83, y: -83, sprite: "gear"},
         {objectType: 'gear', x: 100, y:-50, sprite: "gear"},
-        {objectType: 'player', x: -100, y: 230},
+        {objectType: 'player', x: -100, y: -230},
         {objectType: 'enemy1' , x:110, y: -110, enemyVel: 15, sprite: "enemy"},
         {objectType: 'enemy2' , x:-110, y: 110, enemyVel: 15, sprite: "enemy"},
         {objectType: 'levelBoundary', x: 0, y: 0, radius: 750}
-    ], // level 8 - small planet with two enemies
-    [ //level 9 - fun with overlapping gravity fields
+    ], // level 7 - small planet with two enemies
+    [ //level 8 - fun with overlapping gravity fields
         {objectType: 'planet', x: 200,y: 100, gravRadius: 260, gravForce: 350, sprite: "wafelplanet"},
         {objectType: 'planet', x: 140, y: 610, gravRadius: 190, gravForce: 330, sprite: "donutplanet"},
         {objectType: 'planet', x: 400, y: -380, gravRadius: 200, gravForce: 300, sprite: "orangeplanet"},
@@ -214,35 +214,39 @@ var level = [
         {objectType: 'player', x: -45, y: -25},
         {objectType: 'enemy1', x: 400, y: -20, enemyVel: 25, sprite: "enemy"},
         {objectType: 'levelBoundary', x: 300, y: -100, radius: 1300}
-    ], // level 9 - fun with overlapping gravity fields
-    [ //level 10 - circular planet chains
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 220, gravForce: 350, sprite: "smallstar"},
-        {objectType: 'planet', x: 220, y: 420, gravRadius: 220, gravForce: 350, sprite: "mediumplanet"},
-        {objectType: 'planet', x: -170, y: 750, gravRadius: 220, gravForce: 350, sprite: "treasureSmall"},
-        {objectType: 'planet', x: -650, y: 420, gravRadius: 220, gravForce: 350, sprite: "purplePlanet"},
-        {objectType: 'planet', x: -730, y: -230, gravRadius: 240, gravForce: 350, sprite: "treasureBig"},
-        {objectType: 'teleporter', x: -650, y: 50, radians: 2.85, goal: 1}, //317, 90
-        {objectType: 'startPad', x: -100, y: 120, radians: -2.5 },
+    ], // level 8 - fun with overlapping gravity fields
+    [ //level 9 - circular planet chains
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 220, gravForce: 250, sprite: "level9_planet1"},
+        {objectType: 'planet', x: 220, y: 420, gravRadius: 220, gravForce: 250, sprite: "level9_planet2"},
+        {objectType: 'planet', x: -170, y: 750, gravRadius: 220, gravForce: 250, sprite: "level9_planet3"},
+        {objectType: 'planet', x: -650, y: 420, gravRadius: 220, gravForce: 250, sprite: "level9_planet4"},
+        {objectType: 'planet', x: -730, y: -230, gravRadius: 240, gravForce: 250, sprite: "level9_planet5"},
+        {objectType: 'teleporter', x: -650, y: 50, radians: 2.85, goal: 5}, //317, 90
+        {objectType: 'startPad', x: -170, y: -80, radians: -1 },
         {objectType: 'gear', x: -480, y: -230, sprite: "gear"},
-        {objectType: 'player', x: -130, y: 100},
+        {objectType: 'gear', x: -650, y: 420, sprite: "gear"},
+        {objectType: 'gear', x: -170, y: 750, sprite: "gear"},
+        {objectType: 'gear', x: 220, y: 420, sprite: "gear"},
+        {objectType: 'gear', x: 0, y: 100, sprite: "gear"},
+        {objectType: 'player', x: -190, y: -110},
         {objectType: 'levelBoundary', x: -400, y: 100, radius: 1300}
-    ], //level 10 - circular planet chains
-    [ //level 11 - find the hidden gear
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 300, sprite: "treasureBig"},
-        {objectType: 'planet', x: -20, y: 640, gravRadius: 200, gravForce: 300, sprite: "treasureSmall"},
-        {objectType: 'planet', x: 0, y: 1150, gravRadius: 200, gravForce: 300, sprite: "treasureSmall"},
-        {objectType: 'planet', x: -540, y: 330, gravRadius: 200, gravForce: 300, sprite: "treasureSmall"},
-        {objectType: 'planet', x: 500, y: 390, gravRadius: 200, gravForce: 300, sprite: "treasureSmall"},
-        {objectType: 'planet', x: -590, y: -240, gravRadius: 200, gravForce: 300, sprite: "treasureSmall"},
-        {objectType: 'planet', x: -150, y: -630, gravRadius: 200, gravForce: 300, sprite: "treasureSmall"},
-        {objectType: 'planet', x: 400, y: -510, gravRadius: 200, gravForce: 300, sprite: "treasureSmall"},
+    ], //level 9 - circular planet chains
+    [ //level 10 - find the hidden gear
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 300, sprite: "level10_planet1"},
+        {objectType: 'planet', x: -20, y: 640, gravRadius: 200, gravForce: 300, sprite: "level10_planet2"},
+        {objectType: 'planet', x: 0, y: 1150, gravRadius: 200, gravForce: 300, sprite: "level10_planet3"},
+        {objectType: 'planet', x: -540, y: 330, gravRadius: 200, gravForce: 300, sprite: "level10_planet4"},
+        {objectType: 'planet', x: 500, y: 390, gravRadius: 200, gravForce: 300, sprite: "level10_planet5"},
+        {objectType: 'planet', x: -590, y: -240, gravRadius: 200, gravForce: 300, sprite: "level10_planet6"},
+        {objectType: 'planet', x: -150, y: -630, gravRadius: 200, gravForce: 300, sprite: "level10_planet7"},
+        {objectType: 'planet', x: 400, y: -510, gravRadius: 200, gravForce: 300, sprite: "level10_planet8"},
         {objectType: 'teleporter', x: 0, y: 290, radians: -3.1, goal: 1},
-        {objectType: 'startPad', x: 140, y: 300, radians: 2.5},
+        {objectType: 'startPad', x: -140, y: -300, radians: 0},
         {objectType: 'gear', x: 0, y: 1265, sprite: "gear"},
-        {objectType: 'player', x: 150, y: 300},
+        {objectType: 'player', x: -150, y: -300},
         {objectType: 'levelBoundary', x: 0, y: 0, radius: 1700}
-    ], // level 11 - find hidden gear
-    [ //level 12 - two enemies
+    ], // level 10 - find hidden gear
+    [ //level 11 - two enemies
         {objectType: 'planet', x: 0, y: 0, gravRadius: 230, gravForce: 350, sprite: "roseplanet"},
         {objectType: 'planet', x: 400, y: -230, gravRadius: 230, gravForce: 350, sprite: "hydrangea"},
         {objectType: 'planet', x: 400, y: 230, gravRadius: 230, gravForce: 350, sprite: "lilac"},
@@ -257,46 +261,46 @@ var level = [
         {objectType: 'enemy1', x: 450, y: 180, enemyVel: 15, sprite: "enemy"},
         {objectType: 'enemy2', x: 450, y: -180, enemyVel: 15, sprite: "enemy"},
         {objectType: 'levelBoundary', x: 400, y: 0, radius: 1100}
-    ], // level 12 - two enemies
-    [ //level 13 - two enemies circling center planet
+    ], // level 11 - two enemies
+    [ //level 12 - two enemies circling center planet
         {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 350, sprite: "catplanet"},
         {objectType: 'planet', x: 0, y: -470, gravRadius: 200, gravForce: 350, sprite: "blueyarn"},
         {objectType: 'planet', x: 0, y: 470, gravRadius: 200, gravForce: 350, sprite: "redyarn"},
         {objectType: 'planet', x: 470, y: 0, gravRadius: 200, gravForce: 350, sprite: "greenyarn"},
         {objectType: 'planet', x: -470, y: 0, gravRadius: 200, gravForce: 350, sprite: "purpleyarn"},
         {objectType: 'teleporter', x: 100, y: 150, radians: 2.6, goal: 4},
-        {objectType: 'startPad', x: -100, y: 200, radians: -2.8},
+        {objectType: 'startPad', x: -120, y: -180, radians: -0.7},
         {objectType: 'gear', x: 100, y: 300, sprite: "gear"},
         {objectType: 'gear', x: -100, y: -300, sprite: "gear"},
         {objectType: 'gear', x: 390, y: 20, sprite: "gear"},
         {objectType: 'gear', x: -250, y: -100, sprite: "gear"},
-        {objectType: 'player', x: -160, y: 230},
+        {objectType: 'player', x: -160, y: -230},
         {objectType: 'enemy1', x: -150, y: 0, enemyVel: 25, sprite: "enemy"},
         {objectType: 'enemy2', x: 150, y: 0, enemyVel: 45, sprite: "enemy"},
         {objectType: 'levelBoundary', x: 0, y: 0, radius: 1200}
-    ], // level 13 - two enemies circling center planet
-    [ //level 14 - maze
-        {objectType: 'planet', x: -1000, y: 0, gravRadius: 200, gravForce: 350, sprite: "smallstar"}, //base
-        {objectType: 'planet', x: -800, y: -370, gravRadius: 200, gravForce: 350, sprite: "smallstar"}, //1
-        {objectType: 'planet', x: -480, y: -630, gravRadius: 200, gravForce: 350, sprite: "smallstar"}, //2
-        {objectType: 'planet', x: -1000, y: -730, gravRadius: 200, gravForce: 350, sprite: "smallstar"}, //2
-        {objectType: 'planet', x: -1400, y: -840, gravRadius: 200, gravForce: 350, sprite: "tennisplanet"}, //3
-        {objectType: 'planet', x: -900, y: -1150, gravRadius: 200, gravForce: 350, sprite: "tennisplanet"}, //3
-        {objectType: 'planet', x: -200, y: -950, gravRadius: 200, gravForce: 350, sprite: "tennisplanet"}, //3
-        {objectType: 'planet', x: -800, y: 370, gravRadius: 200, gravForce: 350, sprite: "smallstar"}, //1
-        {objectType: 'planet', x: -480, y: 630, gravRadius: 200, gravForce: 350, sprite: "smallstar"}, //2
-        {objectType: 'planet', x: -1000, y: 730, gravRadius: 200, gravForce: 350, sprite: "smallstar"}, //2
-        {objectType: 'planet', x: -100, y: 450, gravRadius: 200, gravForce: 350, sprite: "tennisplanet"}, //3
-        {objectType: 'planet', x: -300, y: 1000, gravRadius: 200, gravForce: 350, sprite: "tennisplanet"}, //3
-        {objectType: 'planet', x: -850, y: 1150, gravRadius: 200, gravForce: 350, sprite: "tennisplanet"}, //3
-        {objectType: 'planet', x: -1425, y: 800, gravRadius: 200, gravForce: 350, sprite: "tennisplanet"}, //3
+    ], // level 12 - two enemies circling center planet
+    [ //level 13 - maze
+        {objectType: 'planet', x: -1000, y: 0, gravRadius: 200, gravForce: 350, sprite: "level13_planet1"}, //base
+        {objectType: 'planet', x: -800, y: -370, gravRadius: 200, gravForce: 350, sprite: "level13_planet1"}, //1
+        {objectType: 'planet', x: -480, y: -630, gravRadius: 200, gravForce: 350, sprite: "level13_planet2"}, //2
+        {objectType: 'planet', x: -1000, y: -730, gravRadius: 200, gravForce: 350, sprite: "level13_planet2"}, //2
+        {objectType: 'planet', x: -1400, y: -840, gravRadius: 200, gravForce: 350, sprite: "level13_planet3"}, //3
+        {objectType: 'planet', x: -900, y: -1150, gravRadius: 200, gravForce: 350, sprite: "level13_planet3"}, //3
+        {objectType: 'planet', x: -200, y: -950, gravRadius: 200, gravForce: 350, sprite: "level13_planet3"}, //3
+        {objectType: 'planet', x: -800, y: 370, gravRadius: 200, gravForce: 350, sprite: "level13_planet1"}, //1
+        {objectType: 'planet', x: -480, y: 630, gravRadius: 200, gravForce: 350, sprite: "level13_planet2"}, //2
+        {objectType: 'planet', x: -1000, y: 730, gravRadius: 200, gravForce: 350, sprite: "level13_planet2"}, //2
+        {objectType: 'planet', x: -100, y: 450, gravRadius: 200, gravForce: 350, sprite: "level13_planet3"}, //3
+        {objectType: 'planet', x: -300, y: 1000, gravRadius: 200, gravForce: 350, sprite: "level13_planet3"}, //3
+        {objectType: 'planet', x: -850, y: 1150, gravRadius: 200, gravForce: 350, sprite: "level13_planet3"}, //3
+        {objectType: 'planet', x: -1425, y: 800, gravRadius: 200, gravForce: 350, sprite: "level13_planet3"}, //3
         {objectType: 'teleporter', x: -1400, y: 955, radians: 2.95, goal: 2}, //317, 90
         {objectType: 'startPad', x: -1000, y: -160, radians: 6.2 },
         {objectType: 'gear', x: -1450, y:-700, sprite: "gear"},
         {objectType: 'gear', x: -350, y:-1000, sprite: "gear"},
         {objectType: 'player', x: -1000, y: -230},
         {objectType: 'levelBoundary', x: -800, y: 0, radius: 1900}
-    ] //level 14 - maze
+    ] //level 13 - maze
 ];
 
 playGame.prototype = {
@@ -334,10 +338,26 @@ playGame.prototype = {
     preload: function () {
         game.load.image("level0_planet1", "assets/planets/planet_level0.png");
         game.load.spritesheet("level1_planet1", "assets/planets/gearplanetsheet.png", 354, 354);
+        game.load.image("level5_planet1", "assets/planets/level5_planet1.png");
+        game.load.image("level5_planet2", "assets/planets/level5_planet2.png");
+        game.load.image("level7_planet1", "assets/planets/level7_planet1.png");
+        game.load.image("level9_planet1", "assets/planets/level9_planet1.png");
+        game.load.image("level9_planet2", "assets/planets/level9_planet2.png");
+        game.load.image("level9_planet3", "assets/planets/level9_planet3.png");
+        game.load.image("level9_planet4", "assets/planets/level9_planet4.png");
+        game.load.image("level9_planet5", "assets/planets/level9_planet5.png");
+        game.load.image("level10_planet1", "assets/planets/level10_planet1.png");
+        game.load.image("level10_planet2", "assets/planets/level10_planet2.png");
+        game.load.image("level10_planet3", "assets/planets/level10_planet3.png");
+        game.load.image("level10_planet4", "assets/planets/level10_planet4.png");
+        game.load.image("level10_planet5", "assets/planets/level10_planet5.png");
+        game.load.image("level10_planet6", "assets/planets/level10_planet6.png");
+        game.load.image("level10_planet7", "assets/planets/level10_planet7.png");
+        game.load.image("level10_planet8", "assets/planets/level10_planet8.png");
+        game.load.image("level13_planet1", "assets/planets/level13_planet1.png");
+        game.load.image("level13_planet2", "assets/planets/level13_planet2.png");
+        game.load.image("level13_planet3", "assets/planets/level13_planet3.png");
 
-        game.load.image("smallplanet", "assets/planets/planet.png");
-        game.load.image("mediumplanet", "assets/planets/med_planet.png");
-        game.load.image("bigplanet", "assets/planets/bigplanet.png");
         game.load.image("starplanet","assets/planets/bigplanet2.png");
         game.load.image("smallstar", "assets/planets/smallplanet2.png");
         game.load.image("fishplanet","assets/planets/bigplanet3.png");
@@ -361,10 +381,6 @@ playGame.prototype = {
         game.load.image("hydrangea", "assets/planets/hydrangeas.png");
         game.load.image("lilac", "assets/planets/lilacbush.png");
         game.load.image("hibiscus", "assets/planets/hibiscus.png");
-        game.load.image("treasureBig", "assets/planets/sample_treasurePlanet-01.png");
-        game.load.image("treasureSmall", "assets/planets/sample_treasurePlanet_small-01.png");
-        game.load.image("gearPlanet", "assets/planets/sample_Planet_mid.png");
-        game.load.image("purplePlanet", "assets/planets/sample_Planet_small.png");
 
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.spritesheet('player',"assets/game/nebspritesv3.0.png",40,47);

@@ -462,7 +462,7 @@ playGame.prototype = {
         jetpackAudio = game.add.audio("jetpack", 0, true);
         jetpackAudio.play();
 
-        vortexAudio = game.add.audio("vortex", 2.5);
+        vortexAudio = game.add.audio("vortex", 2);
 
         gearTing = game.add.audio('ting', 0.75);
 
@@ -526,7 +526,7 @@ playGame.prototype = {
             //if the player goes too fast, the rotational velocity will make them fly out of gravity fields
             gamePhysics.constrainVelocity(player,150);
 
-            if (helper.playerDistanceFromAnchor() >= levelBoundaryRadius) {
+            if (helper.playerDistanceFromLevelCenter() >= levelBoundaryRadius) {
                 player.body.x = playerPrevX;
                 player.body.y = playerPrevY;
 

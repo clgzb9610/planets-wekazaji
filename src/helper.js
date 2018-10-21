@@ -87,7 +87,9 @@ var Helper = function(game){
 
         gearTing.play();
 
-        gearBody.kill(); // Stops gear from colliding physically with player
+        //gearBody.kill(); // Stops gear from colliding physically with player
+
+        gearBody.sprite.destroy();
 
         score += 1;
         if (score >= levelGoal) {
@@ -96,20 +98,20 @@ var Helper = function(game){
             teleporterOpenSound.play();
         }
 
-        game.add.tween(gearBody).to(
-            {x: playerBody.x, y: playerBody.y},
-            200,
-            Phaser.Easing.Linear.None,
-            true
-        );
-        game.add.tween(gearBody.sprite.scale).to(
-            {x: 0, y: 0},
-            200,
-            Phaser.Easing.Linear.None,
-            true
-        ).onComplete.add(function () {
-            gearBody.destroy()
-        });
+        // game.add.tween(gearBody).to(
+        //     {x: playerBody.x, y: playerBody.y},
+        //     200,
+        //     Phaser.Easing.Linear.None,
+        //     true
+        // );
+        // game.add.tween(gearBody.sprite.scale).to(
+        //     {x: 0.1, y: 0.1},
+        //     200,
+        //     Phaser.Easing.Linear.None,
+        //     true
+        // ).onComplete.add(function () {
+        //     gearBody.sprite.destroy();
+        // });
     };
 
     //will start event to fade startPad a certain amount of time after it register the player's contact.
@@ -370,8 +372,8 @@ var Helper = function(game){
     };
 
     this.playerDistanceFromAnchor = function () {
-        let a = player.x - anchorX,
-            b = player.y - anchorY;
+        let a = player.x - levelCenterX,
+            b = player.y - levelCenterY;
 
         return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
     };

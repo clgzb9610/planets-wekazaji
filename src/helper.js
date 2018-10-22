@@ -76,14 +76,16 @@ var Helper = function(game){
         let filledInGear = game.add.image(0, 0, "filledInGear"),
             imageWidth = filledInGear.width * gearUIScale,
             imageHeight = filledInGear.height * gearUIScale,
-            gearsPerRow = Math.floor(350 / (imageWidth + 2));
+            gearsPerRow = Math.floor(450 / (imageWidth + 2));
 
-        filledInGear.anchor.set(1, 0);
+        // filledInGear.anchor.set(1, 0);
+        filledInGear.anchor.set(0.5, 0);
         filledInGear.setScaleMinMax(gearUIScale);
         userInterface.add(filledInGear);
 
-        filledInGear.x = 350 - 2 - (imageWidth + 2) * (score % gearsPerRow);
-        filledInGear.y = -320 + 2 + (imageHeight + 2) * Math.floor(score / gearsPerRow);
+        var filledInGearStartx = ((imageWidth + 2)/2) - (((imageWidth + 2) * (levelGoal))/2);
+        filledInGear.x = filledInGearStartx - 2 + (imageWidth + 2) * (score % gearsPerRow);
+        filledInGear.y = -285 + 2 + (imageHeight + 2) * Math.floor(score / gearsPerRow);
 
         gearTing.play();
 

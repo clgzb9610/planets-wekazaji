@@ -294,6 +294,11 @@ var LevelChanger = function(game){
 
         game.input.onDown.add(helper.unPauseGame, self);
 
+        progressBar = game.add.image(0, -310, "progressBar");
+        progressBar.anchor.set(0.5, 0);
+        userInterface.add(progressBar);
+        progressBar.scale.setTo(0.8);
+
         addGearOutlines();
     }
 
@@ -302,14 +307,17 @@ var LevelChanger = function(game){
             let gearOutline = game.add.image(0, 0, "gearOutline"),
                 gearOutlineWidth = gearOutline.width * gearUIScale,
                 gearOutlineHeight = gearOutline.height * gearUIScale,
-                gearsPerRow = Math.floor(350 / (gearOutlineWidth + 2));
+                gearsPerRow = Math.floor(450 / (gearOutlineWidth + 2));
 
             gearOutline.setScaleMinMax(gearUIScale);
-            gearOutline.anchor.set(1, 0);
+            // gearOutline.anchor.set(1, 0);
+            gearOutline.anchor.set(0.5,0);
             userInterface.add(gearOutline);
 
-            gearOutline.x = 350 - 2 - (gearOutlineWidth + 2) * (i % gearsPerRow);
-            gearOutline.y = -320 + 2 + (gearOutlineHeight + 2) * Math.floor(i / gearsPerRow);
+            var gearOutlineStartx = ((gearOutlineWidth + 2)/2) - (((gearOutlineWidth + 2) * (levelGoal))/2);
+            gearOutline.x = gearOutlineStartx - 2 + (gearOutlineWidth + 2) * (i % gearsPerRow);
+            // gearOutline.x = 350 - 2 - (gearOutlineWidth + 2) * (i % gearsPerRow);
+            gearOutline.y = -285 + 2 + (gearOutlineHeight + 2) * Math.floor(i / gearsPerRow);
         }
     }
 

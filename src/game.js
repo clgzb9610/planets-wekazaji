@@ -83,7 +83,7 @@ var level = [
     ], // level 0
     [ //level 1 - crazy gears
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 200, sprite: "level1_planet1"},
-        {objectType: 'teleporter', x: 0, y: -294, radians: 0, goal: 42},
+        {objectType: 'teleporter', x: 0, y: -294, radians: 0, goal: 18},
         {objectType: 'startPad', x: -75, y: -300, radians: -0.2},
         {objectType: 'gear', x: 0, y: 200, sprite: "gear"},
         {objectType: 'gear', x: 10, y: 190, sprite: "gear"},
@@ -103,30 +103,30 @@ var level = [
         {objectType: 'gear', x: 150, y: 40, sprite: "gear"},
         {objectType: 'gear', x: 160, y: 30, sprite: "gear"},
         {objectType: 'gear', x: 170, y: 20, sprite: "gear"},
-        {objectType: 'gear', x: 180, y: 10, sprite: "gear"},
-        {objectType: 'gear', x: 190, y: 0, sprite: "gear"},
-        {objectType: 'gear', x: 200, y: -10, sprite: "gear"},
-        {objectType: 'gear', x: 0, y: -200, sprite: "gear"},
-        {objectType: 'gear', x: -10, y: -190, sprite: "gear"},
-        {objectType: 'gear', x: -20, y: -180, sprite: "gear"},
-        {objectType: 'gear', x: -30, y: -170, sprite: "gear"},
-        {objectType: 'gear', x: -40, y: -160, sprite: "gear"},
-        {objectType: 'gear', x: -50, y: -150, sprite: "gear"},
-        {objectType: 'gear', x: -60, y: -140, sprite: "gear"},
-        {objectType: 'gear', x: -70, y: -130, sprite: "gear"},
-        {objectType: 'gear', x: -80, y: -120, sprite: "gear"},
-        {objectType: 'gear', x: -90, y: -110, sprite: "gear"},
-        {objectType: 'gear', x: -100, y: -90, sprite: "gear"},
-        {objectType: 'gear', x: -110, y: -80, sprite: "gear"},
-        {objectType: 'gear', x: -120, y: -70, sprite: "gear"},
-        {objectType: 'gear', x: -130, y: -60, sprite: "gear"},
-        {objectType: 'gear', x: -140, y: -50, sprite: "gear"},
-        {objectType: 'gear', x: -150, y: -40, sprite: "gear"},
-        {objectType: 'gear', x: -160, y: -30, sprite: "gear"},
-        {objectType: 'gear', x: -170, y: -20, sprite: "gear"},
-        {objectType: 'gear', x: -180, y: -10, sprite: "gear"},
-        {objectType: 'gear', x: -190, y: 0, sprite: "gear"},
-        {objectType: 'gear', x: -200, y: -10, sprite: "gear"},
+        // {objectType: 'gear', x: 180, y: 10, sprite: "gear"},
+        // {objectType: 'gear', x: 190, y: 0, sprite: "gear"},
+        // {objectType: 'gear', x: 200, y: -10, sprite: "gear"},
+        // {objectType: 'gear', x: 0, y: -200, sprite: "gear"},
+        // {objectType: 'gear', x: -10, y: -190, sprite: "gear"},
+        // {objectType: 'gear', x: -20, y: -180, sprite: "gear"},
+        // {objectType: 'gear', x: -30, y: -170, sprite: "gear"},
+        // {objectType: 'gear', x: -40, y: -160, sprite: "gear"},
+        // {objectType: 'gear', x: -50, y: -150, sprite: "gear"},
+        // {objectType: 'gear', x: -60, y: -140, sprite: "gear"},
+        // {objectType: 'gear', x: -70, y: -130, sprite: "gear"},
+        // {objectType: 'gear', x: -80, y: -120, sprite: "gear"},
+        // {objectType: 'gear', x: -90, y: -110, sprite: "gear"},
+        // {objectType: 'gear', x: -100, y: -90, sprite: "gear"},
+        // {objectType: 'gear', x: -110, y: -80, sprite: "gear"},
+        // {objectType: 'gear', x: -120, y: -70, sprite: "gear"},
+        // {objectType: 'gear', x: -130, y: -60, sprite: "gear"},
+        // {objectType: 'gear', x: -140, y: -50, sprite: "gear"},
+        // {objectType: 'gear', x: -150, y: -40, sprite: "gear"},
+        // {objectType: 'gear', x: -160, y: -30, sprite: "gear"},
+        // {objectType: 'gear', x: -170, y: -20, sprite: "gear"},
+        // {objectType: 'gear', x: -180, y: -10, sprite: "gear"},
+        // {objectType: 'gear', x: -190, y: 0, sprite: "gear"},
+        // {objectType: 'gear', x: -200, y: -10, sprite: "gear"},
         {objectType: 'player', x: -90, y: -360},
         {objectType: 'levelBoundary', x: 0, y: 0, radius: 1000}
     ], // level 1 - crazy gears
@@ -164,7 +164,7 @@ var level = [
         {objectType: 'levelBoundary', x: -40, y: -10, radius: 1200}
     ], // level 4 - jumping to planets through void
     [ //level 5 - gears in void
-        {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 350, sprite: "level5_planet1"},
+        {objectType: 'planet', x: 0, y: 0, gravRadius: 270, gravForce: 350, sprite: "level5_planet1"},
         {objectType: 'planet', x: 900, y: 900, gravRadius: 230, gravForce: 350, sprite: "level5_planet2"},
         {objectType: 'teleporter', x: 786, y: 786, radians: 5.5, goal: 7}, //317, 90
         {objectType: 'startPad', x: 0, y: -160, radians: 6.2 },
@@ -394,6 +394,7 @@ playGame.prototype = {
 
         game.load.spritesheet("flames", "assets/game/flameSprites2.png", 20, 20);
 
+        game.load.image("progressBar", "assets/game/progressBar.png");
         game.load.image("gearOutline", "assets/game/gearOutline.png", 300, 300);
         game.load.image("filledInGear", "assets/game/filledGear.png", 300, 300);
 
@@ -497,6 +498,7 @@ playGame.prototype = {
     },
 
     update: function(){
+        game.sound.mute = true;
         if (!transitioning) {
             //two enemies operate separately, when they exist in a level
             if (enemy1Present) {
@@ -540,10 +542,10 @@ playGame.prototype = {
     },
     render: function () {
         if (showDebugInfo) {
-            game.debug.text("FPS: " + game.time.fps, 2, 14, "#00ff00");
-            game.debug.text("Player X: " + player.x, 2, 28, "#00ff00");
-            game.debug.text("Player Y: " + player.y, 2, 42, "#00ff00");
-            game.debug.cameraInfo(this.game.camera, 2, 56, "#00ff00");
+            // game.debug.text("FPS: " + game.time.fps, 2, 14, "#00ff00");
+            // game.debug.text("Player X: " + player.x, 2, 28, "#00ff00");
+            // game.debug.text("Player Y: " + player.y, 2, 42, "#00ff00");
+            // game.debug.cameraInfo(this.game.camera, 2, 56, "#00ff00");
         }
     }
 };

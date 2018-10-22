@@ -124,6 +124,25 @@ levelSelect.prototype = {
         
         if (nineButton.input.pointerOver()) {nineButton.alpha=0.7;}
         else {nineButton.alpha=1;}
+        
+        if (screen2 == true) {
+            if (tenButton.input.pointerOver()) {tenButton.alpha=0.7;}
+            else {tenButton.alpha=1;}
+            
+            if (elevenButton.input.pointerOver()) {elevenButton.alpha=0.7;}
+            else {elevenButton.alpha=1;}
+            
+            if (twelveButton.input.pointerOver()) {twelveButton.alpha=0.7;}
+            else {twelveButton.alpha=1;}
+            
+            if (thirteenButton.input.pointerOver()) {thirteenButton.alpha=0.7;}
+            else {thirteenButton.alpha=1;}
+            
+            if (fourteenButton.input.pointerOver()) {fourteenButton.alpha=0.7;}
+            else {fourteenButton.alpha=1;}
+        }
+        
+
 
     },
     render:function(){
@@ -501,6 +520,9 @@ function addPageTwoButtons() {
     tenButton = game.add.button(50,200,"ten",buttonTen,this);
     tenButton.scale.x = 0.3;
     tenButton.scale.y = 0.3;
+    
+    
+        
 
     //Level Eleven
     elevenButtonBG = game.add.button(256,191,"background",buttonEleven,this);

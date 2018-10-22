@@ -83,8 +83,8 @@ var level = [
     ], // level 0
     [ //level 1 - crazy gears
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 200, sprite: "level1_planet1"},
-        {objectType: 'teleporter', x: 0, y: -290, radians: 0, goal: 42},
-        {objectType: 'startPad', x: -55, y: 300, radians: -2.7},
+        {objectType: 'teleporter', x: 0, y: -294, radians: 0, goal: 42},
+        {objectType: 'startPad', x: -75, y: -300, radians: -0.2},
         {objectType: 'gear', x: 0, y: 200, sprite: "gear"},
         {objectType: 'gear', x: 10, y: 190, sprite: "gear"},
         {objectType: 'gear', x: 20, y: 180, sprite: "gear"},
@@ -127,7 +127,7 @@ var level = [
         {objectType: 'gear', x: -180, y: -10, sprite: "gear"},
         {objectType: 'gear', x: -190, y: 0, sprite: "gear"},
         {objectType: 'gear', x: -200, y: -10, sprite: "gear"},
-        {objectType: 'player', x: -90, y: 360},
+        {objectType: 'player', x: -90, y: -360},
         {objectType: 'levelBoundary', x: 0, y: 0, radius: 1000}
     ], // level 1 - crazy gears
     [//level 2 - jumping between planets
@@ -221,7 +221,7 @@ var level = [
         {objectType: 'planet', x: -170, y: 750, gravRadius: 220, gravForce: 250, sprite: "level9_planet3"},
         {objectType: 'planet', x: -650, y: 420, gravRadius: 220, gravForce: 250, sprite: "level9_planet4"},
         {objectType: 'planet', x: -730, y: -230, gravRadius: 240, gravForce: 250, sprite: "level9_planet5"},
-        {objectType: 'teleporter', x: -650, y: 50, radians: 2.85, goal: 5}, //317, 90
+        {objectType: 'teleporter', x: -640, y: 40, radians: 2.85, goal: 5}, //317, 90
         {objectType: 'startPad', x: -170, y: -80, radians: -1 },
         {objectType: 'gear', x: -480, y: -230, sprite: "gear"},
         {objectType: 'gear', x: -650, y: 420, sprite: "gear"},
@@ -234,16 +234,16 @@ var level = [
     [ //level 10 - find the hidden gear
         {objectType: 'planet', x: 0, y: 0, gravRadius: 300, gravForce: 300, sprite: "level10_planet1"},
         {objectType: 'planet', x: -20, y: 640, gravRadius: 200, gravForce: 300, sprite: "level10_planet2"},
-        {objectType: 'planet', x: 0, y: 1150, gravRadius: 200, gravForce: 300, sprite: "level10_planet3"},
+        {objectType: 'planet', x: 0, y: 1200, gravRadius: 200, gravForce: 300, sprite: "level10_planet3"},
         {objectType: 'planet', x: -540, y: 330, gravRadius: 200, gravForce: 300, sprite: "level10_planet4"},
         {objectType: 'planet', x: 500, y: 390, gravRadius: 200, gravForce: 300, sprite: "level10_planet5"},
         {objectType: 'planet', x: -590, y: -240, gravRadius: 200, gravForce: 300, sprite: "level10_planet6"},
         {objectType: 'planet', x: -150, y: -630, gravRadius: 200, gravForce: 300, sprite: "level10_planet7"},
         {objectType: 'planet', x: 400, y: -510, gravRadius: 200, gravForce: 300, sprite: "level10_planet8"},
-        {objectType: 'teleporter', x: 0, y: 290, radians: -3.1, goal: 1},
-        {objectType: 'startPad', x: -140, y: -300, radians: 0},
+        {objectType: 'teleporter', x: 0, y: 267, radians: -3.1, goal: 1},
+        {objectType: 'startPad', x: -110, y: -270, radians: -0.3},
         {objectType: 'gear', x: 0, y: 1265, sprite: "gear"},
-        {objectType: 'player', x: -150, y: -300},
+        {objectType: 'player', x: -120, y: -270},
         {objectType: 'levelBoundary', x: 0, y: 0, radius: 1700}
     ], // level 10 - find hidden gear
     [ //level 11 - two enemies
@@ -308,28 +308,28 @@ playGame.prototype = {
         this.currentLevel = currentLevel;
         
         //level unlock checker
-        if (currentLevel == 1) {
+        if (currentLevel === 1) {
         var unlock2 = localStorage.setItem("Level2","true");
         }
-        if (currentLevel == 2) {
+        if (currentLevel === 2) {
         var unlock3 = localStorage.setItem("Level3","true");
         }
-        if (currentLevel == 3) {
+        if (currentLevel === 3) {
         var unlock4 = localStorage.setItem("Level4","true");
         }
-        if (currentLevel == 4) {
+        if (currentLevel === 4) {
         var unlock5 = localStorage.setItem("Level5","true");
         }
-        if (currentLevel == 5) {
+        if (currentLevel === 5) {
         var unlock6 = localStorage.setItem("Level6","true");
         }
-        if (currentLevel == 6) {
+        if (currentLevel === 6) {
         var unlock7 = localStorage.setItem("Level7","true");
         }
-        if (currentLevel == 7) {
+        if (currentLevel === 7) {
         var unlock8 = localStorage.setItem("Level8","true");
         }
-        if (currentLevel == 8) {
+        if (currentLevel === 8) {
         var unlock9 = localStorage.setItem("Level9","true");
         }
         
@@ -357,7 +357,6 @@ playGame.prototype = {
         game.load.image("level13_planet1", "assets/planets/level13_planet1.png");
         game.load.image("level13_planet2", "assets/planets/level13_planet2.png");
         game.load.image("level13_planet3", "assets/planets/level13_planet3.png");
-
         game.load.image("starplanet","assets/planets/bigplanet2.png");
         game.load.image("smallstar", "assets/planets/smallplanet2.png");
         game.load.image("fishplanet","assets/planets/bigplanet3.png");

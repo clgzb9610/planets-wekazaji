@@ -94,6 +94,7 @@ var Helper = function(game){
         score += 1;
         if (score >= levelGoal) {
             teleporter.animations.play('swirl');
+            progressBarteleporter.animations.play('progressBarSwirl');
             var teleporterOpenSound = game.add.audio("teleporterOpen");
             teleporterOpenSound.play();
         }

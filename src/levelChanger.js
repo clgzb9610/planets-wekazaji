@@ -298,13 +298,17 @@ var LevelChanger = function(game){
         progressBar.anchor.set(0.5, 0);
         userInterface.add(progressBar);
         progressBar.scale.setTo(0.8);
+        progressBarteleporter = game.add.sprite(240, -300, "teleporter", 6);
+        userInterface.add(progressBarteleporter);
+        progressBarteleporter.scale.setTo(0.8);
+        progressBarteleporter.animations.add('progressBarSwirl', [0, 1, 2, 3, 4, 5], 25, true);
 
         addGearOutlines();
     }
 
     function addGearOutlines () {
         for (var i = 0; i < levelGoal; i++) {
-            let gearOutline = game.add.image(0, 0, "gearOutline"),
+            let gearOutline = game.add.image(0, 0, "gearOutline"),s
                 gearOutlineWidth = gearOutline.width * gearUIScale,
                 gearOutlineHeight = gearOutline.height * gearUIScale,
                 gearsPerRow = Math.floor(450 / (gearOutlineWidth + 2));

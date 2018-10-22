@@ -11,6 +11,8 @@ var Helper = function(game){
             return;
         }
 
+        pauseEnabled = false;
+
         // Freezes all entity movement on the screen
         transitioning = true;
         game.physics.box2d.paused = true;
@@ -56,6 +58,9 @@ var Helper = function(game){
 
                 screenTween = game.add.tween(whiteScreen).to({ alpha: 0 }, 200);
                 screenTween.start();
+                screenTween.onComplete.add(function () {
+                    pauseEnabled = true;
+                });
             });
         });
     };
@@ -133,6 +138,7 @@ var Helper = function(game){
                 // Portal is not yet active
             } else {
                 playingNow = false;
+                pauseEnabled = false;
                 levelChanger.finishLevel();
             }
         }
@@ -229,11 +235,17 @@ var Helper = function(game){
     };
 
     this.pauseClicked = function(){
-        helper.showPausePop();
-        let musicPaused = game.sound.mute;
-        game.paused = true;
-        if (!musicPaused) {
-            game.sound.mute = false;
+        if (pauseEnabled) {
+            helper.showPausePop();
+            helper.showCloseButton();
+            helper.showResumeButton();
+            helper.showMuteButton();
+            helper.showMainButton();
+            let musicPaused = game.sound.mute;
+            game.paused = true;
+            if (!musicPaused) {
+                game.sound.mute = false;
+            }
         }
     };
 
@@ -304,11 +316,15 @@ var Helper = function(game){
     };
 
     this.pauseOver = function(){
-        newPause.loadTexture('newPause_hover', 0);
+        if (!game.paused) {
+            newPause.loadTexture('newPause_hover', 0);
+        }
     };
 
     this.pauseOut = function(){
-        newPause.loadTexture("newPause", 0);
+        if (!game.paused) {
+            newPause.loadTexture("newPause", 0);
+        }
     };
 
     this.showPausePop = function(){

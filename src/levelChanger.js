@@ -220,10 +220,8 @@ var LevelChanger = function(game){
         userInterface.add(newPause);
         newPause.inputEnabled = true;
         newPause.events.onInputUp.add(helper.pauseClicked, self);
-        if(game.paused === false){
-            newPause.onInputOver.add(helper.pauseOver, this);
-            newPause.onInputOut.add(helper.pauseOut, this);
-        }
+        newPause.onInputOver.add(helper.pauseOver, this);
+        newPause.onInputOut.add(helper.pauseOut, this);
 
         //Popup when pausebutton is clicked
         pausePop = game.add.sprite(0, 30, 'pausePage');
@@ -231,7 +229,6 @@ var LevelChanger = function(game){
         userInterface.add(pausePop);
         pausePop.inputEnabled = true;
         pausePop.visible = false;
-        newPause.events.onInputUp.add(helper.showPausePop, self);
 
         // close button for popup
         closeButton = game.add.button(310, 30 - 110, 'closeButton');
@@ -242,7 +239,6 @@ var LevelChanger = function(game){
         closeButton.input.priorityID = 1;
         closeButton.input.useHandCursor = true;
         closeButton.visible = false;
-        newPause.events.onInputUp.add(helper.showCloseButton, self);
         closeButton.events.onInputUp.add(helper.closePause, self);
         closeButton.events.onInputOver.add(helper.closeOver, this);
         closeButton.events.onInputOut.add(helper.closeOut, this);
@@ -255,7 +251,6 @@ var LevelChanger = function(game){
         resumeButton.input.priorityID = 1;
         resumeButton.input.useHandCursor = true;
         resumeButton.visible = false;
-        newPause.events.onInputUp.add(helper.showResumeButton, self);
         resumeButton.events.onInputOver.add(helper.resumeOver, this);
         resumeButton.events.onInputOut.add(helper.resumeOut, this);
 
@@ -267,7 +262,6 @@ var LevelChanger = function(game){
         muteButton.input.priorityID = 1;
         muteButton.input.useHandCursor = true;
         muteButton.visible = false;
-        newPause.events.onInputUp.add(helper.showMuteButton, self);
         muteButton.events.onInputOver.removeAll();
         muteButton.events.onInputOut.removeAll();
         if(game.sound.mute===false) { //when sound is on
@@ -288,7 +282,6 @@ var LevelChanger = function(game){
         gotoMainButton.input.priorityID = 1;
         gotoMainButton.input.useHandCursor = true;
         gotoMainButton.visible = false;
-        newPause.events.onInputUp.add(helper.showMainButton, self);
         gotoMainButton.events.onInputOver.add(helper.gotoMainOver, this);
         gotoMainButton.events.onInputOut.add(helper.gotoMainOut, this);
 
@@ -351,7 +344,14 @@ var LevelChanger = function(game){
             addGroups();
             blackScreen.bringToTop();
             game.time.events.add(100, function () {
-                game.add.tween(blackScreen).to( {alpha: 0}, 150, Phaser.Easing.Linear.None, true);
+                game.add.tween(blackScreen).to(
+                    {alpha: 0},
+                    150,
+                    Phaser.Easing.Linear.None,
+                    true
+                ).onComplete.add(function () {
+                    pauseEnabled = true;
+                });
             });
         });
     };

@@ -498,7 +498,6 @@ playGame.prototype = {
     },
 
     update: function(){
-        game.sound.mute = true;
         if (!transitioning) {
             //two enemies operate separately, when they exist in a level
             if (enemy1Present) {
@@ -542,10 +541,10 @@ playGame.prototype = {
     },
     render: function () {
         if (showDebugInfo) {
-            // game.debug.text("FPS: " + game.time.fps, 2, 14, "#00ff00");
-            // game.debug.text("Player X: " + player.x, 2, 28, "#00ff00");
-            // game.debug.text("Player Y: " + player.y, 2, 42, "#00ff00");
-            // game.debug.cameraInfo(this.game.camera, 2, 56, "#00ff00");
+            game.debug.text("FPS: " + game.time.fps, 2, 14, "#00ff00");
+            game.debug.text("Player X: " + player.x, 2, 28, "#00ff00");
+            game.debug.text("Player Y: " + player.y, 2, 42, "#00ff00");
+            game.debug.cameraInfo(this.game.camera, 2, 56, "#00ff00");
         }
     }
 };

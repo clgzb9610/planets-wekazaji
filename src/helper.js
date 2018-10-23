@@ -5,7 +5,7 @@ var Helper = function(game){
 //=======================================================================================================
 //  ========== CONTACT CALLBACKS ========================================
 
-// resets the level when player makes contact with an enemy
+    // resets the level when player makes contact with an enemy
     this.enemyContactCallback = function(body1, body2, fixture1, fixture2, begin) {
         if (!begin) {
             return;
@@ -66,7 +66,7 @@ var Helper = function(game){
     };
 
 
-// kills the gear when touched
+    // kills the gear when touched
     this.gearCallback = function(playerBody, gearBody, playerFixture, gearFixture, beginContact) {
         // body1 is the player because it's the body that owns the callback
         // body2 is the body it impacted with, in this case the gear
@@ -249,6 +249,12 @@ var Helper = function(game){
         }
     };
 
+    this.restartClicked = function(){
+        if(game.paused === false){
+            levelChanger.resetLevel();
+        }
+    };
+
     this.unPauseGame = function(event){
         var closeButtonOnPop = closeButton.getBounds();
         if(Phaser.Rectangle.contains(closeButtonOnPop,event.x,event.y)) {
@@ -279,7 +285,6 @@ var Helper = function(game){
     };
 
     this.muteSound = function(){
-
         muteButton.events.onInputOver.removeAll();
         muteButton.events.onInputOut.removeAll();
         if(game.sound.mute===false) { //when sound is on
@@ -324,6 +329,18 @@ var Helper = function(game){
     this.pauseOut = function(){
         if (!game.paused) {
             newPause.loadTexture("newPause", 0);
+        }
+    };
+
+    this.restartOver = function(){
+        if(!game.paused){
+            restartButton.loadTexture("restartButton_hover");
+        }
+    };
+
+    this.restartOut = function(){
+        if(!game.paused){
+            restartButton.loadTexture("restartButton");
         }
     };
 

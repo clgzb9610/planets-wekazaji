@@ -223,6 +223,16 @@ var LevelChanger = function(game){
         newPause.onInputOver.add(helper.pauseOver, this);
         newPause.onInputOut.add(helper.pauseOut, this);
 
+        //restart button
+        restartButton = game.add.button(238, 344, "restartButton");
+        restartButton.anchor.set(0.5);
+        restartButton.scale.setTo(0.18, 0.18);
+        userInterface.add(restartButton);
+        restartButton.inputEnabled = true;
+        restartButton.onInputUp.add(helper.restartClicked, self);
+        restartButton.onInputOver.add(helper.restartOver, this);
+        restartButton.onInputOut.add(helper.restartOut, this);
+
         //Popup when pausebutton is clicked
         pausePop = game.add.sprite(0, 30, 'pausePage');
         pausePop.anchor.set(0.5);

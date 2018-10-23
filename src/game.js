@@ -78,7 +78,7 @@ var level = [
     [ //level 0 - collect gears to activate portal
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "level0_planet1"},
         {objectType:'teleporter', x:0, y: -215, radians: 0, goal:1},
-        {objectType: 'startPad', x: -230,y: -115,radians: -1.1},
+        {objectType: 'startPad', x: -230,y: -125,radians: -1.1},
         {objectType: 'gear', x: 30, y: 200, sprite:"gear"},
         {objectType: 'player', x: -240, y: -150},
         {objectType: 'levelBoundary', x: 0, y: 0, radius: 1000}
@@ -408,6 +408,8 @@ playGame.prototype = {
 
         game.load.image("newPause", "assets/game/pauseButton.png");
         game.load.image("newPause_hover", "assets/game/pauseButton_hover.png");
+        game.load.image("restartButton", "assets/game/restartButton.png");
+        game.load.image("restartButton_hover", "assets/game/restartButton_hover.png");
         game.load.image("pausePage", "assets/game/settingPopUp.png");
         game.load.image("closeButton", "assets/mainMenu/closeButton.png");
         game.load.image("closeButton_hover", "assets/mainMenu/closeButton_hover.png");

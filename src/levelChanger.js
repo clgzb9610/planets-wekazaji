@@ -350,17 +350,19 @@ var LevelChanger = function(game){
             game.add.tween(player.scale).to( {x: 1, y: 1}, 10, Phaser.Easing.Linear.None, true);
             transitioning = false;
             game.physics.box2d.paused = false;
-            levelChanger.destroyGroups();
-            addGroups();
-            blackScreen.bringToTop();
-            game.time.events.add(100, function () {
-                game.add.tween(blackScreen).to(
-                    {alpha: 0},
-                    150,
-                    Phaser.Easing.Linear.None,
-                    true
-                ).onComplete.add(function () {
-                    pauseEnabled = true;
+            game.time.events.add(0, levelChanger.destroyGroups);
+            game.time.events.add(50, function () { // Timed events are necessary for actions to occur in proper sequence
+                addGroups();
+                blackScreen.bringToTop();
+                game.time.events.add(50, function () {
+                    game.add.tween(blackScreen).to(
+                        {alpha: 0},
+                        150,
+                        Phaser.Easing.Linear.None,
+                        true
+                    ).onComplete.add(function () {
+                        pauseEnabled = true;
+                    });
                 });
             });
         });

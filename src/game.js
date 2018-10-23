@@ -6,7 +6,7 @@ source: https://phaser.io/news/2015/07/simulate-planet-gravity-with-box2d-tutori
 */
 var playGame = function(game){};
 
-var showDebugInfo = true;
+var showDebugInfo = false;
 
 var game;
 var gamePhysics;

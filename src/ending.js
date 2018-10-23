@@ -27,9 +27,6 @@ ending.prototype = {
         backToMenuButton.scale.setTo(0.5, 0.5);
     },
     update:function() {
-        // endBack.tilePosition.x -= 1;
-        // endBack.tilePosition.y += 1;
-
         if (endplayButton.input.pointerOver()) {endplayButton.loadTexture('playAgain_hover', 0);}
         else {endplayButton.loadTexture('playAgain', 0);}
         if (backToMenuButton.input.pointerOver()) {backToMenuButton.loadTexture('backToMenu_hover', 0);}
@@ -44,7 +41,6 @@ ending.prototype = {
 
 function replayTheGame(){
     game.camera.fade('#000000',500);
-    // game.camera.onFadeComplete.add(refadeComplete,this);
     game.time.events.add(500, refadeComplete, this);
 }
 
@@ -55,14 +51,10 @@ function refadeComplete(){
 
 function endBackToMenu(){
     game.camera.fade('#000000',500);
-    // game.camera.onFadeComplete.add(endFadeCompleteMenu,this);
     game.time.events.add(500, endFadeCompleteMenu, this);
 }
 function endFadeCompleteMenu(){
-    //TODO: i think we need to destroy all the objects when we change states, not just this button
     destroyEndStateObjects();
-
-    console.log("clicked go to main");
     game.state.start("MainMenu", true, false, currentLevel = 0);
 }
 

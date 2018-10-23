@@ -14,7 +14,7 @@ var Enemy = function (game, x, y, enemyVel) {
 
     game.physics.box2d.enable(this.sprite);
     this.sprite.body.static = false;
-    this.sprite.body.setRectangle(20,43);
+    this.sprite.body.setRectangle(10,33);
     this.sprite.body.setCollisionCategory(1);
     this.sprite.body.setCollisionMask(1);
     player.body.setBodyContactCallback(this.sprite, helper.enemyContactCallback, this); //sets up function called if player collides with enemy
@@ -43,18 +43,6 @@ Enemy.prototype.update = function() {
     this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle - (Math.PI / 2)) ;
     this.sprite.animations.play('moveL');
 
-
-    // This is code if we desire the enemy to move counter clockwise after impact!
-    // if (enemyCounterClockwise === -1) {
-    //     this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle - (Math.PI / 2)) ;
-    //     this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle - (Math.PI / 2)) ;
-    //     this.sprite.animations.play('moveL');
-    // } else {
-    //     this.sprite.body.velocity.x += this.enemyVel * Math.cos(this.enemyAngle + (Math.PI / 2)) ;
-    //     this.sprite.body.velocity.y += this.enemyVel * Math.sin(this.enemyAngle + (Math.PI / 2)) ;
-    //     this.sprite.animations.play('moveR');
-    // }
-
     gamePhysics.constrainVelocity(this.sprite,this.maxEnemyVel);
 
     this.sprite.update();
@@ -68,8 +56,8 @@ Enemy.prototype.update = function() {
 */
 Enemy.prototype.handleEnemyRotation = function(sprite) {
     var angle = this.enemyGravityToPlanets(sprite);
-    if (angle > -361) { // angle == -361 if the player is not in any gravity field.
-        // orients players feet toward the ground. Uses var angle as degrees offset by -90
+    if (angle > -361) { // angle == -361 if the enemy is not in any gravity field.
+        // orients enemy's feet toward the ground. Uses var angle as degrees offset by -90
         sprite.body.angle = angle * 180 / Math.PI - 90;
         this.enemyLastAngle = angle;
     } else {

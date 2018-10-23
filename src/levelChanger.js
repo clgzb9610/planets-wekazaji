@@ -4,12 +4,52 @@ var LevelChanger = function(game){
     this.createLevel= function(){
         playingNow = true;
         score = 0;
+        
+        //level unlock checker
+        if (currentLevel === 1) {
+        var unlock2 = localStorage.setItem("Level2","true");
+        }
+        if (currentLevel === 2) {
+        var unlock3 = localStorage.setItem("Level3","true");
+        }
+        if (currentLevel === 3) {
+        var unlock4 = localStorage.setItem("Level4","true");
+        }
+        if (currentLevel === 4) {
+        var unlock5 = localStorage.setItem("Level5","true");
+        }
+        if (currentLevel === 5) {
+        var unlock6 = localStorage.setItem("Level6","true");
+        }
+        if (currentLevel === 6) {
+        var unlock7 = localStorage.setItem("Level7","true");
+        }
+        if (currentLevel === 7) {
+        var unlock8 = localStorage.setItem("Level8","true");
+        }
+        if (currentLevel === 8) {
+        var unlock9 = localStorage.setItem("Level9","true");
+        }
+        if (currentLevel === 9) {
+        var unlock10 = localStorage.setItem("Level10","true");
+        }
+        if (currentLevel === 10) {
+        var unlock11 = localStorage.setItem("Level11","true");
+        }
+        if (currentLevel === 11) {
+        var unlock12 = localStorage.setItem("Level12","true");
+        }
+        if (currentLevel === 12) {
+        var unlock13 = localStorage.setItem("Level13","true");
+        }
+        if (currentLevel === 13) {
+        var unlock14 = localStorage.setItem("Level14","true");
+        }
+        
         if(!level[currentLevel]) {          //go to ending state if you pass the last level
             bgm.destroy();
-             console.log("bgm paused");
             player.destroy();
             game.physics.clear();
-            // console.log("destroyed the physics");
             game.world.pivot.x = 0;
             game.world.pivot.y = 0;
             game.world.rotation = 0;
@@ -43,14 +83,25 @@ var LevelChanger = function(game){
             if(addition.objectType === 'player'){
                 movePlayer(addition.x,addition.y);
             }
+            if (addition.objectType === 'levelBoundary') {
+                levelCenterX = addition.x;
+                levelCenterY = addition.y;
+                levelBoundaryRadius = addition.radius;
+            }
         }
+        levelBoundary.drawCircle(levelCenterX, levelCenterY, levelBoundaryRadius*2);
         addUI();
     };
 
 
     function addPlanet(posX, posY, gravityRadius, gravityForce, asset) {
         var planet = game.add.sprite(posX, posY, asset);
-        planet.scale.setTo(1.5, 1.5);
+
+        if (currentLevel === 10){
+            planet.scale.setTo(1.2);
+        } else {
+            planet.scale.setTo(1.5, 1.5);
+        }
 
         planet.animations.add('beaming',[0,1,2,3],5, true);
         planet.animations.play('beaming');
@@ -70,7 +121,6 @@ var LevelChanger = function(game){
     function addTeleporter(x, y, radians, goal) {
         teleporter = game.add.sprite(x, y, "teleporter", 6);
         game.physics.box2d.enable(teleporter);
-       // objectGroup.add(teleporter);
         teleporter.animations.add('swirl', [0, 1, 2, 3, 4, 5], 25, true);
         teleporter.body.setRectangle(38, 55);
         teleporter.body.rotation += radians;
@@ -117,6 +167,23 @@ var LevelChanger = function(game){
         platformTween.onComplete.add(destroyStartPad, this);
     };
 
+    this.finishLevel = function () {
+        transitioning = true;
+        game.physics.box2d.paused = true;
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+
+        let scaleTween = game.add.tween(player.scale).to({x: 0, y: 0}, 750, Phaser.Easing.Back.In),
+            positionTween = game.add.tween(player.body).to({x: teleporter.x, y: teleporter.y, angle: player.angle + 600}, 750, Phaser.Easing.Back.In);
+
+        scaleTween.start();
+        positionTween.start();
+        
+        vortexAudio.play();
+        
+        positionTween.onComplete.add(this.changeLevel);
+    };
+
     function destroyStartPad(){
         objectGroup.remove(startPad);
         objectGroup.remove(startPadAnimations);
@@ -146,51 +213,118 @@ var LevelChanger = function(game){
 
 
     function addUI(){
-        dashboard = game.add.sprite(0, 354,"dashboard");
-        dashboard.anchor.set(0.5);
-        userInterface.add(dashboard);
-        mute = game.add.button(0, 354,"mute", helper.muteSound,this);
-        mute.inputEnabled = true;
-        if(game.sound.mute){
-            mute.loadTexture("mute",0);
-        }else{
-            mute.loadTexture("unMute",0);
-        }
-        mute.anchor.set(-0.9,0.5);
-        userInterface.add(mute);
-        pause = game.add.sprite(0, 354,"pause");
-        pause.frame = 0;
-        pause.anchor.set(0.5, 0.55);
-        userInterface.add(pause);
-        restart = game.add.sprite(0, 354,"restart");
-        restart.anchor.set(1.9,0.55);
-        userInterface.add(restart);
-        // console.log('adding dashboard');
+        //pause button in game
+        newPause = game.add.button(304, 334, "newPause");
+        newPause.anchor.set(0.5);
+        newPause.scale.setTo(0.3, 0.3);
+        userInterface.add(newPause);
+        newPause.inputEnabled = true;
+        newPause.events.onInputUp.add(helper.pauseClicked, self);
+        newPause.onInputOver.add(helper.pauseOver, this);
+        newPause.onInputOut.add(helper.pauseOut, this);
 
-        // make the buttons work
-        pause.inputEnabled = true;
-        pause.events.onInputUp.add(helper.pauseGame, self);
-        restart.inputEnabled = true;
-        restart.events.onInputUp.add(levelChanger.resetLevel,self);
+        //restart button
+        restartButton = game.add.button(238, 344, "restartButton");
+        restartButton.anchor.set(0.5);
+        restartButton.scale.setTo(0.18, 0.18);
+        userInterface.add(restartButton);
+        restartButton.inputEnabled = true;
+        restartButton.onInputUp.add(helper.restartClicked, self);
+        restartButton.onInputOver.add(helper.restartOver, this);
+        restartButton.onInputOut.add(helper.restartOut, this);
+
+        //Popup when pausebutton is clicked
+        pausePop = game.add.sprite(0, 30, 'pausePage');
+        pausePop.anchor.set(0.5);
+        userInterface.add(pausePop);
+        pausePop.inputEnabled = true;
+        pausePop.visible = false;
+
+        // close button for popup
+        closeButton = game.add.button(310, 30 - 110, 'closeButton');
+        userInterface.add(closeButton);
+        closeButton.scale.set(0.2);
+        closeButton.anchor.set(0.5);
+        closeButton.inputEnabled = true;
+        closeButton.input.priorityID = 1;
+        closeButton.input.useHandCursor = true;
+        closeButton.visible = false;
+        closeButton.events.onInputUp.add(helper.closePause, self);
+        closeButton.events.onInputOver.add(helper.closeOver, this);
+        closeButton.events.onInputOut.add(helper.closeOut, this);
+
+        // resume button
+        resumeButton = game.add.button(0, -25, "resumeButton");
+        userInterface.add(resumeButton);
+        resumeButton.anchor.set(0.5);
+        resumeButton.inputEnabled = true;
+        resumeButton.input.priorityID = 1;
+        resumeButton.input.useHandCursor = true;
+        resumeButton.visible = false;
+        resumeButton.events.onInputOver.add(helper.resumeOver, this);
+        resumeButton.events.onInputOut.add(helper.resumeOut, this);
+
+        // mute button
+        muteButton = game.add.button(0, 45, "muteButton");
+        userInterface.add(muteButton);
+        muteButton.anchor.set(0.5);
+        muteButton.inputEnabled = true;
+        muteButton.input.priorityID = 1;
+        muteButton.input.useHandCursor = true;
+        muteButton.visible = false;
+        muteButton.events.onInputOver.removeAll();
+        muteButton.events.onInputOut.removeAll();
+        if(game.sound.mute===false) { //when sound is on
+            muteButton.loadTexture('muteButton', 0);
+            muteButton.events.onInputOver.add(helper.muteSoundOver, this);
+            muteButton.events.onInputOut.add(helper.muteSoundOut, this);
+        } else { // when sound is off
+            muteButton.loadTexture('playSoundButton', 0);
+            muteButton.events.onInputOver.add(helper.playSoundOver, this);
+            muteButton.events.onInputOut.add(helper.playSoundOut, this);
+        }
+
+        // go to main button
+        gotoMainButton = game.add.button(0, 115, "toMainButton");
+        userInterface.add(gotoMainButton);
+        gotoMainButton.anchor.set(0.5);
+        gotoMainButton.inputEnabled = true;
+        gotoMainButton.input.priorityID = 1;
+        gotoMainButton.input.useHandCursor = true;
+        gotoMainButton.visible = false;
+        gotoMainButton.events.onInputOver.add(helper.gotoMainOver, this);
+        gotoMainButton.events.onInputOut.add(helper.gotoMainOut, this);
 
         game.input.onDown.add(helper.unPauseGame, self);
+
+        progressBar = game.add.image(0, -310, "progressBar");
+        progressBar.anchor.set(0.5, 0);
+        userInterface.add(progressBar);
+        progressBar.scale.setTo(0.8);
+        progressBarteleporter = game.add.sprite(240, -300, "teleporter", 6);
+        userInterface.add(progressBarteleporter);
+        progressBarteleporter.scale.setTo(0.8);
+        progressBarteleporter.animations.add('progressBarSwirl', [0, 1, 2, 3, 4, 5], 25, true);
 
         addGearOutlines();
     }
 
     function addGearOutlines () {
         for (var i = 0; i < levelGoal; i++) {
-            let gearOutline = game.add.image(0, 0, "gearOutline"),
+            let gearOutline = game.add.image(0, 0, "gearOutline"),s
                 gearOutlineWidth = gearOutline.width * gearUIScale,
                 gearOutlineHeight = gearOutline.height * gearUIScale,
-                gearsPerRow = Math.floor(350 / (gearOutlineWidth + 2));
+                gearsPerRow = Math.floor(450 / (gearOutlineWidth + 2));
 
             gearOutline.setScaleMinMax(gearUIScale);
-            gearOutline.anchor.set(1, 0);
+            // gearOutline.anchor.set(1, 0);
+            gearOutline.anchor.set(0.5,0);
             userInterface.add(gearOutline);
 
-            gearOutline.x = 350 - 2 - (gearOutlineWidth + 2) * (i % gearsPerRow);
-            gearOutline.y = -320 + 2 + (gearOutlineHeight + 2) * Math.floor(i / gearsPerRow);
+            var gearOutlineStartx = ((gearOutlineWidth + 2)/2) - (((gearOutlineWidth + 2) * (levelGoal))/2);
+            gearOutline.x = gearOutlineStartx - 2 + (gearOutlineWidth + 2) * (i % gearsPerRow);
+            // gearOutline.x = 350 - 2 - (gearOutlineWidth + 2) * (i % gearsPerRow);
+            gearOutline.y = -285 + 2 + (gearOutlineHeight + 2) * Math.floor(i / gearsPerRow);
         }
     }
 
@@ -209,18 +343,33 @@ var LevelChanger = function(game){
         player.animations.play('stand');
 
         blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
-        //does the blackscreen need to be so large? since its a solid color i think it could be tiny & scaled to fit the screen?
-        blackScreen.scale.setTo(2, 2); //if the blackscreen sprite is teensy you could scale at like 200x200?
+        blackScreen.scale.setTo(2, 2);
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;
-        // var fade = game.add.tween(blackScreen).to( { alpha: 1 }, 500, Phaser.Easing.Linear.None, true);
-        game.time.events.add(500,levelChanger.destroyGroups,this);
-        game.time.events.add(501,addGroups,this);
+        game.add.tween(blackScreen).to( { alpha: 1 }, 200, Phaser.Easing.Linear.None, true).onComplete.add(function () {
+            game.add.tween(player.scale).to( {x: 1, y: 1}, 10, Phaser.Easing.Linear.None, true);
+            transitioning = false;
+            game.physics.box2d.paused = false;
+            game.time.events.add(0, levelChanger.destroyGroups);
+            game.time.events.add(50, function () { // Timed events are necessary for actions to occur in proper sequence
+                addGroups();
+                blackScreen.bringToTop();
+                game.time.events.add(50, function () {
+                    game.add.tween(blackScreen).to(
+                        {alpha: 0},
+                        150,
+                        Phaser.Easing.Linear.None,
+                        true
+                    ).onComplete.add(function () {
+                        pauseEnabled = true;
+                    });
+                });
+            });
+        });
     };
 
     // destroy all the groups of objects
     this.destroyGroups = function(){
-        console.log("destroy groups");
         planetGroup.destroy();
 
         objectGroup.destroy();
@@ -238,27 +387,27 @@ var LevelChanger = function(game){
             enemy2Present = false;
         }
 
-        // emitter.forEachExists((particle) => {
-        //     particle.kill();
-        // }, this);
-
         gravityGraphics.destroy();
-        gravityGraphics = game.add.graphics(0, 0);
+        levelBoundary.destroy();
     };
 
     //add all the groups back in to put the level objects in for a new level.
     function addGroups(){
-        console.log("add groups");
         enemyGroup = game.add.group();
         planetGroup = game.add.group();
         objectGroup = game.add.group();
         userInterface = game.add.group();
+        gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
+        levelBoundary = game.add.graphics(0, 0);
+        levelBoundary.lineStyle(12, 0xADD8E6, 0.35);
+        levelCenterX = 0;
+        levelCenterY = 0;
+        levelBoundaryRadius = 2000;
 
         currentLevel++;
 
         game.input.enabled = true;
-        blackScreen.destroy();
         levelChanger.createLevel();
     }
 
@@ -267,7 +416,18 @@ var LevelChanger = function(game){
         if(playingNow === true){
             currentLevel -= 1;
             playingNow = false;
-            levelChanger.changeLevel();
+
+            player.body.velocity.x -= 110;
+            game.input.enabled = false;
+
+            cursors.left.reset(true);
+            cursors.right.reset(true);
+            cursors.up.reset(true);
+            cursors.down.reset(true);
+            player.animations.play('stand');
+
+            levelChanger.destroyGroups();
+            addGroups();
         }
     };
 

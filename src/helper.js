@@ -5,58 +5,119 @@ var Helper = function(game){
 //=======================================================================================================
 //  ========== CONTACT CALLBACKS ========================================
 
-// resets the level when player makes contact with an enemy
+    // resets the level when player makes contact with an enemy
     this.enemyContactCallback = function(body1, body2, fixture1, fixture2, begin) {
         if (!begin) {
             return;
         }
-        // if (enemyCounterClockwise === -1) { //switches the enemyCounterClockwise boolean so enemy can move the other way
-        //     enemyCounterClockwise = 0;
-        // } else {
-        //     enemyCounterClockwise = -1;
-        // }
-        levelChanger.resetLevel();
-        playingNow = false;
 
-        //helper.deadByEnemy();
+        pauseEnabled = false;
+
+        // Freezes all entity movement on the screen
+        transitioning = true;
+        game.physics.box2d.paused = true;
+        emitter.exists = false;
+        objectGroup.exists = false;
+        emitter.forEachAlive(function (particle) {
+            if (particle.scaleData === null || particle._s === null) { return; }
+            
+            let currentScaleIndex = particle._s,
+                currentScaleX = particle.scaleData[currentScaleIndex].x,
+                currentScaleY = particle.scaleData[currentScaleIndex].y;
+            
+            particle.scaleData = particle.scaleData.map(function (obj) {
+                 return { x: currentScaleX, y: currentScaleY };
+             }); 
+        });
+
+
+        if (jetpackAudio.volume > 0) {
+            jetpackAudio.fadeTo(50, 0);
+        }
+
+        // Causes the screen to flash white
+        var whiteScreen = game.add.sprite(player.x, player.y, "whiteScreen");
+        whiteScreen.bringToTop();
+        whiteScreen.anchor.set(0.5);
+        whiteScreen.angle = player.angle;
+        whiteScreen.alpha = 0;
+        whiteScreen.setScaleMinMax(2, 2);
+        let screenTween = game.add.tween(whiteScreen).to({ alpha: 1 }, 200);
+        screenTween.start();
+        screenTween.onComplete.add(function () {
+            game.time.events.add(150, function () { // Waits for 150ms to pass before running events
+                game.time.slowMotion = 1;
+                levelChanger.resetLevel();
+                whiteScreen.bringToTop();
+
+                // Allows entity movement / animation to run again
+                transitioning = false;
+                game.physics.box2d.paused = false;
+                emitter.exists = true;
+                objectGroup.exists = true;
+
+                screenTween = game.add.tween(whiteScreen).to({ alpha: 0 }, 200);
+                screenTween.start();
+                screenTween.onComplete.add(function () {
+                    pauseEnabled = true;
+                });
+            });
+        });
     };
 
 
-// kills the gear when touched
-    this.gearCallback = function(body1, body2, fixture1, fixture2, begin) {
-        //body1, body2, fixture1, fixture2, begin
+    // kills the gear when touched
+    this.gearCallback = function(playerBody, gearBody, playerFixture, gearFixture, beginContact) {
         // body1 is the player because it's the body that owns the callback
         // body2 is the body it impacted with, in this case the gear
         // fixture1 is the fixture of body1 that was touched
         // fixture2 is the fixture of body2 that was touched
 
         // This callback is also called for EndContact events, which we are not interested in.
-        if (!begin) {
+        if (!beginContact) {
             return;
         }
 
         let filledInGear = game.add.image(0, 0, "filledInGear"),
             imageWidth = filledInGear.width * gearUIScale,
             imageHeight = filledInGear.height * gearUIScale,
-            gearsPerRow = Math.floor(350 / (imageWidth + 2));
+            gearsPerRow = Math.floor(450 / (imageWidth + 2));
 
-        filledInGear.anchor.set(1, 0);
+        // filledInGear.anchor.set(1, 0);
+        filledInGear.anchor.set(0.5, 0);
         filledInGear.setScaleMinMax(gearUIScale);
         userInterface.add(filledInGear);
 
-        filledInGear.x = 350 - 2 - (imageWidth + 2) * (score % gearsPerRow);
-        filledInGear.y = -320 + 2 + (imageHeight + 2) * Math.floor(score / gearsPerRow);
+        var filledInGearStartx = ((imageWidth + 2)/2) - (((imageWidth + 2) * (levelGoal))/2);
+        filledInGear.x = filledInGearStartx - 2 + (imageWidth + 2) * (score % gearsPerRow);
+        filledInGear.y = -285 + 2 + (imageHeight + 2) * Math.floor(score / gearsPerRow);
 
-        var ting = game.add.audio('ting');
-        ting.volume = 0.6;
-        ting.play();
+        gearTing.play();
+
+        gearBody.removeFromWorld(); // Stops gear from colliding physically with player
+
         score += 1;
         if (score >= levelGoal) {
             teleporter.animations.play('swirl');
+            progressBarteleporter.animations.play('progressBarSwirl');
             var teleporterOpenSound = game.add.audio("teleporterOpen");
             teleporterOpenSound.play();
         }
-        body2.sprite.destroy();
+
+        game.add.tween(gearBody).to(
+            {x: playerBody.x, y: playerBody.y},
+            150,
+            Phaser.Easing.Linear.None,
+            true
+        );
+        game.add.tween(gearBody.sprite.scale).to(
+            {x: 0, y: 0},
+            150,
+            Phaser.Easing.Linear.None,
+            true
+        ).onComplete.add(function () {
+            gearBody.sprite.destroy();
+        });
     };
 
     //will start event to fade startPad a certain amount of time after it register the player's contact.
@@ -64,26 +125,23 @@ var Helper = function(game){
         if (!begin){
             return;
         }
-        game.time.events.add(Phaser.Timer.SECOND* 0.4, levelChanger.fadeStartPad, this);
+        game.time.events.add(400, levelChanger.fadeStartPad, this);
     };
 
 
     // a custom function to check player contact with the teleporter.
     this.checkTeleporterOverlap = function(teleporter) {
-            //console.log("overlap called");
-            var teleporterBounds = teleporter.getBounds();
-            var playerBounds = player.getBounds();
-            if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
-              //  console.log('teleporter CONTACT');
-                if(score < levelGoal) {
-                    console.log("portal does not work yet, collect gears!");
-                } else {
-                    playingNow = false;
-                    console.log("level beaten");
-                    levelChanger.changeLevel();
-                }
+        var teleporterBounds = teleporter.getBounds();
+        var playerBounds = player.getBounds();
+        if (Phaser.Rectangle.contains(teleporterBounds, playerBounds.centerX, playerBounds.centerY)){
+            if(score < levelGoal) {
+                // Portal is not yet active
+            } else {
+                playingNow = false;
+                pauseEnabled = false;
+                levelChanger.finishLevel();
             }
-
+        }
     };
 
 //==============================================================================================================
@@ -105,14 +163,12 @@ var Helper = function(game){
             ySpeedAdjustment = 0;
 
         if (cursors.left.isDown) {
-            // player.body.moveLeft(90);
             xSpeedAdjustment += playerVel * Math.cos(angle + (Math.PI / 2));
             ySpeedAdjustment += playerVel * Math.sin(angle + (Math.PI / 2));
             player.animations.play('walkL');
             keyDown = true;
         }
         else if (cursors.right.isDown) {
-            // player.body.moveRight(90);
             xSpeedAdjustment += playerVel * Math.cos(angle - (Math.PI / 2));
             ySpeedAdjustment += playerVel * Math.sin(angle - (Math.PI / 2));
             player.animations.play('walkR');
@@ -148,7 +204,7 @@ var Helper = function(game){
             distanceToSurface = distanceToPlanet - closestPlanet.width / 2;
         }
         
-        if (keyDown && distanceToSurface > 2) {
+        if ((keyDown && distanceToSurface > 2) || cursors.down.isDown || cursors.up.isDown) {
             if (frameCounter === 0) {
                 this.calculateParticleVelocities(xSpeedAdjustment, ySpeedAdjustment);
                 emitter.x = player.x;
@@ -157,7 +213,7 @@ var Helper = function(game){
             }
             if (jetpackAudio.volume === 0) { 
                 jetpackAudio.play();
-                jetpackAudio.fadeTo(100, 0.75);
+                jetpackAudio.fadeTo(100, 0.65);
             }
         }
         else {
@@ -178,27 +234,181 @@ var Helper = function(game){
         userInterface.angle = angle * 180 / Math.PI - 90;
     };
 
-    this.pauseGame = function(){
-        pause.frame = 1;
-        game.paused = true;
-        levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
+    this.pauseClicked = function(){
+        if (pauseEnabled) {
+            helper.showPausePop();
+            helper.showCloseButton();
+            helper.showResumeButton();
+            helper.showMuteButton();
+            helper.showMainButton();
+            let musicPaused = game.sound.mute;
+            game.paused = true;
+            if (!musicPaused) {
+                game.sound.mute = false;
+            }
+        }
+    };
+
+    this.restartClicked = function(){
+        if(game.paused === false){
+            levelChanger.resetLevel();
+        }
     };
 
     this.unPauseGame = function(event){
-        var pauseButton = pause.getBounds();
-        if(Phaser.Rectangle.contains(pauseButton,event.x,event.y)) {
+        var closeButtonOnPop = closeButton.getBounds();
+        if(Phaser.Rectangle.contains(closeButtonOnPop,event.x,event.y)) {
             game.paused = false;
-            pause.frame = 0;
+            helper.closePause();
+            newPause.loadTexture("newPause", 0);
+            closeButton.loadTexture("closeButton", 0);
+        }
+        var pauseButtonOnPop = resumeButton.getBounds();
+        if(Phaser.Rectangle.contains(pauseButtonOnPop,event.x,event.y)) {
+            game.paused = false;
+            helper.closePause();
+            newPause.loadTexture("newPause", 0);
+            resumeButton.loadTexture("resumeButton");
+        }
+        var mainButtonOnPop = gotoMainButton.getBounds();
+        if(Phaser.Rectangle.contains(mainButtonOnPop,event.x,event.y)) {
+            game.paused = false;
+            helper.gotoMain();
+            newPause.loadTexture("newPause", 0);
+            gotoMainButton.loadTexture("toMainButton");
+        }
+        var muteSoundOnPop = muteButton.getBounds();
+        if(Phaser.Rectangle.contains(muteSoundOnPop,event.x,event.y)) {
+            helper.muteSound();
+            newPause.loadTexture("newPause", 0);
         }
     };
 
     this.muteSound = function(){
-        if(game.sound.mute===false){
+        muteButton.events.onInputOver.removeAll();
+        muteButton.events.onInputOut.removeAll();
+        if(game.sound.mute===false) { //when sound is on
             game.sound.mute = true;
-            mute.loadTexture('mute', 0);
-        } else {
+            muteButton.loadTexture('playSoundButton_hover', 0);
+            muteButton.events.onInputOver.add(helper.playSoundOver, this);
+            muteButton.events.onInputOut.add(helper.playSoundOut, this);
+        } else { // when sound is off
             game.sound.mute = false;
-            mute.loadTexture('unMute', 0);
+            muteButton.loadTexture('muteButton_hover', 0);
+            muteButton.events.onInputOver.add(helper.muteSoundOver, this);
+            muteButton.events.onInputOut.add(helper.muteSoundOut, this);
         }
     };
+
+    this.closePause = function(){
+        pausePop.visible = false;
+        closeButton.visible = false;
+        resumeButton.visible = false;
+        muteButton.visible = false;
+        gotoMainButton.visible = false;
+    };
+
+    this.gotoMain = function(){
+        game.input.keyboard.enabled = true;
+        bgm.destroy();
+        player.destroy();
+        game.physics.clear();
+        game.world.pivot.x = 0;
+        game.world.pivot.y = 0;
+        game.world.rotation = 0;
+        game.camera.reset();
+        game.state.start("MainMenu", true, false, 0);
+    };
+
+    this.pauseOver = function(){
+        if (!game.paused) {
+            newPause.loadTexture('newPause_hover', 0);
+        }
+    };
+
+    this.pauseOut = function(){
+        if (!game.paused) {
+            newPause.loadTexture("newPause", 0);
+        }
+    };
+
+    this.restartOver = function(){
+        if(!game.paused){
+            restartButton.loadTexture("restartButton_hover");
+        }
+    };
+
+    this.restartOut = function(){
+        if(!game.paused){
+            restartButton.loadTexture("restartButton");
+        }
+    };
+
+    this.showPausePop = function(){
+        pausePop.visible = true;
+    };
+
+    this.showCloseButton = function(){
+        closeButton.visible = true;
+    };
+
+    this.closeOver = function(){
+        closeButton.loadTexture("closeButton_hover", 0);
+    };
+
+    this.closeOut = function(){
+        closeButton.loadTexture("closeButton", 0);
+    };
+
+    this.showResumeButton = function(){
+        resumeButton.visible = true;
+    };
+
+    this.resumeOver = function(){
+        resumeButton.loadTexture("resumeButton_hover");
+    };
+
+    this.resumeOut = function(){
+        resumeButton.loadTexture("resumeButton");
+    };
+
+    this.showMuteButton = function(){
+        muteButton.visible = true;
+    };
+
+    this.muteSoundOver = function(){
+        muteButton.loadTexture("muteButton_hover");
+    };
+
+    this.muteSoundOut = function(){
+        muteButton.loadTexture("muteButton");
+    };
+
+    this.playSoundOver = function(){
+        muteButton.loadTexture("playSoundButton_hover");
+    };
+
+    this.playSoundOut = function(){
+        muteButton.loadTexture("playSoundButton");
+    };
+
+    this.showMainButton = function(){
+        gotoMainButton.visible = true;
+    };
+
+    this.gotoMainOver = function(){
+        gotoMainButton.loadTexture("toMainButton_hover");
+    };
+
+    this.gotoMainOut = function(){
+        gotoMainButton.loadTexture("toMainButton");
+    };
+
+    this.playerDistanceFromLevelCenter = function () {
+        let a = player.x - levelCenterX,
+            b = player.y - levelCenterY;
+
+        return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    };
+
 };

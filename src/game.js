@@ -37,7 +37,7 @@ var teleporter;
 var levelGoal;
 var playerLastAngle;
 
-var pauseEnabled = true;
+var userInterfaceEnabled = true;
 
 var score = 0;
 var lastCaption = "";

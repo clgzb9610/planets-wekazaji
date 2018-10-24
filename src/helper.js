@@ -11,7 +11,7 @@ var Helper = function(game){
             return;
         }
 
-        pauseEnabled = false;
+        userInterfaceEnabled = false;
 
         // Freezes all entity movement on the screen
         transitioning = true;
@@ -59,7 +59,7 @@ var Helper = function(game){
                 screenTween = game.add.tween(whiteScreen).to({ alpha: 0 }, 200);
                 screenTween.start();
                 screenTween.onComplete.add(function () {
-                    pauseEnabled = true;
+                    userInterfaceEnabled = true;
                 });
             });
         });
@@ -138,7 +138,7 @@ var Helper = function(game){
                 // Portal is not yet active
             } else {
                 playingNow = false;
-                pauseEnabled = false;
+                userInterfaceEnabled = false;
                 levelChanger.finishLevel();
             }
         }
@@ -235,7 +235,10 @@ var Helper = function(game){
     };
 
     this.pauseClicked = function(){
-        if (pauseEnabled) {
+        if (userInterfaceEnabled) {
+            newPause.inputEnabled = false;
+            restartButton.inputEnabled = false;
+            newPause.loadTexture("newPause", 0);
             helper.showPausePop();
             helper.showCloseButton();
             helper.showResumeButton();
@@ -250,7 +253,7 @@ var Helper = function(game){
     };
 
     this.restartClicked = function(){
-        if(game.paused === false){
+        if(userInterfaceEnabled){
             levelChanger.resetLevel();
         }
     };
@@ -306,6 +309,8 @@ var Helper = function(game){
         resumeButton.visible = false;
         muteButton.visible = false;
         gotoMainButton.visible = false;
+        newPause.inputEnabled = true;
+        restartButton.inputEnabled = true;
     };
 
     this.gotoMain = function(){

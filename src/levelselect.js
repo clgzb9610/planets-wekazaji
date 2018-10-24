@@ -70,58 +70,8 @@ levelSelect.prototype = {
     update:function() {
         levelBackground.tilePosition.x -= 1;
         if (screen2 == true) {levelBackground2.tilePosition.x -= 1;}
-
-        if (nextArrowR.input.pointerOver()) {nextArrowR.alpha=0.7;}
-        else {nextArrowR.alpha=1;}
-
-        if (nextArrowL.input.pointerOver()) {nextArrowL.alpha=0.7;}
-        else {nextArrowL.alpha=1;}
-
-        if (buttons[0].input.pointerOver()) {buttons[0].alpha=0.7;}
-        else {buttons[0].alpha=1;}
         
-        if (buttons[1].input.pointerOver()) {buttons[1].alpha=0.7;}
-        else {buttons[1].alpha=1;}
-        
-        if (buttons[2].input.pointerOver()) {buttons[2].alpha=0.7;}
-        else {buttons[2].alpha=1;}
-        
-        if (buttons[3].input.pointerOver()) {buttons[3].alpha=0.7;}
-        else {buttons[3].alpha=1;}
-        
-        if (buttons[4].input.pointerOver()) {buttons[4].alpha=0.7;}
-        else {buttons[4].alpha=1;}
-        
-        if (buttons[5].input.pointerOver()) {buttons[5].alpha=0.7;}
-        else {buttons[5].alpha=1;}
-        
-        if (buttons[6].input.pointerOver()) {buttons[6].alpha=0.7;}
-        else {buttons[6].alpha=1;}
-        
-        if (buttons[7].input.pointerOver()) {buttons[7].alpha=0.7;}
-        else {buttons[7].alpha=1;}
-        
-        if (buttons[8].input.pointerOver()) {buttons[8].alpha=0.7;}
-        else {buttons[8].alpha=1;}
-        
-        if (screen2 == true) {
-            if (buttons[9].input.pointerOver()) {buttons[9].alpha=0.7;}
-            else {buttons[9].alpha=1;}
-            
-            if (buttons[10].input.pointerOver()) {buttons[10].alpha=0.7;}
-            else {buttons[10].alpha=1;}
-            
-            if (buttons[11].input.pointerOver()) {buttons[11].alpha=0.7;}
-            else {buttons[11].alpha=1;}
-            
-            if (buttons[12].input.pointerOver()) {buttons[12].alpha=0.7;}
-            else {buttons[12].alpha=1;}
-            
-            if (buttons[13].input.pointerOver()) {buttons[13].alpha=0.7;}
-            else {buttons[13].alpha=1;}
-        }
-        
-
+        enableButtonHovers();
 
     },
     render:function(){
@@ -130,6 +80,26 @@ levelSelect.prototype = {
         }
     }
 };
+
+function enableButtonHovers() {
+    if (nextArrowR.input.pointerOver()) {nextArrowR.alpha=0.7;}
+    else {nextArrowR.alpha=1;}
+
+    if (nextArrowL.input.pointerOver()) {nextArrowL.alpha=0.7;}
+    else {nextArrowL.alpha=1;}
+
+    for (i = 0; i < 9; i++) {
+        if (buttons[i].input.pointerOver()) {buttons[i].alpha=0.7}
+        else {buttons[i].alpha = 1;}
+    }
+
+    if (screen2 == true) {
+        for (i = 9; i < 14; i++) {
+            if (buttons[i].input.pointerOver()) {buttons[i].alpha=0.7}
+            else {buttons[i].alpha = 1};
+        }
+    }
+}
 
 function buttonOne() {
     game.state.start("PlayGame", true, true, currentLevel = 0);
@@ -218,117 +188,42 @@ function closeNextPage(){
 
 
 function destroyScreen2() {
-    buttonBG[9].destroy();
-    buttons[9].destroy();
-    
-    buttonBG[10].destroy();
-    buttons[10].destroy();
-    
-    buttonBG[11].destroy();
-    buttons[11].destroy();
-    
-    buttonBG[12].destroy();
-    buttons[12].destroy();
-    
-    buttonBG[13].destroy();
-    buttons[13].destroy();
+    for (i = 9; i < 14; i++) {
+        buttonBG[i].destroy();
+        buttons[i].destroy();
+    }
     
     level_title2.destroy();
     nextArrowR2.destroy();
     
 }
 
-//function enableMenu1Inputs() {
-//    buttons[0].inputEnabled = true;
-//    oneButtonBG.inputEnabled = true;
-//    for (i = 2; i < 10; i++) {
-//        if (localStorage.getItem("Level" + i.toString()) == "true") {
-//            buttons[i-1].inputEnabled = true;
-//            
-//        }
-//    }
-//}
-
 function enableMenu1Inputs() {
     buttons[0].inputEnabled = true;
     buttonBG[0].inputEnabled = true;
-    if (localStorage.getItem("Level2") == "true") {
-        buttons[1].inputEnabled = true;
-        buttonBG[1].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level3") == "true") {
-        buttons[2].inputEnabled = true;
-        buttonBG[2].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level4") == "true") {
-        buttons[3].inputEnabled = true;
-        buttonBG[3].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level5") == "true") {
-        buttons[4].inputEnabled = true;
-        buttonBG[4].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level6") == "true") {
-        buttons[5].inputEnabled = true;
-        buttonBG[5].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level7") == "true") {
-        buttons[6].inputEnabled = true;
-        buttonBG[6].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level8") == "true") {
-        buttons[7].inputEnabled = true;
-        buttonBG[7].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level9") == "true") {
-        buttons[8].inputEnabled = true;
-        buttonBG[8].inputEnabled = true;
+    for (i = 2; i < 10; i++) {
+        if (localStorage.getItem("Level" + i.toString()) == "true") {
+            buttons[i-1].inputEnabled = true;
+            buttonBG[i-1].inputEnabled = true;
+        }
     }
 }
 
 function enableMenu2Inputs() {
-    if (localStorage.getItem("Level10") == "true") {
-        buttons[9].inputEnabled = true;
-        buttonBG[9].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level11") == "true") {
-        buttons[10].inputEnabled = true;
-        buttonBG[10].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level12") == "true") {
-        buttons[11].inputEnabled = true;
-        buttonBG[11].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level13") == "true") {
-        buttons[12].inputEnabled = true;
-        buttonBG[12].inputEnabled = true;
-    }
-    if (localStorage.getItem("Level14") == "true") {
-        buttons[13].inputEnabled = true;
-        buttonBG[13].inputEnabled = true;
+    for (i = 9; i < 14; i++) {
+        if (localStorage.getItem("Level" + i.toString()) == "true") {
+            buttons[i-1].inputEnabled = true;
+            buttonBG[i-1].inputEnabled = true;
+        }
     }
 }
 
+
 function disableMenu1Inputs() {
-    buttons[0].inputEnabled = false;
-    buttons[1].inputEnabled = false;
-    buttons[2].inputEnabled = false;
-    buttons[3].inputEnabled = false;
-    buttons[4].inputEnabled = false;
-    buttons[5].inputEnabled = false;
-    buttons[6].inputEnabled = false;
-    buttons[7].inputEnabled = false;
-    buttons[8].inputEnabled = false;
-    
-    buttonBG[0].inputEnabled = false;
-    buttonBG[1].inputEnabled = false;
-    buttonBG[2].inputEnabled = false;
-    buttonBG[3].inputEnabled = false;
-    buttonBG[4].inputEnabled = false;
-    buttonBG[5].inputEnabled = false;
-    buttonBG[6].inputEnabled = false;
-    buttonBG[7].inputEnabled = false;
-    buttonBG[8].inputEnabled = false;
+    for (i = 0; i < 9; i++) {
+        buttons[i].inputEnabled = false;
+        buttonBG[i].inputEnabled = false;
+    }
 }
 
 function backtoMenu() {
@@ -341,19 +236,9 @@ function resetProgress() {
 }
 
 function unlockAll() {
-    var unlock2 = localStorage.setItem("Level2","true");
-    var unlock3 = localStorage.setItem("Level3","true");
-    var unlock4 = localStorage.setItem("Level4","true");
-    var unlock5 = localStorage.setItem("Level5","true");
-    var unlock6 = localStorage.setItem("Level6","true");
-    var unlock7 = localStorage.setItem("Level7","true");
-    var unlock8 = localStorage.setItem("Level8","true");
-    var unlock9 = localStorage.setItem("Level9","true");
-    var unlock10 = localStorage.setItem("Level10","true");
-    var unlock11 = localStorage.setItem("Level11","true");
-    var unlock12 = localStorage.setItem("Level12","true");
-    var unlock13 = localStorage.setItem("Level13","true");
-    var unlock14 = localStorage.setItem("Level14","true");
+    for (i = 2; i < 15; i++) {
+        localStorage.setItem("Level" + i.toString(), "true");
+    }
     backtoMenu();
 }
 
@@ -367,6 +252,12 @@ function addPageOneButtons() {
     nextArrowL = game.add.button(70, 60, "nextArrow",backtoMenu, this);
     nextArrowL.scale.x = -0.1;
     nextArrowL.scale.y = 0.1;
+    
+//    var gridPosX = 0;
+//    var gridPosY = 0;
+//    for (i = 0; i <10; i++) {
+//        buttonBG[0] = game.add.button(41 + gridPosX, 191 + gridPosY,"background", )
+//    }
 
     //Level One
     buttonBG[0] = game.add.button(41,191,"background",buttonOne,this);
@@ -558,77 +449,12 @@ function addPageTwoButtons() {
 
 
 function checkLevelProgress() {
-    if (localStorage.getItem("Level2") != "true") {
-            buttons[1].alpha = 0.1;
-            buttonBG[1].alpha = 0.1;
-            buttons[1].inputEnabled = false;
-            buttonBG[1].inputEnabled = false;
-        }
-    if (localStorage.getItem("Level3") != "true") {
-        buttons[2].alpha = 0.1;
-        buttonBG[2].alpha = 0.1;
-        buttons[2].inputEnabled = false;
-        buttonBG[2].inputEnabled = false;
+    for (i = 2; i < 15; i++) {
+        if (localStorage.getItem(("Level" + i.toString())) != "true") {
+            buttons[i-1].alpha = 0.1;
+            buttonBG[i-1].alpha = 0.1;
+            buttons[i-1].inputEnabled = false;
+            buttonBG[i-1].inputEnabled = false;}
+            }
     }
-    if (localStorage.getItem("Level4") != "true") {
-        buttons[3].alpha = 0.1;
-        buttonBG[3].alpha = 0.1;
-        buttons[3].inputEnabled = false;
-        buttonBG[3].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level5") != "true") {
-        buttons[4].alpha = 0.1;
-        buttonBG[4].alpha = 0.1;
-        buttons[4].inputEnabled = false;
-        buttonBG[4].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level6") != "true") {
-        buttons[5].alpha = 0.1;
-        buttonBG[5].alpha = 0.1;
-        buttons[5].inputEnabled = false;
-        buttonBG[5].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level7") != "true") {
-        buttons[6].alpha = 0.1;
-        buttonBG[6].alpha = 0.1;
-        buttons[6].inputEnabled = false;
-        buttonBG[6].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level8") != "true") {
-        buttons[7].alpha = 0.1;
-        buttonBG[7].alpha = 0.1;
-        buttons[7].inputEnabled = false;
-        buttonBG[7].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level9") != "true") {
-        buttons[8].alpha = 0.1;
-        buttonBG[8].alpha = 0.1;
-        buttons[8].inputEnabled = false;
-        buttonBG[8].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level10") != "true") {
-        buttonBG[9].alpha = 0.1;
-        buttons[9].inputEnabled = false;
-        buttonBG[9].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level11") != "true") {
-        buttonBG[10].alpha = 0.1;
-        buttons[10].inputEnabled = false;
-        buttonBG[10].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level12") != "true") {
-        buttonBG[11].alpha = 0.1;
-        buttons[11].inputEnabled = false;
-        buttonBG[11].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level13") != "true") {
-        buttonBG[12].alpha = 0.1;
-        buttons[12].inputEnabled = false;
-        buttonBG[12].inputEnabled = false;
-    }
-    if (localStorage.getItem("Level14") != "true") {
-        buttonBG[13].alpha = 0.1;
-        buttons[13].inputEnabled = false;
-        buttonBG[13].inputEnabled = false;
-    }
-}
+

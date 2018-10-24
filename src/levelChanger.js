@@ -361,7 +361,7 @@ var LevelChanger = function(game){
                         Phaser.Easing.Linear.None,
                         true
                     ).onComplete.add(function () {
-                        pauseEnabled = true;
+                        userInterfaceEnabled = true;
                     });
                 });
             });

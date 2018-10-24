@@ -3,12 +3,10 @@ var mainMenu = function (game) {};
 var text;
 var menuBack;
 var menuBGM;
-var wekazajiPOP;
 
 var playButton;
 var closeButton;
 var levelButton;
-var wekazaji;
 var credits;
 
 mainMenu.prototype = {

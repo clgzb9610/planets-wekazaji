@@ -1,19 +1,18 @@
 var levelSelect = function (game) {};
 
 
-var levelBackground;
+var levelBackground,
+    levelBackground2;
 
 //level button variables
-var buttons = [];
-var buttonBG = [];
+var buttons;
+var buttonBG;
 
 var screen2;
-screen2 = false;
 
 var nextArrowL2;
 
 var L2on;
-L2on = true;
 
 var level_title2;
 var nextArrowL2;
@@ -49,6 +48,11 @@ levelSelect.prototype = {
     create:function () {
         //set up background and title banners
         game.world.setBounds(0, 0, 700, 700);
+
+        screen2 = false;
+        L2on = true;
+        buttons = [];
+        buttonBG = [];
 
         levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
         
@@ -102,59 +106,59 @@ function enableButtonHovers() {
 }
 
 function buttonOne() {
-    game.state.start("PlayGame", true, true, currentLevel = 0);
+    game.state.start("PlayGame", true, true, level = 0);
 }
 
 function buttonTwo() {
-    game.state.start("PlayGame", true, true, currentLevel = 1);
+    game.state.start("PlayGame", true, true, level = 1);
 }
 
 function buttonThree() {
-    game.state.start("PlayGame", true, true, currentLevel = 2);
+    game.state.start("PlayGame", true, true, level = 2);
 }
 
 function buttonFour() {
-    game.state.start("PlayGame", true, true, currentLevel = 3);
+    game.state.start("PlayGame", true, true, level = 3);
 }
 
 function buttonFive() {
-    game.state.start("PlayGame", true, true, currentLevel = 4);
+    game.state.start("PlayGame", true, true, level = 4);
 }
 
 function buttonSix() {
-    game.state.start("PlayGame", true, true, currentLevel = 5);
+    game.state.start("PlayGame", true, true, level = 5);
 }
 
 function buttonSeven() {
-    game.state.start("PlayGame", true, true, currentLevel = 6);
+    game.state.start("PlayGame", true, true, level = 6);
 }
 
 function buttonEight() {
-    game.state.start("PlayGame", true, true, currentLevel = 7);
+    game.state.start("PlayGame", true, true, level = 7);
 }
 
 function buttonNine() {
-    game.state.start("PlayGame", true, true, currentLevel = 8);
+    game.state.start("PlayGame", true, true, level = 8);
 }
 
 function buttonTen() {
-    game.state.start("PlayGame", true, true, currentLevel = 9);
+    game.state.start("PlayGame", true, true, level = 9);
 }
 
 function buttonEleven() {
-    game.state.start("PlayGame", true, true, currentLevel = 10);
+    game.state.start("PlayGame", true, true, level = 10);
 }
 
 function buttonTwelve() {
-    game.state.start("PlayGame", true, true, currentLevel = 11);
+    game.state.start("PlayGame", true, true, level = 11);
 }
 
 function buttonThirteen() {
-    game.state.start("PlayGame", true, true, currentLevel = 12);
+    game.state.start("PlayGame", true, true, level = 12);
 }
 
 function buttonFourteen() {
-    game.state.start("PlayGame", true, true, currentLevel = 13);
+    game.state.start("PlayGame", true, true, level = 13);
 }
 
 

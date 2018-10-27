@@ -56,7 +56,7 @@ function endBackToMenu(){
 }
 function endFadeCompleteMenu(){
     destroyEndStateObjects();
-    game.state.start("MainMenu", true, false, currentLevel = 0);
+    game.state.start("MainMenu", true, false, 0);
 }
 
 function destroyEndStateObjects(){

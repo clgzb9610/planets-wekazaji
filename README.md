@@ -42,8 +42,9 @@ When working on the game, all changes should be pushed to the `master` branch. T
 3. Make sure you have no uncommitted changes by running the command `git status`, and make sure you have the most recent version of the branch using `git pull`
 4. Once everything is ready to go, run the command `git merge master` to merge all of the changes from the `master` branch into the `gh-pages` branch.
 5. The command line will ask you to write a commit message. To move past this, press the `ESC` key and then type `:wq` before pressing enter.
-6. Now you can move back into the `master` branch with `git checkout master`
-7. Run the command `yarn` to reinstall the Phaser library in your local directory (moving from `gh-pages` back to `master` will delete the Phaser directory, since it is not in the `master` branch)
+6. Push all of the merged changes by running the command `git push`
+7. Now you can move back into the `master` branch with `git checkout master`
+8. Run the command `yarn` to reinstall the Phaser library in your local directory (moving from `gh-pages` back to `master` will delete the Phaser directory, since it is not in the `master` branch)
 
 ## Built With
 

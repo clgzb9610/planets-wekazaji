@@ -34,6 +34,16 @@ Webstorm has its own local server. Open index.html in Webstorm and on the upper-
 
 Please see [Phaser Example website](https://phaser.io/examples) to learn how Phaser works. Also check out [Phaser 2.6.2 Documentation](https://phaser.io/docs/2.6.2/index).
 
+## Deployment Process
+
+When working on the game, all changes should be pushed to the `master` branch. The link to play the game references the `gh-pages` branch. To merge changes from the `master` branch to the `gh-pages` branch, follow this process:
+1. `cd` to the project directory on your computer
+2. Check out the `gh-pages` branch using the command `git checkout gh-pages`
+3. Make sure you have no uncommitted changes by running the command `git status`, and make sure you have the most recent version of the branch using `git pull`
+4. Once everything is ready to go, run the command `git merge master` to merge all of the changes from the `master` branch into the `gh-pages` branch.
+5. Now you can move back into the `master` branch with `git checkout master`
+6. Run the command `yarn` to reinstall the Phaser library in your local directory (moving from `gh-pages` back to `master` will delete the Phaser directory, since it is not in the `master` branch)
+
 ## Built With
 
 * [Phaser](https://phaser.io/) - HTML5 game framework with [Box2D plugin](https://phaser.io/shop/plugins/box2d).

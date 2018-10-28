@@ -46,7 +46,7 @@ var LevelChanger = function(game){
         var unlock14 = localStorage.setItem("Level14","true");
         }
         
-        if(!level[currentLevel]) {          //go to ending state if you pass the last level
+        if(!levels[currentLevel]) {          //go to ending state if you pass the last level
             bgm.destroy();
             player.destroy();
             game.physics.clear();
@@ -57,8 +57,8 @@ var LevelChanger = function(game){
             game.state.start("Ending", true, false, 0);
             return;
         }
-        for (var i = 0; i < level[currentLevel].length; i++) {      //create level objects
-            var addition = level[currentLevel][i];
+        for (var i = 0; i < levels[currentLevel].length; i++) {      //create level objects
+            var addition = levels[currentLevel][i];
             if (addition.objectType === 'planet') {
                 addPlanet(addition.x, addition.y,
                     addition.gravRadius, addition.gravForce, addition.sprite);

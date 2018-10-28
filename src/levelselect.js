@@ -1,40 +1,18 @@
 var levelSelect = function (game) {};
 
 
-var levelBackground;
+var levelBackground,
+    levelBackground2;
 
 //level button variables
-var oneButton;
-var twoButton;
-var threeButton;
-var fourButton;
-var fiveButton;
-var sixButton;
-var sevenButton;
-var eightButton;
-var nineButton;
-var tenButton;
-
-//level button backgrounds
-var oneButtonBG;
-var twoButtonBG;
-var threeButtonBG;
-var fourButtonBG;
-var fiveButtonBG;
-var sixButtonBG;
-var sevenButtonBG;
-var eightButtonBG;
-var nineButtonBG;
-var tenButtonBG;
-
+var buttons;
+var buttonBG;
 
 var screen2;
-screen2 = false;
 
 var nextArrowL2;
 
 var L2on;
-L2on = true;
 
 var level_title2;
 var nextArrowL2;
@@ -71,6 +49,11 @@ levelSelect.prototype = {
         //set up background and title banners
         game.world.setBounds(0, 0, 700, 700);
 
+        screen2 = false;
+        L2on = true;
+        buttons = [];
+        buttonBG = [];
+
         levelBackground = game.add.tileSprite(-320, -320, 1024, 1024, 'space');
         
         var level_title = game.add.sprite(75, 50, "level_title");
@@ -91,58 +74,8 @@ levelSelect.prototype = {
     update:function() {
         levelBackground.tilePosition.x -= 1;
         if (screen2 == true) {levelBackground2.tilePosition.x -= 1;}
-
-        if (nextArrowR.input.pointerOver()) {nextArrowR.alpha=0.7;}
-        else {nextArrowR.alpha=1;}
-
-        if (nextArrowL.input.pointerOver()) {nextArrowL.alpha=0.7;}
-        else {nextArrowL.alpha=1;}
-
-        if (oneButton.input.pointerOver()) {oneButton.alpha=0.7;}
-        else {oneButton.alpha=1;}
         
-        if (twoButton.input.pointerOver()) {twoButton.alpha=0.7;}
-        else {twoButton.alpha=1;}
-        
-        if (threeButton.input.pointerOver()) {threeButton.alpha=0.7;}
-        else {threeButton.alpha=1;}
-        
-        if (fourButton.input.pointerOver()) {fourButton.alpha=0.7;}
-        else {fourButton.alpha=1;}
-        
-        if (fiveButton.input.pointerOver()) {fiveButton.alpha=0.7;}
-        else {fiveButton.alpha=1;}
-        
-        if (sixButton.input.pointerOver()) {sixButton.alpha=0.7;}
-        else {sixButton.alpha=1;}
-        
-        if (sevenButton.input.pointerOver()) {sevenButton.alpha=0.7;}
-        else {sevenButton.alpha=1;}
-        
-        if (eightButton.input.pointerOver()) {eightButton.alpha=0.7;}
-        else {eightButton.alpha=1;}
-        
-        if (nineButton.input.pointerOver()) {nineButton.alpha=0.7;}
-        else {nineButton.alpha=1;}
-        
-        if (screen2 == true) {
-            if (tenButton.input.pointerOver()) {tenButton.alpha=0.7;}
-            else {tenButton.alpha=1;}
-            
-            if (elevenButton.input.pointerOver()) {elevenButton.alpha=0.7;}
-            else {elevenButton.alpha=1;}
-            
-            if (twelveButton.input.pointerOver()) {twelveButton.alpha=0.7;}
-            else {twelveButton.alpha=1;}
-            
-            if (thirteenButton.input.pointerOver()) {thirteenButton.alpha=0.7;}
-            else {thirteenButton.alpha=1;}
-            
-            if (fourteenButton.input.pointerOver()) {fourteenButton.alpha=0.7;}
-            else {fourteenButton.alpha=1;}
-        }
-        
-
+        enableButtonHovers();
 
     },
     render:function(){
@@ -152,60 +85,80 @@ levelSelect.prototype = {
     }
 };
 
+function enableButtonHovers() {
+    if (nextArrowR.input.pointerOver()) {nextArrowR.alpha=0.7;}
+    else {nextArrowR.alpha=1;}
+
+    if (nextArrowL.input.pointerOver()) {nextArrowL.alpha=0.7;}
+    else {nextArrowL.alpha=1;}
+
+    for (i = 0; i < 9; i++) {
+        if (buttons[i].input.pointerOver()) {buttons[i].alpha=0.7}
+        else {buttons[i].alpha = 1;}
+    }
+
+    if (screen2 == true) {
+        for (i = 9; i < 14; i++) {
+            if (buttons[i].input.pointerOver()) {buttons[i].alpha=0.7}
+            else {buttons[i].alpha = 1};
+        }
+    }
+}
+
 function buttonOne() {
-    game.state.start("PlayGame", true, true, currentLevel = 0);
+    game.state.start("PlayGame", true, true, level = 0);
 }
 
 function buttonTwo() {
-    game.state.start("PlayGame", true, true, currentLevel = 1);
+    game.state.start("PlayGame", true, true, level = 1);
 }
 
 function buttonThree() {
-    game.state.start("PlayGame", true, true, currentLevel = 2);
+    game.state.start("PlayGame", true, true, level = 2);
 }
 
 function buttonFour() {
-    game.state.start("PlayGame", true, true, currentLevel = 3);
+    game.state.start("PlayGame", true, true, level = 3);
 }
 
 function buttonFive() {
-    game.state.start("PlayGame", true, true, currentLevel = 4);
+    game.state.start("PlayGame", true, true, level = 4);
 }
 
 function buttonSix() {
-    game.state.start("PlayGame", true, true, currentLevel = 5);
+    game.state.start("PlayGame", true, true, level = 5);
 }
 
 function buttonSeven() {
-    game.state.start("PlayGame", true, true, currentLevel = 6);
+    game.state.start("PlayGame", true, true, level = 6);
 }
 
 function buttonEight() {
-    game.state.start("PlayGame", true, true, currentLevel = 7);
+    game.state.start("PlayGame", true, true, level = 7);
 }
 
 function buttonNine() {
-    game.state.start("PlayGame", true, true, currentLevel = 8);
+    game.state.start("PlayGame", true, true, level = 8);
 }
 
 function buttonTen() {
-    game.state.start("PlayGame", true, true, currentLevel = 9);
+    game.state.start("PlayGame", true, true, level = 9);
 }
 
 function buttonEleven() {
-    game.state.start("PlayGame", true, true, currentLevel = 10);
+    game.state.start("PlayGame", true, true, level = 10);
 }
 
 function buttonTwelve() {
-    game.state.start("PlayGame", true, true, currentLevel = 11);
+    game.state.start("PlayGame", true, true, level = 11);
 }
 
 function buttonThirteen() {
-    game.state.start("PlayGame", true, true, currentLevel = 12);
+    game.state.start("PlayGame", true, true, level = 12);
 }
 
 function buttonFourteen() {
-    game.state.start("PlayGame", true, true, currentLevel = 13);
+    game.state.start("PlayGame", true, true, level = 13);
 }
 
 
@@ -239,20 +192,10 @@ function closeNextPage(){
 
 
 function destroyScreen2() {
-    tenButtonBG.destroy();
-    tenButton.destroy();
-    
-    elevenButtonBG.destroy();
-    elevenButton.destroy();
-    
-    twelveButtonBG.destroy();
-    twelveButton.destroy();
-    
-    thirteenButtonBG.destroy();
-    thirteenButton.destroy();
-    
-    fourteenButtonBG.destroy();
-    fourteenButton.destroy();
+    for (i = 9; i < 14; i++) {
+        buttonBG[i].destroy();
+        buttons[i].destroy();
+    }
     
     level_title2.destroy();
     nextArrowR2.destroy();
@@ -260,85 +203,31 @@ function destroyScreen2() {
 }
 
 function enableMenu1Inputs() {
-    oneButton.inputEnabled = true;
-    oneButtonBG.inputEnabled = true;
-    if (localStorage.getItem("Level2") == "true") {
-        twoButton.inputEnabled = true;
-        twoButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level3") == "true") {
-        threeButton.inputEnabled = true;
-        threeButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level4") == "true") {
-        fourButton.inputEnabled = true;
-        fourButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level5") == "true") {
-        fiveButton.inputEnabled = true;
-        fiveButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level6") == "true") {
-        sixButton.inputEnabled = true;
-        sixButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level7") == "true") {
-        sevenButton.inputEnabled = true;
-        sevenButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level8") == "true") {
-        eightButton.inputEnabled = true;
-        eightButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level9") == "true") {
-        nineButton.inputEnabled = true;
-        nineButtonBG.inputEnabled = true;
+    buttons[0].inputEnabled = true;
+    buttonBG[0].inputEnabled = true;
+    for (i = 2; i < 10; i++) {
+        if (localStorage.getItem("Level" + i.toString()) == "true") {
+            buttons[i-1].inputEnabled = true;
+            buttonBG[i-1].inputEnabled = true;
+        }
     }
 }
 
 function enableMenu2Inputs() {
-    if (localStorage.getItem("Level10") == "true") {
-        tenButton.inputEnabled = true;
-        tenButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level11") == "true") {
-        elevenButton.inputEnabled = true;
-        elevenButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level12") == "true") {
-        twelveButton.inputEnabled = true;
-        twelveButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level13") == "true") {
-        thirteenButton.inputEnabled = true;
-        thirteenButtonBG.inputEnabled = true;
-    }
-    if (localStorage.getItem("Level14") == "true") {
-        fourteenButton.inputEnabled = true;
-        fourteenButtonBG.inputEnabled = true;
+    for (i = 9; i < 14; i++) {
+        if (localStorage.getItem("Level" + i.toString()) == "true") {
+            buttons[i-1].inputEnabled = true;
+            buttonBG[i-1].inputEnabled = true;
+        }
     }
 }
 
+
 function disableMenu1Inputs() {
-    oneButton.inputEnabled = false;
-    twoButton.inputEnabled = false;
-    threeButton.inputEnabled = false;
-    fourButton.inputEnabled = false;
-    fiveButton.inputEnabled = false;
-    sixButton.inputEnabled = false;
-    sevenButton.inputEnabled = false;
-    eightButton.inputEnabled = false;
-    nineButton.inputEnabled = false;
-    
-    oneButtonBG.inputEnabled = false;
-    twoButtonBG.inputEnabled = false;
-    threeButtonBG.inputEnabled = false;
-    fourButtonBG.inputEnabled = false;
-    fiveButtonBG.inputEnabled = false;
-    sixButtonBG.inputEnabled = false;
-    sevenButtonBG.inputEnabled = false;
-    eightButtonBG.inputEnabled = false;
-    nineButtonBG.inputEnabled = false;
+    for (i = 0; i < 9; i++) {
+        buttons[i].inputEnabled = false;
+        buttonBG[i].inputEnabled = false;
+    }
 }
 
 function backtoMenu() {
@@ -351,19 +240,9 @@ function resetProgress() {
 }
 
 function unlockAll() {
-    var unlock2 = localStorage.setItem("Level2","true");
-    var unlock3 = localStorage.setItem("Level3","true");
-    var unlock4 = localStorage.setItem("Level4","true");
-    var unlock5 = localStorage.setItem("Level5","true");
-    var unlock6 = localStorage.setItem("Level6","true");
-    var unlock7 = localStorage.setItem("Level7","true");
-    var unlock8 = localStorage.setItem("Level8","true");
-    var unlock9 = localStorage.setItem("Level9","true");
-    var unlock10 = localStorage.setItem("Level10","true");
-    var unlock11 = localStorage.setItem("Level11","true");
-    var unlock12 = localStorage.setItem("Level12","true");
-    var unlock13 = localStorage.setItem("Level13","true");
-    var unlock14 = localStorage.setItem("Level14","true");
+    for (i = 2; i < 15; i++) {
+        localStorage.setItem("Level" + i.toString(), "true");
+    }
     backtoMenu();
 }
 
@@ -377,106 +256,112 @@ function addPageOneButtons() {
     nextArrowL = game.add.button(70, 60, "nextArrow",backtoMenu, this);
     nextArrowL.scale.x = -0.1;
     nextArrowL.scale.y = 0.1;
+    
+//    var gridPosX = 0;
+//    var gridPosY = 0;
+//    for (i = 0; i <10; i++) {
+//        buttonBG[0] = game.add.button(41 + gridPosX, 191 + gridPosY,"background", )
+//    }
 
     //Level One
-    oneButtonBG = game.add.button(41,191,"background",buttonOne,this);
-    oneButtonBG.scale.x = 0.3;
-    oneButtonBG.scale.y = 0.3;
-    oneButtonBG.alpha = 0.8;
+    buttonBG[0] = game.add.button(41,191,"background",buttonOne,this);
+    buttonBG[0].scale.x = 0.3;
+    buttonBG[0].scale.y = 0.3;
+    buttonBG[0].alpha = 0.8;
 
-    oneButton = game.add.button(50,200,"one",buttonOne,this);
-    oneButton.scale.x = 0.3;
-    oneButton.scale.y = 0.3;
+    buttons[0] = game.add.button(50,200,"one",buttonOne,this);
+    buttons[0].scale.x = 0.3;
+    buttons[0].scale.y = 0.3;
 
     //Level Two
-    twoButtonBG = game.add.button(256,191,"background",buttonTwo,this);
-    twoButtonBG.scale.x = 0.3;
-    twoButtonBG.scale.y = 0.3;
-    twoButtonBG.alpha = 0.88;
+    buttonBG[1] = game.add.button(256,191,"background",buttonTwo,this);
+    buttonBG[1].scale.x = 0.3;
+    buttonBG[1].scale.y = 0.3;
+    buttonBG[1].alpha = 0.88;
 
-    twoButton = game.add.button(265,200,"two",buttonTwo,this);
-    twoButton.scale.x = 0.3;
-    twoButton.scale.y = 0.3;
-    twoButton.inputEnabled = true;
+    buttons[1] = game.add.button(265,200,"two",buttonTwo,this);
+    buttons[1].scale.x = 0.3;
+    buttons[1].scale.y = 0.3;
+    buttons[1].inputEnabled = true;
 
     //Level Three
-    threeButtonBG = game.add.button(471,191,"background",buttonThree,this);
-    threeButtonBG.scale.x = 0.3;
-    threeButtonBG.scale.y = 0.3;
-    threeButtonBG.alpha = 0.88;
+    buttonBG[2] = game.add.button(471,191,"background",buttonThree,this);
+    buttonBG[2].scale.x = 0.3;
+    buttonBG[2].scale.y = 0.3;
+    buttonBG[2].alpha = 0.88;
 
-    threeButton = game.add.button(480,200,"three",buttonThree,this);
-    threeButton.scale.x = 0.3;
-    threeButton.scale.y = 0.3;
-    threeButton.inputEnabled = true;
+    buttons[2] = game.add.button(480,200,"three",buttonThree,this);
+    buttons[2].scale.x = 0.3;
+    buttons[2].scale.y = 0.3;
+    buttons[2].inputEnabled = true;
 
     //Level Four
-    fourButtonBG = game.add.button(41,356,"background",buttonFour,this);
-    fourButtonBG.scale.x = 0.3;
-    fourButtonBG.scale.y = 0.3;
-    fourButtonBG.alpha = 0.88;
+    buttonBG[3] = game.add.button(41,356,"background",buttonFour,this);
+    buttonBG[3].scale.x = 0.3;
+    buttonBG[3].scale.y = 0.3;
+    buttonBG[3].alpha = 0.88;
 
-    fourButton = game.add.button(50,365,"four",buttonFour,this);
-    fourButton.scale.x = 0.3;
-    fourButton.scale.y = 0.3;
-    fourButton.inputEnabled = true;
+    buttons[3] = game.add.button(50,365,"four",buttonFour,this);
+    buttons[3].scale.x = 0.3;
+    buttons[3].scale.y = 0.3;
+    buttons[3].inputEnabled = true;
 
     //Level Five
-    fiveButtonBG = game.add.button(256,356,"background",buttonFive,this);
-    fiveButtonBG.scale.x = 0.3;
-    fiveButtonBG.scale.y = 0.3;
-    fiveButtonBG.alpha = 0.88;
+    buttonBG[4] = game.add.button(256,356,"background",buttonFive,this);
+    buttonBG[4].scale.x = 0.3;
+    buttonBG[4].scale.y = 0.3;
+    buttonBG[4].alpha = 0.88;
 
-    fiveButton = game.add.button(265,365,"five",buttonFive,this);
-    fiveButton.scale.x = 0.3;
-    fiveButton.scale.y = 0.3;
-    fiveButton.inputEnabled = true;
+    buttons[4] = game.add.button(265,365,"five",buttonFive,this);
+    buttons[4].scale.x = 0.3;
+    buttons[4].scale.y = 0.3;
+    buttons[4].inputEnabled = true;
 
     //Level Six
-    sixButtonBG = game.add.button(471,356,"background",buttonSix,this);
-    sixButtonBG.scale.x = 0.3;
-    sixButtonBG.scale.y = 0.3;
-    sixButtonBG.alpha = 0.88;
+    buttonBG[5] = game.add.button(471,356,"background",buttonSix,this);
+    buttonBG[5].scale.x = 0.3;
+    buttonBG[5].scale.y = 0.3;
+    buttonBG[5].alpha = 0.88;
 
-    sixButton = game.add.button(480,365,"six",buttonSix,this);
-    sixButton.scale.x = 0.3;
-    sixButton.scale.y = 0.3;
-    sixButton.inputEnabled = true;
+    buttons[5] = game.add.button(480,365,"six",buttonSix,this);
+    buttons[5].scale.x = 0.3;
+    buttons[5].scale.y = 0.3;
+    buttons[5].inputEnabled = true;
 
 
     //Level Seven
-    sevenButtonBG = game.add.button(41,521,"background",buttonSeven,this);
-    sevenButtonBG.scale.x = 0.3;
-    sevenButtonBG.scale.y = 0.3;
-    sevenButtonBG.alpha = 0.88;
+    buttonBG[6] = game.add.button(41,521,"background",buttonSeven,this);
+    buttonBG[6].scale.x = 0.3;
+    buttonBG[6].scale.y = 0.3;
+    buttonBG[6].alpha = 0.88;
 
-    sevenButton = game.add.button(50,530,"seven",buttonSeven,this);
-    sevenButton.scale.x = 0.3;
-    sevenButton.scale.y = 0.3;
-    sevenButton.inputEnabled = true;
+    buttons[6] = game.add.button(50,530,"seven",buttonSeven,this);
+    buttons[6].scale.x = 0.3;
+    buttons[6].scale.y = 0.3;
+    buttons[6].inputEnabled = true;
 
     //Level Eight
-    eightButtonBG = game.add.button(256,521,"background",buttonEight,this);
-    eightButtonBG.scale.x = 0.3;
-    eightButtonBG.scale.y = 0.3;
-    eightButtonBG.alpha = 0.88;
+    buttonBG[7] = game.add.button(256,521,"background",buttonEight,this);
+    buttonBG[7].scale.x = 0.3;
+    buttonBG[7].scale.y = 0.3;
+    buttonBG[7].alpha = 0.88;
 
-    eightButton = game.add.button(265,530,"eight",buttonEight,this);
-    eightButton.scale.x = 0.3;
-    eightButton.scale.y = 0.3;
-    eightButton.inputEnabled = true;
+    buttons[7] = game.add.button(265,530,"eight",buttonEight,this);
+    buttons[7].scale.x = 0.3;
+    buttons[7].scale.y = 0.3;
+    buttons[7].inputEnabled = true;
 
 
     //Level Nine
-    nineButtonBG = game.add.button(471,521,"background",buttonNine,this);
-    nineButtonBG.scale.x = 0.3;
-    nineButtonBG.scale.y = 0.3;
-    nineButtonBG
+    buttonBG[8] = game.add.button(471,521,"background",buttonNine,this);
+    buttonBG[8].scale.x = 0.3;
+    buttonBG[8].scale.y = 0.3;
+    buttonBG[8]
 
-    nineButton = game.add.button(480,530,"nine",buttonNine,this);
-    nineButton.scale.x = 0.3;
-    nineButton.scale.y = 0.3;
-    nineButton.inputEnabled = true;
+    buttons[8] = game.add.button(480,530,"nine",buttonNine,this);
+    buttons[8].scale.x = 0.3;
+    buttons[8].scale.y = 0.3;
+    buttons[8].inputEnabled = true;
 
     //reset progress button
     resetButton = game.add.button(205, 145, "reset_placeholder", resetProgress, this);
@@ -512,136 +397,68 @@ function addPageTwoButtons() {
     nextArrowR2.alpha = 0.5;
 
     //Level ten
-    tenButtonBG = game.add.button(41,191,"background",buttonTen,this);
-    tenButtonBG.scale.x = 0.3;
-    tenButtonBG.scale.y = 0.3;
-    tenButtonBG.alpha = 0.8;
+    buttonBG[9] = game.add.button(41,191,"background",buttonTen,this);
+    buttonBG[9].scale.x = 0.3;
+    buttonBG[9].scale.y = 0.3;
+    buttonBG[9].alpha = 0.8;
 
-    tenButton = game.add.button(50,200,"ten",buttonTen,this);
-    tenButton.scale.x = 0.3;
-    tenButton.scale.y = 0.3;
-    
-    
+    buttons[9] = game.add.button(50,200,"ten",buttonTen,this);
+    buttons[9].scale.x = 0.3;
+    buttons[9].scale.y = 0.3;
         
-
     //Level Eleven
-    elevenButtonBG = game.add.button(256,191,"background",buttonEleven,this);
-    elevenButtonBG.scale.x = 0.3;
-    elevenButtonBG.scale.y = 0.3;
-    elevenButtonBG.alpha = 0.88;
+    buttonBG[10] = game.add.button(256,191,"background",buttonEleven,this);
+    buttonBG[10].scale.x = 0.3;
+    buttonBG[10].scale.y = 0.3;
+    buttonBG[10].alpha = 0.88;
 
-    elevenButton = game.add.button(265,200,"eleven",buttonEleven,this);
-    elevenButton.scale.x = 0.3;
-    elevenButton.scale.y = 0.3;
-    elevenButton.inputEnabled = true;
+    buttons[10] = game.add.button(265,200,"eleven",buttonEleven,this);
+    buttons[10].scale.x = 0.3;
+    buttons[10].scale.y = 0.3;
+    buttons[10].inputEnabled = true;
 
     //Level Twelve
-    twelveButtonBG = game.add.button(471,191,"background",buttonTwelve,this);
-    twelveButtonBG.scale.x = 0.3;
-    twelveButtonBG.scale.y = 0.3;
-    twelveButtonBG.alpha = 0.88;
+    buttonBG[11] = game.add.button(471,191,"background",buttonTwelve,this);
+    buttonBG[11].scale.x = 0.3;
+    buttonBG[11].scale.y = 0.3;
+    buttonBG[11].alpha = 0.88;
 
-    twelveButton = game.add.button(480,200,"twelve",buttonTwelve,this);
-    twelveButton.scale.x = 0.3;
-    twelveButton.scale.y = 0.3;
-    twelveButton.inputEnabled = true;
+    buttons[11] = game.add.button(480,200,"twelve",buttonTwelve,this);
+    buttons[11].scale.x = 0.3;
+    buttons[11].scale.y = 0.3;
+    buttons[11].inputEnabled = true;
 
     //Level Thirteen
-    thirteenButtonBG = game.add.button(41,356,"background",buttonThirteen,this);
-    thirteenButtonBG.scale.x = 0.3;
-    thirteenButtonBG.scale.y = 0.3;
-    thirteenButtonBG.alpha = 0.88;
+    buttonBG[12] = game.add.button(41,356,"background",buttonThirteen,this);
+    buttonBG[12].scale.x = 0.3;
+    buttonBG[12].scale.y = 0.3;
+    buttonBG[12].alpha = 0.88;
 
-    thirteenButton = game.add.button(50,365,"thirteen",buttonThirteen,this);
-    thirteenButton.scale.x = 0.3;
-    thirteenButton.scale.y = 0.3;
-    thirteenButton.inputEnabled = true;
+    buttons[12] = game.add.button(50,365,"thirteen",buttonThirteen,this);
+    buttons[12].scale.x = 0.3;
+    buttons[12].scale.y = 0.3;
+    buttons[12].inputEnabled = true;
 
     //Level Fourteen
-    fourteenButtonBG = game.add.button(256,356,"background",buttonFourteen,this);
-    fourteenButtonBG.scale.x = 0.3;
-    fourteenButtonBG.scale.y = 0.3;
-    fourteenButtonBG.alpha = 0.88;
+    buttonBG[13] = game.add.button(256,356,"background",buttonFourteen,this);
+    buttonBG[13].scale.x = 0.3;
+    buttonBG[13].scale.y = 0.3;
+    buttonBG[13].alpha = 0.88;
 
-    fourteenButton = game.add.button(265,365,"fourteen",buttonFourteen,this);
-    fourteenButton.scale.x = 0.3;
-    fourteenButton.scale.y = 0.3;
-    fourteenButton.inputEnabled = true;
+    buttons[13] = game.add.button(265,365,"fourteen",buttonFourteen,this);
+    buttons[13].scale.x = 0.3;
+    buttons[13].scale.y = 0.3;
+    buttons[13].inputEnabled = true;
 }
 
 
 function checkLevelProgress() {
-    if (localStorage.getItem("Level2") != "true") {
-            twoButton.alpha = 0.1;
-            twoButtonBG.alpha = 0.1;
-            twoButton.inputEnabled = false;
-            twoButtonBG.inputEnabled = false;
-        }
-    if (localStorage.getItem("Level3") != "true") {
-        threeButton.alpha = 0.1;
-        threeButtonBG.alpha = 0.1;
-        threeButton.inputEnabled = false;
-        threeButtonBG.inputEnabled = false;
+    for (i = 2; i < 15; i++) {
+        if (localStorage.getItem(("Level" + i.toString())) != "true") {
+            buttons[i-1].alpha = 0.1;
+            buttonBG[i-1].alpha = 0.1;
+            buttons[i-1].inputEnabled = false;
+            buttonBG[i-1].inputEnabled = false;}
+            }
     }
-    if (localStorage.getItem("Level4") != "true") {
-        fourButton.alpha = 0.1;
-        fourButtonBG.alpha = 0.1;
-        fourButton.inputEnabled = false;
-        fourButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level5") != "true") {
-        fiveButton.alpha = 0.1;
-        fiveButtonBG.alpha = 0.1;
-        fiveButton.inputEnabled = false;
-        fiveButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level6") != "true") {
-        sixButton.alpha = 0.1;
-        sixButtonBG.alpha = 0.1;
-        sixButton.inputEnabled = false;
-        sixButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level7") != "true") {
-        sevenButton.alpha = 0.1;
-        sevenButtonBG.alpha = 0.1;
-        sevenButton.inputEnabled = false;
-        sevenButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level8") != "true") {
-        eightButton.alpha = 0.1;
-        eightButtonBG.alpha = 0.1;
-        eightButton.inputEnabled = false;
-        eightButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level9") != "true") {
-        nineButton.alpha = 0.1;
-        nineButtonBG.alpha = 0.1;
-        nineButton.inputEnabled = false;
-        nineButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level10") != "true") {
-        tenButtonBG.alpha = 0.1;
-        tenButton.inputEnabled = false;
-        tenButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level11") != "true") {
-        elevenButtonBG.alpha = 0.1;
-        elevenButton.inputEnabled = false;
-        elevenButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level12") != "true") {
-        twelveButtonBG.alpha = 0.1;
-        twelveButton.inputEnabled = false;
-        twelveButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level13") != "true") {
-        thirteenButtonBG.alpha = 0.1;
-        thirteenButton.inputEnabled = false;
-        thirteenButtonBG.inputEnabled = false;
-    }
-    if (localStorage.getItem("Level14") != "true") {
-        fourteenButtonBG.alpha = 0.1;
-        fourteenButton.inputEnabled = false;
-        fourteenButtonBG.inputEnabled = false;
-    }
-}
+

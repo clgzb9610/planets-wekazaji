@@ -263,7 +263,7 @@ var levels = [
     ], // level 11 - two enemies
     [ //level 12 - two enemies circling center planet
         {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 350, sprite: "catplanet"},
-        {objectType: 'planet', x: 0, y: -470, gravRadius: 200, gravForce: 350, sprite: "blueyarn"},
+        {objectType: 'planet', x: 0, y: -471, gravRadius: 200, gravForce: 350, sprite: "blueyarn"},
         {objectType: 'planet', x: 0, y: 470, gravRadius: 200, gravForce: 350, sprite: "redyarn"},
         {objectType: 'planet', x: 470, y: 0, gravRadius: 200, gravForce: 350, sprite: "greenyarn"},
         {objectType: 'planet', x: -470, y: 0, gravRadius: 200, gravForce: 350, sprite: "purpleyarn"},

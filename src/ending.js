@@ -4,11 +4,12 @@ var endingBGM;
 
 ending.prototype = {
     preload:function(){
-        game.load.image("spacebeach", "assets/game/vacationeb.png");
-        game.load.image("playAgain", "assets/buttons/playAgain.png");
-        game.load.image("playAgain_hover", "assets/buttons/playAgain_hover.png");
-        game.load.image("backToMenu", "assets/buttons/backToMenu.png");
-        game.load.image("backToMenu_hover", "assets/buttons/backtoMenu_hover.png");
+        // game.load.image("spacebeach", "assets/game/vacationeb.png");
+        game.load.image("spacebeach", "assets/game/vacationeb_new.png");
+        game.load.image("playAgain", "assets/game/playAgain.png");
+        game.load.image("playAgain_hover", "assets/game/playAgain_hover.png");
+        game.load.image("backToMenu", "assets/game/toMainButton.png");
+        game.load.image("backToMenu_hover", "assets/game/toMainButton_hover.png");
         game.load.audio('endingBGM', "assets/music/Visager_-_05_-_Roots_Loop.mp3");
     },
     create:function () {
@@ -18,13 +19,13 @@ ending.prototype = {
         endingBGM.volume = 0.6;
         endingBGM.play();
 
-        endBack = game.add.tileSprite(-320, -320, 1024, 1024, 'spacebeach');
+        endBack = game.add.tileSprite(-295, -320, 1024, 1024, 'spacebeach'); //-320, -320, 1024, 1024
 
-        endplayButton = game.add.button(-115,-250,"playAgain",replayTheGame,this);
-        endplayButton.scale.setTo(0.5, 0.5);
+        endplayButton = game.add.button(-115,-240,"playAgain",replayTheGame,this);
+        // endplayButton.scale.setTo(0.5, 0.5);
 
-        backToMenuButton = game.add.button(-150,-150,"backToMenu",endBackToMenu,this);
-        backToMenuButton.scale.setTo(0.5, 0.5);
+        backToMenuButton = game.add.button(-115,-150,"backToMenu",endBackToMenu,this);
+        // backToMenuButton.scale.setTo(0.5, 0.5);
     },
     update:function() {
         if (endplayButton.input.pointerOver()) {endplayButton.loadTexture('playAgain_hover', 0);}
@@ -55,7 +56,7 @@ function endBackToMenu(){
 }
 function endFadeCompleteMenu(){
     destroyEndStateObjects();
-    game.state.start("MainMenu", true, false, currentLevel = 0);
+    game.state.start("MainMenu", true, false, 0);
 }
 
 function destroyEndStateObjects(){

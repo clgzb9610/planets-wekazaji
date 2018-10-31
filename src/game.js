@@ -7,7 +7,12 @@ source: https://phaser.io/news/2015/07/simulate-planet-gravity-with-box2d-tutori
 var playGame = function(game){};
 
 var showDebugInfo = false;
+var gearUIScale = 0.6;
+var forceReducer = 0.00035;
+var playerVel = 40;
 
+
+// Game Variables
 var game;
 var gamePhysics;
 var helper;
@@ -28,8 +33,8 @@ var fall;
 //for the two enemies, populated in levelChanger
 var enemy1;
 var enemy2;
-var enemy1Present = false;
-var enemy2Present = false;
+var enemy1Present;
+var enemy2Present;
 
 var startPadActive;
 
@@ -37,26 +42,18 @@ var teleporter;
 var levelGoal;
 var playerLastAngle;
 
-var userInterfaceEnabled = true;
+var userInterfaceEnabled;
 
-var score = 0;
-var lastCaption = "";
+var score;
 
-var gearUIScale = 0.6;
+var transitioning;
 
-// a force reducer to let the simulation run smoothly
-var forceReducer = 0.00035; //was .00175
+var levelCenterX,
+    levelCenterY,
+    levelBoundaryRadius;
 
-var playerVel = 40;
-
-var transitioning = false;
-
-var levelCenterX = 0,
-    levelCenterY = 0,
-    levelBoundaryRadius = 2000;
-
-var playerPrevX = 0;
-    playerPrevY = 0;
+var playerPrevX,
+    playerPrevY;
 
 // graphic object where to draw planet gravity area
 var gravityGraphics;
@@ -69,12 +66,12 @@ var jetpackAudio;
 var vortexAudio;
 var gearTing;
 
-var currentLevel = 0;
+var currentLevel;
 
 //var levelUnlock1 = localStorage.setItem("Level1","1");
 
 
-var level = [
+var levels = [
     [ //level 0 - collect gears to activate portal
         {objectType: 'planet', x: 0, y: 0, gravRadius: 350, gravForce: 300, sprite: "level0_planet1"},
         {objectType:'teleporter', x:0, y: -215, radians: 0, goal:1},
@@ -266,7 +263,7 @@ var level = [
     ], // level 11 - two enemies
     [ //level 12 - two enemies circling center planet
         {objectType: 'planet', x: 0, y: 0, gravRadius: 250, gravForce: 350, sprite: "catplanet"},
-        {objectType: 'planet', x: 0, y: -470, gravRadius: 200, gravForce: 350, sprite: "blueyarn"},
+        {objectType: 'planet', x: 0, y: -471, gravRadius: 200, gravForce: 350, sprite: "blueyarn"},
         {objectType: 'planet', x: 0, y: 470, gravRadius: 200, gravForce: 350, sprite: "redyarn"},
         {objectType: 'planet', x: 470, y: 0, gravRadius: 200, gravForce: 350, sprite: "greenyarn"},
         {objectType: 'planet', x: -470, y: 0, gravRadius: 200, gravForce: 350, sprite: "purpleyarn"},
@@ -305,9 +302,31 @@ var level = [
     ] //level 13 - maze
 ];
 
+var initializeVariables = function () {
+    enemy1Present = false;
+    enemy2Present = false;
+
+    userInterfaceEnabled = true;
+
+    score = 0;
+
+    transitioning = false;
+
+    levelCenterX = 0;
+    levelCenterY = 0;
+    levelBoundaryRadius = 2000;
+    
+    playerPrevX = 0;
+    playerPrevY = 0;
+
+    currentLevel = 0;
+};
+
 playGame.prototype = {
-    init:function(currentLevel){
-        this.currentLevel = currentLevel;
+    init: function(level){
+        initializeVariables();
+
+        currentLevel = level;
         
         //level unlock checker
         if (currentLevel === 1) {

@@ -363,17 +363,17 @@ function addPageOneButtons() {
     buttons[8].scale.y = 0.3;
     buttons[8].inputEnabled = true;
 
-    //reset progress button
-    resetButton = game.add.button(205, 145, "reset_placeholder", resetProgress, this);
-    resetButton.scale.x = 0.3;
-    resetButton.scale.y = 0.3;
-    resetButton.inputEnabled = true;
-
-    //unlock all levels button
-    unlockButton = game.add.button(355, 145, "unlock_placeholder", unlockAll, this);
-    unlockButton.scale.x = 0.3;
-    unlockButton.scale.y = 0.3;
-    unlockButton.inputEnabled = true;
+//    //reset progress button
+//    resetButton = game.add.button(205, 145, "reset_placeholder", resetProgress, this);
+//    resetButton.scale.x = 0.3;
+//    resetButton.scale.y = 0.3;
+//    resetButton.inputEnabled = true;
+//
+//    //unlock all levels button
+//    unlockButton = game.add.button(355, 145, "unlock_placeholder", unlockAll, this);
+//    unlockButton.scale.x = 0.3;
+//    unlockButton.scale.y = 0.3;
+//    unlockButton.inputEnabled = true;
 }
 
 function addPageTwoButtons() {

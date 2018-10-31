@@ -214,7 +214,7 @@ function enableMenu1Inputs() {
 }
 
 function enableMenu2Inputs() {
-    for (i = 9; i < 14; i++) {
+    for (i = 10; i < 14; i++) {
         if (localStorage.getItem("Level" + i.toString()) == "true") {
             buttons[i-1].inputEnabled = true;
             buttonBG[i-1].inputEnabled = true;
@@ -282,7 +282,6 @@ function addPageOneButtons() {
     buttons[1] = game.add.button(265,200,"two",buttonTwo,this);
     buttons[1].scale.x = 0.3;
     buttons[1].scale.y = 0.3;
-    buttons[1].inputEnabled = true;
 
     //Level Three
     buttonBG[2] = game.add.button(471,191,"background",buttonThree,this);
@@ -293,7 +292,6 @@ function addPageOneButtons() {
     buttons[2] = game.add.button(480,200,"three",buttonThree,this);
     buttons[2].scale.x = 0.3;
     buttons[2].scale.y = 0.3;
-    buttons[2].inputEnabled = true;
 
     //Level Four
     buttonBG[3] = game.add.button(41,356,"background",buttonFour,this);
@@ -304,7 +302,6 @@ function addPageOneButtons() {
     buttons[3] = game.add.button(50,365,"four",buttonFour,this);
     buttons[3].scale.x = 0.3;
     buttons[3].scale.y = 0.3;
-    buttons[3].inputEnabled = true;
 
     //Level Five
     buttonBG[4] = game.add.button(256,356,"background",buttonFive,this);
@@ -315,7 +312,6 @@ function addPageOneButtons() {
     buttons[4] = game.add.button(265,365,"five",buttonFive,this);
     buttons[4].scale.x = 0.3;
     buttons[4].scale.y = 0.3;
-    buttons[4].inputEnabled = true;
 
     //Level Six
     buttonBG[5] = game.add.button(471,356,"background",buttonSix,this);
@@ -326,7 +322,6 @@ function addPageOneButtons() {
     buttons[5] = game.add.button(480,365,"six",buttonSix,this);
     buttons[5].scale.x = 0.3;
     buttons[5].scale.y = 0.3;
-    buttons[5].inputEnabled = true;
 
 
     //Level Seven
@@ -338,7 +333,6 @@ function addPageOneButtons() {
     buttons[6] = game.add.button(50,530,"seven",buttonSeven,this);
     buttons[6].scale.x = 0.3;
     buttons[6].scale.y = 0.3;
-    buttons[6].inputEnabled = true;
 
     //Level Eight
     buttonBG[7] = game.add.button(256,521,"background",buttonEight,this);
@@ -349,7 +343,6 @@ function addPageOneButtons() {
     buttons[7] = game.add.button(265,530,"eight",buttonEight,this);
     buttons[7].scale.x = 0.3;
     buttons[7].scale.y = 0.3;
-    buttons[7].inputEnabled = true;
 
 
     //Level Nine
@@ -361,7 +354,6 @@ function addPageOneButtons() {
     buttons[8] = game.add.button(480,530,"nine",buttonNine,this);
     buttons[8].scale.x = 0.3;
     buttons[8].scale.y = 0.3;
-    buttons[8].inputEnabled = true;
 
 //    //reset progress button
 //    resetButton = game.add.button(205, 145, "reset_placeholder", resetProgress, this);
@@ -415,7 +407,6 @@ function addPageTwoButtons() {
     buttons[10] = game.add.button(265,200,"eleven",buttonEleven,this);
     buttons[10].scale.x = 0.3;
     buttons[10].scale.y = 0.3;
-    buttons[10].inputEnabled = true;
 
     //Level Twelve
     buttonBG[11] = game.add.button(471,191,"background",buttonTwelve,this);
@@ -426,7 +417,6 @@ function addPageTwoButtons() {
     buttons[11] = game.add.button(480,200,"twelve",buttonTwelve,this);
     buttons[11].scale.x = 0.3;
     buttons[11].scale.y = 0.3;
-    buttons[11].inputEnabled = true;
 
     //Level Thirteen
     buttonBG[12] = game.add.button(41,356,"background",buttonThirteen,this);
@@ -437,7 +427,6 @@ function addPageTwoButtons() {
     buttons[12] = game.add.button(50,365,"thirteen",buttonThirteen,this);
     buttons[12].scale.x = 0.3;
     buttons[12].scale.y = 0.3;
-    buttons[12].inputEnabled = true;
 
     //Level Fourteen
     buttonBG[13] = game.add.button(256,356,"background",buttonFourteen,this);
@@ -448,7 +437,6 @@ function addPageTwoButtons() {
     buttons[13] = game.add.button(265,365,"fourteen",buttonFourteen,this);
     buttons[13].scale.x = 0.3;
     buttons[13].scale.y = 0.3;
-    buttons[13].inputEnabled = true;
 }
 
 

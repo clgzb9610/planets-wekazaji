@@ -114,7 +114,16 @@ function playTheGame(){
     game.time.events.add(500, fadeComplete, this);
 }
 
-function openLevelSelect(){
+//function openLevelSelect(){
+//    game.state.start("levelSelect", true, false, 0);
+//}
+
+function openLevelSelect() {
+    game.camera.fade('#000000',500);
+    game.time.events.add(500, levelSelectComplete, this);
+}
+
+function levelSelectComplete() {
     game.state.start("levelSelect", true, false, 0);
 }
 

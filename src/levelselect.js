@@ -73,7 +73,7 @@ levelSelect.prototype = {
     },
     update:function() {
         levelBackground.tilePosition.x -= 1;
-        if (screen2 == true) {levelBackground2.tilePosition.x -= 1;}
+        if (screen2 === true) {levelBackground2.tilePosition.x -= 1;}
         
         enableButtonHovers();
 
@@ -97,7 +97,7 @@ function enableButtonHovers() {
         else {buttons[i].alpha = 1;}
     }
 
-    if (screen2 == true) {
+    if (screen2 === true) {
         for (i = 9; i < 14; i++) {
             if (buttons[i].input.pointerOver()) {buttons[i].alpha=0.7}
             else {buttons[i].alpha = 1};
@@ -206,7 +206,7 @@ function enableMenu1Inputs() {
     buttons[0].inputEnabled = true;
     buttonBG[0].inputEnabled = true;
     for (i = 2; i < 10; i++) {
-        if (localStorage.getItem("Level" + i.toString()) == "true") {
+        if (localStorage.getItem("Level" + i.toString()) === "true") {
             buttons[i-1].inputEnabled = true;
             buttonBG[i-1].inputEnabled = true;
         }
@@ -215,7 +215,7 @@ function enableMenu1Inputs() {
 
 function enableMenu2Inputs() {
     for (i = 10; i < 14; i++) {
-        if (localStorage.getItem("Level" + i.toString()) == "true") {
+        if (localStorage.getItem("Level" + i.toString()) === "true") {
             buttons[i-1].inputEnabled = true;
             buttonBG[i-1].inputEnabled = true;
         }

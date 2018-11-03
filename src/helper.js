@@ -410,10 +410,33 @@ var Helper = function(game){
     };
 
     this.playerDistanceFromLevelCenter = function () {
-        let a = player.x - levelCenterX,
-            b = player.y - levelCenterY;
+        let offsetX = player.width / 2,
+            offsetY = player.height / 2;
 
-        return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+        let corner1X = player.x + -offsetX*Math.cos(player.angle) - offsetY*Math.sin(player.angle),
+            corner1Y = player.y + -offsetX*Math.cos(player.angle) + offsetY*Math.sin(player.angle);
+
+        let corner2X = player.x + offsetX*Math.cos(player.angle) - offsetY*Math.sin(player.angle),
+            corner2Y = player.y + offsetX*Math.cos(player.angle) + offsetY*Math.sin(player.angle);
+            
+        let corner3X = player.x + offsetX*Math.cos(player.angle) - -offsetY*Math.sin(player.angle),
+            corner3Y = player.y + offsetX*Math.cos(player.angle) + -offsetY*Math.sin(player.angle);
+            
+        let corner4X = player.x + -offsetX*Math.cos(player.angle) - -offsetY*Math.sin(player.angle),
+            corner4Y = player.y + -offsetX*Math.cos(player.angle) + -offsetY*Math.sin(player.angle);
+        
+        let corners = [
+            [corner1X, corner1Y],
+            [corner2X, corner2Y],
+            [corner3X, corner3Y],
+            [corner4X, corner4Y]
+        ]
+
+        let cornerDistances = corners.map(function (coords) {
+            return Math.sqrt(Math.pow(coords[0] - levelCenterX, 2) + Math.pow(coords[1] - levelCenterY, 2));
+        });
+
+        return Math.max(...cornerDistances);
     };
 
 };

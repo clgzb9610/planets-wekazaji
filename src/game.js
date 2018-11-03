@@ -52,9 +52,6 @@ var levelCenterX,
     levelCenterY,
     levelBoundaryRadius;
 
-var playerPrevX,
-    playerPrevY;
-
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 var levelBoundary;
@@ -315,9 +312,6 @@ var initializeVariables = function () {
     levelCenterX = 0;
     levelCenterY = 0;
     levelBoundaryRadius = 2000;
-    
-    playerPrevX = 0;
-    playerPrevY = 0;
 
     currentLevel = 0;
 };
@@ -550,15 +544,19 @@ playGame.prototype = {
             gamePhysics.constrainVelocity(player,150);
 
             if (helper.playerDistanceFromLevelCenter() >= levelBoundaryRadius) {
-                player.body.x = playerPrevX;
-                player.body.y = playerPrevY;
+                let playerVector = Math.sqrt(
+                    Math.pow(player.body.velocity.x, 2) + 
+                    Math.pow(player.body.velocity.y, 2)
+                );
+                let deltaX = player.body.x - levelCenterX,
+                    deltaY = player.body.y - levelCenterY,
+                    angleFromCenter = Math.atan2(deltaY, deltaX);
+                
+                let xImpulse = -0.9 * playerVector * Math.cos(angleFromCenter);
+                let yImpulse = -0.9 * playerVector * Math.sin(angleFromCenter);
 
-                // player.body.velocity.x *= -0.7;
-                // player.body.velocity.y *= -0.7;
-            }
-            else {
-                playerPrevX = player.body.x;
-                playerPrevY = player.body.y;
+                player.body.velocity.x = xImpulse;
+                player.body.velocity.y = yImpulse;
             }
         }
     },

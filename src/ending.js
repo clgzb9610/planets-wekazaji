@@ -95,6 +95,7 @@ function replayTheGame(){
 
 function refadeComplete(){
     destroyEndStateObjects();
+    currentSlide = 0;
     game.state.start("PlayGame", true, false, 0, currentLevel = 0);
 }
 
@@ -104,6 +105,7 @@ function endBackToMenu(){
 }
 function endFadeCompleteMenu(){
     destroyEndStateObjects();
+    currentSlide = 0;
     game.state.start("MainMenu", true, false, 0);
 }
 

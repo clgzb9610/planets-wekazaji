@@ -84,7 +84,7 @@ var Helper = function(game){
             gearsPerRow = Math.floor(450 / (imageWidth + 2));
 
         // filledInGear.anchor.set(1, 0);
-        filledInGear.anchor.set(0.5, 0);
+        filledInGear.anchor.set(0.5, -.1);
         filledInGear.setScaleMinMax(gearUIScale);
         userInterface.add(filledInGear);
 

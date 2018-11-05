@@ -17,8 +17,6 @@ var L2on;
 var level_title2;
 var nextArrowL2;
 
-
-
 levelSelect.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");
@@ -39,11 +37,10 @@ levelSelect.prototype = {
         game.load.image("reset_placeholder", "assets/levelSelect/resetplaceholder.png");
         game.load.image("unlock_placeholder", "assets/levelSelect/unlockplaceholder.png");
         game.load.image("background", "assets/levelSelect/background.png");
+        game.load.image("blackScreen", "assets/game/blackScreen.png");
         game.load.spritesheet("level_title", "assets/levelSelect/levelSelectSheet.png", 700, 90);
         game.load.image("nextArrow", "assets/levelSelect/nextArrow.png");
         game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
-        
-
     },
     create:function () {
         //set up background and title banners
@@ -70,10 +67,15 @@ levelSelect.prototype = {
 
         //Level Unlock Logic
         checkLevelProgress();
+
+        blackScreen = game.add.sprite(0, 0, "blackScreen");
+        blackScreen.scale.setTo(2, 2);
+        blackScreen.anchor.set(0.5, 0.5);
+        game.add.tween(blackScreen).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
     },
     update:function() {
         levelBackground.tilePosition.x -= 1;
-        if (screen2 == true) {levelBackground2.tilePosition.x -= 1;}
+        if (screen2 === true) {levelBackground2.tilePosition.x -= 1;}
         
         enableButtonHovers();
 
@@ -97,7 +99,7 @@ function enableButtonHovers() {
         else {buttons[i].alpha = 1;}
     }
 
-    if (screen2 == true) {
+    if (screen2 === true) {
         for (i = 9; i < 14; i++) {
             if (buttons[i].input.pointerOver()) {buttons[i].alpha=0.7}
             else {buttons[i].alpha = 1};
@@ -105,60 +107,75 @@ function enableButtonHovers() {
     }
 }
 
+function startLevel(levelNum) {
+    blackScreen = game.add.sprite(0, 0, "blackScreen");
+    blackScreen.alpha = 0;
+    blackScreen.scale.setTo(2, 2);
+    blackScreen.anchor.set(0.5, 0.5);
+    game.add.tween(blackScreen).to(
+        {alpha: 1},
+        200,
+        Phaser.Easing.Linear.None,
+        true
+    ).onComplete.add(function () {
+        game.state.start("PlayGame", true, true, level = levelNum);
+    });
+}
+
 function buttonOne() {
-    game.state.start("PlayGame", true, true, level = 0);
+    startLevel(0);
 }
 
 function buttonTwo() {
-    game.state.start("PlayGame", true, true, level = 1);
+    startLevel(1);
 }
 
 function buttonThree() {
-    game.state.start("PlayGame", true, true, level = 2);
+    startLevel(2);
 }
 
 function buttonFour() {
-    game.state.start("PlayGame", true, true, level = 3);
+    startLevel(3);
 }
 
 function buttonFive() {
-    game.state.start("PlayGame", true, true, level = 4);
+    startLevel(4);
 }
 
 function buttonSix() {
-    game.state.start("PlayGame", true, true, level = 5);
+    startLevel(5);
 }
 
 function buttonSeven() {
-    game.state.start("PlayGame", true, true, level = 6);
+    startLevel(6);
 }
 
 function buttonEight() {
-    game.state.start("PlayGame", true, true, level = 7);
+    startLevel(7);
 }
 
 function buttonNine() {
-    game.state.start("PlayGame", true, true, level = 8);
+    startLevel(8);
 }
 
 function buttonTen() {
-    game.state.start("PlayGame", true, true, level = 9);
+    startLevel(9);
 }
 
 function buttonEleven() {
-    game.state.start("PlayGame", true, true, level = 10);
+    startLevel(10);
 }
 
 function buttonTwelve() {
-    game.state.start("PlayGame", true, true, level = 11);
+    startLevel(11);
 }
 
 function buttonThirteen() {
-    game.state.start("PlayGame", true, true, level = 12);
+    startLevel(12);
 }
 
 function buttonFourteen() {
-    game.state.start("PlayGame", true, true, level = 13);
+    startLevel(13);
 }
 
 
@@ -206,7 +223,7 @@ function enableMenu1Inputs() {
     buttons[0].inputEnabled = true;
     buttonBG[0].inputEnabled = true;
     for (i = 2; i < 10; i++) {
-        if (localStorage.getItem("Level" + i.toString()) == "true") {
+        if (localStorage.getItem("Level" + i.toString()) === "true") {
             buttons[i-1].inputEnabled = true;
             buttonBG[i-1].inputEnabled = true;
         }
@@ -214,8 +231,8 @@ function enableMenu1Inputs() {
 }
 
 function enableMenu2Inputs() {
-    for (i = 9; i < 14; i++) {
-        if (localStorage.getItem("Level" + i.toString()) == "true") {
+    for (i = 10; i < 14; i++) {
+        if (localStorage.getItem("Level" + i.toString()) === "true") {
             buttons[i-1].inputEnabled = true;
             buttonBG[i-1].inputEnabled = true;
         }
@@ -231,7 +248,18 @@ function disableMenu1Inputs() {
 }
 
 function backtoMenu() {
-    game.state.start("MainMenu",1,1);
+    blackScreen = game.add.sprite(0, 0, "blackScreen");
+    blackScreen.alpha = 0;
+    blackScreen.scale.setTo(2, 2);
+    blackScreen.anchor.set(0.5, 0.5);
+    game.add.tween(blackScreen).to(
+        {alpha: 1},
+        200,
+        Phaser.Easing.Linear.None,
+        true
+    ).onComplete.add(function () {
+        game.state.start("MainMenu",1,1)
+    });
 }
 
 function resetProgress() {
@@ -282,7 +310,6 @@ function addPageOneButtons() {
     buttons[1] = game.add.button(265,200,"two",buttonTwo,this);
     buttons[1].scale.x = 0.3;
     buttons[1].scale.y = 0.3;
-    buttons[1].inputEnabled = true;
 
     //Level Three
     buttonBG[2] = game.add.button(471,191,"background",buttonThree,this);
@@ -293,7 +320,6 @@ function addPageOneButtons() {
     buttons[2] = game.add.button(480,200,"three",buttonThree,this);
     buttons[2].scale.x = 0.3;
     buttons[2].scale.y = 0.3;
-    buttons[2].inputEnabled = true;
 
     //Level Four
     buttonBG[3] = game.add.button(41,356,"background",buttonFour,this);
@@ -304,7 +330,6 @@ function addPageOneButtons() {
     buttons[3] = game.add.button(50,365,"four",buttonFour,this);
     buttons[3].scale.x = 0.3;
     buttons[3].scale.y = 0.3;
-    buttons[3].inputEnabled = true;
 
     //Level Five
     buttonBG[4] = game.add.button(256,356,"background",buttonFive,this);
@@ -315,7 +340,6 @@ function addPageOneButtons() {
     buttons[4] = game.add.button(265,365,"five",buttonFive,this);
     buttons[4].scale.x = 0.3;
     buttons[4].scale.y = 0.3;
-    buttons[4].inputEnabled = true;
 
     //Level Six
     buttonBG[5] = game.add.button(471,356,"background",buttonSix,this);
@@ -326,7 +350,6 @@ function addPageOneButtons() {
     buttons[5] = game.add.button(480,365,"six",buttonSix,this);
     buttons[5].scale.x = 0.3;
     buttons[5].scale.y = 0.3;
-    buttons[5].inputEnabled = true;
 
 
     //Level Seven
@@ -338,7 +361,6 @@ function addPageOneButtons() {
     buttons[6] = game.add.button(50,530,"seven",buttonSeven,this);
     buttons[6].scale.x = 0.3;
     buttons[6].scale.y = 0.3;
-    buttons[6].inputEnabled = true;
 
     //Level Eight
     buttonBG[7] = game.add.button(256,521,"background",buttonEight,this);
@@ -349,7 +371,6 @@ function addPageOneButtons() {
     buttons[7] = game.add.button(265,530,"eight",buttonEight,this);
     buttons[7].scale.x = 0.3;
     buttons[7].scale.y = 0.3;
-    buttons[7].inputEnabled = true;
 
 
     //Level Nine
@@ -361,7 +382,6 @@ function addPageOneButtons() {
     buttons[8] = game.add.button(480,530,"nine",buttonNine,this);
     buttons[8].scale.x = 0.3;
     buttons[8].scale.y = 0.3;
-    buttons[8].inputEnabled = true;
 
 //    //reset progress button
 //    resetButton = game.add.button(205, 145, "reset_placeholder", resetProgress, this);
@@ -415,7 +435,6 @@ function addPageTwoButtons() {
     buttons[10] = game.add.button(265,200,"eleven",buttonEleven,this);
     buttons[10].scale.x = 0.3;
     buttons[10].scale.y = 0.3;
-    buttons[10].inputEnabled = true;
 
     //Level Twelve
     buttonBG[11] = game.add.button(471,191,"background",buttonTwelve,this);
@@ -426,7 +445,6 @@ function addPageTwoButtons() {
     buttons[11] = game.add.button(480,200,"twelve",buttonTwelve,this);
     buttons[11].scale.x = 0.3;
     buttons[11].scale.y = 0.3;
-    buttons[11].inputEnabled = true;
 
     //Level Thirteen
     buttonBG[12] = game.add.button(41,356,"background",buttonThirteen,this);
@@ -437,7 +455,6 @@ function addPageTwoButtons() {
     buttons[12] = game.add.button(50,365,"thirteen",buttonThirteen,this);
     buttons[12].scale.x = 0.3;
     buttons[12].scale.y = 0.3;
-    buttons[12].inputEnabled = true;
 
     //Level Fourteen
     buttonBG[13] = game.add.button(256,356,"background",buttonFourteen,this);
@@ -448,7 +465,6 @@ function addPageTwoButtons() {
     buttons[13] = game.add.button(265,365,"fourteen",buttonFourteen,this);
     buttons[13].scale.x = 0.3;
     buttons[13].scale.y = 0.3;
-    buttons[13].inputEnabled = true;
 }
 
 

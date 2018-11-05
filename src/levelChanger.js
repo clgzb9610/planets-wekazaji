@@ -46,7 +46,7 @@ var LevelChanger = function(game){
         var unlock14 = localStorage.setItem("Level14","true");
         }
         
-        if(!levels[currentLevel]) {          //go to ending state if you pass the last level
+        if(!levels[currentLevel]) {  //go to ending state if you pass the last level
             bgm.destroy();
             player.destroy();
             game.physics.clear();
@@ -213,6 +213,11 @@ var LevelChanger = function(game){
 
 
     function addUI(){
+        if(tutorialShown === false){
+            game.time.events.add(Phaser.Timer.SECOND * 1.5 , levelChanger.showControlTutorial, this);
+            tutorialShown = true;
+        }
+
         //pause button in game
         newPause = game.add.button(304, 334, "newPause");
         newPause.anchor.set(0.5);
@@ -311,14 +316,14 @@ var LevelChanger = function(game){
 
     function addGearOutlines () {
         for (var i = 0; i < levelGoal; i++) {
-            let gearOutline = game.add.image(0, 0, "gearOutline"),s
+            let gearOutline = game.add.image(0, 0, "gearOutline"),
                 gearOutlineWidth = gearOutline.width * gearUIScale,
                 gearOutlineHeight = gearOutline.height * gearUIScale,
                 gearsPerRow = Math.floor(450 / (gearOutlineWidth + 2));
 
             gearOutline.setScaleMinMax(gearUIScale);
             // gearOutline.anchor.set(1, 0);
-            gearOutline.anchor.set(0.5,0);
+            gearOutline.anchor.set(0.5,-.125);
             userInterface.add(gearOutline);
 
             var gearOutlineStartx = ((gearOutlineWidth + 2)/2) - (((gearOutlineWidth + 2) * (levelGoal))/2);
@@ -327,6 +332,17 @@ var LevelChanger = function(game){
             gearOutline.y = -285 + 2 + (gearOutlineHeight + 2) * Math.floor(i / gearsPerRow);
         }
     }
+
+    this.showControlTutorial = function(){
+        controlTutorial_rightleft = game.add.sprite(-40, -120, "controlTutorial_leftright");
+        controlTutorial_rightleft.scale.setTo(0.3);
+        controlTutorial_rightleft.animations.add('keyboardPress',[0,1,2,3],5, true);
+        controlTutorial_rightleft.animations.play('keyboardPress');
+        userInterface.add(controlTutorial_rightleft);
+        controlTutorial_rightleft.alpha = 0;
+        game.add.tween(controlTutorial_rightleft).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
+        game.add.tween(controlTutorial_rightleft).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true, 3500, 0, false);
+    };
 
     // a couple of housekeeping things to prepare to change between levels.
     // stop taking in user input, reset all the buttons currently being pressed, make the player character stand,
@@ -342,7 +358,7 @@ var LevelChanger = function(game){
         cursors.down.reset(true);
         player.animations.play('stand');
 
-        blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
+        blackScreen = game.add.sprite(player.body.x, player.body.y, "blackScreen");
         blackScreen.scale.setTo(2, 2);
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;

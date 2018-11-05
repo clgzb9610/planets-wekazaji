@@ -52,9 +52,6 @@ var levelCenterX,
     levelCenterY,
     levelBoundaryRadius;
 
-var playerPrevX,
-    playerPrevY;
-
 // graphic object where to draw planet gravity area
 var gravityGraphics;
 var levelBoundary;
@@ -67,6 +64,7 @@ var vortexAudio;
 var gearTing;
 
 var currentLevel;
+var tutorialShown = false;
 
 //var levelUnlock1 = localStorage.setItem("Level1","1");
 
@@ -315,9 +313,6 @@ var initializeVariables = function () {
     levelCenterX = 0;
     levelCenterY = 0;
     levelBoundaryRadius = 2000;
-    
-    playerPrevX = 0;
-    playerPrevY = 0;
 
     currentLevel = 0;
 };
@@ -440,6 +435,7 @@ playGame.prototype = {
         game.load.image("resumeButton_hover", "assets/game/resumeButton_hover.png");
         game.load.image("toMainButton", "assets/game/toMainButton.png");
         game.load.image("toMainButton_hover", "assets/game/toMainButton_hover.png");
+        game.load.spritesheet("controlTutorial_leftright", "assets/game/controlTutorial_sheet.png", 252, 165);
 
         game.load.audio('jetpack', "assets/music/jetpackAudio.mp3");
         game.load.audio('vortex', "assets/music/VortexSoundEffect.mp3");
@@ -518,6 +514,13 @@ playGame.prototype = {
         player.body.friction = 1;
 
         cursors = game.input.keyboard.createCursorKeys();
+        
+        game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
+
+        blackScreen = game.add.sprite(0, 0, "blackScreen");
+        blackScreen.scale.setTo(2, 2);
+        blackScreen.anchor.set(0.5, 0.5);
+        game.add.tween(blackScreen).to({alpha: 0}, 500, Phaser.Easing.Linear.None, true);
     },
 
     update: function(){
@@ -541,8 +544,6 @@ playGame.prototype = {
             //the user interface moves around relative to the player, since the camera can't spin
             helper.moveUI(playerAngle);
 
-            game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
-
             //Handle keyboard input for the player
             helper.handleKeyboardInput(playerAngle);
 
@@ -550,15 +551,19 @@ playGame.prototype = {
             gamePhysics.constrainVelocity(player,150);
 
             if (helper.playerDistanceFromLevelCenter() >= levelBoundaryRadius) {
-                player.body.x = playerPrevX;
-                player.body.y = playerPrevY;
+                let playerVector = Math.sqrt(
+                    Math.pow(player.body.velocity.x, 2) + 
+                    Math.pow(player.body.velocity.y, 2)
+                );
+                let deltaX = player.body.x - levelCenterX,
+                    deltaY = player.body.y - levelCenterY,
+                    angleFromCenter = Math.atan2(deltaY, deltaX);
+                
+                let xImpulse = -0.9 * playerVector * Math.cos(angleFromCenter);
+                let yImpulse = -0.9 * playerVector * Math.sin(angleFromCenter);
 
-                // player.body.velocity.x *= -0.7;
-                // player.body.velocity.y *= -0.7;
-            }
-            else {
-                playerPrevX = player.body.x;
-                playerPrevY = player.body.y;
+                player.body.velocity.x = xImpulse;
+                player.body.velocity.y = yImpulse;
             }
         }
     },

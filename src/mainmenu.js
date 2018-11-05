@@ -8,6 +8,11 @@ var playButton;
 var closeButton;
 var levelButton;
 var credits;
+var music;
+
+var skipButton, startNextSlideButton;
+var startStory = ["start1", "start2", "start3", "start4", "start5", "start6", "start7"];
+var currentStartSlide = 0;
 
 mainMenu.prototype = {
     preload:function(){
@@ -29,6 +34,19 @@ mainMenu.prototype = {
         game.load.image("music_page", "assets/mainMenu/newMusic.png");
         game.load.image("closeButton", "assets/mainMenu/closeButton.png");
         game.load.image("closeButton_hover", "assets/mainMenu/closeButton_hover.png");
+
+        game.load.image("start1", "assets/mainMenu/start1.png");
+        game.load.image("start2", "assets/mainMenu/start2.png");
+        game.load.image("start3", "assets/mainMenu/start3.png");
+        game.load.image("start4", "assets/mainMenu/start4.png");
+        game.load.image("start5", "assets/mainMenu/start5.png");
+        game.load.image("start6", "assets/mainMenu/start6.png");
+        game.load.image("start7", "assets/mainMenu/start7.png");
+
+        game.load.image("skipButton", "assets/mainMenu/skipButton.png");
+        game.load.image("skipButton_hover", "assets/mainMenu/skipButton_hover.png");
+        game.load.image("nextSlideButton", "assets/ending/nextSlideButton.png");
+        game.load.image("nextSlideButton_hover", "assets/ending/nextSlideButton_hover.png");
 
     },
     create:function () {
@@ -66,7 +84,7 @@ mainMenu.prototype = {
         }
 
 
-        playButton = game.add.button(200,560,"newPlay",playTheGame,this);
+        playButton = game.add.button(200,560,"newPlay",fadeToStory,this);
         playButton.scale.x = 0.4;
         playButton.scale.y = 0.4;
         playButton.inputEnabled = true;
@@ -86,21 +104,35 @@ mainMenu.prototype = {
         music.scale.y = 0.2;
         music.inputEnabled = true;
 
+        startNextSlideButton = game.add.button(570, 570, "nextSlideButton", startNextSlide, this);
+        startNextSlideButton.scale.setTo(0.4);
+        startNextSlideButton.inputEnabled = true;
+        startNextSlideButton.visible = false;
+
+        skipButton = game.add.button(460, 620, "skipButton", playTheGame, this);
+        skipButton.scale.setTo(0.35);
+        skipButton.inputEnabled = true;
+        skipButton.visible = false;
+
+        // blackScreen = game.add.sprite(0, 0, "blackScreen");
+        // blackScreen.scale.setTo(2, 2);
+        // blackScreen.anchor.set(0.5, 0.5);
+        // game.add.tween(blackScreen).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
     },
     update:function() {
         menuBack.tilePosition.x -= 1;
-
         if (playButton.input.pointerOver()) {playButton.loadTexture('newPlayHover', 0);}
         else {playButton.loadTexture('newPlay', 0);}
-
         if (levelButton.input.pointerOver()) {levelButton.loadTexture('newLevelHover', 0);}
         else {levelButton.loadTexture('newLevels', 0);}
-
         if (credits.input.pointerOver()) {credits.loadTexture('newCreditHover', 0);}
         else {credits.loadTexture('newCredit', 0);}
-
         if (music.input.pointerOver()) {music.loadTexture('newMusicHover', 0);}
         else {music.loadTexture('newMusic', 0);}
+        if (startNextSlideButton.input.pointerOver()) {startNextSlideButton.loadTexture('nextSlideButton_hover', 0);}
+        else {startNextSlideButton.loadTexture('nextSlideButton', 0);}
+        if (skipButton.input.pointerOver()) {skipButton.loadTexture('skipButton_hover', 0);}
+        else {skipButton.loadTexture('skipButton', 0);}
     },
     render: function () {
         if (showDebugInfo) {
@@ -109,17 +141,59 @@ mainMenu.prototype = {
     }
 };
 
+function fadeToStory(){
+    game.time.events.add(500, startNextSlide, this);
+
+    playButton.inputEnabled = false;
+    levelButton.inputEnabled = false;
+    credits.inputEnabled = false;
+    music.inputEnabled = false;
+}
+
+function startNextSlide(){
+    console.log(startStory[currentStartSlide]);
+    if(currentStartSlide === 0){
+        startNextSlideButton.visible = true;
+        skipButton.visible = true;
+        startNextSlideButton.alpha = 0;
+        skipButton.alpha = 0;
+        game.add.tween(startNextSlideButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+        game.add.tween(skipButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+    }
+    var slide = game.add.sprite(0, 0, startStory[currentStartSlide]);
+    slide.alpha = 0;
+    game.add.tween(slide).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+
+    startNextSlideButton.bringToTop();
+    skipButton.bringToTop();
+
+    if(currentStartSlide === 7){
+        playTheGame();
+    }
+    currentStartSlide++;
+}
+
 function playTheGame(){
     game.camera.fade('#000000',500);
     game.time.events.add(500, fadeComplete, this);
 }
 
-function openLevelSelect(){
+//function openLevelSelect(){
+//    game.state.start("levelSelect", true, false, 0);
+//}
+
+function openLevelSelect() {
+    game.camera.fade('#000000',150);
+    game.time.events.add(150, levelSelectComplete, this);
+}
+
+function levelSelectComplete() {
     game.state.start("levelSelect", true, false, 0);
 }
 
 function fadeComplete(){
     menuBGM.pause();
+    currentStartSlide = 0;
     game.state.start("PlayGame", true, false, 0);
 }
 

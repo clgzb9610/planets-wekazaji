@@ -64,6 +64,7 @@ var vortexAudio;
 var gearTing;
 
 var currentLevel;
+var tutorialShown = false;
 
 //var levelUnlock1 = localStorage.setItem("Level1","1");
 
@@ -434,6 +435,7 @@ playGame.prototype = {
         game.load.image("resumeButton_hover", "assets/game/resumeButton_hover.png");
         game.load.image("toMainButton", "assets/game/toMainButton.png");
         game.load.image("toMainButton_hover", "assets/game/toMainButton_hover.png");
+        game.load.spritesheet("controlTutorial_leftright", "assets/game/controlTutorial_sheet.png", 252, 165);
 
         game.load.audio('jetpack', "assets/music/jetpackAudio.mp3");
         game.load.audio('vortex', "assets/music/VortexSoundEffect.mp3");

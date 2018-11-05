@@ -213,6 +213,16 @@ var LevelChanger = function(game){
 
 
     function addUI(){
+        if(tutorialShown === false){
+            controlTutorial_rightleft = game.add.sprite(player.body.x+200, player.body.y+50, "controlTutorial_leftright");
+            controlTutorial_rightleft.scale.setTo(0.3);
+            controlTutorial_rightleft.animations.add('keyboardPress',[0,1,2,3],5, true);
+            controlTutorial_rightleft.animations.play('keyboardPress');
+            userInterface.add(controlTutorial_rightleft);
+            game.add.tween(controlTutorial_rightleft).to( { alpha: 0 }, 600, Phaser.Easing.Linear.None, true, 3500, 0, false);
+            tutorialShown = true;
+        }
+
         //pause button in game
         newPause = game.add.button(304, 334, "newPause");
         newPause.anchor.set(0.5);

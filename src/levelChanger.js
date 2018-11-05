@@ -46,7 +46,7 @@ var LevelChanger = function(game){
         var unlock14 = localStorage.setItem("Level14","true");
         }
         
-        if(!levels[currentLevel]) {          //go to ending state if you pass the last level
+        if(!levels[currentLevel]) {  //go to ending state if you pass the last level
             bgm.destroy();
             player.destroy();
             game.physics.clear();
@@ -352,7 +352,7 @@ var LevelChanger = function(game){
         cursors.down.reset(true);
         player.animations.play('stand');
 
-        blackScreen = game.add.sprite(game.world.centerX, game.world.centerX, "blackScreen");
+        blackScreen = game.add.sprite(player.body.x, player.body.y, "blackScreen");
         blackScreen.scale.setTo(2, 2);
         blackScreen.anchor.set(0.5, 0.5);
         blackScreen.alpha = 0;

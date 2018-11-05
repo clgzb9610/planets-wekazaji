@@ -35,6 +35,11 @@ ending.prototype = {
         slide1 = game.add.sprite(50, 30, 'slide1');
         slide1.anchor.setTo(0.5);
 
+        blackScreen = game.add.sprite(0, 0, "blackScreen");
+        blackScreen.scale.setTo(2, 2);
+        blackScreen.anchor.set(0.5, 0.5);
+        game.add.tween(blackScreen).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
+
         nextSlideButton = game.add.button(260, 260, "nextSlideButton");
         nextSlideButton.scale.setTo(0.4);
         nextSlideButton.inputEnabled = true;

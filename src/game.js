@@ -514,6 +514,13 @@ playGame.prototype = {
         player.body.friction = 1;
 
         cursors = game.input.keyboard.createCursorKeys();
+        
+        game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
+
+        blackScreen = game.add.sprite(0, 0, "blackScreen");
+        blackScreen.scale.setTo(2, 2);
+        blackScreen.anchor.set(0.5, 0.5);
+        game.add.tween(blackScreen).to({alpha: 0}, 500, Phaser.Easing.Linear.None, true);
     },
 
     update: function(){
@@ -536,8 +543,6 @@ playGame.prototype = {
             
             //the user interface moves around relative to the player, since the camera can't spin
             helper.moveUI(playerAngle);
-
-            game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
 
             //Handle keyboard input for the player
             helper.handleKeyboardInput(playerAngle);

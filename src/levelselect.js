@@ -107,60 +107,75 @@ function enableButtonHovers() {
     }
 }
 
+function startLevel(levelNum) {
+    blackScreen = game.add.sprite(0, 0, "blackScreen");
+    blackScreen.alpha = 0;
+    blackScreen.scale.setTo(2, 2);
+    blackScreen.anchor.set(0.5, 0.5);
+    game.add.tween(blackScreen).to(
+        {alpha: 1},
+        200,
+        Phaser.Easing.Linear.None,
+        true
+    ).onComplete.add(function () {
+        game.state.start("PlayGame", true, true, level = levelNum);
+    });
+}
+
 function buttonOne() {
-    game.state.start("PlayGame", true, true, level = 0);
+    startLevel(0);
 }
 
 function buttonTwo() {
-    game.state.start("PlayGame", true, true, level = 1);
+    startLevel(1);
 }
 
 function buttonThree() {
-    game.state.start("PlayGame", true, true, level = 2);
+    startLevel(2);
 }
 
 function buttonFour() {
-    game.state.start("PlayGame", true, true, level = 3);
+    startLevel(3);
 }
 
 function buttonFive() {
-    game.state.start("PlayGame", true, true, level = 4);
+    startLevel(4);
 }
 
 function buttonSix() {
-    game.state.start("PlayGame", true, true, level = 5);
+    startLevel(5);
 }
 
 function buttonSeven() {
-    game.state.start("PlayGame", true, true, level = 6);
+    startLevel(6);
 }
 
 function buttonEight() {
-    game.state.start("PlayGame", true, true, level = 7);
+    startLevel(7);
 }
 
 function buttonNine() {
-    game.state.start("PlayGame", true, true, level = 8);
+    startLevel(8);
 }
 
 function buttonTen() {
-    game.state.start("PlayGame", true, true, level = 9);
+    startLevel(9);
 }
 
 function buttonEleven() {
-    game.state.start("PlayGame", true, true, level = 10);
+    startLevel(10);
 }
 
 function buttonTwelve() {
-    game.state.start("PlayGame", true, true, level = 11);
+    startLevel(11);
 }
 
 function buttonThirteen() {
-    game.state.start("PlayGame", true, true, level = 12);
+    startLevel(12);
 }
 
 function buttonFourteen() {
-    game.state.start("PlayGame", true, true, level = 13);
+    startLevel(13);
 }
 
 

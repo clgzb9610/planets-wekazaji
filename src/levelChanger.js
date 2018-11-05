@@ -328,7 +328,7 @@ var LevelChanger = function(game){
 
             gearOutline.setScaleMinMax(gearUIScale);
             // gearOutline.anchor.set(1, 0);
-            gearOutline.anchor.set(0.5,-.1);
+            gearOutline.anchor.set(0.5,-.125);
             userInterface.add(gearOutline);
 
             var gearOutlineStartx = ((gearOutlineWidth + 2)/2) - (((gearOutlineWidth + 2) * (levelGoal))/2);

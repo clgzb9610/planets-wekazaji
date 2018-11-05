@@ -17,8 +17,6 @@ var L2on;
 var level_title2;
 var nextArrowL2;
 
-
-
 levelSelect.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");
@@ -39,11 +37,10 @@ levelSelect.prototype = {
         game.load.image("reset_placeholder", "assets/levelSelect/resetplaceholder.png");
         game.load.image("unlock_placeholder", "assets/levelSelect/unlockplaceholder.png");
         game.load.image("background", "assets/levelSelect/background.png");
+        game.load.image("blackScreen", "assets/game/blackScreen.png");
         game.load.spritesheet("level_title", "assets/levelSelect/levelSelectSheet.png", 700, 90);
         game.load.image("nextArrow", "assets/levelSelect/nextArrow.png");
         game.load.audio('bgm', "assets/music/Visager_-_01_-_The_Great_Tree_Loop.mp3");
-        
-
     },
     create:function () {
         //set up background and title banners
@@ -70,6 +67,11 @@ levelSelect.prototype = {
 
         //Level Unlock Logic
         checkLevelProgress();
+
+        blackScreen = game.add.sprite(0, 0, "blackScreen");
+        blackScreen.scale.setTo(2, 2);
+        blackScreen.anchor.set(0.5, 0.5);
+        game.add.tween(blackScreen).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
     },
     update:function() {
         levelBackground.tilePosition.x -= 1;
@@ -231,7 +233,18 @@ function disableMenu1Inputs() {
 }
 
 function backtoMenu() {
-    game.state.start("MainMenu",1,1);
+    blackScreen = game.add.sprite(0, 0, "blackScreen");
+    blackScreen.alpha = 0;
+    blackScreen.scale.setTo(2, 2);
+    blackScreen.anchor.set(0.5, 0.5);
+    game.add.tween(blackScreen).to(
+        {alpha: 1},
+        200,
+        Phaser.Easing.Linear.None,
+        true
+    ).onComplete.add(function () {
+        game.state.start("MainMenu",1,1)
+    });
 }
 
 function resetProgress() {

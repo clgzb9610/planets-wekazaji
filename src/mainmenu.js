@@ -114,6 +114,10 @@ mainMenu.prototype = {
         skipButton.inputEnabled = true;
         skipButton.visible = false;
 
+        // blackScreen = game.add.sprite(0, 0, "blackScreen");
+        // blackScreen.scale.setTo(2, 2);
+        // blackScreen.anchor.set(0.5, 0.5);
+        // game.add.tween(blackScreen).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
     },
     update:function() {
         menuBack.tilePosition.x -= 1;
@@ -179,8 +183,8 @@ function playTheGame(){
 //}
 
 function openLevelSelect() {
-    game.camera.fade('#000000',500);
-    game.time.events.add(500, levelSelectComplete, this);
+    game.camera.fade('#000000',150);
+    game.time.events.add(150, levelSelectComplete, this);
 }
 
 function levelSelectComplete() {

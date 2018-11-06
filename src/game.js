@@ -514,8 +514,6 @@ playGame.prototype = {
         player.body.friction = 1;
 
         cursors = game.input.keyboard.createCursorKeys();
-        
-        game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
 
         blackScreen = game.add.sprite(0, 0, "blackScreen");
         blackScreen.scale.setTo(2, 2);

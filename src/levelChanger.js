@@ -312,6 +312,8 @@ var LevelChanger = function(game){
         progressBarteleporter.animations.add('progressBarSwirl', [0, 1, 2, 3, 4, 5], 25, true);
 
         addGearOutlines();
+
+        game.world.bringToTop(userInterface);  //so that enemies/objects can't appear above UI
     }
 
     function addGearOutlines () {

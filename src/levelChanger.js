@@ -343,7 +343,16 @@ var LevelChanger = function(game){
         userInterface.add(controlTutorial_rightleft);
         controlTutorial_rightleft.alpha = 0;
         game.add.tween(controlTutorial_rightleft).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
-        game.add.tween(controlTutorial_rightleft).to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, true, 3500, 0, false);
+    };
+
+    this.removeControlTutorial = function(){
+        if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
+            keyPressedEndTutorial = true;
+        }
+        if(keyPressedEndTutorial === true && tutorialRemoved === false) {
+            game.add.tween(controlTutorial_rightleft).to({alpha: 0}, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+            tutorialRemoved = true;
+        }
     };
 
     // a couple of housekeeping things to prepare to change between levels.

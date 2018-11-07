@@ -345,12 +345,17 @@ var LevelChanger = function(game){
         game.add.tween(controlTutorial_rightleft).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
     };
 
-    this.removeControlTutorial = function(){
-        if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
+    this.removeControlTutorial = function() {
+        if (typeof controlTutorial_rightleft === "undefined") {
+            return;
+        }
+
+        if (cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown) {
             keyPressedEndTutorial = true;
         }
-        if(keyPressedEndTutorial === true && tutorialRemoved === false) {
-            game.add.tween(controlTutorial_rightleft).to({alpha: 0}, 500, Phaser.Easing.Linear.None, true, 0, 0, false);
+        if(keyPressedEndTutorial === true && tutorialRemoved === false && controlTutorial_rightleft.alpha === 1) {
+            console.log("I should be removing the control thing");
+            game.add.tween(controlTutorial_rightleft).to({alpha: 0}, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
             tutorialRemoved = true;
         }
     };

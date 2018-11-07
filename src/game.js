@@ -65,6 +65,9 @@ var gearTing;
 
 var currentLevel;
 var tutorialShown = false;
+var tutorialRemoved = false;
+var keyPressedEndTutorial = false;
+var controlTutorial_rightleft;
 
 //var levelUnlock1 = localStorage.setItem("Level1","1");
 
@@ -563,7 +566,9 @@ playGame.prototype = {
                 player.body.velocity.x = xImpulse;
                 player.body.velocity.y = yImpulse;
             }
+            levelChanger.removeControlTutorial();
         }
+
     },
     render: function () {
         if (showDebugInfo) {

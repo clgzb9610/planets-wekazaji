@@ -65,7 +65,15 @@ mainMenu.prototype = {
         menuBGM = game.add.audio('menuBGM');
         menuBGM.loop = true;
         menuBGM.volume = 0.6;
-        menuBGM.play();
+        let mediaPlaying = false;
+
+        document.querySelector("body").addEventListener("click", function startSound (event) {
+            event.target.removeEventListener(event.type, startSound);
+            if (!mediaPlaying) {
+                menuBGM.play();
+                mediaPlaying = true;
+            }
+        });
 
         // var title = game.add.sprite(70, 4, "newTitle");
         // title.scale.x = 0.8;

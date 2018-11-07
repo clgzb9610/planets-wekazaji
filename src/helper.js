@@ -215,6 +215,12 @@ var Helper = function(game){
                 jetpackAudio.play();
                 jetpackAudio.fadeTo(100, 0.65);
             }
+            if (cursors.down.isDown) {
+                player.animations.play('stand');
+            }
+            else {
+                player.animations.play('fall');
+            }
         }
         else {
             if (jetpackAudio.volume > 0) {

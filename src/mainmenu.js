@@ -14,6 +14,12 @@ var skipButton, startNextSlideButton;
 var startStory = ["start1", "start2", "start3", "start4", "start5", "start6", "start7"];
 var currentStartSlide = 0;
 
+// var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+// if(isSafari) {
+//
+// }
+
+
 mainMenu.prototype = {
     preload:function(){
         game.load.image("space", "assets/game/seamlessspacebright.png");

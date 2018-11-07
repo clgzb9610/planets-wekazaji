@@ -45,7 +45,7 @@ var Helper = function(game){
         let screenTween = game.add.tween(whiteScreen).to({ alpha: 1 }, 200);
         screenTween.start();
         screenTween.onComplete.add(function () {
-            game.time.events.add(150, function () { // Waits for 150ms to pass before running events
+            game.time.events.add(250, function () { // Waits for 150ms to pass before running events
                 game.time.slowMotion = 1;
                 levelChanger.resetLevel();
                 whiteScreen.bringToTop();

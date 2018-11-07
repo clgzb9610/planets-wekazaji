@@ -2,8 +2,8 @@ var ending = function (game) {};
 
 var endingBGM;
 var currentSlide = 0;
-var slideList = ["slide1", "slide2", "slide3", "slide4", "slide5", "slide6", "slide7"];
-var nextSlideButton, playAgainButton, backToMenuButton;
+var endingSlideList = ["slide1", "slide2", "slide3", "slide4", "slide5", "slide6", "slide7"];
+var nextSlideButton, playAgainButton, backToMenuButton, previousSlideButton, endingSpriteSlides;
 
 ending.prototype = {
     preload:function(){
@@ -12,6 +12,7 @@ ending.prototype = {
         game.load.image("backToMenu", "assets/game/toMainButton.png");
         game.load.image("backToMenu_hover", "assets/game/toMainButton_hover.png");
         game.load.audio('endingBGM', "assets/music/Visager_-_05_-_Roots_Loop.mp3");
+        game.load.image('blackScreen', "assets/game/blackScreen.png");
 
         game.load.image("slide1", "assets/ending/slide1.png");
         game.load.image("slide2", "assets/ending/slide2.png");
@@ -22,6 +23,8 @@ ending.prototype = {
         game.load.image("slide7", "assets/ending/slide7.png");
         game.load.image("nextSlideButton", "assets/ending/nextSlideButton.png");
         game.load.image("nextSlideButton_hover", "assets/ending/nextSlideButton_hover.png");
+        game.load.image("previousSlideButton", "assets/ending/previousSlideButton.png");
+        game.load.image("previousSlideButton_hover", "assets/ending/previousSlideButton_hover.png");
     },
     create:function () {
         game.world.setBounds(-300, -320, 300, 320);
@@ -43,6 +46,11 @@ ending.prototype = {
         nextSlideButton.inputEnabled = true;
         nextSlideButton.events.onInputUp.add(nextSlide, self);
 
+        previousSlideButton = game.add.button(-280, 260, "previousSlideButton", previousSlide, this);
+        previousSlideButton.scale.setTo(0.4);
+        previousSlideButton.inputEnabled = true;
+        previousSlideButton.visible = false;
+
         backToMenuButton = game.add.button(-225,280,"backToMenu",endBackToMenu,this);
         backToMenuButton.scale.setTo(0.8);
         backToMenuButton.inputEnabled = true;
@@ -55,6 +63,20 @@ ending.prototype = {
         playAgainButton.visible = false;
         playAgainButton.alpha = 0;
 
+        ending0 = game.add.sprite(50, 30, endingSlideList[0]);
+        ending1 = game.add.sprite(50, 30, endingSlideList[1]);
+        ending2 = game.add.sprite(50, 30, endingSlideList[2]);
+        ending3 = game.add.sprite(50, 30, endingSlideList[3]);
+        ending4 = game.add.sprite(50, 30, endingSlideList[4]);
+        ending5 = game.add.sprite(50, 30, endingSlideList[5]);
+        ending6 = game.add.sprite(50, 30, endingSlideList[6]);
+        ending7 = game.add.sprite(50, 30, endingSlideList[7]);
+        endingSpriteSlides = [ending0, ending1, ending2, ending3, ending4, ending5, ending6, ending7];
+        for(var i = 0; i < endingSpriteSlides.length; i++){
+            endingSpriteSlides[i].anchor.set(0.5, 0.5);
+            endingSpriteSlides[i].alpha = 0;
+        }
+
     },
     update:function() {
         if (playAgainButton.input.pointerOver()) {playAgainButton.loadTexture('playAgain_hover', 0);}
@@ -63,6 +85,8 @@ ending.prototype = {
         else {backToMenuButton.loadTexture('backToMenu', 0);}
         if (nextSlideButton.input.pointerOver()) {nextSlideButton.loadTexture('nextSlideButton_hover', 0);}
         else {nextSlideButton.loadTexture('nextSlideButton', 0);}
+        if (previousSlideButton.input.pointerOver()) {previousSlideButton.loadTexture('previousSlideButton_hover', 0);}
+        else {previousSlideButton.loadTexture('previousSlideButton', 0);}
     },
     render: function () {
         if (showDebugInfo) {
@@ -73,21 +97,36 @@ ending.prototype = {
 
 function nextSlide(){
     currentSlide++;
-    console.log(slideList[currentSlide]);
-    var slide = game.add.sprite(50, 30, slideList[currentSlide]);
-    slide.anchor.setTo(0.5);
-    slide.alpha = 0;
-    game.add.tween(slide).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+    console.log("nextSlide()", currentSlide);
+    if(currentSlide === 1){
+        previousSlideButton.visible = true;
+        previousSlideButton.inputEnabled = true;
+        previousSlideButton.alpha = 0;
+        game.add.tween(previousSlideButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+    }
+    game.add.tween(endingSpriteSlides[currentSlide]).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
     nextSlideButton.bringToTop();
+    previousSlideButton.bringToTop();
     if(currentSlide === 6){
         playAgainButton.bringToTop();
         backToMenuButton.bringToTop();
         nextSlideButton.visible = false;
+        previousSlideButton.visible = false;
         playAgainButton.visible = true;
         backToMenuButton.visible = true;
         game.add.tween(playAgainButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
         game.add.tween(backToMenuButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
     }
+}
+
+function previousSlide(){
+    currentSlide--;
+    console.log("previousSlide()", currentSlide);
+    if(currentSlide === 0){
+        game.add.tween(previousSlideButton).to( { alpha: 0 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+        previousSlideButton.inputEnabled = false;
+    }
+    game.add.tween(endingSpriteSlides[currentSlide+1]).to( { alpha: 0 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
 }
 
 

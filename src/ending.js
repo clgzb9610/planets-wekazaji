@@ -7,8 +7,6 @@ var nextSlideButton, playAgainButton, backToMenuButton;
 
 ending.prototype = {
     preload:function(){
-        // game.load.image("spacebeach", "assets/game/vacationeb.png");
-        game.load.image("spacebeach", "assets/game/vacationeb_new.png");
         game.load.image("playAgain", "assets/game/playAgain.png");
         game.load.image("playAgain_hover", "assets/game/playAgain_hover.png");
         game.load.image("backToMenu", "assets/game/toMainButton.png");

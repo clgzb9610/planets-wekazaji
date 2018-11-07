@@ -417,12 +417,6 @@ playGame.prototype = {
         game.load.image("gearOutline", "assets/game/gearOutline.png", 300, 300);
         game.load.image("filledInGear", "assets/game/filledGear.png", 300, 300);
 
-        game.load.image("dashboard","assets/game/dashboard.png",300,52);
-        game.load.image("mute","assets/buttons/mute.png",52,52);
-        game.load.image("unMute", "assets/buttons/unMute.png", 52, 52);
-        game.load.spritesheet("pause","assets/buttons/pause.png",52,52);
-        game.load.image("restart","assets/buttons/restart.png",52,52);
-
         game.load.image("newPause", "assets/game/pauseButton.png");
         game.load.image("newPause_hover", "assets/game/pauseButton_hover.png");
         game.load.image("restartButton", "assets/game/restartButton.png");

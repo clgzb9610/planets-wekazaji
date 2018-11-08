@@ -10,6 +10,8 @@ var levelButton;
 var credits;
 var music;
 
+var mediaPlaying = false;
+
 var skipButton, introNextSlideButton, introPreviousSlideButton, spriteSlides;
 var startStory = ["start1", "start2", "start3", "start4", "start5", "start6", "start7"];
 var currentStartSlide = 0;
@@ -61,7 +63,6 @@ mainMenu.prototype = {
         menuBGM = game.add.audio('menuBGM');
         menuBGM.loop = true;
         menuBGM.volume = 0.6;
-        let mediaPlaying = false;
 
         document.querySelector("body").addEventListener("click", function startSound (event) {
             event.target.removeEventListener(event.type, startSound);
@@ -70,6 +71,10 @@ mainMenu.prototype = {
                 mediaPlaying = true;
             }
         });
+
+        if (mediaPlaying) {
+            menuBGM.play();
+        }
 
         // var title = game.add.sprite(70, 4, "newTitle");
         // title.scale.x = 0.8;

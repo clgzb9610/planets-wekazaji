@@ -4,7 +4,7 @@ Deep Space Diver is a platformer game where you jump between planets through ove
 
 ## Play our Game
 
-You can play our game by clicking this link: https://clgzb9610.github.io/planets-wekazaji/
+You can play our game by clicking this link [Deep Space Diver]: https://clgzb9610.github.io/planets-wekazaji/
 
 ## Getting involved
 

@@ -10,7 +10,9 @@ var levelButton;
 var credits;
 var music;
 
-var skipButton, startNextSlideButton;
+var mediaPlaying = false;
+
+var skipButton, introNextSlideButton, introPreviousSlideButton, spriteSlides;
 var startStory = ["start1", "start2", "start3", "start4", "start5", "start6", "start7"];
 var currentStartSlide = 0;
 
@@ -53,6 +55,8 @@ mainMenu.prototype = {
         game.load.image("skipButton_hover", "assets/mainMenu/skipButton_hover.png");
         game.load.image("nextSlideButton", "assets/ending/nextSlideButton.png");
         game.load.image("nextSlideButton_hover", "assets/ending/nextSlideButton_hover.png");
+        game.load.image("previousSlideButton", "assets/ending/previousSlideButton.png");
+        game.load.image("previousSlideButton_hover", "assets/ending/previousSlideButton_hover.png");
 
     },
     create:function () {
@@ -65,7 +69,6 @@ mainMenu.prototype = {
         menuBGM = game.add.audio('menuBGM');
         menuBGM.loop = true;
         menuBGM.volume = 0.6;
-        let mediaPlaying = false;
 
         document.querySelector("body").addEventListener("click", function startSound (event) {
             event.target.removeEventListener(event.type, startSound);
@@ -74,6 +77,10 @@ mainMenu.prototype = {
                 mediaPlaying = true;
             }
         });
+
+        if (mediaPlaying) {
+            menuBGM.play();
+        }
 
         // var title = game.add.sprite(70, 4, "newTitle");
         // title.scale.x = 0.8;
@@ -118,15 +125,32 @@ mainMenu.prototype = {
         music.scale.y = 0.2;
         music.inputEnabled = true;
 
-        startNextSlideButton = game.add.button(570, 570, "nextSlideButton", startNextSlide, this);
-        startNextSlideButton.scale.setTo(0.4);
-        startNextSlideButton.inputEnabled = true;
-        startNextSlideButton.visible = false;
+        introNextSlideButton = game.add.button(570, 570, "nextSlideButton", startNextSlide, this);
+        introNextSlideButton.scale.setTo(0.4);
+        introNextSlideButton.inputEnabled = true;
+        introNextSlideButton.visible = false;
+
+        introPreviousSlideButton = game.add.button(10, 570, "previousSlideButton", goToPreviousSlide, this);
+        introPreviousSlideButton.scale.setTo(0.4);
+        introPreviousSlideButton.inputEnabled = true;
+        introPreviousSlideButton.visible = false;
 
         skipButton = game.add.button(460, 620, "skipButton", playTheGame, this);
         skipButton.scale.setTo(0.35);
         skipButton.inputEnabled = true;
         skipButton.visible = false;
+
+        slide0 = game.add.sprite(0, 0, startStory[0]);
+        slide1 = game.add.sprite(0, 0, startStory[1]);
+        slide2 = game.add.sprite(0, 0, startStory[2]);
+        slide3 = game.add.sprite(0, 0, startStory[3]);
+        slide4 = game.add.sprite(0, 0, startStory[4]);
+        slide5 = game.add.sprite(0, 0, startStory[5]);
+        slide6 = game.add.sprite(0, 0, startStory[6]);
+        spriteSlides = [slide0, slide1, slide2, slide3, slide4, slide5, slide6];
+        for(var k = 0; k < spriteSlides.length; k++){
+            spriteSlides[k].alpha = 0;
+        }
 
         // blackScreen = game.add.sprite(0, 0, "blackScreen");
         // blackScreen.scale.setTo(2, 2);
@@ -143,8 +167,10 @@ mainMenu.prototype = {
         else {credits.loadTexture('newCredit', 0);}
         if (music.input.pointerOver()) {music.loadTexture('newMusicHover', 0);}
         else {music.loadTexture('newMusic', 0);}
-        if (startNextSlideButton.input.pointerOver()) {startNextSlideButton.loadTexture('nextSlideButton_hover', 0);}
-        else {startNextSlideButton.loadTexture('nextSlideButton', 0);}
+        if (introNextSlideButton.input.pointerOver()) {introNextSlideButton.loadTexture('nextSlideButton_hover', 0);}
+        else {introNextSlideButton.loadTexture('nextSlideButton', 0);}
+        if (introPreviousSlideButton.input.pointerOver()) {introPreviousSlideButton.loadTexture('previousSlideButton_hover', 0);}
+        else {introPreviousSlideButton.loadTexture('previousSlideButton', 0);}
         if (skipButton.input.pointerOver()) {skipButton.loadTexture('skipButton_hover', 0);}
         else {skipButton.loadTexture('skipButton', 0);}
     },
@@ -165,26 +191,41 @@ function fadeToStory(){
 }
 
 function startNextSlide(){
-    console.log(startStory[currentStartSlide]);
-    if(currentStartSlide === 0){
-        startNextSlideButton.visible = true;
-        skipButton.visible = true;
-        startNextSlideButton.alpha = 0;
-        skipButton.alpha = 0;
-        game.add.tween(startNextSlideButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
-        game.add.tween(skipButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
-    }
-    var slide = game.add.sprite(0, 0, startStory[currentStartSlide]);
-    slide.alpha = 0;
-    game.add.tween(slide).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
-
-    startNextSlideButton.bringToTop();
-    skipButton.bringToTop();
-
     if(currentStartSlide === 7){
         playTheGame();
     }
+    if(currentStartSlide === 0){
+        introNextSlideButton.visible = true;
+        skipButton.visible = true;
+        introPreviousSlideButton.visible = true;
+        introNextSlideButton.alpha = 0;
+        skipButton.alpha = 0;
+        introPreviousSlideButton.alpha = 0;
+        game.add.tween(introNextSlideButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+        game.add.tween(skipButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+        game.add.tween(introPreviousSlideButton).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+    }
+    game.add.tween(spriteSlides[currentStartSlide]).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+
+    introNextSlideButton.bringToTop();
+    skipButton.bringToTop();
+    introPreviousSlideButton.bringToTop();
+
     currentStartSlide++;
+}
+
+function goToPreviousSlide(){
+    if(currentStartSlide === 1){
+        playButton.inputEnabled = true;
+        levelButton.inputEnabled = true;
+        credits.inputEnabled = true;
+        music.inputEnabled = true;
+        introNextSlideButton.visible = false;
+        skipButton.visible = false;
+        introPreviousSlideButton.visible = false;
+    }
+    game.add.tween(spriteSlides[currentStartSlide-1]).to( { alpha: 0 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
+    currentStartSlide--;
 }
 
 function playTheGame(){

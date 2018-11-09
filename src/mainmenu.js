@@ -24,6 +24,7 @@ var currentStartSlide = 0;
 
 mainMenu.prototype = {
     preload:function(){
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
 

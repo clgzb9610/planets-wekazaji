@@ -213,9 +213,13 @@ var LevelChanger = function(game){
 
 
     function addUI(){
-        if(tutorialShown === false){
-            game.time.events.add(Phaser.Timer.SECOND * 1.5 , levelChanger.showControlTutorial, this);
+        if(tutorialShown === false && currentLevel === 0) {
+            game.time.events.add(Phaser.Timer.SECOND * 1.5, levelChanger.showControlTutorial, this); //shows tutorial after 1.5 seconds
             tutorialShown = true;
+        }
+        if(updowntutorialShown === false && currentLevel === 2){
+            game.time.events.add(Phaser.Timer.SECOND * 0.7 , levelChanger.showControlTutorial_updown, this);
+            updowntutorialShown = true;
         }
 
         //pause button in game
@@ -227,6 +231,7 @@ var LevelChanger = function(game){
         newPause.events.onInputUp.add(helper.pauseClicked, self);
         newPause.onInputOver.add(helper.pauseOver, this);
         newPause.onInputOut.add(helper.pauseOut, this);
+        newPause.bringToTop();
 
         //restart button
         restartButton = game.add.button(238, 344, "restartButton");
@@ -345,11 +350,21 @@ var LevelChanger = function(game){
         game.add.tween(controlTutorial_rightleft).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
     };
 
+    this.showControlTutorial_updown = function(){
+        controlTutorial_updown = game.add.sprite(-40, -120, "controlTutorial_updown");
+        controlTutorial_updown.scale.setTo(0.3);
+        controlTutorial_updown.animations.add('keyboardPress',[0,1,2,3],5, true);
+        controlTutorial_updown.animations.play('keyboardPress');
+        userInterface.add(controlTutorial_updown);
+        controlTutorial_updown.alpha = 0;
+        game.add.tween(controlTutorial_updown).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
+    };
+
     this.removeControlTutorial = function() {
+        //right left
         if (typeof controlTutorial_rightleft === "undefined") {
             return;
         }
-
         if (cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown) {
             keyPressedEndTutorial = true;
         }
@@ -357,6 +372,21 @@ var LevelChanger = function(game){
             console.log("I should be removing the control thing");
             game.add.tween(controlTutorial_rightleft).to({alpha: 0}, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
             tutorialRemoved = true;
+        }
+        // up down
+        if (typeof controlTutorial_updown === "undefined") {
+            return;
+        }
+        if(tutorialRemoved === true && keyPressedEndTutorial_updown !== true){
+            if (cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown) {
+                console.log("keyboard for updown is pressed.");
+                keyPressedEndTutorial_updown = true;
+            }
+        }
+        if(keyPressedEndTutorial_updown === true && updowntutorialRemoved === false && controlTutorial_updown.alpha === 1) {
+            console.log("I should be removing the up down control thing");
+            game.add.tween(controlTutorial_updown).to({alpha: 0}, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
+            updowntutorialRemoved = true;
         }
     };
 

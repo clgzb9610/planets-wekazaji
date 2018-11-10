@@ -64,10 +64,16 @@ var vortexAudio;
 var gearTing;
 
 var currentLevel;
+
 var tutorialShown = false;
 var tutorialRemoved = false;
 var keyPressedEndTutorial = false;
 var controlTutorial_rightleft;
+
+var updowntutorialShown = false;
+var updowntutorialRemoved = false;
+var keyPressedEndTutorial_updown = false;
+var controlTutorial_updown;
 
 //var levelUnlock1 = localStorage.setItem("Level1","1");
 
@@ -134,11 +140,12 @@ var levels = [
         {objectType: 'planet', x: -280, y: -100, gravRadius: 250, gravForce: 350, sprite: "smallstar"},
         {objectType: 'planet', x: 200, y: 220, gravRadius: 350, gravForce: 350, sprite: "starplanet"},
         {objectType: 'teleporter', x: 150, y: 10, radians: -0.2, goal: 3},
-        {objectType: 'startPad', x: -425, y: -50 , radians:1.15 + Math.PI},
-        {objectType: 'gear', x: -350, y: -200, sprite: "gear"},
-        {objectType: 'gear', x: -200, y: -150, sprite: "gear"},
-        {objectType: 'gear', x: -220, y: 10, sprite: "gear"},
-        {objectType: 'player', x: -430, y: -50},
+        // {objectType: 'startPad', x: -120, y: -80 , radians: -1.5 + Math.PI},
+        {objectType: 'startPad', x: -130, y: -80 , radians: 1.5},
+        {objectType: 'gear', x: 23, y: 105, sprite: "gear"},
+        {objectType: 'gear', x: 160, y: 430, sprite: "gear"},
+        {objectType: 'gear', x: 400, y: 200, sprite: "gear"},
+        {objectType: 'player', x: -50, y: -45},
         {objectType: 'levelBoundary', x: -40, y: 60, radius: 1200}
     ], // level 2 - jumping between planets
     [//level 3 - start in void
@@ -407,7 +414,6 @@ playGame.prototype = {
         game.load.spritesheet('teleporter', 'assets/game/teleporterspritesheet.png', 48, 61);
         game.load.image('startPad','assets/game/startPad.png',50,12);
         game.load.spritesheet('startPadAnimations','assets/game/startPadAnimationSpriteSheet.png',50,17);
-        game.load.image("log", "assets/game/shipslog.png");
         game.load.image('blackScreen', "assets/game/blackScreen.png");
         game.load.image("whiteScreen", "assets/game/whiteScreen.png");
 
@@ -433,6 +439,7 @@ playGame.prototype = {
         game.load.image("toMainButton", "assets/game/toMainButton.png");
         game.load.image("toMainButton_hover", "assets/game/toMainButton_hover.png");
         game.load.spritesheet("controlTutorial_leftright", "assets/game/controlTutorial_sheet.png", 252, 165);
+        game.load.spritesheet("controlTutorial_updown", "assets/game/controlTutorial_sheet_updown.png", 252, 165);
 
         game.load.audio('jetpack', "assets/music/jetpackAudio.mp3");
         game.load.audio('vortex', "assets/music/VortexSoundEffect.mp3");
@@ -462,7 +469,7 @@ playGame.prototype = {
         gravityGraphics = game.add.graphics(0, 0);
         gravityGraphics.lineStyle(2, 0xffffff, 0.5);
 
-        // adding level limit line
+        // adding level limit linef
         levelBoundary = game.add.graphics(0, 0);
         levelBoundary.lineStyle(12, 0xADD8E6, 0.35);
 

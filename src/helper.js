@@ -7,9 +7,11 @@ var Helper = function(game){
 
     // resets the level when player makes contact with an enemy
     this.enemyContactCallback = function(body1, body2, fixture1, fixture2, begin) {
-        if (!begin) {
+        if (!begin || transitioning) {
             return;
         }
+        
+        console.log("I made contact with the enemy!");
 
         userInterfaceEnabled = false;
 
@@ -138,6 +140,8 @@ var Helper = function(game){
             if(score < levelGoal) {
                 // Portal is not yet active
             } else {
+                console.log("I am in the Teleporter!");
+
                 playingNow = false;
                 userInterfaceEnabled = false;
                 levelChanger.finishLevel();

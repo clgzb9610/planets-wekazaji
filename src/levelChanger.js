@@ -410,14 +410,15 @@ var LevelChanger = function(game){
         blackScreen.alpha = 0;
         game.add.tween(blackScreen).to( { alpha: 1 }, 200, Phaser.Easing.Linear.None, true).onComplete.add(function () {
             game.add.tween(player.scale).to( {x: 1, y: 1}, 10, Phaser.Easing.Linear.None, true);
-            transitioning = false;
-            game.physics.box2d.paused = false;
             game.time.events.add(0, levelChanger.destroyGroups);
             game.time.events.add(50, function () { // Timed events are necessary for actions to occur in proper sequence
                 addGroups();
                 blackScreen.bringToTop();
                 blackScreen.x = player.body.x;
                 blackScreen.y = player.body.y;
+                transitioning = false;
+                game.physics.box2d.paused = false;
+                
                 game.time.events.add(50, function () {
                     game.add.tween(blackScreen).to(
                         {alpha: 0},

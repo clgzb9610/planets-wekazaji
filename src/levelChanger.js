@@ -416,6 +416,8 @@ var LevelChanger = function(game){
             game.time.events.add(50, function () { // Timed events are necessary for actions to occur in proper sequence
                 addGroups();
                 blackScreen.bringToTop();
+                blackScreen.x = player.body.x;
+                blackScreen.y = player.body.y;
                 game.time.events.add(50, function () {
                     game.add.tween(blackScreen).to(
                         {alpha: 0},

@@ -36,7 +36,7 @@ var Helper = function(game){
         }
 
         // Causes the screen to flash white
-        var whiteScreen = game.add.sprite(player.x, player.y, "whiteScreen");
+        var whiteScreen = game.add.sprite(player.body.x, player.body.y, "whiteScreen");
         whiteScreen.bringToTop();
         whiteScreen.anchor.set(0.5);
         whiteScreen.angle = player.angle;
@@ -46,9 +46,10 @@ var Helper = function(game){
         screenTween.start();
         screenTween.onComplete.add(function () {
             game.time.events.add(250, function () { // Waits for 150ms to pass before running events
-                game.time.slowMotion = 1;
                 levelChanger.resetLevel();
                 whiteScreen.bringToTop();
+                whiteScreen.x = player.body.x;
+                whiteScreen.y = player.body.y;
 
                 // Allows entity movement / animation to run again
                 transitioning = false;

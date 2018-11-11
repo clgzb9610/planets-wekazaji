@@ -97,7 +97,6 @@ ending.prototype = {
 
 function nextSlide(){
     currentSlide++;
-    console.log("nextSlide()", currentSlide);
     if(currentSlide === 1){
         previousSlideButton.visible = true;
         previousSlideButton.inputEnabled = true;
@@ -121,7 +120,6 @@ function nextSlide(){
 
 function previousSlide(){
     currentSlide--;
-    console.log("previousSlide()", currentSlide);
     if(currentSlide === 0){
         game.add.tween(previousSlideButton).to( { alpha: 0 }, 600, Phaser.Easing.Linear.None, true, 0, 0, false);
         previousSlideButton.inputEnabled = false;

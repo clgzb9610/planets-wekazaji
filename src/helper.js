@@ -10,8 +10,6 @@ var Helper = function(game){
         if (!begin || transitioning) {
             return;
         }
-        
-        console.log("I made contact with the enemy!");
 
         userInterfaceEnabled = false;
 
@@ -140,7 +138,6 @@ var Helper = function(game){
             if(score < levelGoal) {
                 // Portal is not yet active
             } else {
-                console.log("I am in the Teleporter!");
 
                 playingNow = false;
                 userInterfaceEnabled = false;

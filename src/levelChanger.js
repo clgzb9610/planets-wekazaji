@@ -369,7 +369,6 @@ var LevelChanger = function(game){
             keyPressedEndTutorial = true;
         }
         if(keyPressedEndTutorial === true && tutorialRemoved === false && controlTutorial_rightleft.alpha === 1) {
-            console.log("I should be removing the control thing");
             game.add.tween(controlTutorial_rightleft).to({alpha: 0}, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
             tutorialRemoved = true;
         }
@@ -379,12 +378,10 @@ var LevelChanger = function(game){
         }
         if(tutorialRemoved === true && keyPressedEndTutorial_updown !== true){
             if (cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown) {
-                console.log("keyboard for updown is pressed.");
                 keyPressedEndTutorial_updown = true;
             }
         }
         if(keyPressedEndTutorial_updown === true && updowntutorialRemoved === false && controlTutorial_updown.alpha === 1) {
-            console.log("I should be removing the up down control thing");
             game.add.tween(controlTutorial_updown).to({alpha: 0}, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
             updowntutorialRemoved = true;
         }
@@ -418,7 +415,7 @@ var LevelChanger = function(game){
                 blackScreen.y = player.body.y;
                 transitioning = false;
                 game.physics.box2d.paused = false;
-                
+
                 game.time.events.add(50, function () {
                     game.add.tween(blackScreen).to(
                         {alpha: 0},

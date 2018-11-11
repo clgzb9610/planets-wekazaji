@@ -214,12 +214,28 @@ var LevelChanger = function(game){
 
     function addUI(){
         if(tutorialShown === false && currentLevel === 0) {
-            game.time.events.add(Phaser.Timer.SECOND * 1.5, levelChanger.showControlTutorial, this); //shows tutorial after 1.5 seconds
             tutorialShown = true;
+
+            controlTutorial_rightleft = game.add.sprite(-40, -120, "controlTutorial_leftright");
+            controlTutorial_rightleft.scale.setTo(0.3);
+            controlTutorial_rightleft.animations.add('keyboardPress',[0,1,2,3],5, true);
+            controlTutorial_rightleft.animations.play('keyboardPress');
+            userInterface.add(controlTutorial_rightleft);
+            controlTutorial_rightleft.alpha = 0;
+
+            game.time.events.add(Phaser.Timer.SECOND * 1.5, levelChanger.showControlTutorial, this); //shows tutorial after 1.5 seconds
         }
         if(updowntutorialShown === false && currentLevel === 2){
-            game.time.events.add(Phaser.Timer.SECOND * 0.7 , levelChanger.showControlTutorial_updown, this);
             updowntutorialShown = true;
+
+            controlTutorial_updown = game.add.sprite(-40, -120, "controlTutorial_updown");
+            controlTutorial_updown.scale.setTo(0.3);
+            controlTutorial_updown.animations.add('keyboardPress',[0,1,2,3],5, true);
+            controlTutorial_updown.animations.play('keyboardPress');
+            userInterface.add(controlTutorial_updown);
+            controlTutorial_updown.alpha = 0;
+
+            game.time.events.add(Phaser.Timer.SECOND * 0.7 , levelChanger.showControlTutorial_updown, this);
         }
 
         //pause button in game
@@ -341,22 +357,10 @@ var LevelChanger = function(game){
     }
 
     this.showControlTutorial = function(){
-        controlTutorial_rightleft = game.add.sprite(-40, -120, "controlTutorial_leftright");
-        controlTutorial_rightleft.scale.setTo(0.3);
-        controlTutorial_rightleft.animations.add('keyboardPress',[0,1,2,3],5, true);
-        controlTutorial_rightleft.animations.play('keyboardPress');
-        userInterface.add(controlTutorial_rightleft);
-        controlTutorial_rightleft.alpha = 0;
         game.add.tween(controlTutorial_rightleft).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
     };
 
     this.showControlTutorial_updown = function(){
-        controlTutorial_updown = game.add.sprite(-40, -120, "controlTutorial_updown");
-        controlTutorial_updown.scale.setTo(0.3);
-        controlTutorial_updown.animations.add('keyboardPress',[0,1,2,3],5, true);
-        controlTutorial_updown.animations.play('keyboardPress');
-        userInterface.add(controlTutorial_updown);
-        controlTutorial_updown.alpha = 0;
         game.add.tween(controlTutorial_updown).to( { alpha: 1 }, 800, Phaser.Easing.Linear.None, true, 0, 0, false);
     };
 

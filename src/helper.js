@@ -138,7 +138,6 @@ var Helper = function(game){
             if(score < levelGoal) {
                 // Portal is not yet active
             } else {
-
                 playingNow = false;
                 userInterfaceEnabled = false;
                 levelChanger.finishLevel();

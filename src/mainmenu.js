@@ -126,17 +126,17 @@ mainMenu.prototype = {
         music.scale.y = 0.2;
         music.inputEnabled = true;
 
-        introNextSlideButton = game.add.button(570, 570, "nextSlideButton", startNextSlide, this);
+        introNextSlideButton = game.add.button(540, 530, "nextSlideButton", startNextSlide, this);
         introNextSlideButton.scale.setTo(0.4);
         introNextSlideButton.inputEnabled = true;
         introNextSlideButton.visible = false;
 
-        introPreviousSlideButton = game.add.button(10, 570, "previousSlideButton", goToPreviousSlide, this);
+        introPreviousSlideButton = game.add.button(40, 530, "previousSlideButton", goToPreviousSlide, this);
         introPreviousSlideButton.scale.setTo(0.4);
         introPreviousSlideButton.inputEnabled = true;
         introPreviousSlideButton.visible = false;
 
-        skipButton = game.add.button(460, 620, "skipButton", playTheGame, this);
+        skipButton = game.add.button(565, 20, "skipButton", playTheGame, this);
         skipButton.scale.setTo(0.35);
         skipButton.inputEnabled = true;
         skipButton.visible = false;

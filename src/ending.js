@@ -41,12 +41,12 @@ ending.prototype = {
         blackScreen.anchor.set(0.5, 0.5);
         game.add.tween(blackScreen).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
 
-        nextSlideButton = game.add.button(260, 260, "nextSlideButton");
+        nextSlideButton = game.add.button(220, 200, "nextSlideButton");
         nextSlideButton.scale.setTo(0.4);
         nextSlideButton.inputEnabled = true;
         nextSlideButton.events.onInputUp.add(nextSlide, self);
 
-        previousSlideButton = game.add.button(-280, 260, "previousSlideButton", previousSlide, this);
+        previousSlideButton = game.add.button(-240, 200, "previousSlideButton", previousSlide, this);
         previousSlideButton.scale.setTo(0.4);
         previousSlideButton.inputEnabled = true;
         previousSlideButton.visible = false;

@@ -398,7 +398,7 @@ function addPageOneButtons() {
 
 function addPageTwoButtons() {
     //top buttons
-    var level_title2 = game.add.sprite(75, 50, "level_title");
+    level_title2 = game.add.sprite(75, 50, "level_title");
     level_title2.scale.x = 0.8;
     level_title2.scale.y = 0.8;
     level_title2.animations.add('beaming_level',[0,1,2],5, true);

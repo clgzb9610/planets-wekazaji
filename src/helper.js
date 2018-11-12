@@ -7,7 +7,7 @@ var Helper = function(game){
 
     // resets the level when player makes contact with an enemy
     this.enemyContactCallback = function(body1, body2, fixture1, fixture2, begin) {
-        if (!begin) {
+        if (!begin || transitioning) {
             return;
         }
 
@@ -36,7 +36,7 @@ var Helper = function(game){
         }
 
         // Causes the screen to flash white
-        var whiteScreen = game.add.sprite(player.x, player.y, "whiteScreen");
+        var whiteScreen = game.add.sprite(player.body.x, player.body.y, "whiteScreen");
         whiteScreen.bringToTop();
         whiteScreen.anchor.set(0.5);
         whiteScreen.angle = player.angle;
@@ -45,10 +45,11 @@ var Helper = function(game){
         let screenTween = game.add.tween(whiteScreen).to({ alpha: 1 }, 200);
         screenTween.start();
         screenTween.onComplete.add(function () {
-            game.time.events.add(150, function () { // Waits for 150ms to pass before running events
-                game.time.slowMotion = 1;
+            game.time.events.add(250, function () { // Waits for 150ms to pass before running events
                 levelChanger.resetLevel();
                 whiteScreen.bringToTop();
+                whiteScreen.x = player.body.x;
+                whiteScreen.y = player.body.y;
 
                 // Allows entity movement / animation to run again
                 transitioning = false;

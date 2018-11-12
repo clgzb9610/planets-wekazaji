@@ -16,8 +16,15 @@ var skipButton, introNextSlideButton, introPreviousSlideButton, spriteSlides;
 var startStory = ["start1", "start2", "start3", "start4", "start5", "start6", "start7"];
 var currentStartSlide = 0;
 
+// var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+// if(isSafari) {
+//
+// }
+
+
 mainMenu.prototype = {
     preload:function(){
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.load.image("space", "assets/game/seamlessspacebright.png");
         game.load.audio('menuBGM', "assets/mainMenu/Visager_-_14_-_Home_Departure_Loop.mp3");
 
@@ -119,17 +126,17 @@ mainMenu.prototype = {
         music.scale.y = 0.2;
         music.inputEnabled = true;
 
-        introNextSlideButton = game.add.button(570, 570, "nextSlideButton", startNextSlide, this);
+        introNextSlideButton = game.add.button(540, 530, "nextSlideButton", startNextSlide, this);
         introNextSlideButton.scale.setTo(0.4);
         introNextSlideButton.inputEnabled = true;
         introNextSlideButton.visible = false;
 
-        introPreviousSlideButton = game.add.button(10, 570, "previousSlideButton", goToPreviousSlide, this);
+        introPreviousSlideButton = game.add.button(40, 530, "previousSlideButton", goToPreviousSlide, this);
         introPreviousSlideButton.scale.setTo(0.4);
         introPreviousSlideButton.inputEnabled = true;
         introPreviousSlideButton.visible = false;
 
-        skipButton = game.add.button(460, 620, "skipButton", playTheGame, this);
+        skipButton = game.add.button(565, 20, "skipButton", playTheGame, this);
         skipButton.scale.setTo(0.35);
         skipButton.inputEnabled = true;
         skipButton.visible = false;

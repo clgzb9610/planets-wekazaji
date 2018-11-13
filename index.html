@@ -43,6 +43,15 @@
 
 	<body>
 		<script src="src/main.js"></script>
+		<script>
+			function handleMouseDown(evt) {
+				window.focus();
+				evt.preventDefault();
+				evt.stopPropagation();
+				evt.target.style.cursor = 'default';
+			}
+			window.onmousedown = handleMouseDown;
+		</script>
 	</body>
 	
 </html>

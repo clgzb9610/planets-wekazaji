@@ -1,5 +1,6 @@
 .DS_Store
 
 index.html
+phaser.min.js
 
 node_modules/
